@@ -1,0 +1,87 @@
+@use "../../../assets/sass/functions" as *;
+
+.container {
+  width: 100%;
+  max-width: 588px;
+  min-height: 177px;
+  padding: 16px 18px;
+  border-radius: 24px;
+
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+
+  background: var(--bg);
+  border: 1px solid rgba(79, 94, 117, 0.2);
+  color: var(--text);
+  transition: all 0.2s ease;
+}
+
+.field {
+  color: var(--text);
+  flex: 1 1 auto;
+  border: none;
+  outline: none;
+  resize: none;
+  min-width: 0px;
+  background-color: transparent;
+}
+
+.title {
+  border-radius: 14px;
+  left: 16px;
+  top: 0;
+  padding: 2px 10px;
+
+  position: absolute;
+
+  transform: translateY(-50%);
+  color: var(--bg);
+  background: var(--orange);
+}
+
+.message {
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  color: var(--error);
+  transform: translateY(100%);
+}
+
+@media (max-width: 1480px) {
+  .container {
+    max-width: vw-1440(588);
+    min-height: vw-1440(177);
+    padding: vw-1440(16) vw-1440(18);
+    border-radius: vw-1440(24);
+  }
+
+  .title {
+    left: vw-1440(16);
+    top: vw-1440(0);
+    padding: vw-1440(2) vw-1440(10);
+  }
+
+  .message {
+    bottom: vw-1440(-2);
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    border-radius: 24px;
+    padding: 15px 18px;
+    max-width: 100%;
+    min-height: 177px;
+  }
+
+  .title {
+    left: 16px;
+    top: 0;
+    padding: 2px 10px;
+  }
+
+  .message {
+    bottom: -2px;
+  }
+}

@@ -1,0 +1,29 @@
+@use "../../assets/sass/functions" as *;
+
+.container {
+  display: flex;
+  width: fit-content;
+  gap: vw-all(10, 10);
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  color: var(--dark-blue);
+}
+
+.container > div {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  width: fit-content;
+}
+
+.link {
+  text-decoration: none;
+  color: var(--dark-blue);
+  display: flex;
+}
+
+a.link:hover {
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
+}

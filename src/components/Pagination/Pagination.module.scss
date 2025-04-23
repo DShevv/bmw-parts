@@ -1,0 +1,27 @@
+@use "../../assets/sass/functions" as *;
+
+.container {
+  display: flex;
+  gap: vw-all(36, 24);
+  align-items: center;
+
+  .prev {
+    transform: rotate(180deg);
+  }
+
+  .list {
+    display: flex;
+    gap: vw-all(20, 16);
+    align-items: center;
+
+    .page {
+      color: var(--dark-blue);
+      text-decoration: none;
+
+      &.active {
+        text-decoration: underline;
+        text-decoration-skip-ink: none;
+      }
+    }
+  }
+}

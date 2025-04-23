@@ -1,0 +1,46 @@
+@use "../../../assets/sass/functions" as *;
+
+.button {
+  border-radius: vw-1550(12);
+  width: vw-1550(54);
+  height: vw-1550(54);
+
+  color: var(--dark-blue);
+  background: var(--light-blue);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  span {
+    transition: all 0.3s ease;
+  }
+
+  &:hover {
+    background: var(--medium-blue);
+  }
+
+  &:active {
+    background: var(--dark-blue);
+    color: var(--white-bg);
+  }
+
+  &:disabled,
+  &.disabled {
+    background: rgba(28, 33, 63, 0.1);
+    color: var(--dark-blue);
+    cursor: default;
+    pointer-events: none;
+
+    svg {
+      opacity: 0.4;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+}

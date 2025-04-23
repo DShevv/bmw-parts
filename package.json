@@ -1,0 +1,37 @@
+{
+  "name": "bmw-parts",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@mona-health/react-input-mask": "^3.0.3",
+    "@yandex/ymaps3-types": "^1.0.16311465",
+    "clsx": "^2.1.1",
+    "formik": "^2.4.6",
+    "mobx": "^6.13.7",
+    "mobx-persist-store": "^1.1.8",
+    "mobx-react-lite": "^4.1.0",
+    "motion": "^12.6.3",
+    "next": "15.2.4",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-range-slider-input": "^3.2.1",
+    "slugify": "^1.6.6",
+    "swiper": "^11.2.6"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "15.2.4",
+    "sass": "^1.86.3",
+    "typescript": "^5"
+  }
+}

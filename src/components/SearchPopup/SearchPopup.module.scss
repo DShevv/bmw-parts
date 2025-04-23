@@ -1,0 +1,181 @@
+@use "../../assets/sass/functions" as *;
+
+.container {
+  display: flex;
+
+  width: 100%;
+
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  border: 1px solid rgba(33, 37, 49, 0.1);
+  background: var(--bg);
+  border-radius: 32px;
+  padding-left: 16px;
+  padding-right: 16px;
+  height: 48px;
+  z-index: 10;
+}
+
+.wrapper {
+  width: 100%;
+  display: none;
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  height: 48px;
+  transform: translateY(100%);
+  z-index: 60;
+}
+
+.wrapper.active {
+  display: flex;
+}
+
+.container svg {
+  width: 26px;
+  height: 26px;
+  flex: 0 0 26px;
+}
+
+.input {
+  flex: 1 1 100%;
+
+  min-width: 0;
+  height: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--text);
+}
+
+.input::placeholder {
+  color: rgba(33, 37, 49, 0.4);
+}
+
+.container .button {
+  flex: 0 0 auto;
+}
+
+.results {
+  position: absolute;
+  top: 0;
+
+  left: 0;
+  width: 100%;
+  height: fit-content;
+  max-height: 482px;
+  box-shadow: 0 15px 33px 0 rgba(51, 33, 44, 0.08),
+    0 60px 60px 0 rgba(51, 33, 44, 0.07), 0 134px 81px 0 rgba(51, 33, 44, 0.03),
+    0 239px 96px 0 rgba(51, 33, 44, 0.01), 0 373px 105px 0 rgba(51, 33, 44, 0);
+  background: var(--bg);
+  border: 1px solid rgba(33, 37, 49, 0.1);
+  border-radius: 24px 24px 16px 16px;
+  padding-top: 48px;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.item {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  text-decoration: none;
+  color: var(--text);
+}
+
+.item img {
+  border-radius: 12px;
+  width: 64px;
+  height: 64px;
+}
+
+.price {
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.price.sale {
+  color: var(--error);
+}
+
+.oldPrice {
+  text-decoration: line-through;
+  color: var(--grey-1);
+}
+
+.items {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.scrollContainer {
+  height: fit-content;
+  max-height: 434px;
+  padding: 12px;
+  overflow-y: auto;
+}
+
+.item .resultButton {
+  padding: 8px 24px;
+  border-radius: 32px;
+}
+
+svg.close {
+  display: none;
+  flex: 0 0 26px;
+  width: 26px;
+  height: 26px;
+  color: var(--orange);
+  cursor: pointer;
+}
+
+.itemContent {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  flex: 1 1 100%;
+}
+
+.info {
+  flex: 0 0 126px;
+}
+
+.close.active {
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .wrapper {
+    display: flex;
+  }
+
+  .container {
+    height: 36px;
+    border-radius: 32px;
+    padding: 0 10px;
+  }
+
+  .container svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .container .close {
+    display: flex;
+    width: 20px;
+    height: 20px;
+    flex: 0 0 20px;
+  }
+}
+
+@media (max-width: 390px) {
+  .title {
+    hyphens: auto;
+    word-break: break-word;
+  }
+}

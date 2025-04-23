@@ -1,0 +1,79 @@
+@use "../../assets/sass/functions" as *;
+
+.wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100dvh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: vw-1440(170);
+  opacity: 0;
+  z-index: -1;
+  pointer-events: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.wrapper.active {
+  opacity: 1;
+  z-index: 150;
+  pointer-events: auto;
+}
+
+.item {
+  position: relative;
+  padding: vw-1440(16) vw-1440(24);
+  background: var(--success);
+  max-width: vw-1440(363);
+  width: fit-content;
+  border-radius: vw-1440(16);
+}
+
+.title {
+  color: var(--bg);
+  display: flex;
+  gap: vw-1440(8);
+  align-items: center;
+}
+
+.text {
+  margin-top: vw-1440(8);
+  color: var(--bg);
+  text-align: center;
+}
+
+.item.error {
+  background: var(--error);
+}
+
+.title svg {
+  width: vw-1440(32);
+  height: vw-1440(32);
+}
+
+@media (max-width: 768px) {
+  .wrapper {
+    padding-top: 48px;
+  }
+
+  .item {
+    padding: 16px 24px;
+    max-width: 300px;
+    border-radius: 16px;
+  }
+
+  .title {
+    gap: 8px;
+  }
+
+  .text {
+    margin-top: 8px;
+  }
+
+  .title svg {
+    width: 32px;
+    height: 32px;
+  }
+}

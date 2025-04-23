@@ -1,0 +1,50 @@
+@use "../../../assets/sass/functions" as *;
+
+.button {
+  color: var(--dark-blue);
+  opacity: 0.4;
+  gap: vw-1550(6);
+  background: transparent;
+
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &.isIcon {
+    opacity: 1;
+  }
+
+  svg {
+    transition: all 0.3s ease;
+  }
+
+  &:hover {
+    opacity: 1;
+
+    svg {
+      color: var(--orange);
+    }
+  }
+
+  &:active {
+    color: var(--orange);
+    opacity: 1;
+  }
+
+  &:disabled,
+  &.disabled {
+    cursor: default;
+    pointer-events: none;
+    opacity: 0.4;
+  }
+}
+
+@media (max-width: 768px) {
+}

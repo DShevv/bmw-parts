@@ -1,0 +1,211 @@
+@use "../assets/sass/functions" as *;
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+:root {
+  --dark-blue: #1c213f;
+  --white-bg: #ffffff;
+  --white-text: #ffffff;
+  --medium-blue: #d0daeb;
+  --light-blue: #f5f9ff;
+
+  --orange: #ee551d;
+  --light-orange: #ff6a32;
+  --error: #ee1d1d;
+  --success: #21b40b;
+  --yellow: #ffe521;
+}
+
+html,
+body {
+  max-width: 100vw;
+  width: 100%;
+  min-height: 100vh;
+  font-family: var(--font-family);
+  color: var(--dark-blue);
+  background-color: var(--white-bg);
+  overflow-x: hidden;
+}
+
+main {
+  max-width: vw-1550(1296);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.mobile {
+  display: none !important;
+}
+
+.scroll-lock {
+  overflow-y: scroll;
+}
+
+.h1 {
+  font-family: var(--second-family);
+  font-weight: 500;
+  font-size: vw-1550(32);
+  line-height: 140%;
+}
+
+.h2 {
+  font-family: var(--second-family);
+  font-weight: 500;
+  font-size: vw-1550(26);
+  line-height: 140%;
+}
+
+.h3 {
+  font-family: var(--font-family);
+  font-weight: 600;
+  font-size: vw-1550(20);
+  line-height: 140%;
+}
+
+.h4 {
+  font-family: var(--second-family);
+  font-weight: 500;
+  font-size: vw-1550(16);
+  line-height: 150%;
+}
+
+.body-1 {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: vw-1550(16);
+  line-height: 140%;
+}
+
+.body-2 {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: vw-1550(16);
+  line-height: 140%;
+}
+
+.body-3 {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: vw-1550(14);
+  line-height: 140%;
+}
+
+.body-4 {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: vw-1550(14);
+  line-height: 140%;
+}
+
+.t-button {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: vw-1550(16);
+}
+
+.t-placeholder {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: vw-1550(16);
+}
+
+#pricePicker {
+  height: vw-1440(3);
+
+  background-color: rgba(79, 94, 117, 0.1);
+
+  .range-slider__range {
+    background-color: var(--grey-1);
+    height: vw-1440(3);
+  }
+
+  .range-slider__thumb {
+    background-color: var(--grey-1);
+    width: vw-1440(14);
+    height: vw-1440(14);
+  }
+}
+
+@media (max-width: 768px) {
+  html,
+  body {
+    overflow-x: hidden;
+  }
+
+  main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: calc(100% - 40px);
+  }
+
+  .h1 {
+    font-size: 20px;
+  }
+
+  .h2 {
+    font-size: 18px;
+  }
+
+  .h3 {
+    font-size: 17px;
+  }
+
+  .h4 {
+    font-size: 13px;
+  }
+
+  .body-1 {
+    font-size: 15px;
+  }
+
+  .body-2 {
+    font-size: 15px;
+  }
+
+  .body-3 {
+    font-size: 12px;
+  }
+
+  .body-4 {
+    font-size: 13px;
+  }
+
+  .t-button {
+    font-size: 15px;
+  }
+
+  .t-placeholder {
+    font-size: 15px;
+  }
+
+  .mobile {
+    display: block !important;
+  }
+
+  .desktop {
+    display: none !important;
+  }
+
+  #pricePicker {
+    height: 3px;
+
+    background-color: rgba(79, 94, 117, 0.1);
+
+    .range-slider__range {
+      background-color: var(--grey-1);
+      height: 3px;
+    }
+
+    .range-slider__thumb {
+      background-color: var(--grey-1);
+      width: 14px;
+      height: 14px;
+    }
+  }
+}

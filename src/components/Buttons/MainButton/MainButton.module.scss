@@ -1,0 +1,100 @@
+@use "../../../assets/sass/functions" as *;
+
+.button {
+  border-radius: vw-1550(12);
+  padding: vw-1550(16);
+  min-width: vw-1550(218);
+
+  color: var(--white-bg);
+  background: var(--orange);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  span {
+    transition: all 0.3s ease;
+  }
+
+  &:hover {
+    background: var(--light-orange);
+  }
+
+  &:active {
+    box-shadow: 0 0 4px 0 rgba(255, 106, 50, 0.7);
+    background: var(--light-orange);
+  }
+
+  &:disabled,
+  &.disabled {
+    background: var(--light-blue);
+    color: var(--dark-blue);
+    cursor: default;
+    pointer-events: none;
+
+    span {
+      opacity: 0.3;
+    }
+  }
+
+  &.secondary {
+    background: var(--dark-blue);
+    color: var(--white-bg);
+
+    &:hover {
+      background: var(--orange);
+    }
+
+    &:active {
+      box-shadow: 0 0 4px 0 rgba(255, 106, 50, 0.7);
+      background: var(--light-orange);
+    }
+
+    &:disabled,
+    &.disabled {
+      background: rgba(28, 33, 63, 0.1);
+      color: var(--dark-blue);
+      cursor: default;
+      pointer-events: none;
+
+      span {
+        opacity: 0.4;
+      }
+    }
+  }
+
+  &.light {
+    background: transparent;
+    color: var(--dark-blue);
+    border: 1px solid var(--medium-blue);
+
+    &:hover {
+      background: var(--light-blue);
+      border-color: var(--light-blue);
+    }
+
+    &:active {
+      box-shadow: 0 0 4px 0 rgba(208, 218, 235, 0.7);
+      background: var(--medium-blue);
+      border-color: var(--medium-blue);
+    }
+
+    &:disabled,
+    &.disabled {
+      background: var(--light-blue);
+      border-color: var(--light-blue);
+
+      span {
+        opacity: 0.4;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+}

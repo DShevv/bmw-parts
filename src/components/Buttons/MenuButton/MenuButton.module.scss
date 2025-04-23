@@ -1,0 +1,64 @@
+@use "../../../assets/sass/functions" as *;
+
+.button {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 14px 28px;
+  border-radius: 32px;
+  gap: 6px;
+
+  color: var(--bg);
+  transition: all 0.3s ease;
+  background-color: var(--orange);
+
+  cursor: pointer;
+  border: none;
+  outline: none;
+  text-decoration: none;
+
+  svg {
+    width: 26px;
+    height: 26px;
+  }
+}
+
+.button:hover {
+  background: var(--orange-2);
+}
+
+.button:active {
+  box-shadow: 0 0 4px 0 var(--orange);
+  background: var(--orange-2);
+}
+
+.button.disabled {
+  cursor: default;
+  pointer-events: none;
+  background: rgba(79, 94, 117, 0.5);
+}
+
+.button.disabled svg,
+.button.disabled div {
+  opacity: 0.5;
+}
+
+@media (max-width: 1480px) {
+  .button {
+    padding: vw-1440(14) vw-1440(28);
+    border-radius: vw-1440(32);
+    gap: vw-1440(6);
+
+    svg {
+      width: vw-1440(26);
+      height: vw-1440(26);
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .button {
+  }
+}

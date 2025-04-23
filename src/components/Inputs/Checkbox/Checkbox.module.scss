@@ -1,0 +1,61 @@
+@use "../../../assets/sass/functions" as *;
+
+.container {
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  gap: vw-all(12, 12);
+  cursor: pointer;
+  color: var(--white-bg);
+}
+
+.input {
+  opacity: 0;
+  position: absolute;
+  z-index: -1;
+  width: 0;
+  height: 0;
+}
+
+.checkbox {
+  border: 1px solid var(--medium-blue);
+  border-radius: vw-all(6, 6);
+  width: vw-all(32, 32);
+  height: vw-all(32, 32);
+  flex: 0 0 vw-all(32, 32);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: var(--white-bg);
+  color: transparent;
+}
+
+.icon {
+  display: none;
+  width: vw-all(24, 24);
+  height: vw-all(24, 24);
+}
+
+.input:checked + .checkbox {
+  background: var(--orange);
+  border-color: var(--orange);
+}
+
+.input:checked + .checkbox > .icon {
+  display: block;
+}
+
+.input:disabled + .checkbox {
+  pointer-events: none;
+  background: transparent;
+}
+
+.container:has(.input:disabled) {
+  cursor: default;
+}
+
+input:focus + .checkbox {
+  background-color: var(--medium-blue);
+}
