@@ -3,11 +3,15 @@
 .container {
   display: flex;
   width: fit-content;
-  gap: vw-all(10, 10);
+  gap: vw-1550(10);
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
   color: var(--dark-blue);
+
+  @media (max-width: 768px) {
+    gap: 10px;
+  }
 }
 
 .container > div {

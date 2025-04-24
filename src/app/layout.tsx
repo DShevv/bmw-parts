@@ -1,6 +1,9 @@
 import { Unbounded, Noto_Sans } from "next/font/google";
 import "./globals.scss";
 import Script from "next/script";
+import Header from "@/blocks/Header/Header";
+import MenuPopup from "@/blocks/MenuPopup/MenuPopup";
+import Footer from "@/blocks/Footer/Footer";
 
 const unbounded = Unbounded({
   variable: "--second-family",
@@ -25,7 +28,11 @@ export default async function RootLayout({
           strategy="beforeInteractive"
         />
 
+        <Header />
         <main>{children}</main>
+        <Footer />
+
+        <MenuPopup />
       </body>
     </html>
   );

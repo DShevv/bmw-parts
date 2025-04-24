@@ -1,0 +1,257 @@
+@use "../../assets/sass/functions" as *;
+
+.footer {
+  background: var(--light-blue);
+  width: 100%;
+  padding: vw-1550(42) 0 vw-1550(33);
+
+  @media (max-width: 768px) {
+    padding: 37px 0 36px;
+  }
+}
+
+.container {
+  max-width: vw-1550(1269);
+  margin: 0 auto;
+
+  @media (max-width: 768px) {
+    max-width: calc(100% - 40px);
+  }
+}
+
+.main {
+  display: flex;
+  gap: vw-1550(86);
+  position: relative;
+
+  @media (max-width: 768px) {
+    flex-wrap: wrap;
+    gap: 24px 16px;
+    margin-bottom: 32px;
+  }
+}
+
+.logo {
+  display: flex;
+  flex-direction: column;
+  gap: vw-1550(12);
+  max-width: vw-1550(282);
+  flex: 0 0 vw-1550(282);
+
+  color: var(--dark-blue);
+
+  p {
+    opacity: 0.7;
+  }
+
+  @media (max-width: 768px) {
+    max-width: 100%;
+    flex: 1 0 100%;
+  }
+}
+
+.categories {
+  flex: 1 0 vw-1550(223);
+  margin-bottom: vw-1550(192);
+
+  display: flex;
+  flex-direction: column;
+  gap: vw-1550(20);
+
+  .category {
+    color: var(--dark-blue);
+    text-decoration: none;
+    transition: color 0.3s ease;
+
+    &:hover {
+      text-decoration: underline;
+      text-decoration-skip-ink: none;
+    }
+  }
+
+  @media (max-width: 768px) {
+    flex: 1 1 25%;
+    margin-bottom: 0;
+    gap: 12px;
+  }
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: vw-1550(16);
+  flex: 1 0 vw-1550(224);
+
+  .menuItem {
+    color: var(--dark-blue);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: vw-1550(4);
+
+    &.sale {
+      color: var(--orange);
+
+      svg {
+        width: vw-1550(26);
+        height: vw-1550(26);
+      }
+    }
+
+    &:hover {
+      text-decoration: underline;
+      text-decoration-skip-ink: none;
+    }
+  }
+
+  @media (max-width: 768px) {
+    flex: 1 1 25%;
+    gap: 10px;
+
+    .menuItem {
+      gap: 4px;
+
+      &.sale svg {
+        width: 26px;
+        height: 26px;
+      }
+    }
+  }
+}
+
+.contacts {
+  display: flex;
+  flex-direction: column;
+  gap: vw-1550(24);
+  flex: 1 0 vw-1550(306);
+
+  .contactItem {
+    display: flex;
+    flex-direction: column;
+    color: var(--dark-blue);
+    gap: vw-1550(8);
+    width: fit-content;
+
+    .title {
+      opacity: 0.7;
+    }
+
+    & > a {
+      color: var(--dark-blue);
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+        text-decoration-skip-ink: none;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    flex: 1 1 100%;
+    gap: 16px;
+
+    .contactItem {
+      gap: 8px;
+    }
+  }
+}
+
+.policy {
+  position: absolute;
+  left: vw-1550(371);
+  bottom: vw-1550(36);
+  display: flex;
+  gap: vw-1550(113);
+
+  .policyItem {
+    color: var(--dark-blue);
+
+    max-width: vw-1550(196);
+    opacity: 0.5;
+  }
+
+  .dev {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+
+    p {
+      color: var(--dark-blue);
+      opacity: 0.5;
+    }
+
+    a {
+      color: var(--orange);
+      opacity: 1;
+    }
+  }
+
+  @media (max-width: 768px) {
+    position: static;
+    gap: 16px;
+
+    .policyItem {
+      max-width: 160px;
+    }
+  }
+}
+
+.copyright {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  p {
+    color: var(--dark-blue);
+    opacity: 0.5;
+  }
+
+  .payments {
+    display: flex;
+    gap: vw-1550(24);
+    align-items: center;
+
+    span {
+      color: var(--dark-blue);
+      opacity: 0.5;
+    }
+
+    .paymentMethods {
+      display: flex;
+      align-items: center;
+      gap: vw-1550(16);
+
+      img {
+        max-height: vw-1550(44);
+        width: auto;
+        max-width: vw-1550(139);
+        height: auto;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding-top: 24px;
+    border-top: 1px solid rgba(28, 33, 63, 0.1);
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
+
+    .payments {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+
+      .paymentMethods {
+        gap: 12px 16px;
+        flex-wrap: wrap;
+
+        img {
+          max-width: 82px;
+          max-height: 30px;
+        }
+      }
+    }
+  }
+}

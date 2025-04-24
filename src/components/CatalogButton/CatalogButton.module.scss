@@ -1,0 +1,190 @@
+@use "../../assets/sass/functions" as *;
+
+.button {
+  display: flex;
+  align-items: center;
+  gap: vw-1550(8);
+  padding: vw-1550(15) vw-1550(39);
+  border-radius: vw-1550(12);
+  border: none;
+  outline: none;
+  background: var(--dark-blue);
+  color: var(--white-bg);
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+
+  svg {
+    width: vw-1550(26);
+    height: vw-1550(26);
+  }
+
+  @media (max-width: 768px) {
+    padding: 15px 39px;
+    gap: 6px;
+    border-radius: 6px;
+    display: none;
+
+    svg {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  &:hover {
+    background: var(--orange);
+  }
+
+  &:active {
+    box-shadow: 0 0 4px 0 rgba(238, 85, 29, 0.7);
+    background: var(--orange);
+  }
+
+  &:disabled {
+    background: var(--light-blue);
+    cursor: default;
+
+    span {
+      opacity: 0.3;
+    }
+
+    svg {
+      opacity: 0.3;
+    }
+  }
+}
+
+.menu {
+  position: absolute;
+  top: calc(100% + vw-1550(10));
+  left: 0;
+  width: vw-1550(966);
+  border: 1px solid var(--medium-blue);
+  border-radius: vw-1550(16);
+  height: fit-content;
+  max-height: vw-1550(570);
+  overflow: hidden;
+  display: flex;
+  z-index: 100;
+
+  box-shadow: 0 14px 31px 0 rgba(28, 33, 63, 0.06),
+    0 225px 90px 0 rgba(28, 33, 63, 0.01), 0 352px 98px 0 rgba(28, 33, 63, 0);
+  background: var(--white-bg);
+
+  .categories {
+    flex: 0 0 vw-1550(295);
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid var(--medium-blue);
+
+    .category {
+      display: flex;
+      align-items: center;
+      gap: vw-1550(8);
+      padding: vw-1550(12) vw-1550(24);
+      padding-right: vw-1550(12);
+      color: var(--dark-blue);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      border-top: 1px solid transparent;
+
+      @media (max-width: 768px) {
+        gap: 6px;
+      }
+
+      img {
+        border-radius: vw-1550(8);
+        width: vw-1550(36);
+        height: vw-1550(36);
+        object-fit: contain;
+      }
+
+      span {
+        flex: 1 1 auto;
+      }
+
+      &.active {
+        background: var(--light-blue);
+        border-bottom: 1px solid var(--medium-blue);
+        border-top: 1px solid var(--medium-blue);
+
+        &:first-of-type {
+          border-top-color: transparent;
+        }
+
+        svg {
+          color: var(--orange);
+        }
+      }
+    }
+  }
+
+  .activeCategory {
+    flex: 1 1 auto;
+    padding: vw-1550(32);
+    overflow-y: auto;
+
+    .title {
+      margin-bottom: vw-1550(24);
+    }
+
+    .content {
+      display: flex;
+      gap: vw-1550(12) vw-1550(54);
+      flex-wrap: wrap;
+
+      .item {
+        width: vw-1550(250);
+        color: var(--dark-blue);
+        text-decoration: none;
+
+        &:hover {
+          color: var(--orange);
+          text-decoration: underline;
+        }
+      }
+    }
+
+    &::-webkit-scrollbar {
+      width: vw-1550(20);
+      border-radius: vw-1550(5);
+    }
+
+    &::-webkit-scrollbar-track {
+      background: var(--light-blue);
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: var(--medium-blue);
+      border: 1px solid var(--light-blue);
+      border-radius: vw-1550(5);
+      position: relative;
+      z-index: 2;
+    }
+
+    &::-webkit-scrollbar-button:single-button {
+      background: var(--light-blue);
+      display: block;
+      background-size: vw-1550(12);
+      background-repeat: no-repeat;
+    }
+
+    &::-webkit-scrollbar-button:single-button:vertical:decrement {
+      height: vw-1550(15);
+
+      width: vw-1550(20);
+      background-position: center center;
+      border-radius: vw-1550(5) vw-1550(5) 0 0;
+
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polygon points="12,8 6,16 18,16" fill="%23222955"/></svg>');
+    }
+
+    &::-webkit-scrollbar-button:single-button:vertical:increment {
+      border-radius: vw-1550(5) vw-1550(5) 0 0;
+
+      height: vw-1550(15);
+      width: vw-1550(20);
+      background-position: center center;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polygon points="12,16 6,8 18,8" fill="%23222955"/></svg>');
+    }
+  }
+}

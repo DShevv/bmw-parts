@@ -1,8 +1,9 @@
+"use client";
 import { SvgSearch } from "@/assets/icons/svgs";
 import styles from "./Search.module.scss";
 import clsx from "clsx";
 import MainButton from "../Buttons/MainButton/MainButton";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { useDebounce } from "@/utils/useDebounce";
 import { searchData } from "@/data/dumpy-data";
 import Image from "next/image";
@@ -17,20 +18,20 @@ const Search = () => {
   const ref = useRef<HTMLDivElement>(null);
   useOutsideClick(ref, () => setResults([]));
 
+  const handleSearch = useCallback(() => {
+    console.log("Поисковый запрос:", debouncedSearch);
+    setResults(
+      searchData.filter((item) =>
+        item.name.toLowerCase().includes(debouncedSearch.toLowerCase())
+      )
+    );
+  }, [debouncedSearch]);
+
   useEffect(() => {
     if (debouncedSearch) {
       handleSearch();
     }
-  }, [debouncedSearch]);
-
-  const handleSearch = () => {
-    console.log("Поисковый запрос:", debouncedSearch);
-    setResults(
-      searchData.filter((item) =>
-        item.title.toLowerCase().includes(debouncedSearch.toLowerCase())
-      )
-    );
-  };
+  }, [debouncedSearch, handleSearch]);
 
   return (
     <div className={styles.container} ref={ref}>
@@ -43,9 +44,6 @@ const Search = () => {
         onChange={(e) => setSearch(e.target.value)}
         onFocus={handleSearch}
       />
-      <MainButton className={styles.button} onClick={handleSearch}>
-        Искать
-      </MainButton>
 
       {results.length > 0 && (
         <div className={styles.results}>
@@ -53,30 +51,35 @@ const Search = () => {
             <div className={styles.items}>
               {results.map((item) => (
                 <Link
-                  href={`/catalog/${slugifyWithOpts(item.title)}`}
+                  href={`/catalog/${slugifyWithOpts(item.name)}`}
                   key={item.id}
                   className={styles.item}
                 >
-                  <Image src={item.image} alt={item.title} />
+                  <Image src={item.image} alt={item.name} />
                   <div className={styles.info}>
                     <div className={clsx("body-1", styles.title)}>
-                      {item.title}
+                      {item.name}
+                      <span className={"body-4"}>Арт. {item.sku}</span>
                     </div>
-                    <div
-                      className={clsx("h3", styles.price, {
-                        [styles.sale]: item.oldPrice,
-                      })}
-                    >
-                      {item.price} BYN / шт.
-                      {item.oldPrice && (
-                        <span className={clsx("body-4", styles.oldPrice)}>
-                          {item.oldPrice} BYN / шт.
-                        </span>
-                      )}
+                    <div className={styles.controls}>
+                      <div
+                        className={clsx("h4", styles.price, {
+                          [styles.sale]: item.discount > 0,
+                        })}
+                      >
+                        {item.discount > 0
+                          ? `${item.price * (1 - item.discount / 100)} BYN `
+                          : `${item.price} BYN `}
+                        {item.discount > 0 && (
+                          <span className={clsx("body-4", styles.oldPrice)}>
+                            {item.price} BYN
+                          </span>
+                        )}
+                      </div>
+                      <MainButton className={styles.resultButton}>
+                        Купить
+                      </MainButton>
                     </div>
-                    <MainButton className={styles.resultButton}>
-                      Подробнее
-                    </MainButton>
                   </div>
                 </Link>
               ))}

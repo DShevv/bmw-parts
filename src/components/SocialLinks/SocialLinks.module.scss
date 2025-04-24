@@ -1,0 +1,49 @@
+@use "../../assets/sass/functions" as *;
+
+.container {
+  display: flex;
+  gap: vw-1550(8);
+  align-items: center;
+
+  @media (max-width: 768px) {
+    gap: 6px;
+  }
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: vw-1550(32);
+  height: vw-1550(32);
+  border-radius: 50%;
+  color: var(--white-bg);
+  transition: background-color 0.3s ease;
+
+  svg {
+    width: vw-1550(20);
+    height: vw-1550(20);
+  }
+
+  @media (max-width: 768px) {
+    width: 26px;
+    height: 26px;
+
+    svg {
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  &.viber {
+    background-color: #613887;
+  }
+
+  &.telegram {
+    background-color: #25a3e1;
+  }
+
+  &.whatsapp {
+    background-color: #4fce5d;
+  }
+}

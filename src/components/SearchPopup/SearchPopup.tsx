@@ -22,7 +22,11 @@ const SearchPopup = ({ isActive, onClose }: SearchPopupProps) => {
   const debouncedSearch = useDebounce(search, 1500);
   const [results, setResults] = useState<typeof searchData>([]);
   const ref = useRef<HTMLDivElement>(null);
-  useOutsideClick(ref, () => setResults([]));
+
+  useOutsideClick(ref, () => {
+    setResults([]);
+    onClose();
+  });
 
   useEffect(() => {
     if (debouncedSearch) {
@@ -35,7 +39,7 @@ const SearchPopup = ({ isActive, onClose }: SearchPopupProps) => {
       console.log("Поисковый запрос:", debouncedSearch);
       setResults(
         searchData.filter((item) =>
-          item.title.toLowerCase().includes(debouncedSearch.toLowerCase())
+          item.name.toLowerCase().includes(debouncedSearch.toLowerCase())
         )
       );
     }
@@ -52,6 +56,7 @@ const SearchPopup = ({ isActive, onClose }: SearchPopupProps) => {
       <div className={clsx(styles.container)} ref={ref}>
         <SvgSearch />
         <input
+          autoFocus
           type="text"
           placeholder="Поиск по сайту"
           className={clsx("t-placeholder", styles.input)}
@@ -72,45 +77,52 @@ const SearchPopup = ({ isActive, onClose }: SearchPopupProps) => {
         />
       </div>
       {results.length > 0 && (
-        <div className={styles.results}>
+        <m.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.3 }}
+          className={styles.results}
+        >
           <div className={styles.scrollContainer}>
             <div className={styles.items}>
               {results.map((item) => (
                 <Link
-                  href={`/catalog/${slugifyWithOpts(item.title)}`}
+                  href={`/catalog/${slugifyWithOpts(item.name)}`}
                   key={item.id}
                   className={styles.item}
                 >
-                  <div className={styles.itemContent}>
-                    <Image src={item.image} alt={item.title} />
-                    <div className={clsx("body-4", styles.title)} lang="ru">
-                      {item.title}
-                    </div>
-                  </div>
+                  <Image src={item.image} alt={item.name} />
                   <div className={styles.info}>
-                    <div
-                      className={clsx("h3", styles.price, {
-                        [styles.sale]: item.oldPrice,
-                      })}
-                    >
-                      {item.price} BYN / шт.
-                      {item.oldPrice && (
-                        <span className={clsx("body-4", styles.oldPrice)}>
-                          {item.oldPrice} BYN / шт.
-                        </span>
-                      )}
+                    <div className={clsx("body-1", styles.title)}>
+                      {item.name}
+                      <span className={"body-4"}>Арт. {item.sku}</span>
                     </div>
-                    <MainButton
-                      className={clsx("t-button-small", styles.resultButton)}
-                    >
-                      Подробнее
-                    </MainButton>
+                    <div className={styles.controls}>
+                      <div
+                        className={clsx("h4", styles.price, {
+                          [styles.sale]: item.discount > 0,
+                        })}
+                      >
+                        {item.discount > 0
+                          ? `${item.price * (1 - item.discount / 100)} BYN `
+                          : `${item.price} BYN `}
+                        {item.discount > 0 && (
+                          <span className={clsx("body-4", styles.oldPrice)}>
+                            {item.price} BYN
+                          </span>
+                        )}
+                      </div>
+                      <MainButton className={styles.resultButton}>
+                        Купить
+                      </MainButton>
+                    </div>
                   </div>
                 </Link>
               ))}
             </div>
           </div>
-        </div>
+        </m.div>
       )}
     </m.div>
   );

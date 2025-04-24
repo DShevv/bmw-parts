@@ -2,17 +2,26 @@
 
 .container {
   position: relative;
-  width: vw-all(234, 234);
+  width: vw-1550(234);
   cursor: pointer;
+
+  @media (max-width: 768px) {
+    width: 234px;
+  }
 
   .header {
     border: 1px solid var(--medium-blue);
-    border-radius: vw-all(12, 12);
-    padding: vw-all(13, 13) vw-all(16, 16);
+    border-radius: vw-1550(12);
+    padding: vw-1550(13) vw-1550(16);
     display: flex;
     align-items: center;
     justify-content: space-between;
     transition: all 0.2s ease-in-out;
+
+    @media (max-width: 768px) {
+      padding: 13px 16px;
+      border-radius: 12px;
+    }
 
     span {
       opacity: 0.4;
@@ -23,31 +32,44 @@
     }
 
     svg {
-      flex: 0 0 vw-all(24, 24);
-      width: vw-all(24, 24);
-      height: vw-all(24, 24);
+      flex: 0 0 vw-1550(24);
+      width: vw-1550(24);
+      height: vw-1550(24);
       transform: rotate(90deg);
       transition: all 0.2s ease-in-out;
       color: var(--orange);
+
+      @media (max-width: 768px) {
+        width: 24px;
+        flex: 0 0 24px;
+        height: 24px;
+      }
     }
   }
 
   .options {
     position: absolute;
-    bottom: vw-all(-8, -8);
+    bottom: vw-1550(-8);
     transform: translateY(100%);
     z-index: 0;
     width: 100%;
     background-color: var(--white-bg);
     border: 1px solid var(--medium-blue);
-    border-radius: vw-all(12, 12);
-    padding: vw-all(16, 16) vw-all(12, 12);
+    border-radius: vw-1550(12);
+    padding: vw-1550(16) vw-1550(12);
     display: flex;
     flex-direction: column;
-    gap: vw-all(8, 8);
+    gap: vw-1550(8);
     pointer-events: none;
     opacity: 0;
     transition: all 0.2s ease-in-out;
+
+    @media (max-width: 768px) {
+      bottom: -8px;
+      border-radius: 12px;
+      padding: 16px 12px;
+      gap: 8px;
+    }
 
     .option {
       opacity: 0.4;

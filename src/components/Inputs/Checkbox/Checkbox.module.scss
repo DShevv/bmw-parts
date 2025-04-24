@@ -4,9 +4,13 @@
   display: flex;
   align-items: center;
   width: fit-content;
-  gap: vw-all(12, 12);
+  gap: vw-1550(12);
   cursor: pointer;
   color: var(--white-bg);
+
+  @media (max-width: 768px) {
+    gap: 12px;
+  }
 }
 
 .input {
@@ -19,10 +23,10 @@
 
 .checkbox {
   border: 1px solid var(--medium-blue);
-  border-radius: vw-all(6, 6);
-  width: vw-all(32, 32);
-  height: vw-all(32, 32);
-  flex: 0 0 vw-all(32, 32);
+  border-radius: vw-1550(6);
+  width: vw-1550(32);
+  height: vw-1550(32);
+  flex: 0 0 vw-1550(32);
 
   display: flex;
   justify-content: center;
@@ -30,12 +34,24 @@
 
   background: var(--white-bg);
   color: transparent;
+
+  @media (max-width: 768px) {
+    width: 32px;
+    height: 32px;
+    flex: 0 0 32px;
+    border-radius: 6px;
+  }
 }
 
 .icon {
   display: none;
-  width: vw-all(24, 24);
-  height: vw-all(24, 24);
+  width: vw-1550(24);
+  height: vw-1550(24);
+
+  @media (max-width: 768px) {
+    width: 24px;
+    height: 24px;
+  }
 }
 
 .input:checked + .checkbox {
