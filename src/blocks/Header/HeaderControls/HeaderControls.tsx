@@ -10,10 +10,17 @@ import globalStore from "@/stores/global-store";
 import clsx from "clsx";
 import SearchPopup from "@/components/SearchPopup/SearchPopup";
 import { AnimatePresence } from "motion/react";
+import { useEffect } from "react";
 
 const HeaderControls = observer(() => {
-  const { popupStore } = globalStore;
+  const { popupStore, stopGlobalStore } = globalStore;
   const { search, openPopup, closePopup } = popupStore;
+
+  useEffect(() => {
+    return () => {
+      stopGlobalStore();
+    };
+  }, []);
 
   return (
     <div className={styles.container}>

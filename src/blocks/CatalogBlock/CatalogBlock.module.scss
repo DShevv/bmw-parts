@@ -1,0 +1,42 @@
+@use "../../assets/sass/functions" as *;
+
+.wrapper {
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: vw-1550(32);
+
+  @media (max-width: 768px) {
+    margin-bottom: 20px;
+
+    .button {
+      display: none;
+    }
+  }
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: vw-1550(298) vw-1550(278);
+  gap: vw-1550(24);
+
+  .button {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    grid-template-rows: initial;
+    gap: 16px;
+
+    .button {
+      display: flex;
+      width: 100%;
+    }
+  }
+}

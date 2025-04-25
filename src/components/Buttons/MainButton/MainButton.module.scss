@@ -16,6 +16,7 @@
   outline: none;
   cursor: pointer;
   transition: all 0.3s ease;
+  text-decoration: none;
 
   span {
     transition: all 0.3s ease;
@@ -97,4 +98,9 @@
 }
 
 @media (max-width: 768px) {
+  .button {
+    border-radius: 8px;
+    padding: 16px;
+    min-width: 218px;
+  }
 }

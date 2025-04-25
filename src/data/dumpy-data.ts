@@ -12,6 +12,9 @@ import belcard from "@/assets/images/payments/belcard.png";
 import belcardInternet from "@/assets/images/payments/belcard-internet.png";
 import samsung from "@/assets/images/payments/samsung-pay.png";
 import apple from "@/assets/images/payments/apple.png";
+import slide1 from "@/assets/images/slide.png";
+import carModel from "@/assets/images/car-model.png";
+import { ProductT } from "@/types/types";
 
 export const categories = [
   {
@@ -439,3 +442,196 @@ export const paymentMethods = [
 ]
 
 
+export const HeroSlides = [
+  {
+    id: 1,
+    image: slide1,
+    title: "Скидка до 20% на тормозные колодки и диски",
+    buttonLink: "/link1",
+  },
+  {
+    id: 2,
+    image: slide1,
+    title: "Скидка до 20% на тормозные колодки и диски 2",
+    buttonLink: "/link2",
+  },
+  {
+    id: 3,
+    image: slide1,
+    title: "Скидка до 20% на тормозные колодки и диски 3",
+    buttonLink: "/link3",
+  },
+];
+
+export const series = [
+  {
+    id: 1,
+    image: carModel,
+    title: "1 серия",
+    models: [
+      {
+        id: 1,
+        title: "1 (e87)",
+
+      },
+      {
+        id: 2,
+        title: "1 купе (E82)",
+      },
+      {
+        id: 3,
+        title: "1 Кабриолет (E88)",
+      },
+
+    ]
+  },
+  {
+    id: 2,
+    image: carModel,
+    title: "2 серия",
+    models: [
+      {
+        id: 1,
+        title: "2 (e88)",
+      },
+      {
+        id: 2,
+        title: "2 купе (E89)",
+      },
+      {
+        id: 3,
+        title: "2 хэтчбек (E83)",
+      },
+      {
+        id: 4,
+        title: "2 хэтчбек (E83)",
+      },
+    ]
+  },
+  {
+    id: 3,
+    image: carModel,
+    title: "3 серия",
+    models: [
+      {
+        id: 1,
+        title: "3 (e90)",
+      },
+      {
+        id: 2,
+        title: "3 купе (E92)",
+      },
+      {
+        id: 3,
+        title: "3 хэтчбек (E93)",
+      },
+      {
+        id: 4,
+        title: "3 хэтчбек (E93)",
+      },
+    ]
+  }
+]
+
+export const popularProducts: ProductT[] = [
+  {
+    id: 1068298034,
+    image: wheelHd,
+    title: "Диск колёсный 6 × 15 | 4 × 100 ET48 D54,1 BMW X1",
+    type: "6HP26, 6HP26A, 6HP26A61, 6HP26X",
+    brand: "ZF",
+    price: 1000,
+    discount: 20,
+    isAvailable: true,
+  },
+  {
+    id: 1068298035,
+    image: wheelHd,
+    title: "Диск колёсный 6 × 15 | 4 × 100 ET48 D54,1 BMW X1",
+    type: "6HP26, 6HP26A, 6HP26A61, 6HP26X",
+    brand: "ZF",
+    price: 400,
+    discount: 0,
+    isAvailable: true,
+  },
+  {
+    id: 1068298036,
+    image: wheelHd,
+    title: "Диск литой R17 5x120 BMW 3 Series F30",
+    type: "6HP26, 6HP26A, 6HP26A61, 6HP26X",
+    brand: "ZF",
+    price: 850,
+    discount: 15,
+    isAvailable: true,
+  },
+  {
+    id: 1068298037,
+    image: wheelHd,
+    title: "Диск кованый R18 5x112 BMW 5 Series G30",
+    type: "6HP26, 6HP26A, 6HP26A61, 6HP26X",
+    brand: "ZF",
+    price: 1200,
+    discount: 10,
+    isAvailable: true,
+  },
+  {
+    id: 1068298038,
+    image: wheelHd,
+    title: "Диск легкосплавный R19 5x120 BMW X5 E70",
+    type: "6HP26, 6HP26A, 6HP26A61, 6HP26X",
+    brand: "ZF",
+    price: 950,
+    discount: 25,
+    isAvailable: true,
+  },
+  {
+    id: 1068298039,
+    image: wheelHd,
+    title: "Диск спортивный R20 5x120 BMW M4 F82",
+    type: "6HP26, 6HP26A, 6HP26A61, 6HP26X",
+    brand: "ZF",
+    price: 1500,
+    discount: 5,
+    isAvailable: true,
+  },
+  {
+    id: 1068298040,
+    image: wheelHd,
+    title: "Диск штампованный R16 5x120 BMW 3 Series E90",
+    type: "6HP26, 6HP26A, 6HP26A61, 6HP26X",
+    brand: "ZF",
+    price: 300,
+    discount: 0,
+    isAvailable: true,
+  },
+  {
+    id: 1068298041,
+    image: wheelHd,
+    title: "Диск составной R21 5x120 BMW X7 G07",
+    type: "6HP26, 6HP26A, 6HP26A61, 6HP26X",
+    brand: "ZF",
+    price: 1800,
+    discount: 12,
+    isAvailable: true,
+  },
+  {
+    id: 1068298042,
+    image: wheelHd,
+    title: "Диск полированный R18 5x120 BMW 7 Series G11",
+    type: "6HP26, 6HP26A, 6HP26A61, 6HP26X",
+    brand: "ZF",
+    price: 1100,
+    discount: 8,
+    isAvailable: false,
+  },
+  {
+    id: 1068298043,
+    image: wheelHd,
+    title: "Диск матовый R19 5x120 BMW X6 F16",
+    type: "6HP26, 6HP26A, 6HP26A61, 6HP26X",
+    brand: "ZF",
+    price: 1300,
+    discount: 18,
+    isAvailable: true,
+  }
+]

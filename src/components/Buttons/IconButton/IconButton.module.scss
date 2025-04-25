@@ -16,9 +16,15 @@
   outline: none;
   cursor: pointer;
   transition: all 0.3s ease;
+  text-decoration: none;
 
   span {
     transition: all 0.3s ease;
+  }
+
+  svg {
+    width: vw-1550(24);
+    height: vw-1550(24);
   }
 
   &:hover {
@@ -48,4 +54,13 @@
 }
 
 @media (max-width: 768px) {
+  .button {
+    border-radius: 12px;
+    padding: 6px 8px;
+
+    svg {
+      width: 24px;
+      height: 24px;
+    }
+  }
 }

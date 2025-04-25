@@ -1,0 +1,27 @@
+@use "../../assets/sass/functions" as *;
+
+.hero {
+  width: 100%;
+
+  .title {
+    margin-bottom: vw-1550(24);
+  }
+}
+
+.container {
+  display: flex;
+  gap: vw-1550(24);
+}
+
+@media (max-width: 768px) {
+  .hero {
+    .title {
+      margin-bottom: 16px;
+    }
+  }
+
+  .container {
+    flex-direction: column-reverse;
+    gap: 16px;
+  }
+}

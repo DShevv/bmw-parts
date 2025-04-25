@@ -1,0 +1,167 @@
+@use "../../../assets/sass/functions" as *;
+
+.wrapper {
+  position: relative;
+  flex: 0 0 vw-1550(856);
+  height: vw-1550(587);
+  border-radius: vw-1550(12);
+  overflow: hidden;
+  background: var(--light-blue);
+
+  @media (max-width: 768px) {
+    flex: initial;
+    max-height: 523px;
+    height: fit-content;
+    border-radius: 8px;
+  }
+}
+
+.title {
+  padding: vw-1550(24);
+
+  @media (max-width: 768px) {
+    padding: 16px;
+  }
+}
+
+.swiper {
+  margin-bottom: vw-1550(30);
+  padding: 0 vw-1550(24);
+
+  .slide {
+    width: auto;
+    opacity: 0.2;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &.active {
+      opacity: 1;
+    }
+
+    .content {
+      width: vw-1550(104);
+      height: vw-1550(80);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      overflow: hidden;
+
+      .image {
+        width: 100%;
+        height: vw-1550(60);
+        object-fit: cover;
+      }
+
+      .slideTitle {
+        color: var(--dark-blue);
+        text-align: center;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    margin-bottom: 16px;
+    padding: 0 16px;
+
+    .slide {
+      .content {
+        width: 70px;
+        height: 58px;
+
+        .image {
+          height: 40px;
+        }
+      }
+    }
+  }
+}
+
+.infoContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  height: vw-1550(369);
+  padding: 0 vw-1550(24);
+
+  @media (max-width: 768px) {
+    height: fit-content;
+    padding: 0 16px;
+    align-items: flex-end;
+    padding-bottom: 16px;
+  }
+}
+
+.info {
+  margin-bottom: vw-1550(43);
+  display: flex;
+  flex-direction: column;
+  gap: vw-1550(32) vw-1550(50);
+  max-height: vw-1550(290);
+  flex-wrap: wrap;
+  align-items: flex-start;
+  align-content: flex-start;
+  justify-content: flex-start;
+
+  @media (max-width: 768px) {
+    margin-bottom: 16px;
+    padding: 0 16px;
+    gap: 19px 22px;
+    max-height: 380px;
+    align-content: space-between;
+    width: 100%;
+  }
+  .infoItem {
+    display: flex;
+    max-width: vw-1550(232);
+    width: vw-1550(232);
+    gap: vw-1550(16);
+
+    @media (max-width: 768px) {
+      max-width: 141px;
+      width: 141px;
+      gap: 6px;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    &.active {
+      .infoTitle {
+        color: var(--orange);
+      }
+    }
+
+    .infoTitle {
+      color: var(--dark-blue);
+      text-align: center;
+    }
+
+    .infoList {
+      display: flex;
+      flex-direction: column;
+      gap: vw-1550(12);
+      list-style: none;
+      padding: 0;
+      margin: 0;
+
+      @media (max-width: 768px) {
+        gap: 6px;
+      }
+
+      .infoItem {
+        display: block;
+        width: fit-content;
+      }
+
+      .infoTitle {
+        color: var(--dark-blue);
+        text-decoration: none;
+
+        &:hover {
+          color: var(--orange);
+        }
+      }
+    }
+  }
+}

@@ -4,6 +4,12 @@
   @return calc(min((($abs-px * 100) / 1550) * 1vw, $abs-px * 1px) * $sign);
 }
 
+@function vw-768($px) {
+  $sign: if($px < 0, -1, 1);
+  $abs-px: abs($px);
+  @return calc(max((($abs-px * 100) / 375) * 1vw, $abs-px * 1px) * $sign);
+}
+
 @function vw-all($px, $mobile) {
   @return clamp($mobile * 1px, vw-1550($px), $px * 1px);
 }

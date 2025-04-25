@@ -25,4 +25,30 @@ export type NotificationStoreT = {
 export type GlobalStoreT = {
   popupStore: PopupStoreT;
   notificationStore: NotificationStoreT;
+  favoritesStore: FavoritesStoreT;
+
+  stopGlobalStore: () => void;
+};
+
+export type FavoritesStoreT = {
+  favorites: { [key: number]: ProductT };
+
+  addToFavorites: (product: ProductT) => void;
+  removeFromFavorites: (product: ProductT) => void;
+  toggleFavorite: (product: ProductT) => void;
+  isFavorite: (product: ProductT) => boolean;
+  stopFavoriteStore: () => void;
+};
+
+export type CartStoreT = {
+  cart: { [key: number]: { product: ProductT; count: number } };
+
+  addToCart: (product: ProductT) => void;
+  removeFromCart: (product: ProductT) => void;
+  removeOneFromCart: (product: ProductT) => void;
+  removeAllFromCart: () => void;
+  isInCart: (product: ProductT) => boolean;
+  getTotalPrice: () => number;
+  getTotalCount: () => number;
+  stopCartStore: () => void;
 };
