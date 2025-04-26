@@ -1,0 +1,96 @@
+@use "../../assets/sass/functions" as *;
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: vw-1550(16);
+  width: vw-1550(636);
+  height: vw-1550(270);
+  padding: vw-1550(16);
+  border: 1px solid var(--medium-blue);
+  background: var(--white-bg);
+  transition: all 0.3s ease;
+  position: relative;
+  text-decoration: none;
+  color: var(--dark-blue);
+  border-radius: vw-1550(12);
+
+  &:hover {
+    box-shadow: 0 14px 31px 0 rgba(28, 33, 63, 0.06),
+      0 225px 90px 0 rgba(28, 33, 63, 0.01), 0 352px 98px 0 rgba(28, 33, 63, 0);
+  }
+
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+    height: 320px;
+    padding: 16px;
+    border-radius: 8px;
+  }
+
+  .image {
+    width: vw-1550(268);
+    border-radius: vw-1550(12);
+    height: 100%;
+    object-fit: cover;
+
+    @media (max-width: 768px) {
+      height: 130px;
+      border-radius: 8px;
+      width: 100%;
+    }
+  }
+
+  .container {
+    padding: vw-1550(12) 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+
+    @media (max-width: 768px) {
+      padding: 0;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  .title {
+    margin-top: vw-1550(10);
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+
+    @media (max-width: 768px) {
+      margin-top: 10px;
+      -webkit-line-clamp: 2;
+    }
+  }
+
+  .date {
+    border-radius: vw-1550(12);
+    padding: vw-1550(6) vw-1550(12);
+    width: fit-content;
+
+    background: var(--medium-blue);
+    color: var(--dark-blue);
+
+    @media (max-width: 768px) {
+      border-radius: 8px;
+      padding: 6px 12px;
+    }
+  }
+
+  .button {
+    min-width: vw-1550(180);
+
+    @media (max-width: 768px) {
+      min-width: 100%;
+    }
+  }
+}

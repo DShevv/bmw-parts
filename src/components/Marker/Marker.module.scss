@@ -1,12 +1,12 @@
 @use "../../assets/sass/functions" as *;
 
 .container {
-  width: vw-1440(100);
-  height: vw-1440(100);
+  width: vw-1550(54);
+  height: vw-1550(54);
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
-  transform: translate(-50%, -100%);
+  transform: translate(-50%, -50%);
 }
 
 .image {
@@ -16,7 +16,7 @@
 
 @media (max-width: 768px) {
   .container {
-    width: 100px;
-    height: 100px;
+    width: 54px;
+    height: 54px;
   }
 }

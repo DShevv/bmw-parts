@@ -5,12 +5,12 @@
   max-width: vw-1550(472);
   padding: vw-1550(16) vw-1550(20);
   border-radius: vw-1550(12);
+  background: var(--white-bg);
 
   position: relative;
   display: inline-flex;
   flex-direction: column;
 
-  background: var(--bg);
   border: 1px solid var(--medium-blue);
   color: var(--dark-blue);
   transition: all 0.2s ease;
@@ -39,9 +39,9 @@
 
 @media (max-width: 768px) {
   .container {
-    border-radius: 32px;
-    padding: 15px 18px;
     max-width: 100%;
+    padding: 17px 16px;
+    border-radius: 6px;
   }
 
   .message {

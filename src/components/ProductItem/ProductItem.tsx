@@ -20,7 +20,13 @@ const ProductItem = observer(({ product }: { product: ProductT }) => {
   }, []);
 
   return (
-    <Link href="/product" className={styles.item}>
+    <Link
+      href="/product"
+      className={clsx(styles.item, {
+        [styles.order]: product.isAvailable === "order",
+        [styles.unavailable]: product.isAvailable === "unavailable",
+      })}
+    >
       {isClient && (
         <div
           className={clsx(styles.favorite, {
@@ -34,9 +40,12 @@ const ProductItem = observer(({ product }: { product: ProductT }) => {
           <SvgHeart />
         </div>
       )}
-      {product.isAvailable && (
-        <div className={clsx(styles.available, "body-4")}>В наличии</div>
-      )}
+
+      <div className={clsx(styles.available, "body-4")}>
+        {product.isAvailable === "available" && "В наличии"}
+        {product.isAvailable === "order" && "Под заказ"}
+        {product.isAvailable === "unavailable" && "Нет в наличии"}
+      </div>
 
       <Image
         src={product.image}
@@ -72,8 +81,11 @@ const ProductItem = observer(({ product }: { product: ProductT }) => {
           <MainButton
             onClick={() => addToCart(product)}
             className={styles.button}
+            style={
+              product.isAvailable === "available" ? "primary" : "secondary"
+            }
           >
-            В корзину
+            {product.isAvailable === "available" ? "В корзину" : "Заказать"}
           </MainButton>
         </div>
       </div>

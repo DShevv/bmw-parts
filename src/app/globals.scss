@@ -38,6 +38,7 @@ main {
   flex-direction: column;
   gap: vw-1550(140);
   margin-top: vw-1550(32);
+  margin-bottom: vw-1550(140);
 }
 
 .mobile {
@@ -146,6 +147,7 @@ main {
     max-width: calc(100% - 40px);
     margin-top: 24px;
     gap: 72px;
+    margin-bottom: 72px;
   }
 
   .h1 {

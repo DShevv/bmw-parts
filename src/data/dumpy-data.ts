@@ -3,7 +3,7 @@ import tools from "@/assets/images/tools.png";
 import oil from "@/assets/images/oil.png";
 import wheelHd from "@/assets/images/wheel-hd.png";
 import { SvgCar, SvgEngine, SvgOil, SvgWheel } from "@/assets/icons/svgs";
-
+import promo from "@/assets/images/promo.png";
 import visaSecure from "@/assets/images/payments/visa-secure.png";
 import visa from "@/assets/images/payments/visa.png";
 import mastercard from "@/assets/images/payments/marstercard.png";
@@ -14,7 +14,12 @@ import samsung from "@/assets/images/payments/samsung-pay.png";
 import apple from "@/assets/images/payments/apple.png";
 import slide1 from "@/assets/images/slide.png";
 import carModel from "@/assets/images/car-model.png";
-import { ProductT } from "@/types/types";
+import { ProductT, PromotionT } from "@/types/types";
+import feedbackImage1 from "@/assets/images/feedback/image-1.png";
+import feedbackImage2 from "@/assets/images/feedback/image-2.png";
+import feedbackImage3 from "@/assets/images/feedback/image-3.png";
+import feedbackImage4 from "@/assets/images/feedback/image-4.png";
+
 
 export const categories = [
   {
@@ -542,7 +547,7 @@ export const popularProducts: ProductT[] = [
     brand: "ZF",
     price: 1000,
     discount: 20,
-    isAvailable: true,
+    isAvailable: "available",
   },
   {
     id: 1068298035,
@@ -552,7 +557,7 @@ export const popularProducts: ProductT[] = [
     brand: "ZF",
     price: 400,
     discount: 0,
-    isAvailable: true,
+    isAvailable: "order",
   },
   {
     id: 1068298036,
@@ -562,7 +567,7 @@ export const popularProducts: ProductT[] = [
     brand: "ZF",
     price: 850,
     discount: 15,
-    isAvailable: true,
+    isAvailable: "unavailable",
   },
   {
     id: 1068298037,
@@ -572,7 +577,7 @@ export const popularProducts: ProductT[] = [
     brand: "ZF",
     price: 1200,
     discount: 10,
-    isAvailable: true,
+    isAvailable: "available",
   },
   {
     id: 1068298038,
@@ -582,7 +587,7 @@ export const popularProducts: ProductT[] = [
     brand: "ZF",
     price: 950,
     discount: 25,
-    isAvailable: true,
+    isAvailable: "available",
   },
   {
     id: 1068298039,
@@ -592,7 +597,7 @@ export const popularProducts: ProductT[] = [
     brand: "ZF",
     price: 1500,
     discount: 5,
-    isAvailable: true,
+    isAvailable: "available",
   },
   {
     id: 1068298040,
@@ -602,7 +607,7 @@ export const popularProducts: ProductT[] = [
     brand: "ZF",
     price: 300,
     discount: 0,
-    isAvailable: true,
+    isAvailable: "available",
   },
   {
     id: 1068298041,
@@ -612,7 +617,7 @@ export const popularProducts: ProductT[] = [
     brand: "ZF",
     price: 1800,
     discount: 12,
-    isAvailable: true,
+    isAvailable: "available",
   },
   {
     id: 1068298042,
@@ -622,7 +627,7 @@ export const popularProducts: ProductT[] = [
     brand: "ZF",
     price: 1100,
     discount: 8,
-    isAvailable: false,
+    isAvailable: "available",
   },
   {
     id: 1068298043,
@@ -632,6 +637,50 @@ export const popularProducts: ProductT[] = [
     brand: "ZF",
     price: 1300,
     discount: 18,
-    isAvailable: true,
+    isAvailable: "available",
+  }
+]
+
+export const promotions: PromotionT[] = [
+  {
+    id: 1,
+    image: promo,
+    title: "Получите запасной диск в подарок при покупке набора из 4 дисков!",
+    date: "01.04.2025",
+  },
+  {
+    id: 2,
+    image: promo,
+    title: "При заказе от 300 BYN получите скидку 5%!",
+    date: "01.04.2025",
+  },
+  {
+    id: 3,
+    image: promo,
+    title: "Скидка до 20% на тормозные колодки и диски",
+    date: "01.04.2025",
+  },
+]
+
+export const feedbackData = [
+  {
+    id: 1,
+    image: feedbackImage1,
+    title: "Диски",
+  },
+  {
+    id: 2,
+    image: feedbackImage2,
+    title: "Уход за автомобилем",
+  },
+  {
+    id: 3,
+    image: feedbackImage3,
+    title: "Инструменты",
+  },
+  {
+    id: 4,
+    image: feedbackImage4,
+    title: "Масла и автохимия",
   }
 ]

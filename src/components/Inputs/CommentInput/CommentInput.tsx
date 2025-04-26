@@ -4,7 +4,6 @@ import styles from "./CommentInput.module.scss";
 import { Field } from "formik";
 
 interface CommentInputProps {
-  title?: string;
   name: string;
   placeholder?: string;
   error?: string;
@@ -15,7 +14,6 @@ interface CommentInputProps {
 }
 
 const CommentInput = ({
-  title,
   name,
   placeholder,
   error,
@@ -31,8 +29,6 @@ const CommentInput = ({
 
   return (
     <label className={clsx("t-placeholder", styles.container)}>
-      <div className={clsx("body-4", styles.title)}>{title}</div>
-
       <Field
         className={clsx(
           "t-placeholder",

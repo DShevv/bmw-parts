@@ -191,4 +191,28 @@
       }
     }
   }
+
+  &.order,
+  &.unavailable {
+    .available {
+      &:before {
+        background: var(--yellow);
+      }
+    }
+
+    .image,
+    .title,
+    .info,
+    .price {
+      opacity: 0.5;
+    }
+  }
+
+  &.unavailable {
+    .available {
+      &:before {
+        background: var(--error);
+      }
+    }
+  }
 }

@@ -1,0 +1,115 @@
+@use "../../assets/sass/functions" as *;
+
+.item {
+  display: flex;
+  align-items: flex-end;
+  gap: vw-1550(16);
+  width: vw-1550(416);
+  height: vw-1550(440);
+  padding: vw-1550(16);
+  border: 1px solid var(--medium-blue);
+  background: var(--white-bg);
+  transition: all 0.3s ease;
+  position: relative;
+  text-decoration: none;
+  color: var(--dark-blue);
+  border-radius: vw-1550(12);
+
+  &:hover {
+    box-shadow: 0 14px 31px 0 rgba(28, 33, 63, 0.06),
+      0 225px 90px 0 rgba(28, 33, 63, 0.01), 0 352px 98px 0 rgba(28, 33, 63, 0);
+  }
+
+  @media (max-width: 768px) {
+    gap: 16px;
+    width: 100%;
+    height: 320px;
+    padding: 16px;
+    border-radius: 8px;
+  }
+
+  .image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: vw-1550(12);
+    z-index: 1;
+
+    @media (max-width: 768px) {
+      border-radius: 8px;
+    }
+  }
+
+  .container {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: var(--white-bg);
+    border-radius: vw-1550(12);
+    padding: vw-1550(16);
+    gap: 0;
+    overflow: hidden;
+    transition: all 0.5s ease;
+
+    @media (max-width: 768px) {
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      border-radius: 8px;
+      gap: 8px;
+    }
+  }
+
+  &:hover {
+    .container {
+      gap: vw-1550(12);
+
+      @media (max-width: 768px) {
+        gap: 8px;
+      }
+    }
+  }
+
+  .title {
+    margin-top: vw-1550(12);
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+
+    @media (max-width: 768px) {
+      margin-top: 8px;
+      -webkit-line-clamp: 4;
+    }
+  }
+
+  .date {
+    border-radius: vw-1550(12);
+    padding: vw-1550(6) vw-1550(12);
+    width: fit-content;
+
+    background: var(--medium-blue);
+    color: var(--dark-blue);
+
+    @media (max-width: 768px) {
+      border-radius: 8px;
+      padding: 6px 12px;
+    }
+  }
+
+  .button {
+    min-width: 100%;
+
+    @media (max-width: 768px) {
+      min-width: 100%;
+      height: auto !important;
+      opacity: 1 !important;
+    }
+  }
+}

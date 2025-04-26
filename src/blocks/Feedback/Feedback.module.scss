@@ -1,0 +1,167 @@
+@use "../../assets/sass/functions" as *;
+
+.container {
+  width: 100%;
+  border-radius: vw-1550(16);
+  position: relative;
+  background: var(--dark-blue);
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  gap: vw-1550(110);
+}
+
+.imageMobile {
+  display: none;
+}
+
+.form {
+  padding: vw-1550(48);
+  display: flex;
+  flex-direction: column;
+  gap: vw-1550(16);
+  width: 100%;
+  color: var(--white-bg);
+
+  .button {
+    width: vw-1550(218);
+  }
+
+  label {
+    margin-top: vw-1550(8);
+    max-width: 100%;
+  }
+
+  .description {
+    margin-bottom: vw-1550(8);
+    max-width: vw-1550(400);
+  }
+}
+
+.imageContainer {
+  position: relative;
+  width: vw-1550(550);
+  flex-shrink: 0;
+  overflow: hidden;
+  display: flex;
+  gap: vw-1550(24);
+
+  .swiper {
+    width: vw-1550(306);
+    flex-shrink: 0;
+    height: vw-1550(626);
+    padding-bottom: vw-1550(88);
+    padding-top: vw-1550(16);
+
+    &.secondary {
+      padding-top: vw-1550(88);
+      padding-bottom: 0;
+    }
+
+    .slide {
+      height: auto;
+      margin-bottom: vw-1550(24);
+    }
+  }
+
+  .item {
+    width: vw-1550(306);
+    flex-shrink: 0;
+    height: vw-1550(280);
+    border-radius: vw-1550(16);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: vw-1550(16);
+    padding: vw-1550(16);
+    text-decoration: none;
+    color: var(--dark-blue);
+    background: var(--white-bg);
+
+    img {
+      width: 100%;
+      height: vw-1550(200);
+      object-fit: cover;
+      border-radius: 8px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    gap: 32px;
+    border-radius: 8px;
+  }
+
+  .form {
+    padding: 0 16px;
+    padding-top: 24px;
+    gap: 12px;
+    align-items: center;
+    width: 100%;
+
+    .title {
+      width: 100%;
+    }
+
+    .description {
+      margin-bottom: 8px;
+      max-width: 100%;
+    }
+
+    label {
+      width: 100%;
+      margin-top: 4px;
+    }
+
+    .button {
+      width: 100%;
+      max-width: 100%;
+    }
+  }
+
+  .imageContainer {
+    width: 410px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 274px;
+    gap: 23px;
+    align-items: center;
+
+    .swiper {
+      height: 100%;
+      width: 193px;
+      padding-top: 0;
+      padding-bottom: 50px;
+
+      &.secondary {
+        padding-top: 50px;
+        padding-bottom: 16px;
+      }
+
+      .slide {
+        margin-bottom: 16px;
+      }
+
+      .item {
+        width: 193px;
+        border-radius: 8px;
+        height: 181px;
+        padding: 12px;
+
+        img {
+          height: 117px;
+          border-radius: 8px;
+        }
+
+        span {
+          flex: 1 1 auto;
+          display: flex;
+          align-items: center;
+        }
+      }
+    }
+  }
+}

@@ -4,6 +4,8 @@ import Script from "next/script";
 import Header from "@/blocks/Header/Header";
 import MenuPopup from "@/blocks/MenuPopup/MenuPopup";
 import Footer from "@/blocks/Footer/Footer";
+import FeedbackPopup from "@/blocks/FeedbackPopup/FeedbackPopup";
+import PopupButton from "@/components/Buttons/PopupButton/PopupButton";
 
 const unbounded = Unbounded({
   variable: "--second-family",
@@ -33,6 +35,8 @@ export default async function RootLayout({
         <Footer />
 
         <MenuPopup />
+        <FeedbackPopup />
+        <PopupButton />
       </body>
     </html>
   );

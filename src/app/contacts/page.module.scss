@@ -1,0 +1,96 @@
+@use "../../assets/sass/functions" as *;
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: vw-1550(20);
+
+  .title {
+    margin-bottom: vw-1550(42);
+  }
+
+  @media (max-width: 768px) {
+    gap: 12px;
+
+    .title {
+      margin-bottom: 32px;
+    }
+  }
+}
+
+.requisites {
+  .title {
+    margin-bottom: vw-1550(32);
+
+    @media (max-width: 768px) {
+      margin-bottom: 20px;
+    }
+  }
+
+  .requisitesContent {
+    display: flex;
+    gap: vw-1550(48);
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      gap: 16px;
+    }
+  }
+
+  .item {
+    display: flex;
+    flex-direction: column;
+    gap: vw-1550(20);
+
+    @media (max-width: 768px) {
+      gap: 8px;
+    }
+
+    .itemTitle {
+      display: flex;
+      gap: vw-1550(12);
+      align-items: center;
+
+      @media (max-width: 768px) {
+        gap: 12px;
+      }
+
+      .icon {
+        width: vw-1550(54);
+        height: vw-1550(54);
+        background-color: var(--orange);
+        border-radius: vw-1550(12);
+        color: var(--white-bg);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        svg {
+          width: vw-1550(26);
+          height: vw-1550(26);
+        }
+
+        @media (max-width: 768px) {
+          width: 36px;
+          height: 36px;
+          border-radius: 8px;
+
+          svg {
+            width: 26px;
+            height: 26px;
+          }
+        }
+      }
+    }
+
+    .itemValue {
+      display: flex;
+      flex-direction: column;
+      gap: vw-1550(6);
+
+      @media (max-width: 768px) {
+        gap: 4px;
+      }
+    }
+  }
+}

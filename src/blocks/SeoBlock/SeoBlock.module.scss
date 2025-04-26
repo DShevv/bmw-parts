@@ -1,0 +1,74 @@
+@use "../../assets/sass/functions" as *;
+
+.container {
+  color: var(--dark-blue);
+
+  h2 {
+    font-family: var(--second-family);
+    font-weight: 500;
+    font-size: vw-1550(26);
+    line-height: 140%;
+
+    margin-bottom: vw-1550(24);
+  }
+
+  p {
+    margin-bottom: vw-1550(6);
+
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: vw-1550(16);
+    line-height: 140%;
+  }
+
+  h3 {
+    margin-top: vw-1550(20);
+    margin-bottom: vw-1550(12);
+
+    font-family: var(--second-family);
+    font-weight: 500;
+    font-size: vw-1550(16);
+    line-height: 150%;
+  }
+
+  ul,
+  ol {
+    margin-left: vw-1550(24);
+    margin-bottom: vw-1550(12);
+
+    li {
+      font-family: var(--font-family);
+      font-weight: 400;
+      font-size: vw-1550(16);
+      line-height: 140%;
+    }
+  }
+
+  @media (max-width: 768px) {
+    h2 {
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 15px;
+      margin-bottom: 6px;
+    }
+
+    h3 {
+      font-size: 16px;
+      margin-top: 16px;
+      margin-bottom: 8px;
+    }
+
+    ul,
+    ol {
+      margin-left: 24px;
+      margin-bottom: 8px;
+
+      li {
+        font-size: 15px;
+      }
+    }
+  }
+}
