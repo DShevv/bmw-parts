@@ -9,7 +9,7 @@ import ArrowButton from "@/components/Buttons/ArrowButton/ArrowButton";
 import { Swiper as SwiperType } from "swiper";
 import { useRef } from "react";
 import PromoItem from "@/components/PromoItem/PromoItem";
-const RecentPromo = () => {
+const RecentPromo = ({ title }: { title?: string }) => {
   const swiperRef = useRef<SwiperType>(null);
 
   const handlePrev = () => {
@@ -23,7 +23,9 @@ const RecentPromo = () => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.header}>
-        <h2 className={clsx("h2", styles.title)}>Последние акции</h2>
+        <h2 className={clsx("h2", styles.title)}>
+          {title ?? "Последние акции"}
+        </h2>
         <MainButton
           type="link"
           href="/promotions"

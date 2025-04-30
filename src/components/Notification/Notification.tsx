@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite";
 import styles from "./Notification.module.scss";
 import globalStore from "@/stores/global-store";
 import clsx from "clsx";
-import { SvgCircleCheck, SvgCircleClose } from "@/assets/icons/svgs";
+import { SvgSquareCheck, SvgSquareClose } from "@/assets/icons/svgs";
 
 const Notification = observer(() => {
   const { notificationStore } = globalStore;
@@ -16,12 +16,10 @@ const Notification = observer(() => {
       onClick={() => removeNotification()}
     >
       <div className={clsx(styles.item, { [styles.error]: type === "error" })}>
-        <div className={clsx("h3", styles.title)}>
-          {type === "success" && <SvgCircleCheck />}
-          {type === "error" && <SvgCircleClose />}
-          {title}
-        </div>
-        <div className={clsx("body-1", styles.text)}>{info}</div>
+        {type === "success" && <SvgSquareCheck />}
+        {type === "error" && <SvgSquareClose />}
+        <div className={clsx("body-1", styles.title)}>{title}</div>
+        <div className={clsx("body-3", styles.text)}>{info}</div>
       </div>
     </div>
   );

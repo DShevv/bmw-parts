@@ -1,3 +1,4 @@
+"use client";
 import styles from "./PromoItem.module.scss";
 import Link from "next/link";
 import Image from "next/image";
@@ -7,7 +8,7 @@ import { PromotionT } from "@/types/types";
 
 const PromoItem = ({ promotion }: { promotion: PromotionT }) => {
   return (
-    <Link href={`/promotion/${promotion.id}`} className={clsx(styles.item)}>
+    <Link href={`/promotions/${promotion.id}`} className={clsx(styles.item)}>
       <Image
         src={promotion.image}
         alt={promotion.title}

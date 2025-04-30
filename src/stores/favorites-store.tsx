@@ -40,6 +40,10 @@ class FavoritesStore implements FavoritesStoreT {
     delete this.favorites[product.id];
   };
 
+  removeAllFavorites = () => {
+    this.favorites = {};
+  };
+
   isFavorite = (product: ProductT) => {
     return this.favorites[product.id] !== undefined;
   };

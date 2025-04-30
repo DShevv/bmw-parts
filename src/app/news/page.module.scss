@@ -1,0 +1,35 @@
+@use "../../assets/sass/functions" as *;
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: vw-1550(20);
+
+  .title {
+    margin-bottom: vw-1550(42);
+  }
+
+  @media (max-width: 768px) {
+    gap: 12px;
+
+    .title {
+      margin-bottom: 24px;
+    }
+  }
+
+  .pagination {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: vw-1550(36) vw-1550(24);
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 16px;
+  }
+}

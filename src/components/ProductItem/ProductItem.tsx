@@ -9,6 +9,7 @@ import { observer } from "mobx-react-lite";
 import globalStore from "@/stores/global-store";
 import { SvgHeart } from "@/assets/icons/svgs";
 import { useState, useEffect } from "react";
+
 const ProductItem = observer(({ product }: { product: ProductT }) => {
   const { cartStore, favoritesStore } = globalStore;
   const { addToCart } = cartStore;

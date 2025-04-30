@@ -31,6 +31,7 @@ const InlineButton = ({
           [styles.isIcon]: isIcon,
         })}
         href={href}
+        onClick={onClick}
       >
         <span>{children}</span>
         {isIcon && <SvgArrowCorner />}

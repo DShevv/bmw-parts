@@ -1,3 +1,4 @@
+"use client";
 import styles from "./NewsItem.module.scss";
 import Link from "next/link";
 import Image from "next/image";
@@ -9,7 +10,7 @@ import { motion as m } from "motion/react";
 const NewsItem = ({ promotion }: { promotion: PromotionT }) => {
   return (
     <m.div whileHover="hover" initial="initial">
-      <Link href={`/promotion/${promotion.id}`} className={clsx(styles.item)}>
+      <Link href={`/news/${promotion.id}`} className={clsx(styles.item)}>
         <Image
           src={promotion.image}
           alt={promotion.title}

@@ -36,6 +36,7 @@ export type FavoritesStoreT = {
   addToFavorites: (product: ProductT) => void;
   removeFromFavorites: (product: ProductT) => void;
   toggleFavorite: (product: ProductT) => void;
+  removeAllFavorites: () => void;
   isFavorite: (product: ProductT) => boolean;
   stopFavoriteStore: () => void;
 };

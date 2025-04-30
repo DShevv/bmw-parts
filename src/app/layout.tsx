@@ -6,6 +6,8 @@ import MenuPopup from "@/blocks/MenuPopup/MenuPopup";
 import Footer from "@/blocks/Footer/Footer";
 import FeedbackPopup from "@/blocks/FeedbackPopup/FeedbackPopup";
 import PopupButton from "@/components/Buttons/PopupButton/PopupButton";
+import Notification from "@/components/Notification/Notification";
+import { Suspense } from "react";
 
 const unbounded = Unbounded({
   variable: "--second-family",
@@ -31,12 +33,15 @@ export default async function RootLayout({
         />
 
         <Header />
-        <main>{children}</main>
+        <main>
+          <Suspense>{children}</Suspense>
+        </main>
         <Footer />
 
         <MenuPopup />
         <FeedbackPopup />
         <PopupButton />
+        <Notification />
       </body>
     </html>
   );
