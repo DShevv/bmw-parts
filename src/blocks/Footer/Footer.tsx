@@ -39,20 +39,20 @@ const Footer = () => {
             <Link href="/" className={clsx(styles.menuItem, "body-1")}>
               Подбор запчастей для BMW
             </Link>
-            <Link href="/" className={clsx(styles.menuItem, "body-1")}>
+            <Link href="/help" className={clsx(styles.menuItem, "body-1")}>
               Помощь покупателю
             </Link>
             <Link href="/news" className={clsx(styles.menuItem, "body-1")}>
               Блог
             </Link>
             <Link
-              href="/"
+              href="/promotions"
               className={clsx(styles.menuItem, styles.sale, "body-1")}
             >
               <SvgSale />
               Акции
             </Link>
-            <Link href="/" className={clsx(styles.menuItem, "body-1")}>
+            <Link href="/contacts" className={clsx(styles.menuItem, "body-1")}>
               Контакты
             </Link>
           </div>

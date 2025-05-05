@@ -713,3 +713,24 @@ export const SvgArrow = ({ ...other }) => {
     </svg>
   );
 };
+
+export const SvgArrowFilter = ({ ...other }) => {
+  return (
+    <svg
+      width="34"
+      height="34"
+      viewBox="0 0 34 34"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...other}
+    >
+      <path
+        d="M17.0295 9.92893V24.0711M17.0295 24.0711L23.3935 17.7071M17.0295 24.0711L10.6656 17.7071"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+};

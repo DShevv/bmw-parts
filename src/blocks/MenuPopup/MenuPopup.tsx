@@ -65,7 +65,7 @@ const MenuPopup = observer(() => {
             </Link>
           </li>
           <li>
-            <Link className={clsx("h4", styles.item)} href="/">
+            <Link className={clsx("h4", styles.item)} href="/help">
               Помощь покупателю
             </Link>
           </li>
@@ -75,13 +75,16 @@ const MenuPopup = observer(() => {
             </Link>
           </li>
           <li>
-            <Link className={clsx("h4", styles.item, styles.sale)} href="/">
+            <Link
+              className={clsx("h4", styles.item, styles.sale)}
+              href="/promotions"
+            >
               <SvgSale />
               Акции
             </Link>
           </li>
           <li>
-            <Link className={clsx("h4", styles.item)} href="/">
+            <Link className={clsx("h4", styles.item)} href="/contacts">
               Контакты
             </Link>
           </li>

@@ -117,19 +117,19 @@ main {
 }
 
 #pricePicker {
-  height: vw-1440(3);
+  height: vw-1550(3);
 
-  background-color: rgba(79, 94, 117, 0.1);
+  background-color: rgba(28, 33, 63, 0.3);
 
   .range-slider__range {
-    background-color: var(--grey-1);
-    height: vw-1440(3);
+    background-color: var(--orange);
+    height: vw-1550(3);
   }
 
   .range-slider__thumb {
-    background-color: var(--grey-1);
-    width: vw-1440(14);
-    height: vw-1440(14);
+    background-color: var(--orange);
+    width: vw-1550(14);
+    height: vw-1550(14);
   }
 }
 
@@ -200,15 +200,11 @@ main {
   #pricePicker {
     height: 3px;
 
-    background-color: rgba(79, 94, 117, 0.1);
-
     .range-slider__range {
-      background-color: var(--grey-1);
       height: 3px;
     }
 
     .range-slider__thumb {
-      background-color: var(--grey-1);
       width: 14px;
       height: 14px;
     }

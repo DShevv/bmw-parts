@@ -1,0 +1,108 @@
+@use "../../assets/sass/functions" as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: vw-1550(16);
+  width: vw-1550(502);
+  position: relative;
+}
+
+.thumbs {
+  width: 100%;
+
+  .thumb {
+    border: 1px solid var(--medium-blue);
+    border-radius: vw-1550(8);
+    width: vw-1550(100);
+    height: vw-1550(100);
+    overflow: hidden;
+    cursor: pointer;
+    opacity: 0.4;
+
+    &.active {
+      border-color: var(--orange);
+      opacity: 1;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+}
+
+.zoom {
+  width: vw-1550(502);
+  height: vw-1550(420);
+  border: 1px solid var(--medium-blue);
+  border-radius: vw-1550(12);
+
+  .zoomItem {
+    width: 100%;
+    height: 100%;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+}
+
+.navigation {
+  position: absolute;
+  top: vw-1550(342);
+  right: vw-1550(24);
+  display: flex;
+  gap: vw-1550(16);
+  z-index: 2;
+
+  .prev {
+    transform: rotate(180deg);
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+  }
+
+  .thumbs {
+    width: 100%;
+    flex: initial;
+
+    .thumb {
+      border-radius: 6px;
+      width: 64px;
+      height: 64px;
+    }
+  }
+
+  .zoom {
+    width: 100%;
+    height: 335px;
+    flex: initial;
+    border-radius: 8px;
+
+    .zoomItem {
+      border-radius: 8px;
+    }
+  }
+
+  .navigation {
+    top: 265px;
+    right: initial;
+    left: 16px;
+    display: flex;
+    gap: 12px;
+    z-index: 2;
+
+    .prev {
+      transform: rotate(180deg);
+    }
+  }
+}

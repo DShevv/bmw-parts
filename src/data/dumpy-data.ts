@@ -477,15 +477,67 @@ export const series = [
       {
         id: 1,
         title: "1 (e87)",
-
+        models: [
+          {
+            id: 1,
+            title: "1 (e87)",
+          },
+          {
+            id: 2,
+            title: "1 (e87)",
+          },
+          {
+            id: 3,
+            title: "1 (e87)",
+          },
+          {
+            id: 4,
+            title: "1 (e87)",
+          },
+        ]
       },
       {
         id: 2,
-        title: "1 купе (E82)",
+        title: "1 (E82)",
+        models: [
+          {
+            id: 1,
+            title: "1 (e87)",
+          },
+          {
+            id: 2,
+            title: "1 (e87)",
+          },
+          {
+            id: 3,
+            title: "1 (e87)",
+          },
+          {
+            id: 4,
+            title: "1 (e87)",
+          },
+        ]
       },
       {
         id: 3,
-        title: "1 Кабриолет (E88)",
+        title: "1 (E88)", models: [
+          {
+            id: 1,
+            title: "1 (e87)",
+          },
+          {
+            id: 2,
+            title: "1 (e87)",
+          },
+          {
+            id: 3,
+            title: "1 (e87)",
+          },
+          {
+            id: 4,
+            title: "1 (e87)",
+          },
+        ]
       },
 
     ]
@@ -497,19 +549,87 @@ export const series = [
     models: [
       {
         id: 1,
-        title: "2 (e88)",
+        title: "2 (e88)", models: [
+          {
+            id: 1,
+            title: "1 (e87)",
+          },
+          {
+            id: 2,
+            title: "1 (e87)",
+          },
+          {
+            id: 3,
+            title: "1 (e87)",
+          },
+          {
+            id: 4,
+            title: "1 (e87)",
+          },
+        ]
       },
       {
         id: 2,
-        title: "2 купе (E89)",
+        title: "2 (E89)", models: [
+          {
+            id: 1,
+            title: "1 (e87)",
+          },
+          {
+            id: 2,
+            title: "1 (e87)",
+          },
+          {
+            id: 3,
+            title: "1 (e87)",
+          },
+          {
+            id: 4,
+            title: "1 (e87)",
+          },
+        ]
       },
       {
         id: 3,
-        title: "2 хэтчбек (E83)",
+        title: "2 (E83)", models: [
+          {
+            id: 1,
+            title: "1 (e87)",
+          },
+          {
+            id: 2,
+            title: "1 (e87)",
+          },
+          {
+            id: 3,
+            title: "1 (e87)",
+          },
+          {
+            id: 4,
+            title: "1 (e87)",
+          },
+        ]
       },
       {
         id: 4,
-        title: "2 хэтчбек (E83)",
+        title: "2 (E83)", models: [
+          {
+            id: 1,
+            title: "1 (e87)",
+          },
+          {
+            id: 2,
+            title: "1 (e87)",
+          },
+          {
+            id: 3,
+            title: "1 (e87)",
+          },
+          {
+            id: 4,
+            title: "1 (e87)",
+          },
+        ]
       },
     ]
   },
@@ -520,19 +640,87 @@ export const series = [
     models: [
       {
         id: 1,
-        title: "3 (e90)",
+        title: "3 (e90)", models: [
+          {
+            id: 1,
+            title: "1 (e87)",
+          },
+          {
+            id: 2,
+            title: "1 (e87)",
+          },
+          {
+            id: 3,
+            title: "1 (e87)",
+          },
+          {
+            id: 4,
+            title: "1 (e87)",
+          },
+        ]
       },
       {
         id: 2,
-        title: "3 купе (E92)",
+        title: "3 (E92)", models: [
+          {
+            id: 1,
+            title: "1 (e87)",
+          },
+          {
+            id: 2,
+            title: "1 (e87)",
+          },
+          {
+            id: 3,
+            title: "1 (e87)",
+          },
+          {
+            id: 4,
+            title: "1 (e87)",
+          },
+        ]
       },
       {
         id: 3,
-        title: "3 хэтчбек (E93)",
+        title: "3 (E93)", models: [
+          {
+            id: 1,
+            title: "1 (e87)",
+          },
+          {
+            id: 2,
+            title: "1 (e87)",
+          },
+          {
+            id: 3,
+            title: "1 (e87)",
+          },
+          {
+            id: 4,
+            title: "1 (e87)",
+          },
+        ]
       },
       {
         id: 4,
-        title: "3 хэтчбек (E93)",
+        title: "3 (E93)", models: [
+          {
+            id: 1,
+            title: "1 (e87)",
+          },
+          {
+            id: 2,
+            title: "1 (e87)",
+          },
+          {
+            id: 3,
+            title: "1 (e87)",
+          },
+          {
+            id: 4,
+            title: "1 (e87)",
+          },
+        ]
       },
     ]
   }

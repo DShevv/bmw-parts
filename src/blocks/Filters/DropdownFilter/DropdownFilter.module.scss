@@ -1,0 +1,79 @@
+@use "../../../assets/sass/_functions.scss" as *;
+
+.filter {
+  width: 100%;
+  background: var(--white-bg);
+  padding: vw-1550(24);
+  border-bottom: 1px solid var(--medium-blue);
+  cursor: pointer;
+
+  &:last-of-type {
+    border-bottom: none;
+    border-radius: vw-1550(12);
+  }
+
+  .select {
+    width: 100%;
+  }
+}
+
+.title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.2s ease-in-out;
+
+  .arrow {
+    transform: rotate(-90deg);
+    transition: all 0.2s ease;
+    color: var(--dark-blue);
+    width: vw-1550(34);
+    height: vw-1550(34);
+  }
+}
+
+.active .title {
+  padding-bottom: vw-1550(16);
+}
+
+.active .arrow {
+  transform: rotate(0deg);
+}
+
+.items {
+  display: flex;
+  flex-direction: column;
+  gap: vw-1550(12);
+
+  .checkbox {
+    span {
+      color: var(--dark-blue);
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .filter {
+    padding: 16px;
+
+    &:last-of-type {
+      border-bottom: none;
+      border-radius: 8px;
+    }
+  }
+
+  .title {
+    .arrow {
+      width: 32px;
+      height: 32px;
+    }
+  }
+
+  .active .title {
+    padding-bottom: 16px;
+  }
+
+  .items {
+    gap: 12px;
+  }
+}

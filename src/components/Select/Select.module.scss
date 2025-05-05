@@ -19,8 +19,8 @@
     transition: all 0.2s ease-in-out;
 
     @media (max-width: 768px) {
-      padding: 13px 16px;
-      border-radius: 12px;
+      padding: 9px 12px;
+      border-radius: 8px;
     }
 
     span {
@@ -63,12 +63,21 @@
     pointer-events: none;
     opacity: 0;
     transition: all 0.2s ease-in-out;
+    max-height: vw-1550(200);
+    overflow-y: auto;
 
     @media (max-width: 768px) {
       bottom: -8px;
-      border-radius: 12px;
-      padding: 16px 12px;
+      border-radius: 8px;
+      padding: 9px 12px;
       gap: 8px;
+      max-height: 200px;
+
+      &.top {
+        bottom: initial;
+        top: -8px;
+        transform: translateY(-100%);
+      }
     }
 
     .option {
@@ -92,7 +101,7 @@
     .options {
       pointer-events: auto;
       opacity: 1;
-      z-index: 1;
+      z-index: 5;
 
       .option {
         cursor: pointer;

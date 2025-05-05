@@ -12,7 +12,7 @@ import { Swiper as SwiperType } from "swiper";
 import { useRef } from "react";
 import { Grid } from "swiper/modules";
 
-const PopularSlider = () => {
+const PopularSlider = ({ title }: { title?: string }) => {
   const swiperRef = useRef<SwiperType>(null);
 
   const handlePrev = () => {
@@ -26,15 +26,19 @@ const PopularSlider = () => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.header}>
-        <h2 className={clsx("h2", styles.title)}>Популярные товары</h2>
-        <MainButton
-          type="link"
-          href="/catalog"
-          style="secondary"
-          className={styles.button}
-        >
-          В каталог
-        </MainButton>
+        <h2 className={clsx("h2", styles.title)}>
+          {title ?? "Популярные товары"}
+        </h2>
+        {!title && (
+          <MainButton
+            type="link"
+            href="/catalog"
+            style="secondary"
+            className={styles.button}
+          >
+            В каталог
+          </MainButton>
+        )}
       </div>
 
       <Swiper

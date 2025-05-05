@@ -22,7 +22,7 @@ const ProductItem = observer(({ product }: { product: ProductT }) => {
 
   return (
     <Link
-      href="/product"
+      href="/catalog/category/product_1 "
       className={clsx(styles.item, {
         [styles.order]: product.isAvailable === "order",
         [styles.unavailable]: product.isAvailable === "unavailable",

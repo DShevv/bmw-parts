@@ -49,7 +49,7 @@ const Checkbox = ({
           </svg>
         </div>
 
-        {children && <span className={"body-4"}>{children}</span>}
+        {children && <span className={"body-3"}>{children}</span>}
       </label>
     );
   }
@@ -82,7 +82,7 @@ const Checkbox = ({
         </svg>
       </div>
 
-      {children && <span className={"body-4"}>{children}</span>}
+      {children && <span className={"body-3"}>{children}</span>}
     </label>
   );
 };

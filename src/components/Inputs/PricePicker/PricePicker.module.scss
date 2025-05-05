@@ -1,0 +1,89 @@
+@use "../../../assets/sass/_functions.scss" as *;
+
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: all 0.2s ease;
+}
+
+.inputs {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  gap: vw-1550(12);
+  margin-bottom: vw-1550(16);
+  transition: all 0.2s ease;
+}
+
+.inputs input[type="number"] {
+  min-width: 0;
+  max-width: vw-1550(86);
+  padding: 0;
+  margin: 0;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  -moz-appearance: textfield; /* Firefox */
+  transition: all 0.2s ease;
+  color: rgba(28, 33, 63, 0.4);
+}
+
+.inputs input::placeholder {
+  opacity: 0.4;
+}
+
+.inputs input::-webkit-outer-spin-button,
+.inputs input::-webkit-inner-spin-button {
+  /* display: none; <- Crashes Chrome on hover */
+  -webkit-appearance: none;
+  margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+.inputs label {
+  display: flex;
+  align-items: center;
+  gap: vw-1550(5);
+  width: vw-1550(111);
+  padding: vw-1550(12) vw-1550(16);
+  text-align: center;
+  border: 1px solid var(--medium-blue);
+  border-radius: vw-1550(12);
+  background: var(--white-bg);
+
+  color: rgba(28, 33, 63, 0.4);
+}
+
+.sliderContainer {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  height: 14px;
+  display: flex;
+  align-items: center;
+}
+
+.slider {
+  width: 100%;
+  transition: all 0.2s ease;
+}
+
+@media (max-width: 768px) {
+  .inputs {
+    margin-bottom: 16px;
+    gap: 12px;
+  }
+
+  .inputs input[type="number"] {
+    max-width: 111px;
+    font-size: 16px;
+  }
+
+  .inputs label {
+    gap: 5px;
+    width: 111px;
+    padding: 12px 16px;
+    border-radius: 8px;
+  }
+}

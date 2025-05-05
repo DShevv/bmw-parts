@@ -9,9 +9,17 @@ interface SelectProps {
   defaultValue: string;
   options: string[];
   onChange?: (value: string) => void;
+  className?: string;
+  direction?: "top" | "bottom";
 }
 
-const Select = ({ defaultValue, options, onChange }: SelectProps) => {
+const Select = ({
+  defaultValue,
+  options,
+  onChange,
+  className,
+  direction = "bottom",
+}: SelectProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(defaultValue);
   const ref = useRef<HTMLDivElement>(null);
@@ -21,7 +29,7 @@ const Select = ({ defaultValue, options, onChange }: SelectProps) => {
   return (
     <div
       ref={ref}
-      className={clsx(styles.container, { [styles.active]: isOpen })}
+      className={clsx(styles.container, { [styles.active]: isOpen }, className)}
       onClick={() => setIsOpen(!isOpen)}
     >
       <div className={clsx("t-placeholder", styles.header)}>
@@ -30,7 +38,11 @@ const Select = ({ defaultValue, options, onChange }: SelectProps) => {
         <SvgArrow />
       </div>
 
-      <div className={styles.options}>
+      <div
+        className={clsx(styles.options, {
+          [styles.top]: direction === "top",
+        })}
+      >
         {options
           .filter((option) => option !== selectedOption)
           .map((option) => (

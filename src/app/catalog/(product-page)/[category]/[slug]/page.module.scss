@@ -1,0 +1,227 @@
+@use "../../../../../assets/sass/functions" as *;
+
+.wrapper {
+  width: 100%;
+}
+
+.content {
+  margin-top: vw-1550(42);
+  display: flex;
+  gap: vw-1550(48);
+  width: 100%;
+
+  & > .title {
+    display: none;
+  }
+
+  & > .isAvailable {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 16px;
+
+    & > .title {
+      display: block;
+      margin-bottom: 0px;
+    }
+
+    & > .isAvailable {
+      display: block;
+      margin-bottom: 4px;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+
+      &::before {
+        content: "";
+        display: block;
+        width: 6px;
+        height: 6px;
+        background-color: var(--success);
+        border-radius: 50%;
+      }
+    }
+  }
+
+  .info {
+    color: var(--dark-blue);
+    width: vw-1550(746);
+
+    .title {
+      margin-bottom: vw-1550(16);
+    }
+
+    @media (max-width: 768px) {
+      width: 100%;
+
+      .title {
+        display: none;
+      }
+    }
+
+    .isAvailable {
+      margin-bottom: vw-1550(24);
+      display: flex;
+      gap: vw-1550(8);
+      align-items: center;
+
+      &::before {
+        content: "";
+        display: block;
+        width: vw-1550(8);
+        height: vw-1550(8);
+        background-color: var(--success);
+        border-radius: 50%;
+      }
+
+      @media (max-width: 768px) {
+        display: none;
+        gap: 8px;
+
+        &::before {
+          width: 6px;
+          height: 6px;
+        }
+      }
+    }
+
+    .specs {
+      margin-bottom: vw-1550(32);
+      display: flex;
+      flex-direction: column;
+      gap: vw-1550(12);
+
+      @media (max-width: 768px) {
+        gap: 12px;
+      }
+
+      .spec {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .specKey {
+          display: inline;
+          float: left;
+          width: 100%;
+          overflow: hidden;
+          white-space: nowrap;
+          opacity: 0.6;
+
+          &::after {
+            content: "....................................................................................................................................................................................................................................................";
+          }
+
+          @media (max-width: 768px) {
+            flex: 1 1 50%;
+
+            &::after {
+              content: "";
+              display: none;
+            }
+          }
+        }
+
+        .specValue {
+          display: inline;
+          flex: 0 0 auto;
+          width: fit-content;
+          overflow: hidden;
+          white-space: nowrap;
+
+          @media (max-width: 768px) {
+            flex: 1 1 50%;
+            text-align: right;
+            white-space: normal;
+          }
+        }
+      }
+    }
+  }
+}
+
+.description {
+  margin-top: vw-1550(64);
+
+  .header {
+    display: flex;
+    gap: vw-1550(54);
+    align-items: center;
+    position: relative;
+    padding-bottom: vw-1550(16);
+    margin-bottom: vw-1550(32);
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      display: block;
+      width: 100%;
+      height: vw-1550(3);
+      background-color: var(--dark-blue);
+      opacity: 0.1;
+      border-radius: 4px;
+    }
+
+    &::before {
+      content: "";
+      display: block;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: vw-1550(174);
+      height: vw-1550(3);
+      background-color: var(--orange);
+      border-radius: 4px;
+    }
+
+    .title {
+      text-decoration: none;
+      color: var(--dark-blue);
+    }
+  }
+
+  .text {
+    max-width: vw-1550(966);
+  }
+
+  @media (max-width: 768px) {
+    margin-top: 48px;
+
+    .header {
+      margin-bottom: 20px;
+      padding-bottom: 0;
+
+      &::after {
+        display: none;
+      }
+
+      &::before {
+        display: none;
+      }
+
+      .title {
+        font-family: var(--font-family);
+        font-weight: 500;
+        font-size: 13px;
+        line-height: 140%;
+        color: var(--white-bg);
+        background: var(--dark-blue);
+        border-radius: 6px;
+        padding: 6px 12px;
+      }
+
+      a.title {
+        background: var(--medium-blue);
+        color: var(--dark-blue);
+      }
+    }
+
+    .text {
+      max-width: 100%;
+    }
+  }
+}

@@ -33,7 +33,7 @@ const Header = () => {
             </Link>
           </li>
           <li>
-            <Link href={"/"} className={clsx("body-2", styles.link)}>
+            <Link href={"/help"} className={clsx("body-2", styles.link)}>
               Помощь покупателю
             </Link>
           </li>
