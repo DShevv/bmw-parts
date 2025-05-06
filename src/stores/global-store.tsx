@@ -28,14 +28,14 @@ class GlobalStore implements GlobalStoreT {
     this.cartStore = cartStore;
   }
 
-  stopGlobalStore() {
+  stopGlobalStore = () => {
     if (this.favoritesStore) {
       this.favoritesStore.stopFavoriteStore();
     }
     if (this.cartStore) {
       this.cartStore.stopCartStore?.();
     }
-  }
+  };
 }
 
 const notificationStore = new NotificationStore();
