@@ -29,7 +29,12 @@ class GlobalStore implements GlobalStoreT {
   }
 
   stopGlobalStore() {
-    this.favoritesStore.stopFavoriteStore();
+    if (this.favoritesStore) {
+      this.favoritesStore.stopFavoriteStore();
+    }
+    if (this.cartStore) {
+      this.cartStore.stopCartStore?.();
+    }
   }
 }
 
