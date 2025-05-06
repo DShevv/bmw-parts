@@ -36,15 +36,15 @@ const Filters = observer(() => {
 
         <CheckboxFilter
           title="Модель автомобиля"
-          name="model"
-          data={["X1", "X2", "X3", "X4", "X5"]}
+          name="series"
+          data={["1 серия", "2 серия", "X3", "X4", "X5"]}
         />
         <CheckboxFilter
           title="Серия автомобиля"
           name="model"
           data={[
-            "(E84) xDrive 28 i",
-            "(E84) xDrive 28 i",
+            "1 (e87)",
+            "2 (E89)",
             "(E84) xDrive 28 i",
             "(E84) xDrive 28 i",
             "(E84) xDrive 28 i",

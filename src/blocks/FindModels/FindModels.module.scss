@@ -1,0 +1,143 @@
+@use "../../assets/sass/functions" as *;
+
+.wrapper {
+  border-radius: vw-1550(12);
+  padding: vw-1550(24);
+  background: var(--light-blue);
+
+  .title {
+    margin-bottom: vw-1550(24);
+  }
+
+  @media (max-width: 768px) {
+    border-radius: 8px;
+    padding: 16px;
+
+    .title {
+      margin-bottom: 8px;
+    }
+  }
+
+  .swiper {
+    margin-left: 0;
+
+    .slide {
+      width: auto;
+      margin-right: vw-1550(20);
+
+      .item {
+        width: vw-1550(104);
+
+        text-align: center;
+        opacity: 0.2;
+        cursor: pointer;
+        transition: opacity 0.3s ease-in-out;
+
+        img {
+          width: 100%;
+          height: vw-1550(60);
+        }
+
+        &:hover {
+          opacity: 1;
+        }
+
+        &.active {
+          opacity: 1;
+        }
+      }
+    }
+
+    @media (max-width: 768px) {
+      .slide {
+        .item {
+          width: 70px;
+
+          img {
+            height: 40px;
+          }
+        }
+      }
+    }
+  }
+
+  .models {
+    margin-top: vw-1550(32);
+    margin-left: 0;
+
+    .slide {
+      width: auto;
+      margin-right: vw-1550(124);
+      margin-bottom: vw-1550(32);
+
+      @media (max-width: 768px) {
+        margin-right: 20px;
+        margin-bottom: 16px;
+      }
+
+      .infoItem {
+        display: flex;
+        max-width: vw-1550(219);
+        width: fit-content;
+        gap: vw-1550(16);
+
+        &:hover {
+          .infoTitle {
+            color: var(--orange);
+          }
+        }
+
+        @media (max-width: 768px) {
+          max-width: 141px;
+          width: 141px;
+          gap: 6px;
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        &.active {
+          .infoTitle {
+            color: var(--orange);
+          }
+        }
+
+        .infoTitle {
+          color: var(--dark-blue);
+          text-align: left;
+        }
+
+        .infoList {
+          display: flex;
+          flex-direction: column;
+          gap: vw-1550(12);
+          list-style: none;
+          padding: 0;
+          margin: 0;
+
+          @media (max-width: 768px) {
+            gap: 6px;
+          }
+
+          .infoItem {
+            display: block;
+            width: fit-content;
+          }
+
+          .infoTitle {
+            color: var(--dark-blue);
+            text-decoration: none;
+            cursor: pointer;
+
+            &:hover {
+              color: var(--orange);
+            }
+
+            &.active {
+              color: var(--orange);
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -3,7 +3,9 @@ import styles from "./MainButton.module.scss";
 import Link from "next/link";
 
 interface MainButtonProps {
-  onClick?: () => void;
+  onClick?: (
+    e: React.MouseEvent<HTMLButtonElement> | React.MouseEvent<HTMLAnchorElement>
+  ) => void;
   disabled?: boolean;
   children: React.ReactNode;
   className?: string;

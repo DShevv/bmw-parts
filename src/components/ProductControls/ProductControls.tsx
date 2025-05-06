@@ -8,8 +8,12 @@ import { observer } from "mobx-react-lite";
 import globalStore from "@/stores/global-store";
 
 const ProductControls = observer(({ product }: { product: ProductT }) => {
-  const { favoritesStore } = globalStore;
+  const { favoritesStore, popupStore, cartStore, notificationStore } =
+    globalStore;
   const { isFavorite, toggleFavorite } = favoritesStore;
+  const { openPopup } = popupStore;
+  const { addToCart } = cartStore;
+  const { setNotification } = notificationStore;
 
   return (
     <div className={styles.container}>
@@ -45,6 +49,14 @@ const ProductControls = observer(({ product }: { product: ProductT }) => {
         <MainButton
           style={product.isAvailable === "available" ? "primary" : "secondary"}
           className={styles.addToCart}
+          onClick={() => {
+            if (product.isAvailable === "available") {
+              addToCart(product);
+              setNotification("Товар добавлен в корзину", undefined, "success");
+            } else {
+              openPopup("order", { product, count: 1 });
+            }
+          }}
         >
           {product.isAvailable === "available"
             ? "Добавить в корзину"

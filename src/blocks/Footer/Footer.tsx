@@ -36,7 +36,10 @@ const Footer = () => {
             <Link href="/" className={clsx(styles.menuItem, "body-1")}>
               Главная
             </Link>
-            <Link href="/" className={clsx(styles.menuItem, "body-1")}>
+            <Link
+              href="/find-parts"
+              className={clsx(styles.menuItem, "body-1")}
+            >
               Подбор запчастей для BMW
             </Link>
             <Link href="/help" className={clsx(styles.menuItem, "body-1")}>

@@ -5,6 +5,7 @@ import InputMask from "@mona-health/react-input-mask";
 
 interface MainInputProps {
   name?: string;
+  title?: string;
   placeholder?: string;
   type: string;
   mask?: string;
@@ -17,6 +18,7 @@ interface MainInputProps {
 
 const MainInput = ({
   name,
+  title,
   placeholder,
   type,
   mask,
@@ -30,6 +32,33 @@ const MainInput = ({
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     onChange?.(e.target.value);
   };
+
+  if (title) {
+    return (
+      <div className={styles.wrapper}>
+        {title && <div className={clsx("body-1", styles.title)}>{title}:</div>}
+
+        <label className={clsx("t-placeholder", styles.container, className)}>
+          <InputMask
+            className={clsx("t-placeholder", styles.field, {
+              [styles.error]: error,
+            })}
+            type={type}
+            name={name}
+            placeholder={placeholder}
+            disabled={disabled}
+            mask={mask}
+            value={value}
+            onChange={handleChange}
+            {...other}
+          />
+          {error && (
+            <div className={clsx("body-4", styles.message)}>*{error}</div>
+          )}
+        </label>
+      </div>
+    );
+  }
 
   return (
     <label className={clsx("t-placeholder", styles.container, className)}>

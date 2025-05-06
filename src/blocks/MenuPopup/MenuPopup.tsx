@@ -60,7 +60,7 @@ const MenuPopup = observer(() => {
             </Link>
           </li>
           <li>
-            <Link className={clsx("h4", styles.item)} href="/">
+            <Link className={clsx("h4", styles.item)} href="/find-parts">
               Подбор запчастей для BMW
             </Link>
           </li>

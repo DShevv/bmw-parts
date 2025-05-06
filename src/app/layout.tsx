@@ -8,6 +8,7 @@ import FeedbackPopup from "@/blocks/FeedbackPopup/FeedbackPopup";
 import PopupButton from "@/components/Buttons/PopupButton/PopupButton";
 import Notification from "@/components/Notification/Notification";
 import { Suspense } from "react";
+import OrderPricePopup from "@/blocks/OrderPricePopup/OrderPricePopup";
 
 const unbounded = Unbounded({
   variable: "--second-family",
@@ -42,6 +43,7 @@ export default async function RootLayout({
         <FeedbackPopup />
         <PopupButton />
         <Notification />
+        <OrderPricePopup />
       </body>
     </html>
   );

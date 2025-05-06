@@ -11,7 +11,7 @@ class NotificationStore implements NotificationStoreT {
     makeAutoObservable(this);
   }
 
-  setNotification = (title: string, info: string, type: string) => {
+  setNotification = (title: string, info: string | undefined, type: string) => {
     this.title = title;
     this.type = type;
     this.info = info;

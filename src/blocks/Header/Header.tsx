@@ -28,7 +28,7 @@ const Header = () => {
             </Link>
           </li>
           <li>
-            <Link href={"/"} className={clsx("body-2", styles.link)}>
+            <Link href={"/find-parts"} className={clsx("body-2", styles.link)}>
               Подбор запчастей для BMW
             </Link>
           </li>

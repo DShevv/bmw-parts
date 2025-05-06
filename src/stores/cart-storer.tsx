@@ -52,8 +52,15 @@ class CartStore implements CartStoreT {
 
   getTotalPrice = () => {
     return Object.values(this.cart).reduce(
-      (acc, item) => acc + item.product.price * item.count,
-      0
+      (acc, item) => {
+        const fullPrice = item.product.price * item.count;
+        const discountedPrice = fullPrice * (1 - item.product.discount / 100);
+        return {
+          fullPrice: acc.fullPrice + fullPrice,
+          discountedPrice: acc.discountedPrice + discountedPrice,
+        };
+      },
+      { fullPrice: 0, discountedPrice: 0 }
     );
   };
 

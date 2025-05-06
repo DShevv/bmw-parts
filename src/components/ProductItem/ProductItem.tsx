@@ -11,9 +11,12 @@ import { SvgHeart } from "@/assets/icons/svgs";
 import { useState, useEffect } from "react";
 
 const ProductItem = observer(({ product }: { product: ProductT }) => {
-  const { cartStore, favoritesStore } = globalStore;
+  const { cartStore, favoritesStore, notificationStore, popupStore } =
+    globalStore;
   const { addToCart } = cartStore;
   const { isFavorite, toggleFavorite } = favoritesStore;
+  const { setNotification } = notificationStore;
+  const { openPopup } = popupStore;
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
@@ -80,7 +83,19 @@ const ProductItem = observer(({ product }: { product: ProductT }) => {
             )}
           </div>
           <MainButton
-            onClick={() => addToCart(product)}
+            onClick={(e) => {
+              e.preventDefault();
+              if (product.isAvailable === "available") {
+                addToCart(product);
+                setNotification(
+                  "Товар добавлен в корзину",
+                  undefined,
+                  "success"
+                );
+              } else {
+                openPopup("order", { product, count: 1 });
+              }
+            }}
             className={styles.button}
             style={
               product.isAvailable === "available" ? "primary" : "secondary"

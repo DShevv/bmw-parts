@@ -173,7 +173,7 @@ export const categories = [
   },
   {
     id: 2,
-    name: "Масла и автохимия",
+    name: "Масла и автохимия",
     image: oil,
     children: [
       {
@@ -253,7 +253,7 @@ export const categories = [
   },
   {
     id: 4,
-    name: "Уход за автомобилем",
+    name: "Уход за автомобилем",
     image: wheel,
     children: [
       {
@@ -339,7 +339,7 @@ export const categories = [
 export const searchData = [
   {
     id: 1,
-    name: "Диск колёсный 6 × 15 | 4 × 100 ET48 D54,1 BMW X1",
+    name: "Диск колёсный 6 × 15 | 4 × 100 ET48 D54,1 BMW X1",
     image: wheelHd,
     sku: "1234567890",
     price: 400,
@@ -387,7 +387,7 @@ export const categoriesData = [
   },
   {
     id: 2,
-    name: "Масла и автохимия",
+    name: "Масла и автохимия",
     image: SvgOil
   },
   {
@@ -397,7 +397,7 @@ export const categoriesData = [
   },
   {
     id: 4,
-    name: "Уход за автомобилем",
+    name: "Уход за автомобилем",
     image: SvgCar
   }
 
@@ -451,19 +451,19 @@ export const HeroSlides = [
   {
     id: 1,
     image: slide1,
-    title: "Скидка до 20% на тормозные колодки и диски",
+    title: "Скидка до 20% на тормозные колодки и диски",
     buttonLink: "/link1",
   },
   {
     id: 2,
     image: slide1,
-    title: "Скидка до 20% на тормозные колодки и диски 2",
+    title: "Скидка до 20% на тормозные колодки и диски 2",
     buttonLink: "/link2",
   },
   {
     id: 3,
     image: slide1,
-    title: "Скидка до 20% на тормозные колодки и диски 3",
+    title: "Скидка до 20% на тормозные колодки и диски 3",
     buttonLink: "/link3",
   },
 ];
@@ -472,7 +472,7 @@ export const series = [
   {
     id: 1,
     image: carModel,
-    title: "1 серия",
+    title: "1 серия",
     models: [
       {
         id: 1,
@@ -484,15 +484,15 @@ export const series = [
           },
           {
             id: 2,
-            title: "1 (e87)",
+            title: "1 (e87) 2",
           },
           {
             id: 3,
-            title: "1 (e87)",
+            title: "1 (e87) 3",
           },
           {
             id: 4,
-            title: "1 (e87)",
+            title: "1 (e87) 4",
           },
         ]
       },
@@ -502,19 +502,19 @@ export const series = [
         models: [
           {
             id: 1,
-            title: "1 (e87)",
+            title: "1 (e82)",
           },
           {
             id: 2,
-            title: "1 (e87)",
+            title: "1 (e82) 2",
           },
           {
             id: 3,
-            title: "1 (e87)",
+            title: "1 (e82) 3",
           },
           {
             id: 4,
-            title: "1 (e87)",
+            title: "1 (e82) 4",
           },
         ]
       },
@@ -523,19 +523,19 @@ export const series = [
         title: "1 (E88)", models: [
           {
             id: 1,
-            title: "1 (e87)",
+            title: "1 (e88)",
           },
           {
             id: 2,
-            title: "1 (e87)",
+            title: "1 (e88) 2",
           },
           {
             id: 3,
-            title: "1 (e87)",
+            title: "1 (e88) 3",
           },
           {
             id: 4,
-            title: "1 (e87)",
+            title: "1 (e88) 4",
           },
         ]
       },
@@ -545,7 +545,7 @@ export const series = [
   {
     id: 2,
     image: carModel,
-    title: "2 серия",
+    title: "2 серия",
     models: [
       {
         id: 1,
@@ -636,7 +636,7 @@ export const series = [
   {
     id: 3,
     image: carModel,
-    title: "3 серия",
+    title: "3 серия",
     models: [
       {
         id: 1,
@@ -833,55 +833,55 @@ export const promotions: PromotionT[] = [
   {
     id: 1,
     image: promo,
-    title: "Получите запасной диск в подарок при покупке набора из 4 дисков!",
+    title: "Получите запасной диск в подарок при покупке набора из 4 дисков!",
     date: "01.04.2025",
   },
   {
     id: 2,
     image: promo,
-    title: "При заказе от 300 BYN получите скидку 5%!",
+    title: "При заказе от 300 BYN получите скидку 5%!",
     date: "01.04.2025",
   },
   {
     id: 3,
     image: promo,
-    title: "Скидка до 20% на тормозные колодки и диски",
+    title: "Скидка до 20% на тормозные колодки и диски",
     date: "01.04.2025",
   },
   {
     id: 4,
     image: promo,
-    title: "Скидка до 20% на тормозные колодки и диски",
+    title: "Скидка до 20% на тормозные колодки и диски",
     date: "01.04.2025",
   },
   {
     id: 5,
     image: promo,
-    title: "Скидка до 20% на тормозные колодки и диски",
+    title: "Скидка до 20% на тормозные колодки и диски",
     date: "01.04.2025",
   },
   {
     id: 6,
     image: promo,
-    title: "Скидка до 20% на тормозные колодки и диски",
+    title: "Скидка до 20% на тормозные колодки и диски",
     date: "01.04.2025",
   },
   {
     id: 7,
     image: promo,
-    title: "Скидка до 20% на тормозные колодки и диски",
+    title: "Скидка до 20% на тормозные колодки и диски",
     date: "01.04.2025",
   },
   {
     id: 8,
     image: promo,
-    title: "Скидка до 20% на тормозные колодки и диски",
+    title: "Скидка до 20% на тормозные колодки и диски",
     date: "01.04.2025",
   },
   {
     id: 9,
     image: promo,
-    title: "Скидка до 20% на тормозные колодки и диски",
+    title: "Скидка до 20% на тормозные колодки и диски",
     date: "01.04.2025",
   },
 
@@ -897,7 +897,7 @@ export const feedbackData = [
   {
     id: 2,
     image: feedbackImage2,
-    title: "Уход за автомобилем",
+    title: "Уход за автомобилем",
   },
   {
     id: 3,
@@ -907,6 +907,6 @@ export const feedbackData = [
   {
     id: 4,
     image: feedbackImage4,
-    title: "Масла и автохимия",
+    title: "Масла и автохимия",
   }
 ]

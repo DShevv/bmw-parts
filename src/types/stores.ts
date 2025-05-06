@@ -18,7 +18,7 @@ export type NotificationStoreT = {
   type: string | undefined;
   isVisible: boolean;
 
-  setNotification: (title: string, info: string, type: string) => void;
+  setNotification: (title: string, info: string | undefined, type: string) => void;
   removeNotification: () => void;
 };
 
@@ -49,7 +49,7 @@ export type CartStoreT = {
   removeOneFromCart: (product: ProductT) => void;
   removeAllFromCart: () => void;
   isInCart: (product: ProductT) => boolean;
-  getTotalPrice: () => number;
+  getTotalPrice: () => { fullPrice: number; discountedPrice: number };
   getTotalCount: () => number;
   stopCartStore: () => void;
 };

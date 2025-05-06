@@ -49,6 +49,7 @@ const CheckboxFilter = ({
   );
 
   useEffect(() => {
+    console.log(value);
     if (value) {
       setFilterValue(value.split(","));
       setActive(true);

@@ -17,6 +17,16 @@
   transition: all 0.2s ease;
 }
 
+.wrapper {
+  .title {
+    margin-bottom: vw-1550(16);
+
+    @media (max-width: 768px) {
+      margin-bottom: 8px;
+    }
+  }
+}
+
 .field {
   color: var(--dark-blue);
   flex: 1 1 auto;
