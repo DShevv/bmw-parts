@@ -2,10 +2,49 @@ import styles from "./page.module.scss";
 import Breadcrumbs from "@/components/Breadcrumbs/Breadcrumbs";
 import clsx from "clsx";
 import Image from "next/image";
-import newsImage from "@/assets/images/new.png";
 import RecentPromo from "@/blocks/RecentPromo/RecentPromo";
+import { getNews, getNewsBySlug } from "@/services/NewsService";
+import { formatDate } from "@/utils/helper";
 
-const page = () => {
+export const generateMetadata = async ({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) => {
+  const { slug } = await params;
+  const promotion = await getNewsBySlug(slug);
+  return {
+    title: promotion?.title ?? "BMW parts",
+    description:
+      promotion?.content.replace(/<[^>]*>?/g, "").slice(0, 155) ?? "BMW parts",
+    openGraph: {
+      title: promotion?.title ?? "BMW parts",
+      description:
+        promotion?.content.replace(/<[^>]*>?/g, "").slice(0, 155) ??
+        "BMW parts",
+    },
+  };
+};
+
+export const dynamicParams = false;
+
+export async function generateStaticParams() {
+  const promo = await getNews({ page: 1, perPage: 10000 });
+
+  if (!promo?.data) {
+    return [];
+  }
+
+  return promo.data.map((promotion) => ({
+    slug: promotion.slug,
+  }));
+}
+
+const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
+  const { slug } = await params;
+  const promotion = await getNewsBySlug(slug);
+  const promos = await getNews({ page: 1, perPage: 8 });
+
   return (
     <>
       <section className={styles.wrapper}>
@@ -16,40 +55,33 @@ const page = () => {
                 { title: "Главная", href: "/" },
                 { title: "Акции", href: "/promotions" },
                 {
-                  title: "При заказе от 300 BYN получите скидку 5%!",
+                  title: promotion?.title ?? "",
                   href: "",
                 },
               ]}
             />
-            <h1 className={clsx(styles.title, "h1")}>
-              При заказе от 300 BYN получите скидку 5%!
-            </h1>
+            <h1 className={clsx(styles.title, "h1")}>{promotion?.title}</h1>
             <div className={styles.info}>
-              <div className={clsx(styles.date, "body-3")}>01.04.2025</div>
+              <div className={clsx(styles.date, "body-3")}>
+                {formatDate(promotion?.created_at ?? "")}
+              </div>
             </div>
           </div>
-          <Image src={newsImage} alt="news" className={styles.image} />
+          <Image
+            src={`${process.env.NEXT_PUBLIC_STORE_URL}/${promotion?.image}`}
+            alt="news"
+            className={styles.image}
+            height={420}
+            width={1296}
+          />
         </div>
-        <div className={styles.text}>
-          <h3>
-            Обнови свой BMW с выгодой! 🚘💨 <br /> При заказе запчастей для BMW
-            от 300 BYN — скидка 5% автоматически!
-          </h3>
-          <p>
-            ✨ Почему мы? <br /> Оригинальные детали и проверенные аналоги.{" "}
-            <br />
-            Мгновенный расчёт скидки в корзине. <br /> Бесплатная консультация
-            по подбору.
-          </p>
-          <p>
-            Не переплачивай! <br /> 🛠️ Выбери нужные детали → Добавь в корзину →
-            Скидка уже ждёт тебя! <br /> 🔥 Улучшай свой автомобиль без лишних
-            трат — только до конца месяца! 🔥
-          </p>
-        </div>
+        <div
+          className={styles.text}
+          dangerouslySetInnerHTML={{ __html: promotion?.content ?? "" }}
+        />
       </section>
 
-      <RecentPromo title="Другие акции" />
+      <RecentPromo title="Другие акции" promo={promos?.data ?? []} />
     </>
   );
 };

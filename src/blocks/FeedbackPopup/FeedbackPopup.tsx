@@ -13,6 +13,7 @@ import globalStore from "@/stores/global-store";
 import { useEffect } from "react";
 import { SvgClose } from "@/assets/icons/svgs";
 import validateFeedback from "@/utils/validateFeedback";
+import { postFeedback } from "@/services/FeedbackService";
 
 const FeedbackPopup = observer(() => {
   const { popupStore, notificationStore } = globalStore;
@@ -50,14 +51,21 @@ const FeedbackPopup = observer(() => {
         <Formik
           initialValues={{ name: "", phone: "", comment: "", isAgree: false }}
           onSubmit={async (values, { resetForm }) => {
-            console.log(values);
-
-            setNotification(
-              "Спасибо за вашу заявку!",
-              "Скоро с вами свяжется наш менеджер и ответит на все ваши вопросы",
-              "success"
-            );
-            resetForm();
+            const response = await postFeedback(values);
+            if (response.success) {
+              setNotification(
+                "Спасибо за вашу заявку!",
+                "Скоро с вами свяжется наш менеджер и ответит на все ваши вопросы",
+                "success"
+              );
+              resetForm();
+            } else {
+              setNotification(
+                "Не получили вашу заявку",
+                "Пожалуйста, повторите попытку ещё раз.",
+                "error"
+              );
+            }
           }}
           validate={validateFeedback}
           validateOnBlur={false}

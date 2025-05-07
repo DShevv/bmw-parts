@@ -48,7 +48,7 @@ const Layout = async ({
         </section>
       </div>
 
-      <SeoBlock />
+      <SeoBlock page={`${category}`} />
       <Feedback />
     </>
   );

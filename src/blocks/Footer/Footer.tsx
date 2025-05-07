@@ -6,8 +6,11 @@ import { SvgSale } from "@/assets/icons/svgs";
 import SocialLinks from "@/components/SocialLinks/SocialLinks";
 import { paymentMethods } from "@/data/dumpy-data";
 import Image from "next/image";
+import { getContacts } from "@/services/InfoService";
 
-const Footer = () => {
+const Footer = async () => {
+  const contacts = await getContacts();
+
   return (
     <footer className={styles.footer}>
       <div className={styles.container}>
@@ -62,20 +65,22 @@ const Footer = () => {
           <div className={styles.contacts}>
             <div className={clsx(styles.contactItem, "h3")}>
               <div className={clsx("body-4", styles.title)}>Адрес</div>
-              г. Минск, пр-т Независимости, 1
+              {contacts?.address}
             </div>
             <div className={clsx(styles.contactItem, "h3")}>
               <div className={clsx("body-4", styles.title)}>Телефон</div>
-              <Link href="tel:+375293333333">+375 29 333-33-33</Link>
+              <Link href={`tel:${contacts?.phones[0]}`}>
+                {contacts?.phones[0]}
+              </Link>
             </div>
             <div className={clsx(styles.contactItem, "h3")}>
               <div className={clsx("body-4", styles.title)}>Email</div>
-              <Link href="mailto:info@example.com">info@example.com</Link>
+              <Link href={`mailto:${contacts?.email}`}>{contacts?.email}</Link>
             </div>
 
             <div className={clsx(styles.contactItem, "h3")}>
               <div className={clsx("body-4", styles.title)}>Соцсети</div>
-              <SocialLinks />
+              {contacts && <SocialLinks contacts={contacts} />}
             </div>
           </div>
           <div className={styles.policy}>

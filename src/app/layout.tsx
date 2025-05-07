@@ -9,6 +9,8 @@ import PopupButton from "@/components/Buttons/PopupButton/PopupButton";
 import Notification from "@/components/Notification/Notification";
 import { Suspense } from "react";
 import OrderPricePopup from "@/blocks/OrderPricePopup/OrderPricePopup";
+import { getSeoPage } from "@/services/InfoService";
+import { getSetting } from "@/services/InfoService";
 
 const unbounded = Unbounded({
   variable: "--second-family",
@@ -19,6 +21,24 @@ const notoSans = Noto_Sans({
   variable: "--font-family",
   subsets: ["latin", "cyrillic"],
 });
+
+export const generateMetadata = async () => {
+  const { seo } = await getSeoPage("main");
+  const setting = await getSetting();
+
+  return {
+    title: seo?.title ?? "BMW parts",
+    description: seo?.description ?? "BMW parts",
+    keywords: seo?.keywords,
+    openGraph: {
+      title: seo?.og_title ?? seo?.title,
+      description: seo?.og_description ?? seo?.description,
+    },
+    icons: {
+      icon: `${process.env.NEXT_PUBLIC_STORE_URL}/${setting?.favicon_path}`,
+    },
+  };
+};
 
 export default async function RootLayout({
   children,

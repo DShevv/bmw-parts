@@ -16,6 +16,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/free-mode";
 import { FreeMode } from "swiper/modules";
+import { postFeedback } from "@/services/FeedbackService";
 
 const Feedback = observer(() => {
   const { notificationStore } = globalStore;
@@ -26,14 +27,21 @@ const Feedback = observer(() => {
       <Formik
         initialValues={{ name: "", phone: "", comment: "", isAgree: false }}
         onSubmit={async (values, { resetForm }) => {
-          console.log(values);
-
-          setNotification(
-            "Спасибо за вашу заявку!",
-            "Скоро с вами свяжется наш менеджер и ответит на все ваши вопросы",
-            "success"
-          );
-          resetForm();
+          const response = await postFeedback(values);
+          if (response.success) {
+            setNotification(
+              "Спасибо за вашу заявку!",
+              "Скоро с вами свяжется наш менеджер и ответит на все ваши вопросы",
+              "success"
+            );
+            resetForm();
+          } else {
+            setNotification(
+              "Не получили вашу заявку",
+              "Пожалуйста, повторите попытку ещё раз.",
+              "error"
+            );
+          }
         }}
         validate={validateFeedback}
         validateOnBlur={false}

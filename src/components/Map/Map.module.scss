@@ -1,7 +1,7 @@
 @use "../../assets/sass/functions" as *;
 
 .container {
-  height: vw-1550(388);
+  min-height: vw-1550(388);
   border-radius: vw-1550(12);
   overflow: hidden;
 }

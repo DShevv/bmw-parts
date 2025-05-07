@@ -9,6 +9,16 @@ const nextConfig: NextConfig = {
         port: "3000",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "liftapi.webspaceteam.site",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "webspaceteam.site",
+        pathname: "/**",
+      },
 
     ],
   },

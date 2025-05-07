@@ -4,7 +4,25 @@ import styles from "./page.module.scss";
 import Breadcrumbs from "@/components/Breadcrumbs/Breadcrumbs";
 import clsx from "clsx";
 import { SvgBank, SvgLocation } from "@/assets/icons/svgs";
-const page = () => {
+import { getContacts, getSeoPage } from "@/services/InfoService";
+
+export const generateMetadata = async () => {
+  const { seo } = await getSeoPage("contacts");
+
+  return {
+    title: seo?.title ?? "BMW parts",
+    description: seo?.description ?? "BMW parts",
+    keywords: seo?.keywords,
+    openGraph: {
+      title: seo?.title ?? "BMW parts",
+      description: seo?.title ?? "BMW parts",
+    },
+  };
+};
+
+const page = async () => {
+  const contacts = await getContacts();
+
   return (
     <>
       <div className={styles.content}>
@@ -28,12 +46,12 @@ const page = () => {
               </div>
               Юридический адрес
             </div>
-            <div className={clsx(styles.itemValue, "body-1")}>
-              <p>Юридический адрес: г. Минск, пр-т Независимости, 1</p>
-              <p>УНП: 999999999 </p>
-              <p>ИНН: 7727438551</p>
-              <p>ОГРН: 1207700036466</p>
-            </div>
+            <div
+              className={clsx(styles.itemValue, "body-1")}
+              dangerouslySetInnerHTML={{
+                __html: contacts?.company_info || "",
+              }}
+            />
           </div>
           <div className={styles.item}>
             <div className={clsx(styles.itemTitle, "h4")}>
@@ -42,12 +60,12 @@ const page = () => {
               </div>
               Банковские реквизиты
             </div>
-            <div className={clsx(styles.itemValue, "body-1")}>
-              <p>Название компании: ООО «Аэронавто»</p>
-              <p>Расчётный счёт: 40702810601300023440</p>
-              <p>Корреспондентский счёт: 30101810200000000593</p>
-              <p>Банк: ЗАО «Альфа-Банк» БИК: 044525593</p>
-            </div>
+            <div
+              className={clsx(styles.itemValue, "body-1")}
+              dangerouslySetInnerHTML={{
+                __html: contacts?.bank_details || "",
+              }}
+            />
           </div>
         </div>
       </section>

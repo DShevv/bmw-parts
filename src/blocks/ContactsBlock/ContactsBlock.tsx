@@ -4,8 +4,11 @@ import clsx from "clsx";
 import { SvgLocation, SvgPhone, SvgMail } from "@/assets/icons/svgs";
 import Link from "next/link";
 import SocialLinks from "@/components/SocialLinks/SocialLinks";
+import { getContacts } from "@/services/InfoService";
 
-const ContactsBlock = ({ noTitle }: { noTitle?: boolean }) => {
+const ContactsBlock = async ({ noTitle }: { noTitle?: boolean }) => {
+  const contacts = await getContacts();
+
   return (
     <div className={styles.wrapper}>
       {!noTitle && (
@@ -20,35 +23,35 @@ const ContactsBlock = ({ noTitle }: { noTitle?: boolean }) => {
             <p className={clsx(styles.infoItemTitle, "body-4")}>Адрес</p>
             <p className={clsx(styles.infoItemValue, "h3")}>
               <SvgLocation />
-              г. Минск, пр-т Независимости, 1
+              {contacts?.address}
             </p>
           </div>
           <div className={styles.infoItem}>
             <p className={clsx(styles.infoItemTitle, "body-4")}>Телефон</p>
             <Link
-              href="tel:+375291234567"
+              href={`tel:+${contacts?.phones[0]}`}
               className={clsx(styles.infoItemValue, "h3")}
             >
               <SvgPhone />
-              +375 (29) 123-45-67
+              {contacts?.phones[0]}
             </Link>
           </div>
           <div className={styles.infoItem}>
             <p className={clsx(styles.infoItemTitle, "body-4")}>Email</p>
             <Link
-              href="mailto:info@example.com"
+              href={`mailto:${contacts?.email}`}
               className={clsx(styles.infoItemValue, "h3")}
             >
               <SvgMail />
-              info@example.com
+              {contacts?.email}
             </Link>
           </div>
           <div className={styles.infoItem}>
             <p className={clsx(styles.infoItemTitle, "body-4")}>Соцсети</p>
-            <SocialLinks />
+            {contacts && <SocialLinks contacts={contacts} />}
           </div>
         </div>
-        <Map className={styles.map} />
+        <Map className={styles.map} address={contacts?.address} />
       </div>
     </div>
   );

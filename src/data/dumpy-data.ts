@@ -3,7 +3,6 @@ import tools from "@/assets/images/tools.png";
 import oil from "@/assets/images/oil.png";
 import wheelHd from "@/assets/images/wheel-hd.png";
 import { SvgCar, SvgEngine, SvgOil, SvgWheel } from "@/assets/icons/svgs";
-import promo from "@/assets/images/promo.png";
 import visaSecure from "@/assets/images/payments/visa-secure.png";
 import visa from "@/assets/images/payments/visa.png";
 import mastercard from "@/assets/images/payments/marstercard.png";
@@ -14,7 +13,7 @@ import samsung from "@/assets/images/payments/samsung-pay.png";
 import apple from "@/assets/images/payments/apple.png";
 import slide1 from "@/assets/images/slide.png";
 import carModel from "@/assets/images/car-model.png";
-import { ProductT, PromotionT } from "@/types/types";
+import { ProductT } from "@/types/types";
 import feedbackImage1 from "@/assets/images/feedback/image-1.png";
 import feedbackImage2 from "@/assets/images/feedback/image-2.png";
 import feedbackImage3 from "@/assets/images/feedback/image-3.png";
@@ -829,64 +828,6 @@ export const popularProducts: ProductT[] = [
   }
 ]
 
-export const promotions: PromotionT[] = [
-  {
-    id: 1,
-    image: promo,
-    title: "Получите запасной диск в подарок при покупке набора из 4 дисков!",
-    date: "01.04.2025",
-  },
-  {
-    id: 2,
-    image: promo,
-    title: "При заказе от 300 BYN получите скидку 5%!",
-    date: "01.04.2025",
-  },
-  {
-    id: 3,
-    image: promo,
-    title: "Скидка до 20% на тормозные колодки и диски",
-    date: "01.04.2025",
-  },
-  {
-    id: 4,
-    image: promo,
-    title: "Скидка до 20% на тормозные колодки и диски",
-    date: "01.04.2025",
-  },
-  {
-    id: 5,
-    image: promo,
-    title: "Скидка до 20% на тормозные колодки и диски",
-    date: "01.04.2025",
-  },
-  {
-    id: 6,
-    image: promo,
-    title: "Скидка до 20% на тормозные колодки и диски",
-    date: "01.04.2025",
-  },
-  {
-    id: 7,
-    image: promo,
-    title: "Скидка до 20% на тормозные колодки и диски",
-    date: "01.04.2025",
-  },
-  {
-    id: 8,
-    image: promo,
-    title: "Скидка до 20% на тормозные колодки и диски",
-    date: "01.04.2025",
-  },
-  {
-    id: 9,
-    image: promo,
-    title: "Скидка до 20% на тормозные колодки и диски",
-    date: "01.04.2025",
-  },
-
-
-]
 
 export const feedbackData = [
   {

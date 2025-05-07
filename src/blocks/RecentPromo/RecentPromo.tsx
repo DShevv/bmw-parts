@@ -4,12 +4,13 @@ import styles from "./RecentPromo.module.scss";
 import clsx from "clsx";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import { promotions } from "@/data/dumpy-data";
 import ArrowButton from "@/components/Buttons/ArrowButton/ArrowButton";
 import { Swiper as SwiperType } from "swiper";
 import { useRef } from "react";
 import PromoItem from "@/components/PromoItem/PromoItem";
-const RecentPromo = ({ title }: { title?: string }) => {
+import { NewsT } from "@/types/types";
+
+const RecentPromo = ({ title, promo }: { title?: string; promo: NewsT[] }) => {
   const swiperRef = useRef<SwiperType>(null);
 
   const handlePrev = () => {
@@ -50,7 +51,7 @@ const RecentPromo = ({ title }: { title?: string }) => {
           swiperRef.current = swiper;
         }}
       >
-        {promotions.map((promotion) => (
+        {promo.map((promotion) => (
           <SwiperSlide key={promotion.id} className={styles.slide}>
             <PromoItem promotion={promotion} />
           </SwiperSlide>

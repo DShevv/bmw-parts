@@ -3,10 +3,49 @@ import Breadcrumbs from "@/components/Breadcrumbs/Breadcrumbs";
 import clsx from "clsx";
 import RecentNews from "@/blocks/RecentNews/RecentNews";
 import Image from "next/image";
-import newsImage from "@/assets/images/new.png";
 import { SvgEye } from "@/assets/icons/svgs";
+import { getNews, getNewsBySlug, addNewsView } from "@/services/NewsService";
+import { formatDate } from "@/utils/helper";
 
-const page = () => {
+export const dynamicParams = false;
+
+export const generateMetadata = async ({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) => {
+  const { slug } = await params;
+  const news = await getNewsBySlug(slug);
+  return {
+    title: news?.title ?? "BMW parts",
+    description:
+      news?.content.replace(/<[^>]*>?/g, "").slice(0, 155) ?? "BMW parts",
+    openGraph: {
+      title: news?.title ?? "BMW parts",
+      description:
+        news?.content.replace(/<[^>]*>?/g, "").slice(0, 155) ?? "BMW parts",
+    },
+  };
+};
+
+export async function generateStaticParams() {
+  const news = await getNews({ page: 1, perPage: 10000 });
+
+  if (!news?.data) {
+    return [];
+  }
+
+  return news.data.map((news) => ({
+    slug: news.slug,
+  }));
+}
+
+const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
+  const { slug } = await params;
+  const news = await getNewsBySlug(slug);
+  const newsList = await getNews({ page: 1, perPage: 9 });
+  await addNewsView(news?.id ?? 0);
+
   return (
     <>
       <section className={styles.wrapper}>
@@ -17,69 +56,37 @@ const page = () => {
                 { title: "Главная", href: "/" },
                 { title: "Блог", href: "/news" },
                 {
-                  title:
-                    "Не только «китайцы». Какие модели появятся на нашем рынке в 2025 году",
+                  title: news?.title ?? "",
                   href: "",
                 },
               ]}
             />
-            <h1 className={clsx(styles.title, "h1")}>
-              Не только «китайцы». Какие модели появятся на нашем рынке
-              в 2025 году
-            </h1>
+            <h1 className={clsx(styles.title, "h1")}>{news?.title}</h1>
             <div className={styles.info}>
-              <div className={clsx(styles.date, "body-3")}>01.04.2025</div>
+              <div className={clsx(styles.date, "body-3")}>
+                {formatDate(news?.created_at ?? "")}
+              </div>
               <div className={clsx(styles.views, "body-3")}>
                 <SvgEye />
-                200 просмотров
+                {news?.views ?? 0} просмотров
               </div>
             </div>
           </div>
-          <Image src={newsImage} alt="news" className={styles.image} />
+          <Image
+            src={`${process.env.NEXT_PUBLIC_STORE_URL}/${news?.image}`}
+            alt="news"
+            className={styles.image}
+            height={420}
+            width={636}
+          />
         </div>
-        <div className={styles.text}>
-          <h3>
-            2024 год запомнился немалым количеством новинок у дилеров
-            и компаний-доставщиков из Китая. Ну а чем порадует 2025-й? Начнём
-            с «официального» сектора рынка новых автомобилей, затем поговорим
-            о параллельном импорте, а напоследок вспомним о тех моделях, которые
-            в 2025-м стали «проходными» и их оказалось выгоднее пригонять
-            подержанными из-за рубежа.
-          </h3>
-          <h3>Audi</h3>
-          <p>
-            В Беларуси появится новое поколение модели А5 — и в данном случае
-            речь идёт о замене предыдущего семейства А4 (если вы вдруг
-            ещё не в курсе, Audi изменила обозначение моделей: чётные индексы
-            теперь назначаются электрическим автомобилям, нечётные —
-            традиционным моделям с ДВС). При этом новое семейство лишено
-            4-дверных версий, поскольку под именем Audi A5 Sedan скрывается
-            5-дверный лифтбэк, а компанию ему составит универсал с привычной
-            приставкой Avant.
-          </p>
-          <h3>BMW</h3>
-          <p>
-            У BMW — целая россыпь новинок, которые ожидаются в этом году.
-            Например, обновлённые версии электромобилей i5 и i4 (2-й и 3-й
-            квартал соответственно). Также к нам приедут заряженные модели:
-            727-сильный универсал M5 Touring (1-й квартал), 543-сильный
-            универсал M3 CS Touring (2-й квартал) и новейшее купе M2 CS (3-й
-            квартал).
-          </p>
-          <p>
-            Ну а где‑то в середине года на рынок должен выйти кроссовер
-            X3 четвёртого поколения (G45). Он тоже экспериментирует с «ноздрями»
-            радиаторной решётки, зато может порадовать улучшенной аэродинамикой.
-            Основу силовой линейки составляют 2,0-литровые бензиновые
-            и дизельные «четвёрки», но имеется и 3,0-литровая дизельная
-            «шесткерка». Все они дополнены мягким гибридом, но есть в гамме
-            и подзаряжаемый гибрид с батареей ёмкостью 19,7 кВт·ч и запасом хода
-            90 км (по циклу WLTP).
-          </p>
-        </div>
+        <div
+          className={styles.text}
+          dangerouslySetInnerHTML={{ __html: news?.content ?? "" }}
+        />
       </section>
 
-      <RecentNews title="Другие новости" />
+      <RecentNews title="Другие новости" news={newsList?.data ?? []} />
     </>
   );
 };

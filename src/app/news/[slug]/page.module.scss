@@ -15,6 +15,7 @@
     width: vw-1550(636);
     height: vw-1550(420);
     object-fit: cover;
+    flex-shrink: 0;
 
     @media (max-width: 768px) {
       width: 100%;

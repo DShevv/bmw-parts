@@ -2,7 +2,7 @@
 import { observer } from "mobx-react-lite";
 import styles from "./MenuPopup.module.scss";
 import clsx from "clsx";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import globalStore from "@/stores/global-store";
 import {
   SvgClose,
@@ -13,10 +13,21 @@ import {
 } from "@/assets/icons/svgs";
 import Link from "next/link";
 import SocialLinks from "@/components/SocialLinks/SocialLinks";
+import { ContactsT } from "@/types/types";
+import { getContacts } from "@/services/InfoService";
 
 const MenuPopup = observer(() => {
   const { popupStore } = globalStore;
   const { menu, closePopup } = popupStore;
+  const [contacts, setContacts] = useState<ContactsT | null>(null);
+
+  useEffect(() => {
+    const fetchContacts = async () => {
+      const contacts = await getContacts();
+      setContacts(contacts);
+    };
+    fetchContacts();
+  }, []);
 
   useEffect(() => {
     if (menu) {
@@ -109,7 +120,7 @@ const MenuPopup = observer(() => {
             <SvgMail />
             info@example.com
           </Link>
-          <SocialLinks />
+          {contacts && <SocialLinks contacts={contacts} />}
         </div>
       </div>
     </div>

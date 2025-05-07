@@ -3,6 +3,8 @@ import React, { useEffect, useRef } from "react";
 import clsx from "clsx";
 import styles from "./Map.module.scss";
 import Marker from "@/components/Marker/Marker";
+import mapStyles from "@/assets/maps.json";
+import { VectorCustomizationItem } from "@yandex/ymaps3-types";
 
 declare global {
   interface Window {
@@ -10,12 +12,12 @@ declare global {
   }
 }
 
-function Map({ className }: { className?: string }) {
+function Map({ className, address }: { className?: string; address?: string }) {
   const mapRef = useRef(null);
 
   useEffect(() => {
     async function initMap() {
-      if (mapRef.current) {
+      if (mapRef.current && address) {
         await ymaps3.ready;
 
         const {
@@ -25,19 +27,28 @@ function Map({ className }: { className?: string }) {
           YMapMarker,
         } = ymaps3;
 
+        const searchResponse = await ymaps3.search({ text: address });
+
+        const coordinates = searchResponse[0]?.geometry?.coordinates;
+
         const map = new YMap(
           mapRef.current,
           {
-            location: { center: [27.631837, 53.959675], zoom: 16 },
+            location: { center: coordinates, zoom: 16 },
             mode: "vector",
           },
-          [new YMapDefaultSchemeLayer({}), new YMapDefaultFeaturesLayer({})]
+          [
+            new YMapDefaultSchemeLayer({
+              customization: mapStyles as VectorCustomizationItem[],
+            }),
+            new YMapDefaultFeaturesLayer({}),
+          ]
         );
 
         map.addChild(
           new YMapMarker(
             {
-              coordinates: [27.631837, 53.959675],
+              coordinates: coordinates || [0, 0],
               draggable: false,
               mapFollowsOnDrag: true,
             },
@@ -48,7 +59,7 @@ function Map({ className }: { className?: string }) {
     }
 
     initMap();
-  }, [mapRef]);
+  }, [mapRef, address]);
 
   return (
     <>

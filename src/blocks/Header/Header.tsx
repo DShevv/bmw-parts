@@ -6,18 +6,21 @@ import clsx from "clsx";
 import SocialLinks from "@/components/SocialLinks/SocialLinks";
 import HeaderControls from "./HeaderControls/HeaderControls";
 import HeaderCategories from "./HeaderCategories/HeaderCategories";
+import { getContacts } from "@/services/InfoService";
 
-const Header = () => {
+const Header = async () => {
+  const contacts = await getContacts();
+
   return (
     <header className={styles.header}>
       <div className={styles.info}>
-        <Link href={"tel:+79111234567"} className={styles.phone}>
+        <Link href={`tel:+${contacts?.phones[0]}`} className={styles.phone}>
           <div className={styles.icon}>
             <SvgPhone />
           </div>
           <div className={clsx("body-1", styles.caption)}>
-            +375 (29) 999-99-99
-            <span className="body-4">Ежедневно 09:00–21:00</span>
+            {contacts?.phones[0]}
+            <span className="body-4">{contacts?.working_hours}</span>
           </div>
         </Link>
 
@@ -57,7 +60,7 @@ const Header = () => {
             </Link>
           </li>
         </ul>
-        <SocialLinks />
+        {contacts && <SocialLinks contacts={contacts} />}
       </div>
       <HeaderControls />
       <HeaderCategories />

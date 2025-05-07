@@ -2,31 +2,38 @@ import Link from "next/link";
 import styles from "./SocialLinks.module.scss";
 import { SvgTelegram, SvgViber, SvgWhatsapp } from "@/assets/icons/svgs";
 import clsx from "clsx";
+import { ContactsT } from "@/types/types";
 
-const SocialLinks = () => {
+const SocialLinks = ({ contacts }: { contacts: ContactsT }) => {
   return (
     <div className={styles.container}>
-      <Link
-        href={""}
-        target="_blank"
-        className={clsx(styles.link, styles.viber)}
-      >
-        <SvgViber />
-      </Link>
-      <Link
-        href={""}
-        target="_blank"
-        className={clsx(styles.link, styles.telegram)}
-      >
-        <SvgTelegram />
-      </Link>
-      <Link
-        href={""}
-        target="_blank"
-        className={clsx(styles.link, styles.whatsapp)}
-      >
-        <SvgWhatsapp />
-      </Link>
+      {contacts?.viber && contacts?.viber !== "" && (
+        <Link
+          href={`viber://chat?number=${contacts.viber}`}
+          target="_blank"
+          className={clsx(styles.link, styles.viber)}
+        >
+          <SvgViber />
+        </Link>
+      )}
+      {contacts?.telegram && contacts?.telegram !== "" && (
+        <Link
+          href={`https://t.me/${contacts.telegram}`}
+          target="_blank"
+          className={clsx(styles.link, styles.telegram)}
+        >
+          <SvgTelegram />
+        </Link>
+      )}
+      {contacts?.whatsapp && contacts?.whatsapp !== "" && (
+        <Link
+          href={`https://wa.me/${contacts.whatsapp}`}
+          target="_blank"
+          className={clsx(styles.link, styles.whatsapp)}
+        >
+          <SvgWhatsapp />
+        </Link>
+      )}
     </div>
   );
 };

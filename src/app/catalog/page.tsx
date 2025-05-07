@@ -5,6 +5,21 @@ import clsx from "clsx";
 import CatalogModels from "@/blocks/CatalogModels/CatalogModels";
 import SeoBlock from "@/blocks/SeoBlock/SeoBlock";
 import CatalogCategories from "@/blocks/CatalogCategories/CatalogCategories";
+import { getSeoPage } from "@/services/InfoService";
+
+export const generateMetadata = async () => {
+  const { seo } = await getSeoPage("catalog");
+
+  return {
+    title: seo?.title ?? "BMW parts",
+    description: seo?.description ?? "BMW parts",
+    keywords: seo?.keywords,
+    openGraph: {
+      title: seo?.og_title ?? seo?.title,
+      description: seo?.og_description ?? seo?.description,
+    },
+  };
+};
 
 const page = () => {
   return (
@@ -21,7 +36,7 @@ const page = () => {
         <CatalogCategories />
       </div>
 
-      <SeoBlock />
+      <SeoBlock page="catalog" />
       <Feedback />
     </>
   );

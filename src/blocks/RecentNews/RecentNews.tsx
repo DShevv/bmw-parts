@@ -4,13 +4,13 @@ import styles from "./RecentNews.module.scss";
 import clsx from "clsx";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import { promotions } from "@/data/dumpy-data";
 import ArrowButton from "@/components/Buttons/ArrowButton/ArrowButton";
 import { Swiper as SwiperType } from "swiper";
 import { useRef } from "react";
 import NewsItem from "@/components/NewsItem/NewsItem";
+import { NewsT } from "@/types/types";
 
-const RecentNews = ({ title }: { title?: string }) => {
+const RecentNews = ({ title, news }: { title?: string; news: NewsT[] }) => {
   const swiperRef = useRef<SwiperType>(null);
 
   const handlePrev = () => {
@@ -51,7 +51,7 @@ const RecentNews = ({ title }: { title?: string }) => {
           swiperRef.current = swiper;
         }}
       >
-        {promotions.map((promotion) => (
+        {news.map((promotion) => (
           <SwiperSlide key={promotion.id} className={styles.slide}>
             <NewsItem promotion={promotion} />
           </SwiperSlide>
