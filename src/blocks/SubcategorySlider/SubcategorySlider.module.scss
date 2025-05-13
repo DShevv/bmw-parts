@@ -17,7 +17,11 @@
 }
 
 .slider {
-  width: 100%;
+  width: calc(100% + vw-1550(24));
+  position: relative;
+  left: vw-1550(-24);
+  padding: 0 vw-1550(24) vw-1550(48) vw-1550(24);
+  margin-bottom: vw-1550(-24);
   overflow: hidden;
 
   .slide {
@@ -35,11 +39,13 @@
       justify-content: center;
       border-radius: vw-1550(12);
       border: 1px solid transparent;
+      transition: all 0.3s ease-in-out;
 
       &:hover {
-        box-shadow: 0 14px 31px 0 rgba(28, 33, 63, 0.06),
-          0 225px 90px 0 rgba(28, 33, 63, 0.01),
-          0 352px 98px 0 rgba(28, 33, 63, 0);
+        box-shadow:
+          0 vw-1550(14) vw-1550(31) 0 rgba(28, 33, 63, 0.06),
+          0 vw-1550(24) vw-1550(90) 0 rgba(28, 33, 63, 0.01),
+          0 vw-1550(352) vw-1550(98) 0 rgba(28, 33, 63, 0);
       }
 
       &.active {
@@ -51,6 +57,10 @@
 
   @media (max-width: 768px) {
     max-width: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    left: 0;
 
     .slide {
       width: auto;

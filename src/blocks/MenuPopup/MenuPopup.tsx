@@ -60,28 +60,48 @@ const MenuPopup = observer(() => {
 
         <ul className={styles.menu}>
           <li>
-            <Link className={clsx("h4", styles.item)} href="/">
+            <Link
+              className={clsx("h4", styles.item)}
+              href="/"
+              onClick={() => closePopup("menu")}
+            >
               Главная
             </Link>
           </li>
 
           <li>
-            <Link className={clsx("h4", styles.item)} href="/catalog">
+            <Link
+              className={clsx("h4", styles.item)}
+              href="/catalog"
+              onClick={() => closePopup("menu")}
+            >
               Каталог
             </Link>
           </li>
           <li>
-            <Link className={clsx("h4", styles.item)} href="/find-parts">
+            <Link
+              className={clsx("h4", styles.item)}
+              href="/find-parts"
+              onClick={() => closePopup("menu")}
+            >
               Подбор запчастей для BMW
             </Link>
           </li>
           <li>
-            <Link className={clsx("h4", styles.item)} href="/help">
+            <Link
+              className={clsx("h4", styles.item)}
+              href="/help"
+              onClick={() => closePopup("menu")}
+            >
               Помощь покупателю
             </Link>
           </li>
           <li>
-            <Link className={clsx("h4", styles.item)} href="/news">
+            <Link
+              className={clsx("h4", styles.item)}
+              href="/news"
+              onClick={() => closePopup("menu")}
+            >
               Блог
             </Link>
           </li>
@@ -89,13 +109,18 @@ const MenuPopup = observer(() => {
             <Link
               className={clsx("h4", styles.item, styles.sale)}
               href="/promotions"
+              onClick={() => closePopup("menu")}
             >
               <SvgSale />
               Акции
             </Link>
           </li>
           <li>
-            <Link className={clsx("h4", styles.item)} href="/contacts">
+            <Link
+              className={clsx("h4", styles.item)}
+              href="/contacts"
+              onClick={() => closePopup("menu")}
+            >
               Контакты
             </Link>
           </li>

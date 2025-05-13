@@ -6,27 +6,43 @@ import { useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { categories } from "@/data/dumpy-data";
-import useOutsideClick from "@/utils/useOutsideClick";
 
 const CatalogButton = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const [activeCategory, setActiveCategory] = useState(categories[0]);
-  const ref = useRef<HTMLDivElement>(null);
 
-  useOutsideClick(ref, () => setIsOpen(false));
+  const handleMouseLeave = () => {
+    timeoutRef.current = setTimeout(() => {
+      setIsOpen(false);
+    }, 500);
+  };
+
+  const handleMouseEnter = () => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+    setIsOpen(true);
+  };
 
   return (
     <>
-      <button
+      <Link
+        href={"/catalog"}
         className={clsx(styles.button, "t-button")}
-        onClick={() => setIsOpen(!isOpen)}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
       >
         <SvgBurger />
         <span>Каталог</span>
-      </button>
+      </Link>
 
       {isOpen && (
-        <div className={styles.menu} ref={ref}>
+        <div
+          className={styles.menu}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
           <div className={styles.categories}>
             {categories.map((category) => (
               <Link

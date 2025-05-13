@@ -53,6 +53,10 @@
     padding-bottom: vw-1550(88);
     padding-top: vw-1550(16);
 
+    div:has(.slide) {
+      transition-timing-function: linear;
+    }
+
     &.secondary {
       padding-top: vw-1550(88);
       padding-bottom: 0;
@@ -77,6 +81,11 @@
     text-decoration: none;
     color: var(--dark-blue);
     background: var(--white-bg);
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+      color: var(--orange);
+    }
 
     img {
       width: 100%;

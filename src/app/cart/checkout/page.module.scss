@@ -161,8 +161,13 @@
       align-items: center;
       justify-content: center;
       color: var(--white-bg);
-      background: var(--orange);
+      background: var(--medium-blue);
       line-height: 1;
+      transition: all 0.3s ease;
+
+      &.active {
+        background: var(--orange);
+      }
     }
 
     @media (max-width: 768px) {
@@ -239,7 +244,8 @@
     transition: all 0.3s ease;
 
     &:hover {
-      box-shadow: 0 14px 31px 0 rgba(28, 33, 63, 0.06),
+      box-shadow:
+        0 14px 31px 0 rgba(28, 33, 63, 0.06),
         0 225px 90px 0 rgba(28, 33, 63, 0.01),
         0 352px 98px 0 rgba(28, 33, 63, 0);
     }

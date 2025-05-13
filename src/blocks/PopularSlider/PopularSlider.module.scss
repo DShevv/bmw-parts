@@ -37,8 +37,12 @@
 }
 
 .slider {
-  width: 100%;
+  width: calc(100% + vw-1550(48));
+  left: -24px;
+  padding: 0 vw-1550(24) vw-1550(48) vw-1550(24);
+  margin-bottom: vw-1550(-48);
   overflow: hidden;
+  position: relative;
 
   .slide {
     width: auto;
@@ -47,6 +51,9 @@
 
   @media (max-width: 768px) {
     max-width: 100%;
+    left: 0;
+    padding: 0;
+    margin-bottom: 0;
 
     .slide {
       margin-right: 15px;

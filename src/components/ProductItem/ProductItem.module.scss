@@ -13,8 +13,10 @@
   border-radius: vw-1550(12);
 
   &:hover {
-    box-shadow: 0 14px 31px 0 rgba(28, 33, 63, 0.06),
-      0 225px 90px 0 rgba(28, 33, 63, 0.01), 0 352px 98px 0 rgba(28, 33, 63, 0);
+    box-shadow:
+      0 vw-1550(14) vw-1550(31) 0 rgba(28, 33, 63, 0.06),
+      0 vw-1550(48) vw-1550(90) 0 rgba(28, 33, 63, 0.01),
+      0 vw-1550(352) vw-1550(98) 0 rgba(28, 33, 63, 0);
   }
 
   @media (max-width: 768px) {
@@ -58,12 +60,14 @@
     text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-line-clamp: 2;
+    line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
 
     @media (max-width: 768px) {
       margin-bottom: 8px;
       -webkit-line-clamp: 3;
+      line-clamp: 3;
     }
   }
 

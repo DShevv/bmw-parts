@@ -51,7 +51,7 @@
       width: vw-1550(54);
       height: vw-1550(54);
       border: 1px solid var(--medium-blue);
-      border-radius: 12px;
+      border-radius: vw-1550(12);
       background-color: var(--white-bg);
       color: var(--dark-blue);
       cursor: pointer;
@@ -60,6 +60,11 @@
 
       &:hover {
         background-color: var(--medium-blue);
+      }
+
+      svg {
+        width: vw-1550(26);
+        height: vw-1550(26);
       }
 
       &.active {

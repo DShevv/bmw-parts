@@ -18,6 +18,7 @@ import Image from "next/image";
 import { SvgBanknote, SvgCard } from "@/assets/icons/svgs";
 import Checkbox from "@/components/Inputs/Checkbox/Checkbox";
 import { useRouter } from "next/navigation";
+import { isActiveStepOne } from "@/utils/helper";
 
 const Page = observer(() => {
   const { cartStore } = globalStore;
@@ -53,7 +54,7 @@ const Page = observer(() => {
             delivery: "pickup",
             address: "",
             comment: "",
-            payment: "online",
+            payment: "",
             isAgree: false,
           }}
           onSubmit={(values) => {
@@ -69,7 +70,18 @@ const Page = observer(() => {
                   <m.div layout className={styles.list}>
                     <m.div layout className={styles.step}>
                       <div className={styles.stepTitle}>
-                        <span className={clsx("h3", styles.stepNumber)}>1</span>
+                        <span
+                          className={clsx("h3", styles.stepNumber, {
+                            [styles.active]: isActiveStepOne(
+                              values.name,
+                              values.lastName,
+                              values.email,
+                              values.phone
+                            ),
+                          })}
+                        >
+                          1
+                        </span>
                         <span className="h4">
                           Укажите ваши контактные данные
                         </span>
@@ -120,7 +132,15 @@ const Page = observer(() => {
                     </m.div>
                     <m.div layout className={styles.step}>
                       <div className={styles.stepTitle}>
-                        <span className={clsx("h3", styles.stepNumber)}>2</span>
+                        <span
+                          className={clsx(
+                            "h3",
+                            styles.stepNumber,
+                            styles.active
+                          )}
+                        >
+                          2
+                        </span>
                         <span className="h4">Выберите способ доставки</span>
                       </div>
                       <div className={styles.stepLine}>
@@ -171,7 +191,11 @@ const Page = observer(() => {
                           className={styles.step}
                         >
                           <div className={styles.stepTitle}>
-                            <span className={clsx("h3", styles.stepNumber)}>
+                            <span
+                              className={clsx("h3", styles.stepNumber, {
+                                [styles.active]: values.address.length > 0,
+                              })}
+                            >
                               3
                             </span>
                             <span className="h4">Укажите адрес доставки</span>
@@ -202,7 +226,11 @@ const Page = observer(() => {
 
                     <m.div layout className={styles.step}>
                       <div className={styles.stepTitle}>
-                        <span className={clsx("h3", styles.stepNumber)}>
+                        <span
+                          className={clsx("h3", styles.stepNumber, {
+                            [styles.active]: values.payment.length > 0,
+                          })}
+                        >
                           {values.delivery !== "pickup" ? "4" : "3"}
                         </span>
                         <span className="h4">Выберите способ оплаты</span>

@@ -56,22 +56,29 @@
     background-color: var(--white-bg);
     border: 1px solid var(--medium-blue);
     border-radius: vw-1550(12);
-    padding: vw-1550(16) vw-1550(12);
-    display: flex;
-    flex-direction: column;
-    gap: vw-1550(8);
     pointer-events: none;
     opacity: 0;
     transition: all 0.2s ease-in-out;
-    max-height: vw-1550(200);
-    overflow-y: auto;
+    overflow: hidden;
+
+    .inner {
+      padding: vw-1550(16) vw-1550(12);
+      display: flex;
+      flex-direction: column;
+      gap: vw-1550(8);
+      overflow-y: auto;
+      max-height: vw-1550(200);
+    }
 
     @media (max-width: 768px) {
       bottom: -8px;
       border-radius: 8px;
-      padding: 9px 12px;
-      gap: 8px;
-      max-height: 200px;
+
+      .inner {
+        padding: 9px 12px;
+        gap: 8px;
+        max-height: 200px;
+      }
 
       &.top {
         bottom: initial;

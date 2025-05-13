@@ -12,7 +12,7 @@
   color: var(--white-bg);
   cursor: pointer;
   transition: all 0.3s ease-in-out;
-
+  text-decoration: none;
   svg {
     width: vw-1550(26);
     height: vw-1550(26);
@@ -66,8 +66,10 @@
   display: flex;
   z-index: 100;
 
-  box-shadow: 0 14px 31px 0 rgba(28, 33, 63, 0.06),
-    0 225px 90px 0 rgba(28, 33, 63, 0.01), 0 352px 98px 0 rgba(28, 33, 63, 0);
+  box-shadow:
+    0 14px 31px 0 rgba(28, 33, 63, 0.06),
+    0 225px 90px 0 rgba(28, 33, 63, 0.01),
+    0 352px 98px 0 rgba(28, 33, 63, 0);
   background: var(--white-bg);
 
   .categories {

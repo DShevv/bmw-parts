@@ -15,7 +15,7 @@ import { feedbackData } from "@/data/dumpy-data";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/free-mode";
-import { FreeMode } from "swiper/modules";
+import { FreeMode, Autoplay } from "swiper/modules";
 import { postFeedback } from "@/services/FeedbackService";
 
 const Feedback = observer(() => {
@@ -102,9 +102,16 @@ const Feedback = observer(() => {
           }}
           slidesPerView={"auto"}
           freeMode
-          modules={[FreeMode]}
+          modules={[FreeMode, Autoplay]}
           className={styles.swiper}
           direction="vertical"
+          speed={3000}
+          loop
+          autoplay={{
+            delay: 0,
+            disableOnInteraction: false,
+            pauseOnMouseEnter: true,
+          }}
         >
           {feedbackData.map((item) => (
             <SwiperSlide key={item.id} className={styles.slide}>
@@ -118,9 +125,16 @@ const Feedback = observer(() => {
         <Swiper
           slidesPerView={"auto"}
           freeMode
-          modules={[FreeMode]}
+          modules={[FreeMode, Autoplay]}
           className={clsx(styles.swiper, styles.secondary)}
           direction="vertical"
+          speed={3500}
+          loop
+          autoplay={{
+            delay: 0,
+            disableOnInteraction: true,
+            pauseOnMouseEnter: true,
+          }}
         >
           {feedbackData.map((item) => (
             <SwiperSlide key={item.id} className={styles.slide}>

@@ -4,7 +4,7 @@ import styles from "./page.module.scss";
 import Breadcrumbs from "@/components/Breadcrumbs/Breadcrumbs";
 import clsx from "clsx";
 import FindModels from "@/blocks/FindModels/FindModels";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AnimatePresence } from "motion/react";
 import FindBlock from "@/blocks/FindBlock/FindBlock";
 import { series } from "@/data/dumpy-data";
@@ -14,6 +14,18 @@ const Page = () => {
     series: number;
     model: number;
   } | null>(null);
+
+  useEffect(() => {
+    if (activeId && activeId?.model && activeId?.series) {
+      setTimeout(() => {
+        const findBlock = document.querySelector("#find-block");
+        console.log(findBlock);
+        if (findBlock) {
+          findBlock.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 100);
+    }
+  }, [activeId]);
 
   return (
     <>

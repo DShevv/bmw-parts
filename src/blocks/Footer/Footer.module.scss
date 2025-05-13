@@ -201,6 +201,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding-top: vw-1550(24);
+  border-top: 1px solid rgba(28, 33, 63, 0.1);
 
   p {
     color: var(--dark-blue);

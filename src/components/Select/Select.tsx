@@ -43,21 +43,23 @@ const Select = ({
           [styles.top]: direction === "top",
         })}
       >
-        {options
-          .filter((option) => option !== selectedOption)
-          .map((option) => (
-            <div
-              className={clsx("t-placeholder", styles.option)}
-              key={option}
-              onClick={() => {
-                setSelectedOption(option);
-                setIsOpen(false);
-                onChange?.(option);
-              }}
-            >
-              {option}
-            </div>
-          ))}
+        <div className={styles.inner}>
+          {options
+            .filter((option) => option !== selectedOption)
+            .map((option) => (
+              <div
+                className={clsx("t-placeholder", styles.option)}
+                key={option}
+                onClick={() => {
+                  setSelectedOption(option);
+                  setIsOpen(false);
+                  onChange?.(option);
+                }}
+              >
+                {option}
+              </div>
+            ))}
+        </div>
       </div>
     </div>
   );
