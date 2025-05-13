@@ -9,7 +9,7 @@
   transition: all 0.3s ease;
   position: relative;
   text-decoration: none;
-  color: var(--dark-blue);
+  color: var(--text);
   border-radius: vw-1550(12);
 
   &:hover {
@@ -81,6 +81,10 @@
       flex-wrap: wrap;
       align-items: center;
       gap: vw-1550(4);
+
+      .brand {
+        color: var(--dark-blue);
+      }
     }
 
     @media (max-width: 768px) {
@@ -100,13 +104,14 @@
       flex-direction: column;
       align-items: flex-start;
       gap: vw-1550(4);
+      color: var(--dark-blue);
 
       &:has(.discount) {
         color: var(--orange);
       }
 
       .discount {
-        color: var(--dark-blue);
+        color: var(--text);
         text-decoration: line-through;
         opacity: 0.4;
         line-height: 1;
@@ -136,7 +141,7 @@
     position: absolute;
     top: vw-1550(23);
     left: vw-1550(20);
-    color: var(--dark-blue);
+    color: var(--text);
     display: flex;
     gap: vw-1550(6);
     align-items: center;

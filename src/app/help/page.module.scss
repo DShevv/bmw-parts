@@ -24,7 +24,7 @@
     font-weight: 600;
     font-size: vw-1550(20);
     line-height: 140%;
-    color: var(--dark-blue);
+    color: var(--text);
     margin-bottom: vw-1550(20);
   }
 
@@ -33,7 +33,7 @@
     font-weight: 500;
     font-size: vw-1550(16);
     line-height: 140%;
-    color: var(--dark-blue);
+    color: var(--text);
     margin-bottom: vw-1550(20);
   }
 
@@ -55,7 +55,7 @@
       font-weight: 500;
       font-size: vw-1550(16);
       line-height: 140%;
-      color: var(--dark-blue);
+      color: var(--text);
     }
   }
 
@@ -124,13 +124,21 @@
       padding: vw-1550(14) vw-1550(24);
       border-radius: vw-1550(12);
       background: var(--light-blue);
-      color: var(--dark-blue);
+      color: var(--text);
       text-decoration: none;
       transition: all 0.3s ease;
+
+      svg {
+        color: var(--dark-blue);
+      }
 
       &:hover {
         background: var(--dark-blue);
         color: var(--white-bg);
+
+        svg {
+          color: var(--orange);
+        }
       }
 
       &.active {

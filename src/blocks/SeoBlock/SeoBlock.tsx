@@ -1,7 +1,14 @@
+import clsx from "clsx";
 import styles from "./SeoBlock.module.scss";
 import { getSeoText } from "@/services/InfoService";
 
-const SeoBlock = async ({ page }: { page: string }) => {
+const SeoBlock = async ({
+  page,
+  className,
+}: {
+  page: string;
+  className?: string;
+}) => {
   const seoText = await getSeoText(page);
 
   if (!seoText) {
@@ -10,7 +17,7 @@ const SeoBlock = async ({ page }: { page: string }) => {
 
   return (
     <section
-      className={styles.container}
+      className={clsx(styles.container, className)}
       dangerouslySetInnerHTML={{ __html: seoText.content }}
     />
   );

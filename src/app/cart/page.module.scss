@@ -76,7 +76,8 @@
       background: var(--white-bg);
       transition: all 0.2s ease;
       &:hover {
-        box-shadow: 0 14px 31px 0 rgba(28, 33, 63, 0.06),
+        box-shadow:
+          0 14px 31px 0 rgba(28, 33, 63, 0.06),
           0 225px 90px 0 rgba(28, 33, 63, 0.01),
           0 352px 98px 0 rgba(28, 33, 63, 0);
       }
@@ -132,7 +133,7 @@
 
           a {
             flex: 1;
-            color: var(--dark-blue);
+            color: var(--text);
             text-decoration: none;
           }
 
@@ -155,7 +156,7 @@
         }
 
         .discount {
-          color: var(--dark-blue);
+          color: var(--text);
           opacity: 0.4;
           text-decoration: line-through;
         }

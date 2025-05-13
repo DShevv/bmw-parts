@@ -4,7 +4,7 @@
   display: flex;
   align-items: center;
   gap: vw-1550(8);
-  color: var(--dark-blue);
+  color: var(--text);
   text-decoration: none;
   width: fit-content;
 
@@ -22,7 +22,7 @@
     font-weight: 500;
     font-size: vw-1550(20);
     line-height: 140%;
-    color: var(--dark-blue);
+    color: var(--text);
 
     span {
       white-space: nowrap;

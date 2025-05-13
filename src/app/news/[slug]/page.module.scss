@@ -33,7 +33,7 @@
     .info {
       display: flex;
       gap: vw-1550(16);
-      color: var(--dark-blue);
+      color: var(--text);
       align-items: center;
 
       .date {
@@ -46,7 +46,7 @@
         display: flex;
         gap: vw-1550(6);
         align-items: center;
-        color: var(--dark-blue);
+        color: var(--text);
 
         svg {
           color: var(--orange);
@@ -97,7 +97,7 @@
     font-weight: 600;
     font-size: vw-1550(20);
     line-height: 140%;
-    color: var(--dark-blue);
+    color: var(--text);
   }
 
   p {
@@ -108,7 +108,7 @@
     font-weight: 500;
     font-size: vw-1550(16);
     line-height: 140%;
-    color: var(--dark-blue);
+    color: var(--text);
   }
 
   @media (max-width: 768px) {

@@ -1,29 +1,14 @@
 import React from "react";
 import styles from "./Header.module.scss";
 import Link from "next/link";
-import { SvgPhone, SvgSale } from "@/assets/icons/svgs";
 import clsx from "clsx";
-import SocialLinks from "@/components/SocialLinks/SocialLinks";
 import HeaderControls from "./HeaderControls/HeaderControls";
-import HeaderCategories from "./HeaderCategories/HeaderCategories";
-import { getContacts } from "@/services/InfoService";
+import HeaderInfo from "./HeaderInfo/HeaderInfo";
 
 const Header = async () => {
-  const contacts = await getContacts();
-
   return (
     <header className={styles.header}>
       <div className={styles.info}>
-        <Link href={`tel:+${contacts?.phones[0]}`} className={styles.phone}>
-          <div className={styles.icon}>
-            <SvgPhone />
-          </div>
-          <div className={clsx("body-1", styles.caption)}>
-            {contacts?.phones[0]}
-            <span className="body-4">{contacts?.working_hours}</span>
-          </div>
-        </Link>
-
         <ul className={styles.menu}>
           <li>
             <Link href={"/"} className={clsx("body-2", styles.link)}>
@@ -46,24 +31,14 @@ const Header = async () => {
             </Link>
           </li>
           <li>
-            <Link
-              href={"/promotions"}
-              className={clsx("body-2", styles.link, styles.sale)}
-            >
-              <SvgSale />
-              Акции
-            </Link>
-          </li>
-          <li>
             <Link href={"/contacts"} className={clsx("body-2", styles.link)}>
               Контакты
             </Link>
           </li>
         </ul>
-        {contacts && <SocialLinks contacts={contacts} />}
       </div>
+      <HeaderInfo />
       <HeaderControls />
-      <HeaderCategories />
     </header>
   );
 };

@@ -1,0 +1,48 @@
+@use "../../../assets/sass/functions" as *;
+
+.container {
+  display: flex;
+  align-items: center;
+  margin-bottom: vw-1550(16);
+
+  .logo {
+    margin-right: vw-1550(82);
+  }
+
+  .info {
+    margin-left: vw-1550(64);
+    display: flex;
+    gap: vw-1550(54);
+    align-items: center;
+
+    .infoItem {
+      display: flex;
+      gap: vw-1550(8);
+      align-items: center;
+      max-width: vw-1550(163);
+
+      svg {
+        width: vw-1550(26);
+        height: vw-1550(26);
+        flex-shrink: 0;
+      }
+
+      .caption {
+        display: flex;
+        flex-direction: column;
+        gap: vw-1550(2);
+        color: var(--text);
+
+        .value {
+          color: var(--text);
+          text-decoration: none;
+        }
+
+        a.value {
+          white-space: nowrap;
+          word-break: none;
+        }
+      }
+    }
+  }
+}

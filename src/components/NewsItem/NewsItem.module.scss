@@ -12,12 +12,14 @@
   transition: all 0.3s ease;
   position: relative;
   text-decoration: none;
-  color: var(--dark-blue);
+  color: var(--text);
   border-radius: vw-1550(12);
 
   &:hover {
-    box-shadow: 0 14px 31px 0 rgba(28, 33, 63, 0.06),
-      0 225px 90px 0 rgba(28, 33, 63, 0.01), 0 352px 98px 0 rgba(28, 33, 63, 0);
+    box-shadow:
+      0 14px 31px 0 rgba(28, 33, 63, 0.06),
+      0 225px 90px 0 rgba(28, 33, 63, 0.01),
+      0 352px 98px 0 rgba(28, 33, 63, 0);
   }
 
   @media (max-width: 768px) {
@@ -95,7 +97,7 @@
     width: fit-content;
 
     background: var(--medium-blue);
-    color: var(--dark-blue);
+    color: var(--text);
 
     @media (max-width: 768px) {
       border-radius: 8px;

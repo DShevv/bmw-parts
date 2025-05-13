@@ -38,7 +38,7 @@
   max-width: vw-1550(282);
   flex: 0 0 vw-1550(282);
 
-  color: var(--dark-blue);
+  color: var(--text);
 
   p {
     opacity: 0.7;
@@ -59,7 +59,7 @@
   gap: vw-1550(20);
 
   .category {
-    color: var(--dark-blue);
+    color: var(--text);
     text-decoration: none;
     transition: color 0.3s ease;
 
@@ -83,7 +83,7 @@
   flex: 1 0 vw-1550(224);
 
   .menuItem {
-    color: var(--dark-blue);
+    color: var(--text);
     text-decoration: none;
     display: flex;
     align-items: center;
@@ -128,7 +128,7 @@
   .contactItem {
     display: flex;
     flex-direction: column;
-    color: var(--dark-blue);
+    color: var(--text);
     gap: vw-1550(8);
     width: fit-content;
 
@@ -137,7 +137,7 @@
     }
 
     & > a {
-      color: var(--dark-blue);
+      color: var(--text);
       text-decoration: none;
 
       &:hover {

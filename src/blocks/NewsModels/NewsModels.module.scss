@@ -1,0 +1,12 @@
+@use "../../assets/sass/functions" as *;
+
+.wrapper {
+  width: 100%;
+  display: flex;
+  gap: vw-1550(70);
+
+  @media (max-width: 768px) {
+    flex-direction: column-reverse;
+    gap: 24px;
+  }
+}

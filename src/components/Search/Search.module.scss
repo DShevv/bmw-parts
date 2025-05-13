@@ -11,6 +11,7 @@
   height: vw-1550(54);
   padding: 0 vw-1550(16);
   background-color: var(--light-blue);
+  flex: 1;
 
   &:has(.input:focus) {
     svg {
@@ -63,8 +64,10 @@
   max-height: vw-1550(333);
   z-index: 150;
 
-  box-shadow: 0 14px 31px 0 rgba(28, 33, 63, 0.06),
-    0 225px 90px 0 rgba(28, 33, 63, 0.01), 0 352px 98px 0 rgba(28, 33, 63, 0);
+  box-shadow:
+    0 14px 31px 0 rgba(28, 33, 63, 0.06),
+    0 225px 90px 0 rgba(28, 33, 63, 0.01),
+    0 352px 98px 0 rgba(28, 33, 63, 0);
   background: var(--white-bg);
   border: 1px solid var(--medium-blue);
   border-radius: vw-1550(12);

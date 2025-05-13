@@ -9,13 +9,15 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  color: var(--dark-blue);
+  color: var(--text);
   cursor: pointer;
   transition: all 0.3s ease;
 
   &:hover {
-    box-shadow: 0 14px 31px 0 rgba(28, 33, 63, 0.06),
-      0 225px 90px 0 rgba(28, 33, 63, 0.01), 0 352px 98px 0 rgba(28, 33, 63, 0);
+    box-shadow:
+      0 14px 31px 0 rgba(28, 33, 63, 0.06),
+      0 225px 90px 0 rgba(28, 33, 63, 0.01),
+      0 352px 98px 0 rgba(28, 33, 63, 0);
   }
 
   &.active {

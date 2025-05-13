@@ -1,9 +1,14 @@
 "use client";
-import Logo from "@/components/Logo/Logo";
 import CatalogButton from "@/components/CatalogButton/CatalogButton";
 import styles from "./HeaderControls.module.scss";
 import Search from "@/components/Search/Search";
-import { SvgBag, SvgBurger, SvgHeart, SvgSearch } from "@/assets/icons/svgs";
+import {
+  SvgBag,
+  SvgBurger,
+  SvgHeart,
+  SvgSale,
+  SvgSearch,
+} from "@/assets/icons/svgs";
 import Link from "next/link";
 import { observer } from "mobx-react-lite";
 import globalStore from "@/stores/global-store";
@@ -24,8 +29,11 @@ const HeaderControls = observer(() => {
 
   return (
     <div className={styles.container}>
-      <Logo className={styles.logo} />
       <CatalogButton />
+      <Link href="/promotions" className={styles.promoLink}>
+        <SvgSale />
+        Акции
+      </Link>
       <Search />
       <div className={styles.controls}>
         <button

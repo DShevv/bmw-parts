@@ -2,15 +2,14 @@
 
 .wrapper {
   position: relative;
-  flex: 0 0 vw-1550(856);
-  height: vw-1550(587);
+  flex: 0 0 vw-1550(810);
+  height: vw-1550(440);
   border-radius: vw-1550(12);
   overflow: hidden;
   background: var(--light-blue);
 
   @media (max-width: 768px) {
     flex: initial;
-    max-height: 523px;
     height: fit-content;
     border-radius: 8px;
   }
@@ -82,7 +81,8 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
-  height: vw-1550(369);
+  gap: vw-1550(16);
+  height: vw-1550(214);
   padding: 0 vw-1550(24);
 
   @media (max-width: 768px) {
@@ -90,77 +90,65 @@
     padding: 0 16px;
     align-items: flex-end;
     padding-bottom: 16px;
+    gap: 16px;
   }
 }
 
-.info {
-  margin-bottom: vw-1550(43);
+.infoSwiper {
+  width: 100%;
+}
+
+.infoItem {
   display: flex;
-  flex-direction: column;
-  gap: vw-1550(32) vw-1550(50);
-  max-height: vw-1550(290);
-  flex-wrap: wrap;
-  align-items: flex-start;
-  align-content: flex-start;
-  justify-content: flex-start;
+  gap: vw-1550(16);
+  width: fit-content;
 
   @media (max-width: 768px) {
-    margin-bottom: 16px;
-    padding: 0 16px;
-    gap: 19px 22px;
-    max-height: 380px;
-    align-content: space-between;
-    width: 100%;
+    max-width: 141px;
+    width: 141px;
+    gap: 6px;
+    flex-direction: column;
+    align-items: flex-start;
   }
-  .infoItem {
+
+  &.active {
+    .infoTitle {
+      color: var(--orange);
+    }
+  }
+
+  .infoTitle {
+    color: var(--text);
+    text-align: center;
+    height: fit-content;
+  }
+
+  .infoList {
     display: flex;
-    max-width: vw-1550(232);
-    width: vw-1550(232);
-    gap: vw-1550(16);
+    flex-direction: column;
+    max-height: vw-1550(162);
+    flex-wrap: wrap;
+    gap: vw-1550(12);
+    list-style: none;
+    padding: 0;
+    margin: 0;
 
     @media (max-width: 768px) {
-      max-width: 141px;
-      width: 141px;
       gap: 6px;
-      flex-direction: column;
-      align-items: flex-start;
+      max-height: initial;
     }
 
-    &.active {
-      .infoTitle {
-        color: var(--orange);
-      }
+    .infoItem {
+      display: block;
+      width: fit-content;
     }
 
     .infoTitle {
-      color: var(--dark-blue);
-      text-align: center;
-    }
+      color: var(--text);
+      text-decoration: none;
 
-    .infoList {
-      display: flex;
-      flex-direction: column;
-      gap: vw-1550(12);
-      list-style: none;
-      padding: 0;
-      margin: 0;
-
-      @media (max-width: 768px) {
-        gap: 6px;
-      }
-
-      .infoItem {
-        display: block;
-        width: fit-content;
-      }
-
-      .infoTitle {
-        color: var(--dark-blue);
-        text-decoration: none;
-
-        &:hover {
-          color: var(--orange);
-        }
+      &:hover {
+        color: var(--orange);
       }
     }
   }

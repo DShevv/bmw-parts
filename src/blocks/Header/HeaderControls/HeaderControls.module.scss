@@ -20,6 +20,19 @@
   }
 }
 
+.promoLink {
+  display: flex;
+  align-items: center;
+  gap: vw-1550(6);
+  color: var(--orange);
+  text-decoration: none;
+
+  svg {
+    width: vw-1550(26);
+    height: vw-1550(26);
+  }
+}
+
 .controls {
   display: flex;
   align-items: center;

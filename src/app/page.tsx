@@ -1,9 +1,10 @@
-import CatalogBlock from "@/blocks/CatalogBlock/CatalogBlock";
+import AboutBlock from "@/blocks/AboutBlock/AboutBlock";
 import ContactsBlock from "@/blocks/ContactsBlock/ContactsBlock";
+import DeliveryPayment from "@/blocks/DeliveryPayment/DeliveryPayment";
 import Feedback from "@/blocks/Feedback/Feedback";
 import Hero from "@/blocks/Hero/Hero";
+import NewsModels from "@/blocks/NewsModels/NewsModels";
 import PopularSlider from "@/blocks/PopularSlider/PopularSlider";
-import RecentNews from "@/blocks/RecentNews/RecentNews";
 import RecentPromo from "@/blocks/RecentPromo/RecentPromo";
 import SeoBlock from "@/blocks/SeoBlock/SeoBlock";
 import { getNews } from "@/services/NewsService";
@@ -14,10 +15,11 @@ export default async function Home() {
   return (
     <>
       <Hero />
-      <CatalogBlock />
+      <NewsModels news={news?.data ?? []} />
+      <AboutBlock />
       <PopularSlider />
       <RecentPromo promo={news?.data ?? []} />
-      <RecentNews news={news?.data ?? []} />
+      <DeliveryPayment />
       <ContactsBlock />
       <SeoBlock page="main" />
       <Feedback />

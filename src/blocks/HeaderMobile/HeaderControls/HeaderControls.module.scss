@@ -1,0 +1,81 @@
+@use "../../../assets/sass/functions" as *;
+
+.container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: vw-1550(24);
+
+  .logo {
+    margin-right: vw-1550(24);
+  }
+
+  @media (max-width: 768px) {
+    gap: 12px;
+
+    .logo {
+      margin-right: 0;
+    }
+  }
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: vw-1550(16);
+
+  @media (max-width: 768px) {
+    gap: 6px;
+  }
+
+  .controlsLink {
+    border-radius: vw-1550(12);
+    width: vw-1550(54);
+    height: vw-1550(54);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--light-blue);
+    transition: all 0.3s ease;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    color: var(--dark-blue);
+
+    svg {
+      width: vw-1550(26);
+      height: vw-1550(26);
+    }
+
+    &.search,
+    &.burger {
+      display: none;
+    }
+
+    @media (max-width: 768px) {
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+
+      &.search,
+      &.burger {
+        display: flex;
+      }
+
+      svg {
+        width: 20px;
+        height: 20px;
+      }
+    }
+
+    &:hover {
+      background-color: var(--medium-blue);
+    }
+
+    &:active {
+      background-color: var(--dark-blue);
+      color: var(--white-bg);
+    }
+  }
+}

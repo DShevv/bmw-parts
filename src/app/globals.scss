@@ -7,14 +7,15 @@
 }
 
 :root {
-  --dark-blue: #1c213f;
+  --dark-blue: #284b8f;
   --white-bg: #ffffff;
   --white-text: #ffffff;
   --medium-blue: #d0daeb;
   --light-blue: #f5f9ff;
+  --text: #1e213e;
 
-  --orange: #ee551d;
-  --light-orange: #ff6a32;
+  --orange: #cc212f;
+  --light-orange: #e93e4c;
   --error: #ee1d1d;
   --success: #21b40b;
   --yellow: #ffe521;
@@ -26,7 +27,7 @@ body {
   width: 100%;
   min-height: 100vh;
   font-family: var(--font-family);
-  color: var(--dark-blue);
+  color: var(--text);
   background-color: var(--white-bg);
 }
 

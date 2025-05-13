@@ -24,6 +24,7 @@ const ProductControls = observer(({ product }: { product: ProductT }) => {
               [styles.isAvailable]: product.isAvailable === "available",
             })}
           >
+            {product.isAvailable !== "available" && "от "}
             {product.price} BYN
           </div>
         ) : (

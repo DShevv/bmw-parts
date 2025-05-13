@@ -40,11 +40,12 @@
     gap: vw-1550(16);
     background: var(--light-blue);
     transition: all 0.3s ease-in-out;
-    color: var(--dark-blue);
+    color: var(--text);
     text-decoration: none;
 
     &:hover {
-      box-shadow: 0 14px 31px 0 rgba(28, 33, 63, 0.06),
+      box-shadow:
+        0 14px 31px 0 rgba(28, 33, 63, 0.06),
         0 225px 90px 0 rgba(28, 33, 63, 0.01),
         0 352px 98px 0 rgba(28, 33, 63, 0);
       color: var(--orange);

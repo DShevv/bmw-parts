@@ -11,7 +11,7 @@ import { Suspense } from "react";
 import OrderPricePopup from "@/blocks/OrderPricePopup/OrderPricePopup";
 import { getSeoPage } from "@/services/InfoService";
 import { getSetting } from "@/services/InfoService";
-
+import HeaderMobile from "@/blocks/HeaderMobile/HeaderMobile";
 const unbounded = Unbounded({
   variable: "--second-family",
   subsets: ["latin", "cyrillic"],
@@ -54,6 +54,7 @@ export default async function RootLayout({
         />
 
         <Header />
+        <HeaderMobile />
         <main>
           <Suspense>{children}</Suspense>
         </main>

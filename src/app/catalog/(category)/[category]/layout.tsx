@@ -48,7 +48,7 @@ const Layout = async ({
         </section>
       </div>
 
-      <SeoBlock page={`${category}`} />
+      <SeoBlock page={`${category}`} className={styles.seo} />
       <Feedback />
     </>
   );

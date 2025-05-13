@@ -1,0 +1,157 @@
+@use "../../assets/sass/functions" as *;
+
+.text {
+  h2 {
+    font-family: var(--font-family);
+    font-weight: 600;
+    font-size: vw-1550(20);
+    line-height: 140%;
+    color: var(--text);
+    margin-bottom: vw-1550(20);
+  }
+
+  p {
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: vw-1550(16);
+    line-height: 140%;
+    color: var(--text);
+    margin-bottom: vw-1550(20);
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+    margin: vw-1550(20) 0;
+    object-fit: contain;
+  }
+
+  ul,
+  ol {
+    margin-left: vw-1550(26);
+    margin-bottom: vw-1550(20);
+    margin-top: vw-1550(8);
+
+    li {
+      font-family: var(--font-family);
+      font-weight: 500;
+      font-size: vw-1550(16);
+      line-height: 140%;
+      color: var(--text);
+    }
+  }
+
+  @media (max-width: 768px) {
+    h2 {
+      font-family: var(--second-family);
+      margin-bottom: 12px;
+      font-size: 13px;
+    }
+
+    p {
+      font-size: 15px;
+      margin-bottom: 12px;
+    }
+
+    img {
+      margin: 12px 0;
+      width: 100%;
+      height: 200px;
+    }
+
+    ul,
+    ol {
+      margin-left: 24px;
+      margin-bottom: 12px;
+      margin-top: 8px;
+
+      li {
+        font-size: 15px;
+      }
+    }
+  }
+}
+
+.wrapper {
+  position: relative;
+  display: flex;
+  gap: vw-1550(46);
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .sidebar {
+    position: sticky;
+    top: vw-1550(24);
+    height: fit-content;
+    left: 0;
+    flex: 0 0 vw-1550(392);
+    display: flex;
+    flex-direction: column;
+    gap: vw-1550(16);
+    align-self: flex-start;
+
+    @media (max-width: 768px) {
+      position: static;
+      gap: 12px;
+      width: 100%;
+    }
+
+    .link {
+      display: flex;
+      align-items: center;
+      gap: vw-1550(10);
+      padding: vw-1550(14) vw-1550(24);
+      border-radius: vw-1550(12);
+      background: var(--light-blue);
+      color: var(--text);
+      text-decoration: none;
+      transition: all 0.3s ease;
+      cursor: pointer;
+
+      svg {
+        color: var(--dark-blue);
+      }
+
+      &:hover {
+        background: var(--dark-blue);
+        color: var(--white-bg);
+
+        svg {
+          color: var(--orange);
+        }
+      }
+
+      &.active {
+        background: var(--dark-blue);
+        color: var(--white-bg);
+
+        svg {
+          color: var(--orange);
+        }
+      }
+
+      @media (max-width: 768px) {
+        width: 100%;
+        gap: 10px;
+        padding: 14px 16px;
+        border-radius: 8px;
+
+        svg {
+          width: 26px;
+          height: 26px;
+        }
+      }
+    }
+  }
+}
+
+.title {
+  margin-bottom: vw-1550(32);
+
+  @media (max-width: 768px) {
+    margin-bottom: 24px;
+  }
+}

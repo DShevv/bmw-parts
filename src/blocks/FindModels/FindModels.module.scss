@@ -27,7 +27,7 @@
 
       .item {
         width: vw-1550(104);
-
+        color: var(--dark-blue);
         text-align: center;
         opacity: 0.2;
         cursor: pointer;
@@ -102,7 +102,7 @@
         }
 
         .infoTitle {
-          color: var(--dark-blue);
+          color: var(--text);
           text-align: left;
         }
 
@@ -124,7 +124,7 @@
           }
 
           .infoTitle {
-            color: var(--dark-blue);
+            color: var(--text);
             text-decoration: none;
             cursor: pointer;
 
