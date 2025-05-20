@@ -2,8 +2,8 @@
 
 .container {
   position: fixed;
-  bottom: 10dvh;
-  left: calc(100dvw - 2.6dvw);
+  bottom: 2.6dvw;
+  left: calc(100dvw - 2.6dvw - 15px);
   width: vw-1550(90);
   transform: translateX(-100%);
   height: vw-1550(90);
@@ -29,6 +29,7 @@
     width: 66px;
     height: 66px;
     left: calc(100dvw - 28px);
+    bottom: 28px;
 
     svg {
       width: 36px;
