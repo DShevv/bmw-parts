@@ -4,7 +4,7 @@ import { SvgTelegram, SvgViber, SvgWhatsapp } from "@/assets/icons/svgs";
 import clsx from "clsx";
 import { ContactsT } from "@/types/types";
 
-const SocialLinks = ({ contacts }: { contacts: ContactsT }) => {
+const SocialLinks = ({ contacts }: { contacts: ContactsT["social_links"] }) => {
   return (
     <div className={styles.container}>
       {contacts?.viber && contacts?.viber !== "" && (

@@ -4,8 +4,11 @@ import Link from "next/link";
 import clsx from "clsx";
 import HeaderControls from "./HeaderControls/HeaderControls";
 import HeaderInfo from "./HeaderInfo/HeaderInfo";
+import { getCategories } from "@/services/CatalogService";
 
 const Header = async () => {
+  const categories = await getCategories();
+
   return (
     <header className={styles.header}>
       <div className={styles.info}>
@@ -38,7 +41,7 @@ const Header = async () => {
         </ul>
       </div>
       <HeaderInfo />
-      <HeaderControls />
+      <HeaderControls categories={categories ?? undefined} />
     </header>
   );
 };

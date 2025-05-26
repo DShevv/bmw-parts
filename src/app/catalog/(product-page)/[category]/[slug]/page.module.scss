@@ -16,6 +16,19 @@
 
   & > .isAvailable {
     display: none;
+
+    &::before {
+      content: "";
+      display: block;
+      width: 6px;
+      height: 6px;
+      background-color: var(--yellow);
+      border-radius: 50%;
+    }
+
+    &.inStock::before {
+      background-color: var(--success);
+    }
   }
 
   @media (max-width: 768px) {
@@ -39,8 +52,12 @@
         display: block;
         width: 6px;
         height: 6px;
-        background-color: var(--success);
+        background-color: var(--yellow);
         border-radius: 50%;
+      }
+
+      &.inStock::before {
+        background-color: var(--success);
       }
     }
   }
@@ -72,8 +89,12 @@
         display: block;
         width: vw-1550(8);
         height: vw-1550(8);
-        background-color: var(--success);
+        background-color: var(--yellow);
         border-radius: 50%;
+      }
+
+      &.inStock::before {
+        background-color: var(--success);
       }
 
       @media (max-width: 768px) {

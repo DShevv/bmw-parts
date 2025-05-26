@@ -1,4 +1,4 @@
-import { NewsListT, NewsT } from "@/types/types";
+import { PromoListT, PromoT } from "@/types/types";
 
 export const getPromo = async ({
   page,
@@ -6,7 +6,7 @@ export const getPromo = async ({
 }: {
   page?: number;
   perPage?: number;
-}): Promise<NewsListT | null> => {
+}): Promise<PromoListT | null> => {
   try {
     const params = new URLSearchParams();
 
@@ -34,7 +34,7 @@ export const getPromo = async ({
   }
 };
 
-export const getPromoBySlug = async (slug: string): Promise<NewsT | null> => {
+export const getPromoBySlug = async (slug: string): Promise<PromoT | null> => {
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/v1/promotions/${slug}`,

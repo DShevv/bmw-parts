@@ -8,14 +8,14 @@ import ArrowButton from "@/components/Buttons/ArrowButton/ArrowButton";
 import { Swiper as SwiperType } from "swiper";
 import { useRef } from "react";
 import Link from "next/link";
-import { slugifyWithOpts } from "@/utils/helper";
+import { CategoryT } from "@/types/types";
 
 const SubcategorySlider = ({
   slug,
   categories,
 }: {
   slug: string;
-  categories: string[];
+  categories: CategoryT[];
 }) => {
   const swiperRef = useRef<SwiperType>(null);
 
@@ -49,12 +49,12 @@ const SubcategorySlider = ({
         {categories.map((category, index) => (
           <SwiperSlide key={index} className={clsx("h4", styles.slide)}>
             <Link
-              href={`/catalog/${slugifyWithOpts(category)}`}
+              href={`/catalog/${category.slug}`}
               className={clsx(styles.item, {
-                [styles.active]: slugifyWithOpts(category) === slug,
+                [styles.active]: category.slug === slug,
               })}
             >
-              {category}
+              {category.name}
             </Link>
           </SwiperSlide>
         ))}

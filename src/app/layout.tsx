@@ -35,7 +35,7 @@ export const generateMetadata = async () => {
       description: seo?.og_description ?? seo?.description,
     },
     icons: {
-      icon: `${process.env.NEXT_PUBLIC_STORE_URL}/${setting?.favicon_path}`,
+      icon: `${process.env.NEXT_PUBLIC_STORE_URL}/${setting?.favicon}`,
     },
   };
 };

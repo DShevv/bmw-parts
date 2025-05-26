@@ -3,10 +3,13 @@ import Select from "@/components/Select/Select";
 import styles from "./page.module.scss";
 import clsx from "clsx";
 import FilterButton from "@/components/Buttons/FilterButton/FilterButton";
-import { popularProducts } from "@/data/dumpy-data";
 import ProductItem from "@/components/ProductItem/ProductItem";
 import Pagination from "@/components/Pagination/Pagination";
-const page = () => {
+import { getProducts } from "@/services/CatalogService";
+
+const page = async () => {
+  const products = await getProducts();
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.header}>
@@ -35,7 +38,7 @@ const page = () => {
       </div>
 
       <div className={styles.container}>
-        {popularProducts.map((product) => (
+        {products?.map((product) => (
           <ProductItem key={product.id} product={product} />
         ))}
       </div>

@@ -9,8 +9,18 @@
   flex-wrap: wrap;
   color: var(--text);
 
+  svg {
+    width: vw-1550(6);
+    height: vw-1550(6);
+  }
+
   @media (max-width: 768px) {
     gap: 10px;
+
+    svg {
+      width: 6px;
+      height: 6px;
+    }
   }
 }
 

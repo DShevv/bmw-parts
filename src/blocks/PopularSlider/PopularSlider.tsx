@@ -5,14 +5,20 @@ import clsx from "clsx";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/grid";
-import { popularProducts } from "@/data/dumpy-data";
 import ProductItem from "@/components/ProductItem/ProductItem";
 import ArrowButton from "@/components/Buttons/ArrowButton/ArrowButton";
 import { Swiper as SwiperType } from "swiper";
 import { useRef } from "react";
 import { Grid } from "swiper/modules";
+import { ProductT } from "@/types/types";
 
-const PopularSlider = ({ title }: { title?: string }) => {
+const PopularSlider = ({
+  title,
+  products,
+}: {
+  title?: string;
+  products: ProductT[];
+}) => {
   const swiperRef = useRef<SwiperType>(null);
 
   const handlePrev = () => {
@@ -22,6 +28,10 @@ const PopularSlider = ({ title }: { title?: string }) => {
   const handleNext = () => {
     swiperRef.current?.slideNext();
   };
+
+  if (products.length === 0) {
+    return null;
+  }
 
   return (
     <div className={styles.wrapper}>
@@ -61,7 +71,7 @@ const PopularSlider = ({ title }: { title?: string }) => {
           swiperRef.current = swiper;
         }}
       >
-        {popularProducts.map((product) => (
+        {products.map((product) => (
           <SwiperSlide key={product.id} className={styles.slide}>
             <ProductItem product={product} />
           </SwiperSlide>

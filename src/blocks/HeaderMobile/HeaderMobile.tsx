@@ -60,7 +60,7 @@ const HeaderMobile = async () => {
             </Link>
           </li>
         </ul>
-        {contacts && <SocialLinks contacts={contacts} />}
+        {contacts && <SocialLinks contacts={contacts.social_links} />}
       </div>
       <HeaderControls />
       <HeaderCategories />

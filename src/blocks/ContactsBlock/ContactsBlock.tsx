@@ -48,7 +48,7 @@ const ContactsBlock = async ({ noTitle }: { noTitle?: boolean }) => {
           </div>
           <div className={styles.infoItem}>
             <p className={clsx(styles.infoItemTitle, "body-4")}>Соцсети</p>
-            {contacts && <SocialLinks contacts={contacts} />}
+            {contacts && <SocialLinks contacts={contacts.social_links} />}
           </div>
         </div>
         <Map className={styles.map} address={contacts?.address} />

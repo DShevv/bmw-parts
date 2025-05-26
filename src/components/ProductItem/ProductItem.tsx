@@ -27,8 +27,8 @@ const ProductItem = observer(({ product }: { product: ProductT }) => {
     <Link
       href="/catalog/category/product_1 "
       className={clsx(styles.item, {
-        [styles.order]: product.isAvailable === "order",
-        [styles.unavailable]: product.isAvailable === "unavailable",
+        [styles.order]: !product.in_stock,
+        // [styles.unavailable]: product.isAvailable === "unavailable",
       })}
     >
       {isClient && (
@@ -46,40 +46,40 @@ const ProductItem = observer(({ product }: { product: ProductT }) => {
       )}
 
       <div className={clsx(styles.available, "body-4")}>
-        {product.isAvailable === "available" && "В наличии"}
-        {product.isAvailable === "order" && "Под заказ"}
-        {product.isAvailable === "unavailable" && "Нет в наличии"}
+        {product.in_stock && "В наличии"}
+        {!product.in_stock && "Под заказ"}
+        {/* product.isAvailable === "unavailable" && "Нет в наличии" */}
       </div>
 
       <Image
-        src={product.image}
-        alt={product.title}
+        src={`${process.env.NEXT_PUBLIC_STORE_URL}/${product.main_image.image_path}`}
+        alt={product.name}
         width={200}
         height={200}
         className={styles.image}
       />
       <div className={styles.container}>
-        <div className={clsx(styles.title, "body-1")}>{product.title}</div>
+        <div className={clsx(styles.title, "body-1")}>{product.name}</div>
 
         <div className={styles.info}>
-          <div className={clsx(styles.infoItem, "body-4")}>
+          {/* <div className={clsx(styles.infoItem, "body-4")}>
             Тип/модель АКПП: <span className="body-3">{product.type}</span>
-          </div>
+          </div> */}
           <div className={clsx(styles.infoItem, "body-4")}>
             Производитель:{" "}
             <span className={clsx(styles.brand, "body-3")}>
-              {product.brand}
+              {product.brand.name}
             </span>
           </div>
           <div className={clsx(styles.infoItem, "body-4")}>
-            Номер: <span className="body-3">{product.id}</span>
+            Номер: <span className="body-3">{product.sku}</span>
           </div>
         </div>
 
         <div className={styles.controls}>
           <div className={clsx(styles.price, "h3")}>
-            {product.price * (1 - product.discount / 100)} BYN
-            {product.discount > 0 && (
+            {Number(product.price) * (1 - Number(product.discount) / 100)} BYN
+            {Number(product.discount) > 0 && (
               <span className={clsx(styles.discount, "body-3")}>
                 {product.price} BYN
               </span>
@@ -88,7 +88,7 @@ const ProductItem = observer(({ product }: { product: ProductT }) => {
           <MainButton
             onClick={(e) => {
               e.preventDefault();
-              if (product.isAvailable === "available") {
+              if (product.in_stock) {
                 addToCart(product);
                 setNotification(
                   "Товар добавлен в корзину",
@@ -100,11 +100,9 @@ const ProductItem = observer(({ product }: { product: ProductT }) => {
               }
             }}
             className={styles.button}
-            style={
-              product.isAvailable === "available" ? "primary" : "secondary"
-            }
+            style={product.in_stock ? "primary" : "secondary"}
           >
-            {product.isAvailable === "available" ? "В корзину" : "Заказать"}
+            {product.in_stock ? "В корзину" : "Заказать"}
           </MainButton>
         </div>
       </div>

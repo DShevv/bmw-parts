@@ -40,6 +40,11 @@
       opacity: 0.4;
     }
   }
+
+  svg {
+    width: vw-1550(34);
+    height: vw-1550(34);
+  }
 }
 
 @media (max-width: 768px) {
@@ -47,5 +52,10 @@
     border-radius: 8px;
     width: 54px;
     height: 54px;
+
+    svg {
+      width: 34px;
+      height: 34px;
+    }
   }
 }

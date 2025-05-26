@@ -5,12 +5,18 @@ import clsx from "clsx";
 import { useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { categories } from "@/data/dumpy-data";
+import { CategoryT } from "@/types/types";
 
-const CatalogButton = () => {
+type CatalogButtonProps = {
+  categories?: CategoryT[];
+};
+
+const CatalogButton = ({ categories }: CatalogButtonProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const [activeCategory, setActiveCategory] = useState(categories[0]);
+  const [activeCategory, setActiveCategory] = useState<CategoryT | null>(
+    categories?.[0] ?? null
+  );
 
   const handleMouseLeave = () => {
     timeoutRef.current = setTimeout(() => {
@@ -44,42 +50,52 @@ const CatalogButton = () => {
           onMouseLeave={handleMouseLeave}
         >
           <div className={styles.categories}>
-            {categories.map((category) => (
+            {categories?.map((category) => (
               <Link
                 onMouseEnter={() => setActiveCategory(category)}
                 key={category.id}
-                href={"/catalog"}
+                href={`/catalog/${category.slug}`}
                 className={clsx(styles.category, "body-1", {
-                  [styles.active]: activeCategory.id === category.id,
+                  [styles.active]: activeCategory?.id === category.id,
                 })}
               >
-                <Image src={category.image} alt={category.name} />
+                <Image
+                  src={`${process.env.NEXT_PUBLIC_STORE_URL}/${category.photo_path}`}
+                  alt={category.name}
+                  width={36}
+                  height={36}
+                />
                 <span>{category.name}</span>
                 <SvgArrow />
               </Link>
             ))}
           </div>
-          <div className={styles.activeCategory}>
-            <div className={styles.scrollContainer}>
-              <div className={clsx("h4", styles.title)}>
-                {activeCategory.name}
-              </div>
-              <div className={styles.content}>
-                <Link href={"/catalog"} className={clsx("body-2", styles.item)}>
-                  Все товары
-                </Link>
-                {activeCategory.children.map((child) => (
+          {activeCategory && (
+            <div className={styles.activeCategory}>
+              <div className={styles.scrollContainer}>
+                <div className={clsx("h4", styles.title)}>
+                  {activeCategory?.name}
+                </div>
+                <div className={styles.content}>
                   <Link
-                    key={child.id}
-                    href={"/catalog"}
+                    href={`/catalog/${activeCategory?.slug}`}
                     className={clsx("body-2", styles.item)}
                   >
-                    {child.name}
+                    Все товары
                   </Link>
-                ))}
+                  {activeCategory?.subcategories?.map((child) => (
+                    <Link
+                      key={child.id}
+                      href={`/catalog/${child.slug}`}
+                      className={clsx("body-2", styles.item)}
+                    >
+                      {child.name}
+                    </Link>
+                  ))}
+                </div>
               </div>
             </div>
-          </div>
+          )}
         </div>
       )}
     </>

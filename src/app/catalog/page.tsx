@@ -21,7 +21,7 @@ export const generateMetadata = async () => {
   };
 };
 
-const page = () => {
+const page = async () => {
   return (
     <>
       <div className={styles.content}>

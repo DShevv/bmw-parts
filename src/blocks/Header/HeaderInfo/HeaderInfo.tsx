@@ -17,7 +17,7 @@ const HeaderInfo = async () => {
   return (
     <div className={styles.container}>
       <Logo className={styles.logo} />
-      {contacts && <SocialLinks contacts={contacts} />}
+      {contacts && <SocialLinks contacts={contacts.social_links} />}
       <div className={styles.info}>
         <div className={styles.infoItem}>
           <SvgPhone />

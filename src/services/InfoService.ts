@@ -41,6 +41,8 @@ export const getSetting = async (): Promise<SettingT | null> => {
   }
 };
 
+
+
 export async function getSeoText(page: string): Promise<SeoTextT | null> {
   try {
     const data = await fetch(
@@ -58,7 +60,7 @@ export async function getSeoText(page: string): Promise<SeoTextT | null> {
 
     const res = await data.json();
 
-    return res;
+    return res.data;
   } catch (e) {
     console.log(e);
     return null;

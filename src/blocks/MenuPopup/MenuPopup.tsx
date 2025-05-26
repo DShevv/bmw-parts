@@ -145,7 +145,7 @@ const MenuPopup = observer(() => {
             <SvgMail />
             info@example.com
           </Link>
-          {contacts && <SocialLinks contacts={contacts} />}
+          {contacts && <SocialLinks contacts={contacts.social_links} />}
         </div>
       </div>
     </div>

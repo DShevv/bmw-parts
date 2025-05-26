@@ -18,27 +18,27 @@ const ProductControls = observer(({ product }: { product: ProductT }) => {
   return (
     <div className={styles.container}>
       <div className={styles.priceContainer}>
-        {product.discount === 0 ? (
+        {Number(product.discount) === 0 ? (
           <div
             className={clsx("h2", styles.price, {
-              [styles.isAvailable]: product.isAvailable === "available",
+              [styles.isAvailable]: product.in_stock,
             })}
           >
-            {product.isAvailable !== "available" && "от "}
+            {product.in_stock && "от "}
             {product.price} BYN
           </div>
         ) : (
           <div
             className={clsx(styles.price, {
-              [styles.isAvailable]: product.isAvailable === "available",
+              [styles.isAvailable]: product.in_stock,
             })}
           >
             <div
               className={clsx("h2", styles.price, styles.discounted, {
-                [styles.isAvailable]: product.isAvailable === "available",
+                [styles.isAvailable]: product.in_stock,
               })}
             >
-              {product.price * (1 - product.discount / 100)} BYN
+              {Number(product.price) * (1 - Number(product.discount) / 100)} BYN
             </div>
             <div className={clsx("h4", styles.discount)}>
               {product.price} BYN
@@ -48,10 +48,10 @@ const ProductControls = observer(({ product }: { product: ProductT }) => {
       </div>
       <div className={styles.controls}>
         <MainButton
-          style={product.isAvailable === "available" ? "primary" : "secondary"}
+          style={product.in_stock ? "primary" : "secondary"}
           className={styles.addToCart}
           onClick={() => {
-            if (product.isAvailable === "available") {
+            if (product.in_stock) {
               addToCart(product);
               setNotification("Товар добавлен в корзину", undefined, "success");
             } else {
@@ -59,9 +59,7 @@ const ProductControls = observer(({ product }: { product: ProductT }) => {
             }
           }}
         >
-          {product.isAvailable === "available"
-            ? "Добавить в корзину"
-            : "Запросить цену"}
+          {product.in_stock ? "Добавить в корзину" : "Запросить цену"}
         </MainButton>
         <button
           className={clsx(styles.favorite, {

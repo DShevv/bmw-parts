@@ -78,8 +78,7 @@
 .navigation {
   position: absolute;
   left: vw-1550(-90);
-  bottom: 50%;
-  transform: translateY(50%);
+  top: vw-1550(13);
   width: calc(100% + vw-1550(180));
   display: flex;
   justify-content: space-between;

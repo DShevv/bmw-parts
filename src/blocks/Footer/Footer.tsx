@@ -7,9 +7,11 @@ import SocialLinks from "@/components/SocialLinks/SocialLinks";
 import { paymentMethods } from "@/data/dumpy-data";
 import Image from "next/image";
 import { getContacts } from "@/services/InfoService";
+import { getCategories } from "@/services/CatalogService";
 
 const Footer = async () => {
   const contacts = await getContacts();
+  const categories = await getCategories();
 
   return (
     <footer className={styles.footer}>
@@ -22,18 +24,15 @@ const Footer = async () => {
             </p>
           </div>
           <div className={styles.categories}>
-            <Link href="/" className={clsx(styles.category, "h3")}>
-              Масла и автохимия
-            </Link>
-            <Link href="/" className={clsx(styles.category, "h3")}>
-              Диски
-            </Link>
-            <Link href="/" className={clsx(styles.category, "h3")}>
-              Уход за автомобилем
-            </Link>
-            <Link href="/" className={clsx(styles.category, "h3")}>
-              Инструменты
-            </Link>
+            {categories?.map((category) => (
+              <Link
+                key={category.id}
+                href={`/catalog/${category.slug}`}
+                className={clsx(styles.category, "h3")}
+              >
+                {category.name}
+              </Link>
+            ))}
           </div>
           <div className={styles.menu}>
             <Link href="/" className={clsx(styles.menuItem, "body-1")}>
@@ -80,7 +79,7 @@ const Footer = async () => {
 
             <div className={clsx(styles.contactItem, "h3")}>
               <div className={clsx("body-4", styles.title)}>Соцсети</div>
-              {contacts && <SocialLinks contacts={contacts} />}
+              {contacts && <SocialLinks contacts={contacts.social_links} />}
             </div>
           </div>
           <div className={styles.policy}>

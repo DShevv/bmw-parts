@@ -8,9 +8,9 @@ import ArrowButton from "@/components/Buttons/ArrowButton/ArrowButton";
 import { Swiper as SwiperType } from "swiper";
 import { useRef } from "react";
 import PromoItem from "@/components/PromoItem/PromoItem";
-import { NewsT } from "@/types/types";
+import { PromoT } from "@/types/types";
 
-const RecentPromo = ({ title, promo }: { title?: string; promo: NewsT[] }) => {
+const RecentPromo = ({ title, promo }: { title?: string; promo: PromoT[] }) => {
   const swiperRef = useRef<SwiperType>(null);
 
   const handlePrev = () => {

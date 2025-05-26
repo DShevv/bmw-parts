@@ -1,3 +1,4 @@
+import { CategoryT } from "@/types/types";
 import slugify from "slugify";
 
 export function slugifyWithOpts(name: string) {
@@ -16,3 +17,19 @@ export function isActiveStepOne(name: string, lastName: string, email: string, p
   return name.length > 0 && lastName.length > 0 && email.length > 0 && phone.length > 0;
 }
 
+export function getCategoryBySlug(categories: CategoryT[], slug: string): CategoryT | undefined {
+  for (const category of categories) {
+    if (category.slug === slug) {
+      return category;
+    }
+
+    if (category.subcategories?.length) {
+      const found = getCategoryBySlug(category.subcategories, slug);
+      if (found) {
+        return found;
+      }
+    }
+  }
+
+  return undefined;
+}

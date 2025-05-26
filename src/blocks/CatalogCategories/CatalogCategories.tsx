@@ -1,9 +1,12 @@
-import { categories } from "@/data/dumpy-data";
 import styles from "./CatalogCategories.module.scss";
 import clsx from "clsx";
 import Link from "next/link";
 import Image from "next/image";
-const CatalogCategories = () => {
+import { getCategories } from "@/services/CatalogService";
+
+const CatalogCategories = async () => {
+  const categories = await getCategories();
+
   return (
     <section className={styles.wrapper}>
       <div className={styles.header}>
@@ -11,23 +14,18 @@ const CatalogCategories = () => {
       </div>
 
       <div className={styles.content}>
-        {categories.map((category) => (
+        {categories?.map((category) => (
           <Link
-            href={`/catalog/${category.id}`}
+            href={`/catalog/${category.slug}`}
             key={category.id}
             className={styles.item}
           >
-            <Image src={category.image} alt={category.name} />
-            <div className={clsx("h4", styles.title)}>{category.name}</div>
-          </Link>
-        ))}
-        {categories.map((category) => (
-          <Link
-            href={`/catalog/${category.id}`}
-            key={category.id}
-            className={styles.item}
-          >
-            <Image src={category.image} alt={category.name} />
+            <Image
+              src={`${process.env.NEXT_PUBLIC_STORE_URL}/${category.photo_path}`}
+              alt={category.name}
+              width={274}
+              height={200}
+            />
             <div className={clsx("h4", styles.title)}>{category.name}</div>
           </Link>
         ))}

@@ -1,13 +1,30 @@
-import { StaticImageData } from "next/image";
 export type ProductT = {
   id: number;
-  image: StaticImageData | string;
-  title: string;
-  type: string;
-  brand: string;
-  price: number;
-  discount: number;
-  isAvailable: "available" | "unavailable" | "order";
+  name: string;
+  slug: string;
+  description: string;
+  photo_path: string;
+  price: string;
+  discount: string;
+  is_popular: boolean;
+  is_novelty: boolean;
+  in_stock: boolean;
+  sku: string;
+  specifications: string[];
+  is_active: boolean;
+  category_id: number;
+  manufacturer_id: number | null;
+  order: number;
+  brand_id: number;
+  bmw_model_id: number | null;
+  category: CategoryT;
+  images: {
+    image_path: string;
+  }[];
+  brand: BrandT;
+  main_image: {
+    image_path: string;
+  }
 };
 
 
@@ -34,15 +51,33 @@ export type NewsListT = {
   total: number;
 };
 
-export type NewsT = {
+export type PromoListT = {
+  success: boolean;
+  data: {
+    current_page: number;
+    data: PromoT[];
+    from: number;
+    last_page: number;
+  };
+}
+
+export type PromoT = {
   id: number;
   title: string;
   slug: string;
   content: string;
+  photo_path: string;
+  published_at: string;
+}
+
+export type NewsT = {
+  id: number;
+  title: string;
   subtitle: string;
-  image: string;
-  created_at: string;
-  views: number;
+  content: string;
+  photo_path: string;
+  publication_date: string;
+  tags: string[];
 };
 
 export type SeoTagT = {
@@ -57,35 +92,17 @@ export type SeoTagT = {
   updated_at: string;
 };
 
+export type AboutT = {
+  text: string;
+  image: string;
+}
 
 export type SettingT = {
-  favicon_path?: string;
-  about_enabled: boolean;
-  accent_color: string;
-  address: string;
-  advantages_enabled: boolean;
-  bank_details: string;
-  banners_enabled: boolean;
-  button_secondary_color: string;
-  company_info: string;
-  contacts_enabled: boolean;
-  delivery_payment_enabled: boolean;
-  delivery_text: string | null;
-  email: string;
-  feedback_image_path: string;
-  instagram: string | null;
-  logo_path: string;
-  payment_text: string | null;
-  phones: string[];
-  primary_color: string;
-  privacy_policy_enabled: boolean;
-  privacy_policy_text: string;
-  secondary_color: string;
-  telegram: string;
-  viber: string;
-  whatsapp: string;
-  working_hours: string | null;
-  footer_logo_path: string;
+  logo: string;
+  favicon: string;
+  feedback_image: string | null;
+  footer_logo_path: string | null;
+  about: AboutT;
 };
 
 export type ContactsT = {
@@ -93,10 +110,29 @@ export type ContactsT = {
   bank_details: string;
   company_info: string;
   email: string;
-  instagram: string;
   phones: string[];
-  telegram: string;
-  viber: string;
-  whatsapp: string;
   working_hours: string;
+  social_links: {
+    instagram: string;
+    telegram: string;
+    viber: string;
+    whatsapp: string;
+  }
 };
+
+export type CategoryT = {
+  id: number;
+  name: string;
+  slug: string;
+  photo_path: string;
+  parent_id: number | null;
+  subcategories: CategoryT[] | undefined;
+}
+
+export type BrandT = {
+  id: number;
+  name: string;
+  link: string | null;
+  image_path: string | null;
+  order: number;
+}

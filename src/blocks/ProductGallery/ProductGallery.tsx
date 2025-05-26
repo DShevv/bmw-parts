@@ -3,7 +3,7 @@ import styles from "./ProductGallery.module.scss";
 import { useState } from "react";
 import clsx from "clsx";
 import { Swiper, SwiperSlide } from "swiper/react";
-import Image, { StaticImageData } from "next/image";
+import Image from "next/image";
 import { FreeMode, Thumbs, Zoom, Mousewheel } from "swiper/modules";
 import type { Swiper as SwiperType } from "swiper";
 import "swiper/css";
@@ -13,7 +13,7 @@ import "swiper/css/zoom";
 import ArrowButton from "@/components/Buttons/ArrowButton/ArrowButton";
 
 interface ProductGalleryProps {
-  images: StaticImageData[];
+  images: string[];
   className?: string;
 }
 
@@ -55,7 +55,13 @@ const ProductGallery = ({ images, className }: ProductGalleryProps) => {
         {images.map((image, index) => (
           <SwiperSlide key={index} className={styles.zoomItem}>
             <div className="swiper-zoom-container">
-              <Image src={image} alt={""} width={1000} height={1000} />
+              <Image
+                src={`${process.env.NEXT_PUBLIC_STORE_URL}/${image}`}
+                alt={""}
+                width={1000}
+                height={1000}
+                className={styles.image}
+              />
             </div>
           </SwiperSlide>
         ))}
@@ -79,7 +85,13 @@ const ProductGallery = ({ images, className }: ProductGalleryProps) => {
             })}
             onClick={() => handleThumbClick(index)}
           >
-            <Image src={image} alt={""} width={1000} height={1000} />
+            <Image
+              src={`${process.env.NEXT_PUBLIC_STORE_URL}/${image}`}
+              alt={""}
+              width={1000}
+              height={1000}
+              className={styles.image}
+            />
           </SwiperSlide>
         ))}
       </Swiper>

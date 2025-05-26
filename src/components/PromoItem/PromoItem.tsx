@@ -4,14 +4,17 @@ import Link from "next/link";
 import Image from "next/image";
 import clsx from "clsx";
 import MainButton from "../Buttons/MainButton/MainButton";
-import { NewsT } from "@/types/types";
+import { PromoT } from "@/types/types";
 import { formatDate } from "@/utils/helper";
 
-const PromoItem = ({ promotion }: { promotion: NewsT }) => {
+const PromoItem = ({ promotion }: { promotion: PromoT }) => {
   return (
-    <Link href={`/promotions/${promotion.slug}`} className={clsx(styles.item)}>
+    <Link
+      href={`/promotions/${promotion.slug}_${promotion.id}`}
+      className={clsx(styles.item)}
+    >
       <Image
-        src={`${process.env.NEXT_PUBLIC_STORE_URL}/${promotion.image}`}
+        src={`${process.env.NEXT_PUBLIC_STORE_URL}/${promotion.photo_path}`}
         alt={promotion.title}
         width={268}
         height={237}
@@ -20,7 +23,7 @@ const PromoItem = ({ promotion }: { promotion: NewsT }) => {
       <div className={styles.container}>
         <div className={styles.info}>
           <div className={clsx(styles.date, "body-3")}>
-            {formatDate(promotion.created_at)}
+            {formatDate(promotion.published_at)}
           </div>
           <div className={clsx(styles.title, "h4")}>{promotion.title}</div>
         </div>

@@ -26,6 +26,10 @@
   gap: vw-1550(6);
   color: var(--orange);
   text-decoration: none;
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: vw-1550(16);
+  line-height: 140%;
 
   svg {
     width: vw-1550(26);

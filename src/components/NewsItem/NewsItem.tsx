@@ -6,14 +6,17 @@ import clsx from "clsx";
 import MainButton from "../Buttons/MainButton/MainButton";
 import { NewsT } from "@/types/types";
 import { motion as m } from "motion/react";
-import { formatDate } from "@/utils/helper";
+import { formatDate, slugifyWithOpts } from "@/utils/helper";
 
 const NewsItem = ({ promotion }: { promotion: NewsT }) => {
   return (
     <m.div whileHover="hover" initial="initial">
-      <Link href={`/news/${promotion.slug}`} className={clsx(styles.item)}>
+      <Link
+        href={`/news/${slugifyWithOpts(promotion.title)}_${promotion.id}`}
+        className={clsx(styles.item)}
+      >
         <Image
-          src={`${process.env.NEXT_PUBLIC_STORE_URL}/${promotion.image}`}
+          src={`${process.env.NEXT_PUBLIC_STORE_URL}/${promotion.photo_path}`}
           alt={promotion.title}
           width={268}
           height={237}
@@ -22,7 +25,7 @@ const NewsItem = ({ promotion }: { promotion: NewsT }) => {
         <div className={styles.container}>
           <div className={styles.info}>
             <div className={clsx(styles.date, "body-3")}>
-              {formatDate(promotion.created_at)}
+              {formatDate(promotion.publication_date)}
             </div>
             <div className={clsx(styles.title, "h4")}>{promotion.title}</div>
           </div>

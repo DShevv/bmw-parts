@@ -43,7 +43,7 @@ const FindBlock = ({ carModel }: FindBlockProps) => {
           Автомобиль {carModel.title}
         </div>
         <div className={styles.selects}>
-          <div className={styles.select}>
+          {/*  <div className={styles.select}>
             <div className={clsx("body-1", styles.selectTitle)}>Руль</div>
             <Select
               className={styles.selectItem}
@@ -51,7 +51,7 @@ const FindBlock = ({ carModel }: FindBlockProps) => {
               options={["Любой", "Левый", "Правый"]}
               onChange={setSelectedRear}
             />
-          </div>
+          </div> */}
           <div className={styles.select}>
             <div className={clsx("body-1", styles.selectTitle)}>Коробка</div>
             <Select

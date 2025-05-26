@@ -3,13 +3,23 @@ import styles from "./page.module.scss";
 import PopularSlider from "@/blocks/PopularSlider/PopularSlider";
 import Breadcrumbs from "@/components/Breadcrumbs/Breadcrumbs";
 import ProductGallery from "@/blocks/ProductGallery/ProductGallery";
-import wheelHd from "@/assets/images/wheel-hd.png";
 import clsx from "clsx";
 import ProductControls from "@/components/ProductControls/ProductControls";
-import { popularProducts } from "@/data/dumpy-data";
 import Link from "next/link";
+import { getProductBySlug, getProducts } from "@/services/CatalogService";
+import { notFound } from "next/navigation";
 
-const page = () => {
+const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
+  const { slug } = await params;
+  const product = await getProductBySlug(slug);
+  const products = await getProducts();
+
+  if (!product) {
+    notFound();
+  }
+
+  console.log(products);
+
   return (
     <>
       <div className={styles.wrapper}>
@@ -17,27 +27,38 @@ const page = () => {
           items={[
             { title: "Главная", href: "/" },
             { title: "Каталог", href: "/catalog" },
-            { title: "Диски", href: "/catalog/discs" },
             {
-              title: "Диск колёсный 6 × 15 | 4 × 100 ET48 D54,1 BMW X1",
-              href: "/catalog/steel-discs",
+              title: product.category.name,
+              href: `/catalog/${product.category.slug}`,
+            },
+            {
+              title: product.name ?? "",
+              href: `/catalog/${product.category.slug}/${product.slug}`,
             },
           ]}
         />
         <div className={styles.content}>
-          <h1 className={clsx("h1", styles.title)}>
-            Диск колёсный 6 × 15 | 4 × 100 ET48 D54,1 BMW X1
-          </h1>
-          <div className={clsx("body-1", styles.isAvailable)}>В наличии</div>
+          <h1 className={clsx("h1", styles.title)}>{product.name}</h1>
+          <div
+            className={clsx("body-1", styles.isAvailable, {
+              [styles.inStock]: product.in_stock,
+            })}
+          >
+            {product.in_stock ? "В наличии" : "Под заказ"}
+          </div>
 
           <ProductGallery
-            images={[wheelHd, wheelHd, wheelHd, wheelHd, wheelHd]}
+            images={product.images.map((image) => image.image_path)}
           />
           <div className={styles.info}>
-            <h1 className={clsx("h1", styles.title)}>
-              Диск колёсный 6 × 15 | 4 × 100 ET48 D54,1 BMW X1
-            </h1>
-            <div className={clsx("body-1", styles.isAvailable)}>В наличии</div>
+            <h1 className={clsx("h1", styles.title)}>{product.name}</h1>
+            <div
+              className={clsx("body-1", styles.isAvailable, {
+                [styles.inStock]: product.in_stock,
+              })}
+            >
+              {product.in_stock ? "В наличии" : "Под заказ"}
+            </div>
             <div className={styles.specs}>
               <div className={styles.spec}>
                 <div className={clsx("body-2", styles.specKey)}>
@@ -51,14 +72,18 @@ const page = () => {
                 <div className={clsx("body-2", styles.specKey)}>
                   Производитель
                 </div>
-                <div className={clsx("h3", styles.specValue)}>ZF</div>
+                <div className={clsx("h3", styles.specValue)}>
+                  {product.brand.name}
+                </div>
               </div>
               <div className={styles.spec}>
                 <div className={clsx("body-2", styles.specKey)}>Номер</div>
-                <div className={clsx("h3", styles.specValue)}>1068298034</div>
+                <div className={clsx("h3", styles.specValue)}>
+                  {product.sku}
+                </div>
               </div>
             </div>
-            <ProductControls product={popularProducts[0]} />
+            <ProductControls product={product} />
           </div>
         </div>
 
@@ -69,7 +94,7 @@ const page = () => {
               href="/help?type=delivery"
               className={clsx("h3", styles.title)}
             >
-              Доставка и оплата
+              Доставка и оплата
             </Link>
           </div>
           <div className={clsx("body-1", styles.text)}>
@@ -82,7 +107,10 @@ const page = () => {
         </div>
       </div>
 
-      <PopularSlider title="С этим товаром также покупают" />
+      <PopularSlider
+        title="С этим товаром также покупают"
+        products={products ?? []}
+      />
       <Feedback />
     </>
   );

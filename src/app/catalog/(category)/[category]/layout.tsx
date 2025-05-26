@@ -5,6 +5,7 @@ import clsx from "clsx";
 import SeoBlock from "@/blocks/SeoBlock/SeoBlock";
 import SubcategorySlider from "@/blocks/SubcategorySlider/SubcategorySlider";
 import FiltersSidebar from "@/blocks/FiltersSidebar/FiltersSidebar";
+import { getCategories } from "@/services/CatalogService";
 
 const Layout = async ({
   children,
@@ -14,6 +15,7 @@ const Layout = async ({
   params: Promise<{ category: string }>;
 }) => {
   const { category } = await params;
+  const categories = await getCategories();
 
   return (
     <>
@@ -32,15 +34,9 @@ const Layout = async ({
           {category === "all" ? "Все товары" : category}
           <span className={clsx("body-4", styles.count)}>100 товаров</span>
         </h1>
-        <SubcategorySlider
-          slug={category}
-          categories={[
-            "Фрикционные диски",
-            "Стальные диски",
-            "Стальные опорные диски",
-            "Фрикционные диски",
-          ]}
-        />
+        {categories && categories.length > 0 && (
+          <SubcategorySlider slug={category} categories={categories} />
+        )}
 
         <section className={styles.container}>
           <FiltersSidebar />

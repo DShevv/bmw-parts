@@ -11,7 +11,7 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
-        hostname: "liftapi.webspaceteam.site",
+        hostname: "bmw.webspaceteam.site",
         pathname: "/**",
       },
       {
