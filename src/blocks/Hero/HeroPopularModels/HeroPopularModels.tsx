@@ -8,11 +8,16 @@ import styles from "./HeroPopularModels.module.scss";
 import "swiper/css";
 import "swiper/css/grid";
 import clsx from "clsx";
-import { series } from "@/data/dumpy-data";
 import Link from "next/link";
 import IconButton from "@/components/Buttons/IconButton/IconButton";
+import { SeriesT, GenerationT } from "@/types/types";
 
-const HeroPopularModels = () => {
+interface HeroPopularModelsProps {
+  series: SeriesT[];
+  generations: GenerationT[];
+}
+
+const HeroPopularModels = ({ series, generations }: HeroPopularModelsProps) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [swiper, setSwiper] = useState<SwiperType | null>(null);
   const [swiper2, setSwiper2] = useState<SwiperType | null>(null);
@@ -44,27 +49,27 @@ const HeroPopularModels = () => {
         onSlideChange={handleSlideChange}
         className={styles.swiper}
       >
-        {series.map((slide, index) => (
+        {series.map((slide) => (
           <SwiperSlide
             key={slide.id}
             className={clsx(styles.slide, {
-              [styles.active]: activeIndex === index,
+              [styles.active]: activeIndex === slide.id,
             })}
             onClick={() => {
-              setActiveIndex(index);
-              swiper?.slideTo(index);
+              setActiveIndex(slide.id);
+              swiper?.slideTo(slide.id);
             }}
           >
             <div className={styles.content}>
               <Image
-                src={slide.image}
-                alt={slide.title}
+                src={`${process.env.NEXT_PUBLIC_STORE_URL}/${slide.image_path}`}
+                alt={slide.name}
                 className={styles.image}
                 width={104}
                 height={60}
               />
               <h2 className={clsx("body-3", styles.slideTitle)}>
-                {slide.title}
+                {slide.name}
               </h2>
             </div>
           </SwiperSlide>
@@ -93,91 +98,27 @@ const HeroPopularModels = () => {
           onSwiper={setSwiper2}
           className={styles.infoSwiper}
         >
-          {series.map((slide, index) => (
+          {series.map((slide) => (
             <SwiperSlide
               key={slide.id}
               className={clsx(styles.infoItem, {
-                [styles.active]: activeIndex === index,
+                [styles.active]: activeIndex === slide.id,
               })}
             >
-              <h4 className={clsx("h4", styles.infoTitle)}>{slide.title}</h4>
+              <h4 className={clsx("h4", styles.infoTitle)}>{slide.name}</h4>
               <ul className={styles.infoList}>
-                {slide.models.map((model) => (
-                  <li key={model.id} className={styles.infoItem}>
-                    <Link
-                      href={`/catalog/${model.id}`}
-                      className={clsx("body-2", styles.infoTitle)}
-                    >
-                      {model.title}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </SwiperSlide>
-          ))}
-          {series.map((slide, index) => (
-            <SwiperSlide
-              key={slide.id}
-              className={clsx(styles.infoItem, {
-                [styles.active]: activeIndex === index,
-              })}
-            >
-              <h4 className={clsx("h4", styles.infoTitle)}>{slide.title}</h4>
-              <ul className={styles.infoList}>
-                {slide.models.map((model) => (
-                  <li key={model.id} className={styles.infoItem}>
-                    <Link
-                      href={`/catalog/${model.id}`}
-                      className={clsx("body-2", styles.infoTitle)}
-                    >
-                      {model.title}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </SwiperSlide>
-          ))}
-          {series.map((slide, index) => (
-            <SwiperSlide
-              key={slide.id}
-              className={clsx(styles.infoItem, {
-                [styles.active]: activeIndex === index,
-              })}
-            >
-              <h4 className={clsx("h4", styles.infoTitle)}>{slide.title}</h4>
-              <ul className={styles.infoList}>
-                {slide.models.map((model) => (
-                  <li key={model.id} className={styles.infoItem}>
-                    <Link
-                      href={`/catalog/${model.id}`}
-                      className={clsx("body-2", styles.infoTitle)}
-                    >
-                      {model.title}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </SwiperSlide>
-          ))}
-          {series.map((slide, index) => (
-            <SwiperSlide
-              key={slide.id}
-              className={clsx(styles.infoItem, {
-                [styles.active]: activeIndex === index,
-              })}
-            >
-              <h4 className={clsx("h4", styles.infoTitle)}>{slide.title}</h4>
-              <ul className={styles.infoList}>
-                {slide.models.map((model) => (
-                  <li key={model.id} className={styles.infoItem}>
-                    <Link
-                      href={`/catalog/${model.id}`}
-                      className={clsx("body-2", styles.infoTitle)}
-                    >
-                      {model.title}
-                    </Link>
-                  </li>
-                ))}
+                {generations
+                  .filter((generation) => generation.series_id === slide.id)
+                  .map((generation) => (
+                    <li key={generation.id} className={styles.infoItem}>
+                      <Link
+                        href={`/catalog/all?series=${slide.slug}&generation=${generation.slug}`}
+                        className={clsx("body-2", styles.infoTitle)}
+                      >
+                        {generation.name}
+                      </Link>
+                    </li>
+                  ))}
               </ul>
             </SwiperSlide>
           ))}

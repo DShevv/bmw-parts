@@ -6,19 +6,20 @@ import { SvgSale } from "@/assets/icons/svgs";
 import SocialLinks from "@/components/SocialLinks/SocialLinks";
 import { paymentMethods } from "@/data/dumpy-data";
 import Image from "next/image";
-import { getContacts } from "@/services/InfoService";
+import { getContacts, getSetting } from "@/services/InfoService";
 import { getCategories } from "@/services/CatalogService";
 
 const Footer = async () => {
   const contacts = await getContacts();
   const categories = await getCategories();
+  const settings = await getSetting();
 
   return (
     <footer className={styles.footer}>
       <div className={styles.container}>
         <div className={styles.main}>
           <div className={styles.logo}>
-            <Logo isFooter />
+            <Logo isFooter image={settings?.logo_path} />
             <p className="body-1">
               Официальный дистрибьютор запасных частей для автомобилей марки BMW
             </p>

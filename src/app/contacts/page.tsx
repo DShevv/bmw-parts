@@ -5,6 +5,7 @@ import Breadcrumbs from "@/components/Breadcrumbs/Breadcrumbs";
 import clsx from "clsx";
 import { SvgBank, SvgLocation } from "@/assets/icons/svgs";
 import { getContacts, getSeoPage } from "@/services/InfoService";
+import { getCategories } from "@/services/CatalogService";
 
 export const generateMetadata = async () => {
   const { seo } = await getSeoPage("contacts");
@@ -22,6 +23,7 @@ export const generateMetadata = async () => {
 
 const page = async () => {
   const contacts = await getContacts();
+  const categories = await getCategories();
 
   return (
     <>
@@ -70,7 +72,7 @@ const page = async () => {
         </div>
       </section>
 
-      <Feedback />
+      <Feedback categories={categories ?? []} />
     </>
   );
 };

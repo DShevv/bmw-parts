@@ -7,18 +7,17 @@ import clsx from "clsx";
 import ProductControls from "@/components/ProductControls/ProductControls";
 import Link from "next/link";
 import { getProductBySlug, getProducts } from "@/services/CatalogService";
+import { getCategories } from "@/services/CatalogService";
 import { notFound } from "next/navigation";
 
 const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
   const { slug } = await params;
   const product = await getProductBySlug(slug);
-  const products = await getProducts();
-
+  const products = await getProducts({});
+  const categories = await getCategories();
   if (!product) {
     notFound();
   }
-
-  console.log(products);
 
   return (
     <>
@@ -107,11 +106,13 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
         </div>
       </div>
 
-      <PopularSlider
-        title="С этим товаром также покупают"
-        products={products ?? []}
-      />
-      <Feedback />
+      {products && (
+        <PopularSlider
+          title="С этим товаром также покупают"
+          products={products.data ?? []}
+        />
+      )}
+      <Feedback categories={categories ?? []} />
     </>
   );
 };

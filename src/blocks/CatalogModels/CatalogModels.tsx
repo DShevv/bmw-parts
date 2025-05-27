@@ -6,21 +6,30 @@ import { FreeMode, Grid } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/grid";
-import { series } from "@/data/dumpy-data";
 import Image from "next/image";
 import { useState } from "react";
 import { motion as m, AnimatePresence } from "motion/react";
 import Link from "next/link";
+import { SeriesT, GenerationT, BodyT } from "@/types/types";
 
-const CatalogModels = () => {
+const CatalogModels = ({
+  series,
+  generations,
+  bodies,
+}: {
+  series: SeriesT[];
+  generations: GenerationT[];
+  bodies: BodyT[];
+}) => {
   const [activeId, setActiveId] = useState<number | null>(null);
+  const [activeSeries, setActiveSeries] = useState<SeriesT | null>(null);
 
   return (
     <section className={styles.wrapper}>
       <h2 className={clsx("h2", styles.title)}>
         {activeId
-          ? `Модификации автомобиля BMW ${
-              series.find((item) => item.id === activeId)?.title
+          ? `Кузова автомобиля BMW ${
+              series.find((item) => item.id === activeId)?.name
             }`
           : "Все модели"}
       </h2>
@@ -34,64 +43,23 @@ const CatalogModels = () => {
           <SwiperSlide
             key={item.id}
             className={styles.slide}
-            onClick={() => setActiveId(item.id)}
+            onClick={() => {
+              setActiveId(item.id);
+              setActiveSeries(item);
+            }}
           >
             <div
               className={clsx(styles.item, {
                 [styles.active]: activeId === item.id,
               })}
             >
-              <Image src={item.image} alt={item.title} />
-              <div className={clsx("body-3", styles.title)}>{item.title}</div>
-            </div>
-          </SwiperSlide>
-        ))}
-        {series.map((item) => (
-          <SwiperSlide
-            key={item.id + 10}
-            className={styles.slide}
-            onClick={() => setActiveId(item.id)}
-          >
-            <div
-              className={clsx(styles.item, {
-                [styles.active]: activeId === item.id,
-              })}
-            >
-              <Image src={item.image} alt={item.title} />
-              <div className={clsx("body-3", styles.title)}>{item.title}</div>
-            </div>
-          </SwiperSlide>
-        ))}
-        {series.map((item) => (
-          <SwiperSlide
-            key={item.id + 40}
-            className={styles.slide}
-            onClick={() => setActiveId(item.id)}
-          >
-            <div
-              className={clsx(styles.item, {
-                [styles.active]: activeId === item.id,
-              })}
-            >
-              <Image src={item.image} alt={item.title} />
-              <div className={clsx("body-3", styles.title)}>{item.title}</div>
-            </div>
-          </SwiperSlide>
-        ))}
-
-        {series.map((item) => (
-          <SwiperSlide
-            key={item.id + 50}
-            className={styles.slide}
-            onClick={() => setActiveId(item.id)}
-          >
-            <div
-              className={clsx(styles.item, {
-                [styles.active]: activeId === item.id,
-              })}
-            >
-              <Image src={item.image} alt={item.title} />
-              <div className={clsx("body-3", styles.title)}>{item.title}</div>
+              <Image
+                src={`${process.env.NEXT_PUBLIC_STORE_URL}/${item.image_path}`}
+                alt={item.name}
+                width={104}
+                height={60}
+              />
+              <div className={clsx("body-3", styles.title)}>{item.name}</div>
             </div>
           </SwiperSlide>
         ))}
@@ -122,117 +90,32 @@ const CatalogModels = () => {
                 },
               }}
             >
-              {series
-                .find((item) => item.id === activeId)
-                ?.models.map((model) => (
-                  <SwiperSlide key={model.id} className={styles.slide}>
-                    <div key={model.id} className={clsx(styles.infoItem)}>
-                      <h4 className={clsx("h4", styles.infoTitle)}>
-                        {model.title}
+              {generations
+                .filter((generation) => generation.series_id === activeId)
+                .map((generation) => (
+                  <SwiperSlide key={generation.id} className={styles.slide}>
+                    <div key={generation.id} className={clsx(styles.infoItem)}>
+                      <h4
+                        className={clsx("h4", styles.infoTitle)}
+                        title={generation.name}
+                      >
+                        {generation.name}
                       </h4>
                       <ul className={styles.infoList}>
-                        {model.models.map((model) => (
-                          <li key={model.id} className={styles.infoItem}>
-                            <Link
-                              href={`/catalog/${model.id}`}
-                              className={clsx("body-2", styles.infoTitle)}
-                            >
-                              {model.title}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </SwiperSlide>
-                ))}
-              {series
-                .find((item) => item.id === activeId)
-                ?.models.map((model) => (
-                  <SwiperSlide key={model.id} className={styles.slide}>
-                    <div key={model.id} className={clsx(styles.infoItem)}>
-                      <h4 className={clsx("h4", styles.infoTitle)}>
-                        {model.title}
-                      </h4>
-                      <ul className={styles.infoList}>
-                        {model.models.map((model) => (
-                          <li key={model.id} className={styles.infoItem}>
-                            <Link
-                              href={`/catalog/${model.id}`}
-                              className={clsx("body-2", styles.infoTitle)}
-                            >
-                              {model.title}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </SwiperSlide>
-                ))}
-              {series
-                .find((item) => item.id === activeId)
-                ?.models.map((model) => (
-                  <SwiperSlide key={model.id} className={styles.slide}>
-                    <div key={model.id} className={clsx(styles.infoItem)}>
-                      <h4 className={clsx("h4", styles.infoTitle)}>
-                        {model.title}
-                      </h4>
-                      <ul className={styles.infoList}>
-                        {model.models.map((model) => (
-                          <li key={model.id} className={styles.infoItem}>
-                            <Link
-                              href={`/catalog/${model.id}`}
-                              className={clsx("body-2", styles.infoTitle)}
-                            >
-                              {model.title}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </SwiperSlide>
-                ))}
-              {series
-                .find((item) => item.id === activeId)
-                ?.models.map((model) => (
-                  <SwiperSlide key={model.id} className={styles.slide}>
-                    <div key={model.id} className={clsx(styles.infoItem)}>
-                      <h4 className={clsx("h4", styles.infoTitle)}>
-                        {model.title}
-                      </h4>
-                      <ul className={styles.infoList}>
-                        {model.models.map((model) => (
-                          <li key={model.id} className={styles.infoItem}>
-                            <Link
-                              href={`/catalog/${model.id}`}
-                              className={clsx("body-2", styles.infoTitle)}
-                            >
-                              {model.title}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </SwiperSlide>
-                ))}
-              {series
-                .find((item) => item.id === activeId)
-                ?.models.map((model) => (
-                  <SwiperSlide key={model.id} className={styles.slide}>
-                    <div key={model.id} className={clsx(styles.infoItem)}>
-                      <h4 className={clsx("h4", styles.infoTitle)}>
-                        {model.title}
-                      </h4>
-                      <ul className={styles.infoList}>
-                        {model.models.map((model) => (
-                          <li key={model.id} className={styles.infoItem}>
-                            <Link
-                              href={`/catalog/${model.id}`}
-                              className={clsx("body-2", styles.infoTitle)}
-                            >
-                              {model.title}
-                            </Link>
-                          </li>
-                        ))}
+                        {bodies
+                          .filter(
+                            (body) => body.generation_id === generation.id
+                          )
+                          .map((body) => (
+                            <li key={body.id} className={styles.infoItem}>
+                              <Link
+                                href={`/catalog/all?generation=${generation.slug}&body=${body.slug}&series=${activeSeries?.slug}`}
+                                className={clsx("body-2", styles.infoTitle)}
+                              >
+                                {body.name}
+                              </Link>
+                            </li>
+                          ))}
                       </ul>
                     </div>
                   </SwiperSlide>

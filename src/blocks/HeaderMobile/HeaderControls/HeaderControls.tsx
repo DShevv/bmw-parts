@@ -12,7 +12,7 @@ import SearchPopup from "@/components/SearchPopup/SearchPopup";
 import { AnimatePresence } from "motion/react";
 import { useEffect } from "react";
 
-const HeaderControls = observer(() => {
+const HeaderControls = observer(({ logo }: { logo: string }) => {
   const { popupStore, stopGlobalStore } = globalStore;
   const { search, openPopup, closePopup } = popupStore;
 
@@ -24,7 +24,7 @@ const HeaderControls = observer(() => {
 
   return (
     <div className={styles.container}>
-      <Logo className={styles.logo} />
+      <Logo className={styles.logo} image={logo} />
       <CatalogButton />
       <Search />
       <div className={styles.controls}>

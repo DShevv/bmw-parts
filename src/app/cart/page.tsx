@@ -61,13 +61,15 @@ const Page = observer(() => {
                       href="/catalog/wheels/product_1"
                       className={clsx("h3")}
                     >
-                      {product.title}
+                      {product.name}
                     </Link>
                     <div className={styles.price}>
                       <div className={clsx("h4", styles.price)}>
-                        {product.discount > 0 ? (
+                        {Number(product.discount) > 0 ? (
                           <>
-                            {product.price * (1 - product.discount / 100)} BYN
+                            {Number(product.price) *
+                              (1 - Number(product.discount) / 100)}
+                             BYN
                             <span className={clsx("body-3", styles.discount)}>
                               {product.price} BYN
                             </span>
@@ -81,9 +83,11 @@ const Page = observer(() => {
                   <div className={styles.controlsWrapper}>
                     <div className={styles.price}>
                       <div className={clsx("h4", styles.price)}>
-                        {product.discount > 0 ? (
+                        {Number(product.discount) > 0 ? (
                           <>
-                            {product.price * (1 - product.discount / 100)} BYN
+                            {Number(product.price) *
+                              (1 - Number(product.discount) / 100)}
+                             BYN
                             <span className={clsx("body-3", styles.discount)}>
                               {product.price} BYN
                             </span>

@@ -57,14 +57,14 @@ const OrderPricePopup = observer(() => {
           <div className={styles.product}>
             {orderProduct && (
               <Image
-                src={orderProduct?.product.image}
-                alt={orderProduct?.product.title}
+                src={`${process.env.NEXT_PUBLIC_STORE_URL}/${orderProduct?.product.main_image.image_path}`}
+                alt={orderProduct?.product.name}
                 width={100}
                 height={100}
               />
             )}
             <div className={clsx("h3", styles.title)}>
-              {orderProduct?.product.title}
+              {orderProduct?.product.name}
             </div>
           </div>
 

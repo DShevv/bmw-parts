@@ -17,7 +17,7 @@ const AboutBlock = async () => {
         />
       </div>
       <div className={styles.content}>
-        <Logo className={styles.logo} />
+        <Logo className={styles.logo} image={setting?.logo_path} />
 
         <div className={styles.caption}>
           <h2 className={clsx("h2", styles.title)}>О нашей компании</h2>

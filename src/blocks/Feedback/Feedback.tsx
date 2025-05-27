@@ -11,14 +11,14 @@ import validateFeedback from "@/utils/validateFeedback";
 import { observer } from "mobx-react-lite";
 import globalStore from "@/stores/global-store";
 import Link from "next/link";
-import { feedbackData } from "@/data/dumpy-data";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/free-mode";
 import { FreeMode, Autoplay } from "swiper/modules";
 import { postFeedback } from "@/services/FeedbackService";
+import { CategoryT } from "@/types/types";
 
-const Feedback = observer(() => {
+const Feedback = observer(({ categories }: { categories: CategoryT[] }) => {
   const { notificationStore } = globalStore;
   const { setNotification } = notificationStore;
 
@@ -97,7 +97,7 @@ const Feedback = observer(() => {
           initialSlide={1}
           breakpoints={{
             768: {
-              initialSlide: Math.floor(feedbackData.length / 2) - 1,
+              initialSlide: Math.floor(categories.length / 2) - 1,
             },
           }}
           slidesPerView={"auto"}
@@ -113,11 +113,19 @@ const Feedback = observer(() => {
             pauseOnMouseEnter: true,
           }}
         >
-          {feedbackData.map((item) => (
+          {categories.map((item) => (
             <SwiperSlide key={item.id} className={styles.slide}>
-              <Link className={clsx(styles.item, "h4")} href="/">
-                <Image src={item.image} alt={item.title} />
-                <span>{item.title}</span>
+              <Link
+                className={clsx(styles.item, "h4")}
+                href={`/catalog/${item.slug}`}
+              >
+                <Image
+                  src={`${process.env.NEXT_PUBLIC_STORE_URL}/${item.photo_path}`}
+                  alt={item.name}
+                  width={274}
+                  height={200}
+                />
+                <span>{item.name}</span>
               </Link>
             </SwiperSlide>
           ))}
@@ -136,11 +144,19 @@ const Feedback = observer(() => {
             pauseOnMouseEnter: true,
           }}
         >
-          {feedbackData.map((item) => (
+          {categories.map((item) => (
             <SwiperSlide key={item.id} className={styles.slide}>
-              <Link className={clsx(styles.item, "h4")} href="/">
-                <Image src={item.image} alt={item.title} />
-                <span>{item.title}</span>
+              <Link
+                className={clsx(styles.item, "h4")}
+                href={`/catalog/${item.slug}`}
+              >
+                <Image
+                  src={`${process.env.NEXT_PUBLIC_STORE_URL}/${item.photo_path}`}
+                  alt={item.name}
+                  width={274}
+                  height={200}
+                />
+                <span>{item.name}</span>
               </Link>
             </SwiperSlide>
           ))}

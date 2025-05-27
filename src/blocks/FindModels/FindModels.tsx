@@ -6,16 +6,24 @@ import { FreeMode, Grid } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/grid";
-import { series } from "@/data/dumpy-data";
 import Image from "next/image";
 import { useState } from "react";
 import { motion as m, AnimatePresence } from "motion/react";
+import { GenerationT, BodyT, SeriesT } from "@/types/types";
 
 interface FindModelsProps {
-  onChange: (model: number, series: number) => void;
+  onChange: (series: SeriesT, body: BodyT, generation: GenerationT) => void;
+  series: SeriesT[];
+  generations: GenerationT[];
+  bodies: BodyT[];
 }
 
-const FindModels = ({ onChange }: FindModelsProps) => {
+const FindModels = ({
+  onChange,
+  series,
+  generations,
+  bodies,
+}: FindModelsProps) => {
   const [activeId, setActiveId] = useState<number | null>(null);
   const [activeModel, setActiveModel] = useState<string | null>(null);
 
@@ -24,7 +32,7 @@ const FindModels = ({ onChange }: FindModelsProps) => {
       <h2 className={clsx("h2", styles.title)}>
         {activeId
           ? `Модификации автомобиля BMW ${
-              series.find((item) => item.id === activeId)?.title
+              series.find((item) => item.id === activeId)?.name
             }`
           : "Выберите модель автомобиля BMW"}
       </h2>
@@ -45,57 +53,13 @@ const FindModels = ({ onChange }: FindModelsProps) => {
                 [styles.active]: activeId === item.id,
               })}
             >
-              <Image src={item.image} alt={item.title} />
-              <div className={clsx("body-3", styles.title)}>{item.title}</div>
-            </div>
-          </SwiperSlide>
-        ))}
-        {series.map((item) => (
-          <SwiperSlide
-            key={item.id + 10}
-            className={styles.slide}
-            onClick={() => setActiveId(item.id)}
-          >
-            <div
-              className={clsx(styles.item, {
-                [styles.active]: activeId === item.id,
-              })}
-            >
-              <Image src={item.image} alt={item.title} />
-              <div className={clsx("body-3", styles.title)}>{item.title}</div>
-            </div>
-          </SwiperSlide>
-        ))}
-        {series.map((item) => (
-          <SwiperSlide
-            key={item.id + 40}
-            className={styles.slide}
-            onClick={() => setActiveId(item.id)}
-          >
-            <div
-              className={clsx(styles.item, {
-                [styles.active]: activeId === item.id,
-              })}
-            >
-              <Image src={item.image} alt={item.title} />
-              <div className={clsx("body-3", styles.title)}>{item.title}</div>
-            </div>
-          </SwiperSlide>
-        ))}
-
-        {series.map((item) => (
-          <SwiperSlide
-            key={item.id + 50}
-            className={styles.slide}
-            onClick={() => setActiveId(item.id)}
-          >
-            <div
-              className={clsx(styles.item, {
-                [styles.active]: activeId === item.id,
-              })}
-            >
-              <Image src={item.image} alt={item.title} />
-              <div className={clsx("body-3", styles.title)}>{item.title}</div>
+              <Image
+                src={`${process.env.NEXT_PUBLIC_STORE_URL}/${item.image_path}`}
+                alt={item.name}
+                width={104}
+                height={60}
+              />
+              <div className={clsx("body-3", styles.title)}>{item.name}</div>
             </div>
           </SwiperSlide>
         ))}
@@ -126,142 +90,40 @@ const FindModels = ({ onChange }: FindModelsProps) => {
                 },
               }}
             >
-              {series
-                .find((item) => item.id === activeId)
-                ?.models.map((model) => (
-                  <SwiperSlide key={model.id} className={styles.slide}>
-                    <div key={model.id} className={clsx(styles.infoItem)}>
+              {generations
+                .filter((item) => item.series_id === activeId)
+                .map((generation) => (
+                  <SwiperSlide key={generation.id} className={styles.slide}>
+                    <div key={generation.id} className={clsx(styles.infoItem)}>
                       <h4 className={clsx("h4", styles.infoTitle)}>
-                        {model.title}
+                        {generation.name}
                       </h4>
                       <ul className={styles.infoList}>
-                        {model.models.map((model) => (
-                          <li key={model.id} className={styles.infoItem}>
-                            <div
-                              onClick={() => {
-                                setActiveModel(model.title);
-                                onChange(model.id, activeId);
-                              }}
-                              className={clsx("body-2", styles.infoTitle, {
-                                [styles.active]: activeModel === model.title,
-                              })}
-                            >
-                              {model.title}
-                            </div>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </SwiperSlide>
-                ))}
-              {series
-                .find((item) => item.id === activeId)
-                ?.models.map((model) => (
-                  <SwiperSlide key={model.id} className={styles.slide}>
-                    <div key={model.id} className={clsx(styles.infoItem)}>
-                      <h4 className={clsx("h4", styles.infoTitle)}>
-                        {model.title}
-                      </h4>
-                      <ul className={styles.infoList}>
-                        {model.models.map((model) => (
-                          <li key={model.id} className={styles.infoItem}>
-                            <div
-                              onClick={() => {
-                                setActiveModel(model.title);
-                                onChange(model.id, activeId);
-                              }}
-                              className={clsx("body-2", styles.infoTitle, {
-                                [styles.active]: activeModel === model.title,
-                              })}
-                            >
-                              {model.title}
-                            </div>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </SwiperSlide>
-                ))}
-              {series
-                .find((item) => item.id === activeId)
-                ?.models.map((model) => (
-                  <SwiperSlide key={model.id} className={styles.slide}>
-                    <div key={model.id} className={clsx(styles.infoItem)}>
-                      <h4 className={clsx("h4", styles.infoTitle)}>
-                        {model.title}
-                      </h4>
-                      <ul className={styles.infoList}>
-                        {model.models.map((model) => (
-                          <li key={model.id} className={styles.infoItem}>
-                            <div
-                              onClick={() => {
-                                setActiveModel(model.title);
-                                onChange(model.id, activeId);
-                              }}
-                              className={clsx("body-2", styles.infoTitle, {
-                                [styles.active]: activeModel === model.title,
-                              })}
-                            >
-                              {model.title}
-                            </div>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </SwiperSlide>
-                ))}
-              {series
-                .find((item) => item.id === activeId)
-                ?.models.map((model) => (
-                  <SwiperSlide key={model.id} className={styles.slide}>
-                    <div key={model.id} className={clsx(styles.infoItem)}>
-                      <h4 className={clsx("h4", styles.infoTitle)}>
-                        {model.title}
-                      </h4>
-                      <ul className={styles.infoList}>
-                        {model.models.map((model) => (
-                          <li key={model.id} className={styles.infoItem}>
-                            <div
-                              onClick={() => {
-                                setActiveModel(model.title);
-                                onChange(model.id, activeId);
-                              }}
-                              className={clsx("body-2", styles.infoTitle, {
-                                [styles.active]: activeModel === model.title,
-                              })}
-                            >
-                              {model.title}
-                            </div>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </SwiperSlide>
-                ))}
-              {series
-                .find((item) => item.id === activeId)
-                ?.models.map((model) => (
-                  <SwiperSlide key={model.id} className={styles.slide}>
-                    <div key={model.id} className={clsx(styles.infoItem)}>
-                      <h4 className={clsx("h4", styles.infoTitle)}>
-                        {model.title}
-                      </h4>
-                      <ul className={styles.infoList}>
-                        {model.models.map((model) => (
-                          <li key={model.id} className={styles.infoItem}>
-                            <div
-                              onClick={() => {
-                                setActiveModel(model.title);
-                                onChange(model.id, activeId);
-                              }}
-                              className={clsx("body-2", styles.infoTitle, {
-                                [styles.active]: activeModel === model.title,
-                              })}
-                            >
-                              {model.title}
-                            </div>
-                          </li>
-                        ))}
+                        {bodies
+                          .filter(
+                            (item) => item.generation_id === generation.id
+                          )
+                          .map((body) => (
+                            <li key={body.id} className={styles.infoItem}>
+                              <div
+                                onClick={() => {
+                                  setActiveModel(body.name);
+                                  onChange(
+                                    series.find(
+                                      (item) => item.id === activeId
+                                    ) ?? series[0],
+                                    body,
+                                    generation
+                                  );
+                                }}
+                                className={clsx("body-2", styles.infoTitle, {
+                                  [styles.active]: activeModel === body.name,
+                                })}
+                              >
+                                {body.name}
+                              </div>
+                            </li>
+                          ))}
                       </ul>
                     </div>
                   </SwiperSlide>

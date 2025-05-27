@@ -20,6 +20,7 @@
 
   .swiper {
     margin-left: 0;
+    width: 100%;
 
     .slide {
       width: auto;
@@ -37,6 +38,8 @@
         img {
           width: 100%;
           height: vw-1550(60);
+          object-fit: cover;
+          border-radius: vw-1550(8);
         }
 
         &:hover {
@@ -56,6 +59,7 @@
 
           img {
             height: 40px;
+            border-radius: 6px;
           }
         }
       }
@@ -65,6 +69,11 @@
   .models {
     margin-top: vw-1550(32);
     margin-left: 0;
+    width: 100%;
+
+    & > div {
+      margin: 0;
+    }
 
     .slide {
       width: auto;
@@ -78,7 +87,7 @@
 
       .infoItem {
         display: flex;
-        max-width: vw-1550(219);
+
         width: fit-content;
         gap: vw-1550(16);
 
@@ -105,6 +114,15 @@
         .infoTitle {
           color: var(--text);
           text-align: left;
+          max-width: vw-1550(90);
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          cursor: default;
+
+          @media (max-width: 768px) {
+            max-width: 90px;
+          }
         }
 
         .infoList {
@@ -114,9 +132,12 @@
           list-style: none;
           padding: 0;
           margin: 0;
+          max-height: vw-1550(180);
+          flex-wrap: wrap;
 
           @media (max-width: 768px) {
             gap: 6px;
+            max-height: 180px;
           }
 
           .infoItem {
@@ -127,6 +148,7 @@
           .infoTitle {
             color: var(--text);
             text-decoration: none;
+            cursor: pointer;
 
             &:hover {
               color: var(--orange);

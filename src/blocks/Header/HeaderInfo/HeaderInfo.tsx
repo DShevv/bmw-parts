@@ -7,16 +7,17 @@ import {
 import styles from "./HeaderInfo.module.scss";
 import Logo from "@/components/Logo/Logo";
 import SocialLinks from "@/components/SocialLinks/SocialLinks";
-import { getContacts } from "@/services/InfoService";
+import { getContacts, getSetting } from "@/services/InfoService";
 import Link from "next/link";
 import clsx from "clsx";
 
 const HeaderInfo = async () => {
   const contacts = await getContacts();
+  const settings = await getSetting();
 
   return (
     <div className={styles.container}>
-      <Logo className={styles.logo} />
+      <Logo className={styles.logo} image={settings?.logo_path} />
       {contacts && <SocialLinks contacts={contacts.social_links} />}
       <div className={styles.info}>
         <div className={styles.infoItem}>

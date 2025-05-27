@@ -3,9 +3,8 @@ import Breadcrumbs from "@/components/Breadcrumbs/Breadcrumbs";
 import clsx from "clsx";
 import RecentNews from "@/blocks/RecentNews/RecentNews";
 import Image from "next/image";
-import { SvgEye } from "@/assets/icons/svgs";
 import { getNews, getNewsBySlug, addNewsView } from "@/services/NewsService";
-import { formatDate } from "@/utils/helper";
+import { formatDate, slugifyWithOpts } from "@/utils/helper";
 
 export const dynamicParams = false;
 
@@ -35,14 +34,14 @@ export async function generateStaticParams() {
     return [];
   }
 
-  return news.data.map((news) => ({
-    slug: news.slug,
+  return news.data.map((item) => ({
+    slug: `${slugifyWithOpts(item.title)}_${item.id}`,
   }));
 }
 
 const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
   const { slug } = await params;
-  const news = await getNewsBySlug(slug);
+  const news = await getNewsBySlug(slug.split("_")[1]);
   const newsList = await getNews({ page: 1, perPage: 9 });
   await addNewsView(news?.id ?? 0);
 
@@ -64,16 +63,18 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
             <h1 className={clsx(styles.title, "h1")}>{news?.title}</h1>
             <div className={styles.info}>
               <div className={clsx(styles.date, "body-3")}>
-                {formatDate(news?.created_at ?? "")}
+                {formatDate(news?.publication_date ?? "")}
               </div>
-              <div className={clsx(styles.views, "body-3")}>
-                <SvgEye />
-                {news?.views ?? 0} просмотров
-              </div>
+              {/* {news?.views && (
+                <div className={clsx(styles.views, "body-3")}>
+                  <SvgEye />
+                  {news?.views ?? 0} просмотров
+                </div>
+              )} */}
             </div>
           </div>
           <Image
-            src={`${process.env.NEXT_PUBLIC_STORE_URL}/${news?.image}`}
+            src={`${process.env.NEXT_PUBLIC_STORE_URL}/${news?.photo_path}`}
             alt="news"
             className={styles.image}
             height={420}
@@ -86,7 +87,7 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
         />
       </section>
 
-      <RecentNews title="Другие новости" news={newsList?.data ?? []} />
+      {newsList && <RecentNews title="Другие новости" news={newsList.data} />}
     </>
   );
 };

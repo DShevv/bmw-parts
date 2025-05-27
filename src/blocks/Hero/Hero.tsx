@@ -2,8 +2,9 @@ import clsx from "clsx";
 import styles from "./Hero.module.scss";
 import HeroBannerSlider from "./HeroBannerSlider/HeroBannerSlider";
 import Link from "next/link";
+import { BannerT } from "@/types/types";
 
-const Hero = () => {
+const Hero = ({ banners }: { banners: BannerT[] }) => {
   return (
     <section className={styles.hero}>
       <h1 className={clsx("h1", styles.title)}>
@@ -11,7 +12,7 @@ const Hero = () => {
       </h1>
 
       <div className={styles.container}>
-        <HeroBannerSlider />
+        <HeroBannerSlider banners={banners} />
         <div className={styles.categories}>
           <Link href={`catalog/${1}`} className={styles.category}>
             <svg

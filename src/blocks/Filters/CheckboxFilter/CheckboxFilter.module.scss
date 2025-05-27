@@ -32,6 +32,10 @@
   transform: rotate(0deg);
 }
 
+.disabled .title {
+  opacity: 0.5;
+}
+
 .items {
   display: flex;
   flex-direction: column;
@@ -39,7 +43,7 @@
 
   .checkbox {
     span {
-      color: var(--dark-blue);
+      color: var(--text);
     }
   }
 }

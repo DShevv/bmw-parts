@@ -1,3 +1,4 @@
+import { getGenerations, getSeries } from "@/services/CarsService";
 import HeroPopularModels from "../Hero/HeroPopularModels/HeroPopularModels";
 import styles from "./NewsModels.module.scss";
 import SingleNewsSlider from "./SingleNewsSlider/SingleNewsSlider";
@@ -7,11 +8,14 @@ interface NewsModelsProps {
   news: NewsT[];
 }
 
-const NewsModels = ({ news }: NewsModelsProps) => {
+const NewsModels = async ({ news }: NewsModelsProps) => {
+  const series = await getSeries();
+  const generations = await getGenerations();
+
   return (
     <section className={styles.wrapper}>
       <SingleNewsSlider news={news} />
-      <HeroPopularModels />
+      <HeroPopularModels series={series} generations={generations} />
     </section>
   );
 };

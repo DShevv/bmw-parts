@@ -18,10 +18,12 @@
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   gap: vw-1550(24);
+  max-height: vw-1550(500);
 
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
     gap: 16px;
+    max-height: 1000px;
   }
 
   .info {

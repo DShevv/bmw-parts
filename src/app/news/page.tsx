@@ -7,6 +7,7 @@ import NewsItem from "@/components/NewsItem/NewsItem";
 import { getNews } from "@/services/NewsService";
 import SeoBlock from "@/blocks/SeoBlock/SeoBlock";
 import { getSeoPage } from "@/services/InfoService";
+import { getCategories } from "@/services/CatalogService";
 export const dynamicParams = false;
 
 export const generateMetadata = async () => {
@@ -33,6 +34,8 @@ const page = async ({
     page: Number(page) ?? 1,
     perPage: 9,
   });
+  const categories = await getCategories();
+
   return (
     <>
       <div className={styles.content}>
@@ -59,7 +62,7 @@ const page = async ({
       </div>
 
       <SeoBlock page="news" />
-      <Feedback />
+      <Feedback categories={categories ?? []} />
     </>
   );
 };

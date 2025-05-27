@@ -2,11 +2,13 @@ import styles from "./CatalogCategories.module.scss";
 import clsx from "clsx";
 import Link from "next/link";
 import Image from "next/image";
-import { getCategories } from "@/services/CatalogService";
+import { CategoryT } from "@/types/types";
 
-const CatalogCategories = async () => {
-  const categories = await getCategories();
-
+const CatalogCategories = async ({
+  categories,
+}: {
+  categories: CategoryT[];
+}) => {
   return (
     <section className={styles.wrapper}>
       <div className={styles.header}>

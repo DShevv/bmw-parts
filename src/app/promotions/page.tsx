@@ -7,6 +7,7 @@ import PromoItem from "@/components/PromoItem/PromoItem";
 import { getPromo } from "@/services/PromoService";
 import SeoBlock from "@/blocks/SeoBlock/SeoBlock";
 import { getSeoPage } from "@/services/InfoService";
+import { getCategories } from "@/services/CatalogService";
 
 export const generateMetadata = async () => {
   const { seo } = await getSeoPage("promotions");
@@ -32,6 +33,7 @@ const page = async ({
     page: Number(page) ?? 1,
     perPage: 8,
   });
+  const categories = await getCategories();
 
   return (
     <>
@@ -59,7 +61,7 @@ const page = async ({
       </div>
 
       <SeoBlock page="promotions" />
-      <Feedback />
+      <Feedback categories={categories ?? []} />
     </>
   );
 };

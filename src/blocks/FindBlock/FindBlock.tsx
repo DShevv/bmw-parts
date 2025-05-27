@@ -6,18 +6,19 @@ import { useState } from "react";
 import MainButton from "@/components/Buttons/MainButton/MainButton";
 import { useRouter } from "next/navigation";
 import { motion as m } from "motion/react";
+import { SeriesT, BodyT, GenerationT } from "@/types/types";
 
 interface FindBlockProps {
   carModel: {
     image: string | StaticImageData;
     title: string;
-    series: string;
-    model: string;
+    series: SeriesT;
+    body: BodyT;
+    generation: GenerationT;
   };
 }
 
 const FindBlock = ({ carModel }: FindBlockProps) => {
-  const [selectedRear, setSelectedRear] = useState<string>("Любой");
   const [selectedYear, setSelectedYear] = useState<string>("Любой");
   const [selectedGearbox, setSelectedGearbox] = useState<string>("Любая");
   const router = useRouter();
@@ -37,6 +38,8 @@ const FindBlock = ({ carModel }: FindBlockProps) => {
         src={carModel.image}
         alt={carModel.title}
         className={styles.image}
+        width={282}
+        height={282}
       />
       <div className={styles.container}>
         <div className={clsx("h2", styles.title)}>
@@ -92,10 +95,6 @@ const FindBlock = ({ carModel }: FindBlockProps) => {
           onClick={() => {
             const query: Record<string, string> = {};
 
-            if (selectedRear !== "Любой") {
-              query["rear"] = selectedRear;
-            }
-
             if (selectedGearbox !== "Любая") {
               query["gearbox"] = selectedGearbox;
             }
@@ -105,11 +104,15 @@ const FindBlock = ({ carModel }: FindBlockProps) => {
             }
 
             if (carModel.series) {
-              query["series"] = carModel.series;
+              query["series"] = carModel.series.slug;
             }
 
-            if (carModel.model) {
-              query["model"] = carModel.model;
+            if (carModel.body) {
+              query["body"] = carModel.body.slug;
+            }
+
+            if (carModel.generation) {
+              query["generation"] = carModel.generation.slug;
             }
 
             router.push(

@@ -6,25 +6,81 @@ import FilterButton from "@/components/Buttons/FilterButton/FilterButton";
 import ProductItem from "@/components/ProductItem/ProductItem";
 import Pagination from "@/components/Pagination/Pagination";
 import { getProducts } from "@/services/CatalogService";
+import { ProductT } from "@/types/types";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "next/navigation";
 
-const page = async () => {
-  const products = await getProducts();
+const Page = () => {
+  const [products, setProducts] = useState<ProductT[] | null>(null);
+  const [page, setPage] = useState<{ current: number; max: number }>({
+    current: 1,
+    max: 1,
+  });
+  const [sort, setSort] = useState<string>("name");
+  const searchParams = useSearchParams();
+  const params = useMemo(
+    () => new URLSearchParams(searchParams.toString()),
+    [searchParams]
+  );
+  const searchOptions = useMemo(() => {
+    return {
+      generation: params.get("generation"),
+      series: params.get("series"),
+      body: params.get("body"),
+      year: params.get("year"),
+      price: params.get("price"),
+      gearbox: params.get("gearbox"),
+      sort: sort,
+    };
+  }, [params, sort]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const products = await getProducts(searchOptions);
+
+      setProducts(products?.data ?? []);
+      setPage({
+        current: products?.current_page ?? 1,
+        max: products?.last_page ?? 1,
+      });
+    };
+    fetchProducts();
+  }, [searchOptions]);
+
+  const handleSortChange = useCallback((value: string) => {
+    let sortValue = "name";
+
+    switch (value) {
+      case "Сначала дешевые":
+        sortValue = "price";
+        break;
+      case "Сначала дорогие":
+        sortValue = "-price";
+        break;
+      case "По алфавиту А-Я":
+        sortValue = "name";
+        break;
+      case "По алфавиту Я-А":
+        sortValue = "-name";
+        break;
+    }
+
+    setSort(sortValue);
+  }, []);
 
   return (
     <div className={styles.wrapper}>
       <div className={styles.header}>
         <div className={clsx("body-4", styles.count)}>
           товаров на странице:
-          <span className="body-1">9</span>
+          <span className="body-1">{products?.length}</span>
         </div>
 
         <div className={styles.mobileContainer}>
           <span className={clsx("body-1", styles.sort)}>Сортировка:</span>
           <Select
             className={styles.select}
-            onChange={(value) => {
-              console.log(value);
-            }}
+            onChange={handleSortChange}
             defaultValue="По алфавиту А-Я"
             options={[
               "Сначала дешевые",
@@ -42,14 +98,16 @@ const page = async () => {
           <ProductItem key={product.id} product={product} />
         ))}
       </div>
-      <Pagination
-        current={2}
-        max={10}
-        maxPerView={5}
-        className={styles.pagination}
-      />
+      {page.max > 1 && (
+        <Pagination
+          current={page.current}
+          max={page.max}
+          maxPerView={5}
+          className={styles.pagination}
+        />
+      )}
     </div>
   );
 };
 
-export default page;
+export default Page;

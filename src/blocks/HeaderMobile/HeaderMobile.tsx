@@ -6,10 +6,11 @@ import clsx from "clsx";
 import SocialLinks from "@/components/SocialLinks/SocialLinks";
 import HeaderControls from "./HeaderControls/HeaderControls";
 import HeaderCategories from "./HeaderCategories/HeaderCategories";
-import { getContacts } from "@/services/InfoService";
+import { getContacts, getSetting } from "@/services/InfoService";
 
 const HeaderMobile = async () => {
   const contacts = await getContacts();
+  const settings = await getSetting();
 
   return (
     <header className={styles.header}>
@@ -62,7 +63,7 @@ const HeaderMobile = async () => {
         </ul>
         {contacts && <SocialLinks contacts={contacts.social_links} />}
       </div>
-      <HeaderControls />
+      <HeaderControls logo={settings?.logo_path ?? ""} />
       <HeaderCategories />
     </header>
   );

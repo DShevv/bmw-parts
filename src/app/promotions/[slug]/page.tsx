@@ -9,7 +9,6 @@ import { getPromo, getPromoBySlug } from "@/services/PromoService";
 const transformContent = (content: string): string => {
   if (!content) return "";
 
-  // Сохраняем содержимое h3 тегов
   const h3Contents: string[] = [];
   const processedContent = content.replace(
     /<h3[^>]*>(.*?)<\/h3>/g,
@@ -19,29 +18,22 @@ const transformContent = (content: string): string => {
     }
   );
 
-  // Объединяем содержимое h3 тегов в один тег
   const h3Content =
     h3Contents.length > 0 ? `<h3>${h3Contents.join("<br>")}</h3>` : "";
 
-  // Разделяем контент по <br> тегу на логические блоки
   const parts = processedContent.split(/<br\s*\/?>/);
 
-  // Обрабатываем каждую часть
   const processedParts = parts.map((part) => {
-    // Заменяем все плейсхолдеры на пустую строку, так как h3 уже обработаны
     const processed = part.replace(/###H3_PLACEHOLDER###/g, "");
 
-    // Находим все параграфы
     const paragraphContents = processed.match(/<p[^>]*>.*?<\/p>/g) || [];
     if (paragraphContents.length === 0) return processed;
 
-    // Извлекаем текст из параграфов и объединяем с <br> между ними
     const combinedText = paragraphContents
       .map((p) => p.replace(/<p[^>]*>(.*?)<\/p>/g, "$1").trim())
       .filter((text) => text.length > 0)
       .join("<br>");
 
-    // Возвращаем один параграф с объединенным текстом
     return (
       processed
         .replace(/<p[^>]*>.*?<\/p>/g, "")
@@ -50,7 +42,6 @@ const transformContent = (content: string): string => {
     );
   });
 
-  // Собираем финальный контент, добавляя h3 в начало
   return (
     h3Content + processedParts.filter((part) => part.trim().length > 0).join("")
   );

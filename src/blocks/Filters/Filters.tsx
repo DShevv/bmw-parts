@@ -8,21 +8,82 @@ import CheckboxFilter from "./CheckboxFilter/CheckboxFilter";
 import { observer } from "mobx-react-lite";
 import globalStore from "@/stores/global-store";
 import DropdownFilter from "./DropdownFilter/DropdownFilter";
+import { useMemo } from "react";
+import { GenerationT, SeriesT, BodyT } from "@/types/types";
 
-const Filters = observer(() => {
+interface FiltersProps {
+  generations: GenerationT[];
+  series: SeriesT[];
+  bodies: BodyT[];
+}
+
+const Filters = observer(({ generations, series, bodies }: FiltersProps) => {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const params = new URLSearchParams(searchParams.toString());
+  const params = useMemo(
+    () => new URLSearchParams(searchParams.toString()),
+    [searchParams]
+  );
   const pathname = usePathname();
+
+  const searchOptions = useMemo(() => {
+    return {
+      generation: params.get("generation")?.split(",") || [],
+      body: params.get("body")?.split(",") || [],
+      series: params.get("series")?.split(",") || [],
+      year: params.get("year"),
+      price: params.get("price"),
+      gearbox: params.get("gearbox"),
+    };
+  }, [params]);
 
   const { popupStore } = globalStore;
   const { closePopup } = popupStore;
+
+  const filteredGenerations = useMemo(() => {
+    if (searchOptions.series.length === 0) return generations;
+
+    return generations.filter((generation) => {
+      const seriesItem = series.find(
+        (s) =>
+          s.slug ===
+          searchOptions.series.find((seriesSlug) => {
+            const currentSeries = series.find((s) => s.slug === seriesSlug);
+            return currentSeries && currentSeries.id === generation.series_id;
+          })
+      );
+      return seriesItem !== undefined;
+    });
+  }, [generations, series, searchOptions.series]);
+
+  const filteredBodies = useMemo(() => {
+    if (searchOptions.generation.length === 0) return bodies;
+
+    return bodies.filter((body) => {
+      const generationItem = generations.find(
+        (g) =>
+          g.slug ===
+          searchOptions.generation.find((generationSlug) => {
+            const currentGeneration = generations.find(
+              (g) => g.slug === generationSlug
+            );
+            return (
+              currentGeneration && currentGeneration.id === body.generation_id
+            );
+          })
+      );
+      return generationItem !== undefined;
+    });
+  }, [bodies, generations, searchOptions.generation]);
 
   const resetFilters = () => {
     params.delete("price");
     params.delete("model");
     params.delete("year");
     params.delete("body");
+    params.delete("series");
+    params.delete("generation");
+    params.delete("gearbox");
     router.push(`${pathname}?${params.toString()}`, { scroll: false });
     closePopup("filters");
   };
@@ -35,20 +96,35 @@ const Filters = observer(() => {
         <PriceFilter title="Цена" name="price" />
 
         <CheckboxFilter
-          title="Модель автомобиля"
+          title="Серия автомобиля"
           name="series"
-          data={["1 серия", "2 серия", "X3", "X4", "X5"]}
+          data={series.map((series) => {
+            return { title: series.name, value: series.slug };
+          })}
         />
         <CheckboxFilter
-          title="Серия автомобиля"
-          name="model"
-          data={[
-            "1 (e87)",
-            "2 (E89)",
-            "(E84) xDrive 28 i",
-            "(E84) xDrive 28 i",
-            "(E84) xDrive 28 i",
-          ]}
+          disabled={searchOptions.series.length === 0}
+          title="Поколение"
+          name="generation"
+          data={filteredGenerations.map((generation) => {
+            return { title: generation.name, value: generation.slug };
+          })}
+        />
+
+        <CheckboxFilter
+          disabled={searchOptions.generation.length === 0}
+          title="Кузов"
+          name="body"
+          data={filteredBodies.map((body) => {
+            return { title: body.name, value: body.slug };
+          })}
+        />
+
+        <DropdownFilter
+          direction="top"
+          title="КПП"
+          name="gearbox"
+          data={["Автомат", "Механика"]}
         />
         <DropdownFilter
           title="Год"
@@ -72,27 +148,9 @@ const Filters = observer(() => {
             "2025",
           ]}
         />
-        <DropdownFilter
-          direction="top"
-          title="Кузов"
-          name="body"
-          data={[
-            "Седан",
-            "Хетчбек",
-            "Универсал",
-            "Купе",
-            "Кабриолет",
-            "Внедорожник",
-            "Кроссовер",
-            "Минивэн",
-            "Пикап",
-            "Фургон",
-            "Другой",
-          ]}
-        />
       </div>
       <MainButton style="light" className={styles.reset} onClick={resetFilters}>
-        Сбросить фильтр
+        Очистить фильтр
       </MainButton>
     </div>
   );

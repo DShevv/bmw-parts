@@ -36,6 +36,8 @@
         img {
           width: 100%;
           height: vw-1550(60);
+          object-fit: cover;
+          border-radius: vw-1550(8);
         }
 
         &:hover {
@@ -55,6 +57,7 @@
 
           img {
             height: 40px;
+            border-radius: 6px;
           }
         }
       }

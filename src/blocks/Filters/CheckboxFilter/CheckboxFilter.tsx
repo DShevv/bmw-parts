@@ -12,7 +12,7 @@ interface CheckboxFilterProps {
   name: string;
   title: string;
   disabled?: boolean;
-  data: string[];
+  data: { title: string; value: string }[];
 }
 
 const CheckboxFilter = ({
@@ -25,9 +25,9 @@ const CheckboxFilter = ({
   const params = new URLSearchParams(searchParams.toString());
   const value = params.get(name);
   const [filterValue, setFilterValue] = useState<string[]>(
-    value ? value.split(",") : []
+    disabled ? [] : value ? value.split(",") : []
   );
-  const debouncedFilterValue = useDebounce(filterValue, 2000);
+  const debouncedFilterValue = useDebounce(filterValue, 500);
   const router = useRouter();
   const pathname = usePathname();
   const [isActive, setActive] = useState(
@@ -49,15 +49,14 @@ const CheckboxFilter = ({
   );
 
   useEffect(() => {
-    console.log(value);
-    if (value) {
+    if (!disabled && value) {
       setFilterValue(value.split(","));
       setActive(true);
     } else {
       setFilterValue([]);
       setActive(false);
     }
-  }, [value]);
+  }, [value, disabled]);
 
   useEffect(() => {
     router.push(
@@ -108,18 +107,18 @@ const CheckboxFilter = ({
               <Checkbox
                 key={index}
                 onChange={() => {
-                  if (filterValue.includes(elem)) {
+                  if (filterValue.includes(elem.value)) {
                     setFilterValue((prev) =>
-                      prev.filter((item) => item !== elem)
+                      prev.filter((item) => item !== elem.value)
                     );
                   } else {
-                    setFilterValue((prev) => [...prev, elem]);
+                    setFilterValue((prev) => [...prev, elem.value]);
                   }
                 }}
-                checked={filterValue.includes(elem)}
+                checked={filterValue.includes(elem.value)}
                 className={styles.checkbox}
               >
-                {elem}
+                {elem.title}
               </Checkbox>
             ))}
           </m.div>

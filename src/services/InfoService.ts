@@ -1,5 +1,5 @@
 import { SeoTextT } from "@/types/api";
-import { ContactsT, SettingT } from "@/types/types";
+import { BannerT, ContactsT, SettingT } from "@/types/types";
 
 export const getContacts = async (): Promise<ContactsT | null> => {
   try {
@@ -78,5 +78,19 @@ export async function getSeoPage(page: string) {
   } catch (error) {
     console.log(error);
     return { seo: undefined };
+  }
+}
+
+
+export async function getBanners(): Promise<BannerT[] | null> {
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/v1/banners`, {
+      next: { revalidate: 60 },
+    });
+    const banners = await res.json();
+    return banners.data;
+  } catch (error) {
+    console.log(error);
+    return null;
   }
 }

@@ -6,42 +6,52 @@ import globalStore from "@/stores/global-store";
 import clsx from "clsx";
 import { SvgClose } from "@/assets/icons/svgs";
 import { useEffect } from "react";
-const FiltersSidebar = observer(() => {
-  const { popupStore } = globalStore;
-  const { filters } = popupStore;
+import { GenerationT, SeriesT, BodyT } from "@/types/types";
 
-  useEffect(() => {
-    if (filters) {
-      const scrollPosition = window.scrollY;
+interface FiltersSidebarProps {
+  generations: GenerationT[];
+  series: SeriesT[];
+  bodies: BodyT[];
+}
 
-      document.body.style.position = "fixed";
-      document.body.style.overflowY = "scroll";
-      document.body.style.top = `-${scrollPosition}px`;
-      document.body.style.width = "100%";
+const FiltersSidebar = observer(
+  ({ generations, series, bodies }: FiltersSidebarProps) => {
+    const { popupStore } = globalStore;
+    const { filters } = popupStore;
 
-      return () => {
-        document.body.style.position = "";
-        document.body.style.overflowY = "auto";
-        document.body.style.top = "";
-        document.body.style.width = "";
-        window.scrollTo(0, scrollPosition);
-      };
-    }
-  }, [filters]);
+    useEffect(() => {
+      if (filters) {
+        const scrollPosition = window.scrollY;
 
-  return (
-    <div className={clsx(styles.sidebar, { [styles.active]: filters })}>
-      <button
-        className={styles.close}
-        onClick={() => popupStore.closePopup("filters")}
-      >
-        <SvgClose />
-      </button>
-      <div className={styles.wrapper}>
-        <Filters />
+        document.body.style.position = "fixed";
+        document.body.style.overflowY = "scroll";
+        document.body.style.top = `-${scrollPosition}px`;
+        document.body.style.width = "100%";
+
+        return () => {
+          document.body.style.position = "";
+          document.body.style.overflowY = "auto";
+          document.body.style.top = "";
+          document.body.style.width = "";
+          window.scrollTo(0, scrollPosition);
+        };
+      }
+    }, [filters]);
+
+    return (
+      <div className={clsx(styles.sidebar, { [styles.active]: filters })}>
+        <button
+          className={styles.close}
+          onClick={() => popupStore.closePopup("filters")}
+        >
+          <SvgClose />
+        </button>
+        <div className={styles.wrapper}>
+          <Filters generations={generations} series={series} bodies={bodies} />
+        </div>
       </div>
-    </div>
-  );
-});
+    );
+  }
+);
 
 export default FiltersSidebar;

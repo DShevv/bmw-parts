@@ -6,7 +6,9 @@ import CatalogModels from "@/blocks/CatalogModels/CatalogModels";
 import SeoBlock from "@/blocks/SeoBlock/SeoBlock";
 import CatalogCategories from "@/blocks/CatalogCategories/CatalogCategories";
 import { getSeoPage } from "@/services/InfoService";
-
+import { getCategories } from "@/services/CatalogService";
+import { getBodies, getGenerations } from "@/services/CarsService";
+import { getSeries } from "@/services/CarsService";
 export const generateMetadata = async () => {
   const { seo } = await getSeoPage("catalog");
 
@@ -22,6 +24,13 @@ export const generateMetadata = async () => {
 };
 
 const page = async () => {
+  const [categories, series, generations, bodies] = await Promise.all([
+    getCategories(),
+    getSeries(),
+    getGenerations(),
+    getBodies(),
+  ]);
+
   return (
     <>
       <div className={styles.content}>
@@ -32,12 +41,16 @@ const page = async () => {
           ]}
         />
         <h1 className={clsx(styles.title, "h1")}>Каталог</h1>
-        <CatalogModels />
-        <CatalogCategories />
+        <CatalogModels
+          series={series ?? []}
+          generations={generations ?? []}
+          bodies={bodies ?? []}
+        />
+        <CatalogCategories categories={categories ?? []} />
       </div>
 
       <SeoBlock page="catalog" />
-      <Feedback />
+      <Feedback categories={categories ?? []} />
     </>
   );
 };
