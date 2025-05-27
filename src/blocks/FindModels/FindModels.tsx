@@ -95,7 +95,10 @@ const FindModels = ({
                 .map((generation) => (
                   <SwiperSlide key={generation.id} className={styles.slide}>
                     <div key={generation.id} className={clsx(styles.infoItem)}>
-                      <h4 className={clsx("h4", styles.infoTitle)}>
+                      <h4
+                        className={clsx("h4", styles.infoTitle)}
+                        title={generation.name}
+                      >
                         {generation.name}
                       </h4>
                       <ul className={styles.infoList}>

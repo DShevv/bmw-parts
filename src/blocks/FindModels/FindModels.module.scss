@@ -68,6 +68,10 @@
     margin-top: vw-1550(32);
     margin-left: 0;
 
+    & > div {
+      margin-left: 0;
+    }
+
     .slide {
       width: auto;
       margin-right: vw-1550(124);
@@ -107,6 +111,15 @@
         .infoTitle {
           color: var(--text);
           text-align: left;
+          max-width: vw-1550(90);
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          cursor: default;
+
+          @media (max-width: 768px) {
+            max-width: 90px;
+          }
         }
 
         .infoList {
