@@ -57,6 +57,7 @@ const Layout = async ({
 
         <section className={styles.container}>
           <FiltersSidebar
+            categoryId={categoryData?.id ?? null}
             generations={generations ?? []}
             series={series ?? []}
             bodies={bodies ?? []}

@@ -12,10 +12,11 @@ interface FiltersSidebarProps {
   generations: GenerationT[];
   series: SeriesT[];
   bodies: BodyT[];
+  categoryId: number | null;
 }
 
 const FiltersSidebar = observer(
-  ({ generations, series, bodies }: FiltersSidebarProps) => {
+  ({ generations, series, bodies, categoryId }: FiltersSidebarProps) => {
     const { popupStore } = globalStore;
     const { filters } = popupStore;
 
@@ -47,7 +48,12 @@ const FiltersSidebar = observer(
           <SvgClose />
         </button>
         <div className={styles.wrapper}>
-          <Filters generations={generations} series={series} bodies={bodies} />
+          <Filters
+            generations={generations}
+            series={series}
+            bodies={bodies}
+            categoryId={categoryId}
+          />
         </div>
       </div>
     );

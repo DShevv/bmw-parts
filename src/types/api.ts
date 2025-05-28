@@ -27,7 +27,7 @@ export type ProductParamsT = {
   body?: string | null;
   year?: string | null;
   price?: string | null;
-  gearbox?: string | null;
+  transmission?: string | null;
   page?: number | null;
   search?: string | null;
   category?: string | null;
@@ -41,4 +41,30 @@ export type ProductResponseT = {
   per_page: number;
   to: number;
   total: number;
+  max_price: number;
+}
+
+
+export type OrderT = {
+  customer_name: string;
+  phone: string;
+  email: string;
+  address: string;
+  comment: string;
+  delivery_method_id: number;
+  payment_method_id: number;
+  items: {
+    product_id: number;
+    quantity: number;
+  }[];
+}
+
+export type OrderResponseT = {
+  success: boolean;
+  data: {
+    id: number;
+    order_number: string;
+    customer_name: string;
+    total_amount: number;
+  }
 }

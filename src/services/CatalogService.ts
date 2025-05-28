@@ -1,5 +1,5 @@
 import { ProductParamsT, ProductResponseT } from "@/types/api";
-import { CategoryT, ProductT } from "@/types/types";
+import { CategoryT, DeliveryT, PaymentT, ProductT } from "@/types/types";
 
 export const getCategories = async (): Promise<CategoryT[] | null> => {
   try {
@@ -43,8 +43,6 @@ export const getCategoriesBySlug = async (slug: string): Promise<CategoryT | nul
   }
 };
 
-
-
 export const getProductBySlug = async (slug: string): Promise<ProductT | null> => {
   try {
     const res = await fetch(
@@ -74,7 +72,7 @@ export const getProducts = async ({
   body,
   year,
   price,
-  gearbox,
+  transmission,
   page,
   search,
   category,
@@ -125,8 +123,8 @@ export const getProducts = async ({
       params.set("price_to", price.split("-")[1]);
     }
 
-    if (gearbox) {
-      params.set("gearbox", gearbox);
+    if (transmission) {
+      params.set("transmission", transmission);
     }
 
     if (page) {
@@ -153,5 +151,40 @@ export const getProducts = async ({
   } catch (e) {
     console.log(e);
     return null;
+  }
+};
+
+
+export const getPayments = async (): Promise<PaymentT[]> => {
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/v1/payment-methods`, {
+      next: {
+        revalidate: 60,
+      },
+    });
+
+    const { data } = await res.json();
+
+    return data;
+  } catch (e) {
+    console.log(e);
+    return [];
+  }
+};
+
+export const getDeliveries = async (): Promise<DeliveryT[]> => {
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/v1/delivery-methods`, {
+      next: {
+        revalidate: 60,
+      },
+    });
+
+    const { data } = await res.json();
+
+    return data;
+  } catch (e) {
+    console.log(e);
+    return [];
   }
 };

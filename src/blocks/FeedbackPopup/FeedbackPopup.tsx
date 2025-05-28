@@ -59,6 +59,7 @@ const FeedbackPopup = observer(() => {
                 "success"
               );
               resetForm();
+              closePopup("feedback");
             } else {
               setNotification(
                 "Не получили вашу заявку",

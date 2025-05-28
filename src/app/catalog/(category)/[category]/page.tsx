@@ -29,13 +29,14 @@ const Page = () => {
       body: params.get("body"),
       year: params.get("year"),
       price: params.get("price"),
-      gearbox: params.get("gearbox"),
+      transmission: params.get("transmission"),
       sort: sort,
     };
   }, [params, sort]);
 
   useEffect(() => {
     const fetchProducts = async () => {
+      console.log(searchOptions);
       const products = await getProducts(searchOptions);
 
       setProducts(products?.data ?? []);

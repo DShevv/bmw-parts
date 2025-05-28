@@ -106,6 +106,13 @@ export type SettingT = {
   feedback_image: string | null;
   footer_logo_path: string | null;
   about: AboutT;
+  delivery_payment: {
+    delivery_text: string;
+    payment_text: string;
+  }
+  privacy_policy: {
+    text: string;
+  }
 };
 
 export type BannerT = {
@@ -197,3 +204,18 @@ export type BodyT = {
   };
   transmission: string;
 }
+
+export type PaymentT = {
+  id: number;
+  name: string;
+  description: string | null;
+  image: string | null;
+}
+
+export type DeliveryT = {
+  id: number;
+  name: string;
+  description: string;
+  cost: string;
+}
+

@@ -10,7 +10,7 @@ import SeoBlock from "@/blocks/SeoBlock/SeoBlock";
 import { getNews } from "@/services/NewsService";
 import { getPromo } from "@/services/PromoService";
 import { getCategories, getProducts } from "@/services/CatalogService";
-import { getBanners } from "@/services/InfoService";
+import { getBanners, getSetting } from "@/services/InfoService";
 
 export default async function Home() {
   const news = await getNews({ page: 1, perPage: 9 });
@@ -18,6 +18,7 @@ export default async function Home() {
   const promo = await getPromo({ page: 1, perPage: 10 });
   const categories = await getCategories();
   const banners = await getBanners();
+  const settings = await getSetting();
 
   return (
     <>
@@ -26,7 +27,7 @@ export default async function Home() {
       <AboutBlock />
       {products && <PopularSlider products={products.data} />}
       <RecentPromo promo={promo?.data.data ?? []} />
-      <DeliveryPayment />
+      {settings && <DeliveryPayment settings={settings} />}
       <ContactsBlock />
       <SeoBlock page="main" />
       <Feedback categories={categories ?? []} />

@@ -11,9 +11,17 @@ interface PriceFilterProps {
   name: string;
   title: string;
   disabled?: boolean;
+  maxPrice: number | null;
+  minPrice: number | null;
 }
 
-const PriceFilter = ({ name, title, disabled = false }: PriceFilterProps) => {
+const PriceFilter = ({
+  name,
+  title,
+  disabled = false,
+  maxPrice,
+  minPrice,
+}: PriceFilterProps) => {
   const searchParams = useSearchParams();
   const params = new URLSearchParams(searchParams.toString());
   const value = params.get(name);
@@ -38,6 +46,10 @@ const PriceFilter = ({ name, title, disabled = false }: PriceFilterProps) => {
     },
     [searchParams]
   );
+
+  if (!maxPrice) {
+    return null;
+  }
 
   return (
     <div
@@ -69,10 +81,10 @@ const PriceFilter = ({ name, title, disabled = false }: PriceFilterProps) => {
       >
         <PricePicker
           initialValue={value ? value.split("-").map(Number) : undefined}
-          maxPrice={200}
-          minPrice={0}
+          maxPrice={Number(maxPrice)}
+          minPrice={Number(minPrice)}
           onChange={(values: [number, number]) => {
-            if (values[0] === 0 && values[1] === 200) {
+            if (values[0] === 0 && values[1] === Number(maxPrice)) {
               router.push(pathname + "?" + createQueryString(name), {
                 scroll: false,
               });

@@ -257,13 +257,26 @@
     .paymentTypeIcons {
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: vw-1550(6);
+
+      img {
+        width: vw-1550(30);
+        height: vw-1550(30);
+        object-fit: contain;
+      }
     }
 
     @media (max-width: 768px) {
       padding: 16px;
       border-radius: 8px;
       gap: 24px;
+
+      .paymentTypeIcons {
+        img {
+          width: 30px;
+          height: 30px;
+        }
+      }
     }
   }
 }

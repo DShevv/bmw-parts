@@ -1,3 +1,4 @@
+"use client";
 import clsx from "clsx";
 import Checkbox from "../Inputs/Checkbox/Checkbox";
 import styles from "./DeliveryType.module.scss";

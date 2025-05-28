@@ -20,7 +20,8 @@ interface FindBlockProps {
 
 const FindBlock = ({ carModel }: FindBlockProps) => {
   const [selectedYear, setSelectedYear] = useState<string>("Любой");
-  const [selectedGearbox, setSelectedGearbox] = useState<string>("Любая");
+  const [selectedtransmission, setSelectedtransmission] =
+    useState<string>("Любая");
   const router = useRouter();
 
   console.log(carModel);
@@ -59,9 +60,9 @@ const FindBlock = ({ carModel }: FindBlockProps) => {
             <div className={clsx("body-1", styles.selectTitle)}>Коробка</div>
             <Select
               className={styles.selectItem}
-              defaultValue={selectedGearbox}
-              options={["Любая", "Автоматическая", "Ручная"]}
-              onChange={setSelectedGearbox}
+              defaultValue={selectedtransmission}
+              options={["Любая", "АКПП", "МКПП", "Вариатор", "Робот"]}
+              onChange={setSelectedtransmission}
             />
           </div>
           <div className={styles.select}>
@@ -95,8 +96,8 @@ const FindBlock = ({ carModel }: FindBlockProps) => {
           onClick={() => {
             const query: Record<string, string> = {};
 
-            if (selectedGearbox !== "Любая") {
-              query["gearbox"] = selectedGearbox;
+            if (selectedtransmission !== "Любая") {
+              query["transmission"] = selectedtransmission;
             }
 
             if (selectedYear !== "Любой") {
