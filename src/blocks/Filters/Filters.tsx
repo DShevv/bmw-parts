@@ -20,7 +20,12 @@ interface FiltersProps {
 }
 
 const Filters = observer(
-  ({ generations, series, bodies, categoryId }: FiltersProps) => {
+  ({
+    generations,
+    series,
+    bodies,
+    categoryId,
+  }: FiltersProps): React.ReactElement => {
     const router = useRouter();
     const searchParams = useSearchParams();
     const params = useMemo(
@@ -44,6 +49,33 @@ const Filters = observer(
 
     const { popupStore } = globalStore;
     const { closePopup } = popupStore;
+
+    useEffect(() => {
+      // Если серия изменилась, проверяем валидность выбранных поколений
+      const validGenerations = searchOptions.generation.filter(
+        (generationSlug) => {
+          const generation = generations.find((g) => g.slug === generationSlug);
+          return (
+            generation &&
+            searchOptions.series.some((seriesSlug) => {
+              const currentSeries = series.find((s) => s.slug === seriesSlug);
+              return currentSeries && currentSeries.id === generation.series_id;
+            })
+          );
+        }
+      );
+
+      // Если есть невалидные поколения, обновляем URL
+      if (validGenerations.length !== searchOptions.generation.length) {
+        if (validGenerations.length === 0) {
+          params.delete("generation");
+          params.delete("body");
+        } else {
+          params.set("generation", validGenerations.join(","));
+        }
+        router.push(`${pathname}?${params.toString()}`, { scroll: false });
+      }
+    }, [searchOptions.series, series, generations, params, pathname, router]);
 
     const filteredGenerations = useMemo(() => {
       if (searchOptions.series.length === 0) return generations;
@@ -101,7 +133,7 @@ const Filters = observer(
           series: searchOptions.series.join(","),
           body: searchOptions.body.join(","),
         });
-        console.log(products);
+
         setMaxPrice(products?.max_price ?? null);
       };
       fetchMaxPrice();
@@ -140,6 +172,7 @@ const Filters = observer(
 
           <CheckboxFilter
             disabled={
+              searchOptions.series.length === 0 ||
               searchOptions.generation.length === 0 ||
               filteredBodies.length === 0
             }

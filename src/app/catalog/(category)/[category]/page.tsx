@@ -36,7 +36,6 @@ const Page = () => {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      console.log(searchOptions);
       const products = await getProducts(searchOptions);
 
       setProducts(products?.data ?? []);
