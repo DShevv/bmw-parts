@@ -124,7 +124,7 @@ const Feedback = observer(({ categories }: { categories: CategoryT[] }) => {
               >
                 <Image
                   src={`${process.env.NEXT_PUBLIC_STORE_URL}/${item.photo_path}`}
-                  alt={item.name}
+                  alt={`${item.name} изображение`}
                   width={274}
                   height={200}
                 />
@@ -155,7 +155,7 @@ const Feedback = observer(({ categories }: { categories: CategoryT[] }) => {
               >
                 <Image
                   src={`${process.env.NEXT_PUBLIC_STORE_URL}/${item.photo_path}`}
-                  alt={item.name}
+                  alt={`${item.name} изображение`}
                   width={274}
                   height={200}
                 />

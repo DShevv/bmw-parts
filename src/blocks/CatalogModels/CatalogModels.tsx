@@ -97,12 +97,12 @@ const CatalogModels = ({
                 .map((generation) => (
                   <SwiperSlide key={generation.id} className={styles.slide}>
                     <div key={generation.id} className={clsx(styles.infoItem)}>
-                      <h4
+                      <div
                         className={clsx("h4", styles.infoTitle)}
                         title={generation.name}
                       >
                         {generation.name}
-                      </h4>
+                      </div>
                       <ul className={styles.infoList}>
                         {bodies
                           .filter(

@@ -44,18 +44,24 @@ const HeaderControls = observer(({ categories }: HeaderControlsProps) => {
         <button
           className={clsx(styles.controlsLink, styles.search)}
           onClick={() => openPopup("search")}
+          aria-label="search"
         >
           <SvgSearch />
         </button>
-        <Link href={"/favorites"} className={styles.controlsLink}>
+        <Link
+          href={"/favorites"}
+          className={styles.controlsLink}
+          aria-label="favorites"
+        >
           <SvgHeart />
         </Link>
-        <Link href={"/cart"} className={styles.controlsLink}>
+        <Link href={"/cart"} className={styles.controlsLink} aria-label="cart">
           <SvgBag />
         </Link>
         <button
           className={clsx(styles.controlsLink, styles.burger)}
           onClick={() => openPopup("menu")}
+          aria-label="menu"
         >
           <SvgBurger />
         </button>

@@ -105,7 +105,7 @@ const HeroPopularModels = ({ series, generations }: HeroPopularModelsProps) => {
                 [styles.active]: activeIndex === slide.id,
               })}
             >
-              <h4 className={clsx("h4", styles.infoTitle)}>{slide.name}</h4>
+              <div className={clsx("h4", styles.infoTitle)}>{slide.name}</div>
               <ul className={styles.infoList}>
                 {generations
                   .filter((generation) => generation.series_id === slide.id)
