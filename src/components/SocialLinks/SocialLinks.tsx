@@ -12,6 +12,7 @@ const SocialLinks = ({ contacts }: { contacts: ContactsT["social_links"] }) => {
           href={`viber://chat?number=${contacts.viber}`}
           target="_blank"
           className={clsx(styles.link, styles.viber)}
+          aria-label="viber"
         >
           <SvgViber />
         </Link>
@@ -21,6 +22,7 @@ const SocialLinks = ({ contacts }: { contacts: ContactsT["social_links"] }) => {
           href={`https://t.me/${contacts.telegram}`}
           target="_blank"
           className={clsx(styles.link, styles.telegram)}
+          aria-label="telegram"
         >
           <SvgTelegram />
         </Link>
@@ -30,6 +32,7 @@ const SocialLinks = ({ contacts }: { contacts: ContactsT["social_links"] }) => {
           href={`https://wa.me/${contacts.whatsapp}`}
           target="_blank"
           className={clsx(styles.link, styles.whatsapp)}
+          aria-label="whatsapp"
         >
           <SvgWhatsapp />
         </Link>

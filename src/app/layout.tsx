@@ -9,9 +9,10 @@ import PopupButton from "@/components/Buttons/PopupButton/PopupButton";
 import Notification from "@/components/Notification/Notification";
 import { Suspense } from "react";
 import OrderPricePopup from "@/blocks/OrderPricePopup/OrderPricePopup";
-import { getSeoPage } from "@/services/InfoService";
+import { getContacts, getSeoPage } from "@/services/InfoService";
 import { getSetting } from "@/services/InfoService";
 import HeaderMobile from "@/blocks/HeaderMobile/HeaderMobile";
+import { getCategories } from "@/services/CatalogService";
 const unbounded = Unbounded({
   variable: "--second-family",
   subsets: ["latin", "cyrillic"],
@@ -45,6 +46,10 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const categories = await getCategories();
+  const contacts = await getContacts();
+  const settings = await getSetting();
+
   return (
     <html lang="ru">
       <body className={`${unbounded.variable} ${notoSans.variable}`}>
@@ -53,7 +58,11 @@ export default async function RootLayout({
           strategy="beforeInteractive"
         />
 
-        <Header />
+        <Header
+          categories={categories ?? undefined}
+          contacts={contacts ?? undefined}
+          settings={settings ?? undefined}
+        />
         <HeaderMobile />
         <main>
           <Suspense>{children}</Suspense>

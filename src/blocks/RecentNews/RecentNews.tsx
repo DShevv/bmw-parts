@@ -59,8 +59,16 @@ const RecentNews = ({ title, news }: { title?: string; news: NewsT[] }) => {
       </Swiper>
 
       <div className={styles.navigation}>
-        <ArrowButton className={styles.prev} onClick={handlePrev} />
-        <ArrowButton className={styles.next} onClick={handleNext} />
+        <ArrowButton
+          name="prev-news"
+          className={styles.prev}
+          onClick={handlePrev}
+        />
+        <ArrowButton
+          name="next-news"
+          className={styles.next}
+          onClick={handleNext}
+        />
       </div>
       <MainButton
         type="link"

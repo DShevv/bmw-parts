@@ -10,6 +10,7 @@ interface ArrowButtonProps {
   className?: string;
   type?: "button" | "link";
   href?: string;
+  name?: string;
 }
 
 const ArrowButton = ({
@@ -19,6 +20,7 @@ const ArrowButton = ({
   className,
   type = "button",
   href,
+  name,
 }: ArrowButtonProps) => {
   if (type === "link" && href) {
     return (
@@ -40,6 +42,7 @@ const ArrowButton = ({
       className={clsx("t-button", styles.button, className)}
       onClick={onClick}
       disabled={disabled}
+      aria-label={name}
     >
       {children}
       <SvgArrow />

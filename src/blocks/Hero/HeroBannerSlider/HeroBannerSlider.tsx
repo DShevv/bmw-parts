@@ -63,6 +63,7 @@ const HeroBannerSlider = ({ banners }: { banners: BannerT[] }) => {
               [styles.active]: index === activeIndex,
             })}
             onClick={() => swiper?.slideTo(index)}
+            aria-label={`pagination-bullet-${index}`}
           />
         ))}
       </div>

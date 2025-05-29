@@ -114,15 +114,10 @@
         .infoTitle {
           color: var(--text);
           text-align: left;
-          max-width: vw-1550(90);
           overflow: hidden;
           text-overflow: ellipsis;
           white-space: nowrap;
           cursor: default;
-
-          @media (max-width: 768px) {
-            max-width: 90px;
-          }
         }
 
         .infoList {

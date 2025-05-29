@@ -80,7 +80,10 @@ const Feedback = observer(({ categories }: { categories: CategoryT[] }) => {
               onChange={(value) => setFieldValue("comment", value)}
             />
             <Checkbox name="isAgree">
-              Согласна(-ен) на обработку персональных данных
+              Согласна(-ен) на{" "}
+              <Link href="/help?type=policy" className={styles.link}>
+                обработку персональных данных
+              </Link>
             </Checkbox>
             <MainButton
               type="submit"

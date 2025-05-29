@@ -2,9 +2,82 @@
 
 .header {
   width: 100%;
-  max-width: vw-1550(1296);
-  margin: 0 auto;
   padding-top: vw-1550(12);
+  background: var(--white-bg);
+  opacity: 0;
+
+  &.fixed {
+    opacity: 1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    box-shadow:
+      0 14px 31px 0 rgba(28, 33, 63, 0.06),
+      0 225px 90px 0 rgba(28, 33, 63, 0.01),
+      0 352px 98px 0 rgba(28, 33, 63, 0);
+    padding-top: 0 !important;
+
+    &.top {
+      padding-top: vw-1550(12) !important;
+      .hide {
+        opacity: 0;
+        pointer-events: none;
+      }
+    }
+  }
+
+  .wrapper {
+    width: 100%;
+    padding-bottom: vw-1550(16);
+    padding-top: vw-1550(12);
+
+    background: var(--white-bg);
+
+    .inner {
+      max-width: vw-1550(1296);
+      margin: 0 auto;
+    }
+  }
+
+  .hide {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    transform: translateY(100%);
+    border-bottom: 1px solid rgba(40, 75, 143, 0.2);
+    background: var(--light-blue);
+    border-left: 1px solid rgba(40, 75, 143, 0.2);
+    border-right: 1px solid rgba(40, 75, 143, 0.2);
+    border-radius: 0 0 vw-1550(12) vw-1550(12);
+    width: vw-1550(83);
+    height: vw-1550(21);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--dark-blue);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    opacity: 1;
+
+    svg {
+      width: vw-1550(16);
+      height: vw-1550(16);
+      transition: all 0.3s ease;
+    }
+
+    &.active {
+      svg {
+        transform: rotate(180deg);
+      }
+    }
+
+    &:hover {
+      background: var(--dark-blue);
+      color: var(--white-bg);
+    }
+  }
 
   @media (max-width: 768px) {
     display: none;
@@ -15,7 +88,10 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: vw-1550(16);
+  width: 100%;
+  max-width: vw-1550(1296);
+  margin: 0 auto;
+  margin-bottom: vw-1550(4);
 
   @media (max-width: 768px) {
     margin-bottom: 12px;

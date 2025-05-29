@@ -79,8 +79,16 @@ const PopularSlider = ({
       </Swiper>
 
       <div className={styles.navigation}>
-        <ArrowButton className={styles.prev} onClick={handlePrev} />
-        <ArrowButton className={styles.next} onClick={handleNext} />
+        <ArrowButton
+          name="prev-item"
+          className={styles.prev}
+          onClick={handlePrev}
+        />
+        <ArrowButton
+          name="next-item"
+          className={styles.next}
+          onClick={handleNext}
+        />
       </div>
       <MainButton
         type="link"

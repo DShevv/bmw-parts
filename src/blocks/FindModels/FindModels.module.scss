@@ -84,7 +84,6 @@
 
       .infoItem {
         display: flex;
-        max-width: vw-1550(219);
         width: fit-content;
         gap: vw-1550(16);
 
@@ -95,7 +94,6 @@
         }
 
         @media (max-width: 768px) {
-          max-width: 141px;
           width: 141px;
           gap: 6px;
           flex-direction: column;
@@ -111,15 +109,10 @@
         .infoTitle {
           color: var(--text);
           text-align: left;
-          max-width: vw-1550(90);
           overflow: hidden;
           text-overflow: ellipsis;
           white-space: nowrap;
           cursor: default;
-
-          @media (max-width: 768px) {
-            max-width: 90px;
-          }
         }
 
         .infoList {

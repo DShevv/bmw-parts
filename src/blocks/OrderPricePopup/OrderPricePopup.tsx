@@ -13,6 +13,7 @@ import { useEffect } from "react";
 import { SvgClose } from "@/assets/icons/svgs";
 import validateFeedback from "@/utils/validateFeedback";
 import { postFeedback } from "@/services/FeedbackService";
+import Link from "next/link";
 
 const OrderPricePopup = observer(() => {
   const { popupStore, notificationStore } = globalStore;
@@ -125,7 +126,14 @@ const OrderPricePopup = observer(() => {
                   onChange={(value) => setFieldValue("comment", value)}
                 />
                 <Checkbox name="isAgree">
-                  Согласна(-ен) на обработку персональных данных
+                  Согласна(-ен) на{" "}
+                  <Link
+                    href="/help?type=policy"
+                    className={styles.link}
+                    onClick={() => closePopup("order")}
+                  >
+                    обработку персональных данных
+                  </Link>
                 </Checkbox>
                 <MainButton
                   type="submit"

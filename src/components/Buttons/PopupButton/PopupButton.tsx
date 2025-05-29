@@ -9,7 +9,11 @@ const PopupButton = observer(() => {
   const { openPopup } = popupStore;
 
   return (
-    <button className={styles.container} onClick={() => openPopup("feedback")}>
+    <button
+      className={styles.container}
+      onClick={() => openPopup("feedback")}
+      aria-label="feedback-button"
+    >
       <SvgPhoneFilled />
     </button>
   );

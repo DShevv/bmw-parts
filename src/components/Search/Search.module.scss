@@ -13,6 +13,11 @@
   background-color: var(--light-blue);
   flex: 1;
 
+  & > svg {
+    width: vw-1550(26);
+    height: vw-1550(26);
+  }
+
   &:has(.input:focus) {
     svg {
       color: var(--orange);
@@ -26,6 +31,11 @@
     height: 54px;
     padding: 0 16px;
     display: none;
+
+    & > svg {
+      width: 26px;
+      height: 26px;
+    }
   }
 }
 

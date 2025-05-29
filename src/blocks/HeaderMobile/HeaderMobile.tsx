@@ -5,7 +5,6 @@ import { SvgPhone, SvgSale } from "@/assets/icons/svgs";
 import clsx from "clsx";
 import SocialLinks from "@/components/SocialLinks/SocialLinks";
 import HeaderControls from "./HeaderControls/HeaderControls";
-import HeaderCategories from "./HeaderCategories/HeaderCategories";
 import { getContacts, getSetting } from "@/services/InfoService";
 
 const HeaderMobile = async () => {
@@ -64,7 +63,6 @@ const HeaderMobile = async () => {
         {contacts && <SocialLinks contacts={contacts.social_links} />}
       </div>
       <HeaderControls logo={settings?.logo_path ?? ""} />
-      <HeaderCategories />
     </header>
   );
 };

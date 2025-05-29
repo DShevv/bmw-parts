@@ -7,14 +7,17 @@ import {
 import styles from "./HeaderInfo.module.scss";
 import Logo from "@/components/Logo/Logo";
 import SocialLinks from "@/components/SocialLinks/SocialLinks";
-import { getContacts, getSetting } from "@/services/InfoService";
 import Link from "next/link";
 import clsx from "clsx";
+import { ContactsT, SettingT } from "@/types/types";
 
-const HeaderInfo = async () => {
-  const contacts = await getContacts();
-  const settings = await getSetting();
-
+const HeaderInfo = ({
+  contacts,
+  settings,
+}: {
+  contacts: ContactsT | undefined;
+  settings: SettingT | undefined;
+}) => {
   return (
     <div className={styles.container}>
       <Logo className={styles.logo} image={settings?.logo_path} />

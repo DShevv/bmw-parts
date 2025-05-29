@@ -84,8 +84,10 @@ const FindModels = ({
               }}
               breakpoints={{
                 768: {
+                  slidesPerView: 4,
                   grid: {
                     rows: 2,
+                    fill: "row",
                   },
                 },
               }}

@@ -62,6 +62,14 @@
     margin-bottom: vw-1550(8);
     max-width: vw-1550(400);
   }
+
+  .link {
+    color: var(--white-bg);
+
+    &:hover {
+      color: var(--light-orange);
+    }
+  }
 }
 
 .close {

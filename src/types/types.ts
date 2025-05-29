@@ -150,6 +150,7 @@ export type CategoryT = {
   parent_id: number | null;
   subcategories: CategoryT[] | undefined;
   products_count: number;
+  icon_path: string | null;
 }
 
 export type BrandT = {

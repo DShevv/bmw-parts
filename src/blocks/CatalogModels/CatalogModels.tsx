@@ -84,7 +84,9 @@ const CatalogModels = ({
               }}
               breakpoints={{
                 768: {
+                  slidesPerView: 4,
                   grid: {
+                    fill: "row",
                     rows: 2,
                   },
                 },

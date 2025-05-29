@@ -88,8 +88,16 @@ const SubcategorySlider = ({
       </Swiper>
 
       <div className={styles.navigation}>
-        <ArrowButton className={styles.prev} onClick={handlePrev} />
-        <ArrowButton className={styles.next} onClick={handleNext} />
+        <ArrowButton
+          name="prev-subcategory"
+          className={styles.prev}
+          onClick={handlePrev}
+        />
+        <ArrowButton
+          name="next-subcategory"
+          className={styles.next}
+          onClick={handleNext}
+        />
       </div>
     </div>
   );

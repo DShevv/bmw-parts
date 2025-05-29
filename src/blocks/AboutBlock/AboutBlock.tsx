@@ -1,11 +1,26 @@
+"use client";
+
 import Image from "next/image";
 import styles from "./AboutBlock.module.scss";
 import Logo from "@/components/Logo/Logo";
 import clsx from "clsx";
 import { getSetting } from "@/services/InfoService";
+import { useEffect, useState } from "react";
+import { SettingT } from "@/types/types";
 
-const AboutBlock = async () => {
-  const setting = await getSetting();
+const AboutBlock = () => {
+  const [setting, setSetting] = useState<SettingT | null>(null);
+
+  useEffect(() => {
+    const fetchSettings = async () => {
+      const data = await getSetting();
+      setSetting(data);
+    };
+    fetchSettings();
+  }, []);
+
+  if (!setting) return null;
+
   return (
     <section className={styles.wrapper}>
       <div className={styles.bg}>
@@ -21,7 +36,10 @@ const AboutBlock = async () => {
 
         <div className={styles.caption}>
           <h2 className={clsx("h2", styles.title)}>О нашей компании</h2>
-          <p className={clsx("body-1", styles.text)}>{setting?.about.text}</p>
+          <p
+            className={clsx("body-1", styles.text)}
+            dangerouslySetInnerHTML={{ __html: setting?.about.text ?? "" }}
+          />
         </div>
       </div>
     </section>

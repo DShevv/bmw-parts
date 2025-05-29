@@ -59,8 +59,16 @@ const RecentPromo = ({ title, promo }: { title?: string; promo: PromoT[] }) => {
       </Swiper>
 
       <div className={styles.navigation}>
-        <ArrowButton className={styles.prev} onClick={handlePrev} />
-        <ArrowButton className={styles.next} onClick={handleNext} />
+        <ArrowButton
+          name="prev-promo"
+          className={styles.prev}
+          onClick={handlePrev}
+        />
+        <ArrowButton
+          name="next-promo"
+          className={styles.next}
+          onClick={handleNext}
+        />
       </div>
       <MainButton
         type="link"

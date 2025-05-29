@@ -105,11 +105,13 @@ const Page = observer(() => {
                             removeOneFromCart(product);
                           }
                         }}
+                        name="remove-one-from-cart"
                       />
                       <div className={clsx("h3", styles.count)}>{count}</div>
                       <ArrowButton
                         className={styles.arrow}
                         onClick={() => addToCart(product)}
+                        name="add-one-to-cart"
                       />
                     </div>
                   </div>

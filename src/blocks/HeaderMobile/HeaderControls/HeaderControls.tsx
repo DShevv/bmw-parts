@@ -34,10 +34,14 @@ const HeaderControls = observer(({ logo }: { logo: string }) => {
         >
           <SvgSearch />
         </button>
-        <Link href={"/favorites"} className={styles.controlsLink}>
+        <Link
+          href={"/favorites"}
+          className={styles.controlsLink}
+          aria-label="favorites"
+        >
           <SvgHeart />
         </Link>
-        <Link href={"/cart"} className={styles.controlsLink}>
+        <Link href={"/cart"} className={styles.controlsLink} aria-label="cart">
           <SvgBag />
         </Link>
         <button
