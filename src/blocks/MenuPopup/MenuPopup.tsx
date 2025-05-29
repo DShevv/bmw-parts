@@ -54,7 +54,11 @@ const MenuPopup = observer(() => {
       onClick={() => closePopup("menu")}
     >
       <div className={styles.container} onClick={(e) => e.stopPropagation()}>
-        <button className={styles.close} onClick={() => closePopup("menu")}>
+        <button
+          className={styles.close}
+          onClick={() => closePopup("menu")}
+          aria-label="close"
+        >
           <SvgClose />
         </button>
 
