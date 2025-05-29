@@ -47,6 +47,7 @@ const MenuButton = forwardRef<HTMLButtonElement, MenuButtonProps>(
           [styles.disabled]: disabled,
         })}
         onClick={onClick}
+        aria-label="menu"
       >
         <SvgBurger />
 

@@ -31,6 +31,7 @@ const HeaderControls = observer(({ logo }: { logo: string }) => {
         <button
           className={clsx(styles.controlsLink, styles.search)}
           onClick={() => openPopup("search")}
+          aria-label="search"
         >
           <SvgSearch />
         </button>
@@ -47,6 +48,7 @@ const HeaderControls = observer(({ logo }: { logo: string }) => {
         <button
           className={clsx(styles.controlsLink, styles.burger)}
           onClick={() => openPopup("menu")}
+          aria-label="menu"
         >
           <SvgBurger />
         </button>
