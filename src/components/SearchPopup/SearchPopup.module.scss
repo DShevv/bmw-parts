@@ -68,8 +68,10 @@
   max-height: 400px;
   z-index: 150;
 
-  box-shadow: 0 14px 31px 0 rgba(28, 33, 63, 0.06),
-    0 225px 90px 0 rgba(28, 33, 63, 0.01), 0 352px 98px 0 rgba(28, 33, 63, 0);
+  box-shadow:
+    0 14px 31px 0 rgba(28, 33, 63, 0.06),
+    0 225px 90px 0 rgba(28, 33, 63, 0.01),
+    0 352px 98px 0 rgba(28, 33, 63, 0);
   background: var(--white-bg);
   border: 1px solid var(--medium-blue);
   border-radius: 12px;
@@ -88,7 +90,7 @@
   align-items: center;
   gap: 12px;
   text-decoration: none;
-  color: var(--dark-blue);
+  color: var(--text);
 
   .info {
     display: flex;
