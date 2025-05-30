@@ -19,6 +19,10 @@
     transition: height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     pointer-events: none;
 
+    .wrapper {
+      overflow: hidden;
+    }
+
     &:not([style*="opacity: 0"]) {
       pointer-events: auto;
     }
