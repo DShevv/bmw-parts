@@ -23,7 +23,10 @@ const Search = observer(() => {
   const { setNotification } = notificationStore;
   const { openPopup } = popupStore;
 
-  useOutsideClick(ref, () => setResults([]));
+  useOutsideClick(ref, () => {
+    setResults([]);
+    setSearch("");
+  });
 
   const handleSearch = useCallback(async () => {
     const products = await getProducts({

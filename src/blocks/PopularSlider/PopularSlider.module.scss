@@ -48,6 +48,8 @@
   .slide {
     width: auto;
     margin-right: vw-1550(24);
+    display: flex;
+    gap: vw-1550(24);
   }
 
   @media (max-width: 768px) {
@@ -59,6 +61,12 @@
     .slide {
       margin-right: 15px;
       margin-bottom: 20px;
+
+      gap: 15px;
+
+      > div {
+        width: 100%;
+      }
     }
   }
 }

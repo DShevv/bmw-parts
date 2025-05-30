@@ -38,6 +38,13 @@ const ProductItem = observer(({ product }: { product: ProductT }) => {
           })}
           onClick={(e) => {
             e.preventDefault();
+            setNotification(
+              isFavorite(product)
+                ? "Товар удален из избранного"
+                : "Товар добавлен в избранное",
+              undefined,
+              "success"
+            );
             toggleFavorite(product);
           }}
         >

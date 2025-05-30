@@ -29,6 +29,19 @@ const PopularSlider = ({
     swiperRef.current?.slideNext();
   };
 
+  // Группируем товары по два
+  const groupedProducts = products.reduce<ProductT[][]>(
+    (acc, product, index) => {
+      if (index % 2 === 0) {
+        acc.push([product]);
+      } else {
+        acc[acc.length - 1].push(product);
+      }
+      return acc;
+    },
+    []
+  );
+
   if (products.length === 0) {
     return null;
   }
@@ -61,6 +74,7 @@ const PopularSlider = ({
           768: {
             slidesPerView: "auto",
             grid: {
+              fill: "row",
               rows: 1,
             },
           },
@@ -71,9 +85,11 @@ const PopularSlider = ({
           swiperRef.current = swiper;
         }}
       >
-        {products.map((product) => (
-          <SwiperSlide key={product.id} className={styles.slide}>
-            <ProductItem product={product} />
+        {groupedProducts.map((group, groupIndex) => (
+          <SwiperSlide key={groupIndex} className={styles.slide}>
+            {group.map((product) => (
+              <ProductItem key={product.id} product={product} />
+            ))}
           </SwiperSlide>
         ))}
       </Swiper>

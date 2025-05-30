@@ -46,7 +46,7 @@ const Page = () => {
         const findBlock = document.querySelector("#find-block");
 
         if (findBlock) {
-          findBlock.scrollIntoView({ behavior: "smooth" });
+          findBlock.scrollIntoView({ behavior: "smooth", block: "center" });
         }
       }, 100);
     }

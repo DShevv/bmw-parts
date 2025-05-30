@@ -20,39 +20,16 @@ const Header = ({
 }) => {
   const [isTop, setIsTop] = useState(true);
   const [isHide, setIsHide] = useState(false);
+  const [isPastViewport, setIsPastViewport] = useState(false);
   const headerRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
       setIsTop(window.scrollY === 0);
+      setIsPastViewport(window.scrollY > window.innerHeight);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  useEffect(() => {
-    if (isTop) {
-      setIsHide(false);
-    }
-  }, [isTop]);
-
-  useEffect(() => {
-    if (!headerRef.current) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setIsHide(false);
-          }
-        });
-      },
-      { threshold: 0 }
-    );
-
-    observer.observe(headerRef.current);
-
-    return () => observer.disconnect();
   }, []);
 
   return (
@@ -118,94 +95,32 @@ const Header = ({
       </m.header>
       <AnimatePresence>
         <m.header
-          layout="preserve-aspect"
+          layout
           className={clsx(styles.header, styles.fixed, {
             [styles.top]: isTop,
           })}
-          initial={{ height: "auto" }}
-          animate={{ height: isHide ? 0 : "auto" }}
+          initial={{ opacity: 0 }}
+          animate={{
+            opacity: isPastViewport ? 1 : 0,
+          }}
           transition={{
-            duration: 0.3,
-            ease: "easeInOut",
+            opacity: { duration: 0.5, ease: "easeInOut" },
           }}
         >
-          <AnimatePresence>
-            {!isHide && (
-              <m.div
-                key="header-content"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{
-                  duration: 0.2,
-                  ease: "easeInOut",
-                }}
-                style={{ overflow: "hidden" }}
-              >
-                {isTop && (
-                  <m.div
-                    layout="preserve-aspect"
-                    className={styles.info}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{
-                      duration: 0.2,
-                      ease: "easeInOut",
-                    }}
-                  >
-                    <ul className={styles.menu}>
-                      <li>
-                        <Link
-                          href={"/"}
-                          className={clsx("body-2", styles.link)}
-                        >
-                          Главная
-                        </Link>
-                      </li>
-                      <li>
-                        <Link
-                          href={"/find-parts"}
-                          className={clsx("body-2", styles.link)}
-                        >
-                          Подбор запчастей для BMW
-                        </Link>
-                      </li>
-                      <li>
-                        <Link
-                          href={"/help"}
-                          className={clsx("body-2", styles.link)}
-                        >
-                          Помощь покупателю
-                        </Link>
-                      </li>
-                      <li>
-                        <Link
-                          href={"/news"}
-                          className={clsx("body-2", styles.link)}
-                        >
-                          Блог
-                        </Link>
-                      </li>
-                      <li>
-                        <Link
-                          href={"/contacts"}
-                          className={clsx("body-2", styles.link)}
-                        >
-                          Контакты
-                        </Link>
-                      </li>
-                    </ul>
-                  </m.div>
-                )}
+          <m.div className={styles.content} layout>
+            <AnimatePresence>
+              {!isHide && (
                 <m.div
-                  layout="preserve-aspect"
+                  layout
                   className={styles.wrapper}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
+                  initial={{ height: 0, padding: 0 }}
+                  animate={{
+                    height: isHide ? 0 : "auto",
+                    padding: isHide ? 0 : `${12}px 0 ${16}px 0`,
+                  }}
+                  exit={{ height: 0, padding: 0 }}
                   transition={{
-                    duration: 0.2,
+                    duration: 0.3,
                     ease: "easeInOut",
                   }}
                 >
@@ -217,9 +132,9 @@ const Header = ({
                     <HeaderControls categories={categories ?? undefined} />
                   </div>
                 </m.div>
-              </m.div>
-            )}
-          </AnimatePresence>
+              )}
+            </AnimatePresence>
+          </m.div>
 
           <div
             className={clsx(styles.hide, { [styles.active]: isHide })}

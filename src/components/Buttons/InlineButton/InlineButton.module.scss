@@ -23,6 +23,8 @@
 
   svg {
     transition: all 0.3s ease;
+    width: vw-1550(24);
+    height: vw-1550(24);
   }
 
   &:hover {
@@ -47,4 +49,11 @@
 }
 
 @media (max-width: 768px) {
+  .button {
+    gap: 6px;
+    svg {
+      width: 24px;
+      height: 24px;
+    }
+  }
 }

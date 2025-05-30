@@ -23,8 +23,11 @@ type HeaderControlsProps = {
 };
 
 const HeaderControls = observer(({ categories }: HeaderControlsProps) => {
-  const { popupStore, stopGlobalStore } = globalStore;
+  const { popupStore, stopGlobalStore, cartStore, favoritesStore } =
+    globalStore;
   const { search, openPopup, closePopup } = popupStore;
+  const { favorites } = favoritesStore;
+  const { getTotalCount } = cartStore;
 
   useEffect(() => {
     return () => {
@@ -54,9 +57,21 @@ const HeaderControls = observer(({ categories }: HeaderControlsProps) => {
           aria-label="favorites"
         >
           <SvgHeart />
+          {Object.keys(favorites).length > 0 && (
+            <span className={clsx(styles.cartCount, "body-3")}>
+              {Object.keys(favorites).length > 9
+                ? "9+"
+                : Object.keys(favorites).length}
+            </span>
+          )}
         </Link>
         <Link href={"/cart"} className={styles.controlsLink} aria-label="cart">
           <SvgBag />
+          {getTotalCount() > 0 && (
+            <span className={clsx(styles.cartCount, "body-3")}>
+              {getTotalCount() > 9 ? "9+" : getTotalCount()}
+            </span>
+          )}
         </Link>
         <button
           className={clsx(styles.controlsLink, styles.burger)}

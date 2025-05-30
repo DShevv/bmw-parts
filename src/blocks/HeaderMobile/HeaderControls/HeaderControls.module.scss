@@ -42,6 +42,7 @@
     outline: none;
     cursor: pointer;
     color: var(--dark-blue);
+    position: relative;
 
     svg {
       width: vw-1550(26);
@@ -51,6 +52,31 @@
     &.search,
     &.burger {
       display: none;
+    }
+
+    .cartCount {
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      background-color: var(--orange);
+      color: var(--white-bg);
+      border-radius: 50%;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      aspect-ratio: 1/1;
+      transform: translate(50%, -50%);
+      line-height: 1;
+      width: vw-1550(20);
+      height: vw-1550(20);
+
+      @media (max-width: 768px) {
+        width: 14px;
+        height: 14px;
+        font-size: 12px;
+        line-height: 140%;
+      }
     }
 
     @media (max-width: 768px) {

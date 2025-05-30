@@ -6,6 +6,7 @@ class NotificationStore implements NotificationStoreT {
   info: string | undefined;
   type: string | undefined;
   isVisible: boolean = false;
+  timer: NodeJS.Timeout | undefined;
 
   constructor() {
     makeAutoObservable(this);
@@ -17,7 +18,7 @@ class NotificationStore implements NotificationStoreT {
     this.info = info;
     this.isVisible = true;
 
-    setTimeout(() => {
+    this.timer = setTimeout(() => {
       this.removeNotification();
     }, 3000);
   };
@@ -25,6 +26,9 @@ class NotificationStore implements NotificationStoreT {
   removeNotification = () => {
     this.isVisible = false;
 
+    if (this.timer) {
+      clearTimeout(this.timer);
+    }
     setTimeout(() => {
       this.title = undefined;
       this.info = undefined;

@@ -17,6 +17,7 @@ export type NotificationStoreT = {
   info: string | undefined;
   type: string | undefined;
   isVisible: boolean;
+  timer: NodeJS.Timeout | undefined;
 
   setNotification: (title: string, info: string | undefined, type: string) => void;
   removeNotification: () => void;

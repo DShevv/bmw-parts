@@ -145,6 +145,7 @@ const Feedback = observer(({ categories }: { categories: CategoryT[] }) => {
             delay: 0,
             disableOnInteraction: true,
             pauseOnMouseEnter: true,
+            reverseDirection: true,
           }}
         >
           {categories.map((item) => (

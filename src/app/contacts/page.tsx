@@ -39,7 +39,7 @@ const page = async () => {
       </div>
 
       <section className={styles.requisites}>
-        <h2 className={clsx(styles.title, "h2")}>Заказать обратный звонок</h2>
+        <h2 className={clsx(styles.title, "h2")}>Реквизиты компании</h2>
         <div className={styles.requisitesContent}>
           <div className={styles.item}>
             <div className={clsx(styles.itemTitle, "h4")}>

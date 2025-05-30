@@ -4,10 +4,8 @@
   width: 100%;
   padding-top: vw-1550(12);
   background: var(--white-bg);
-  opacity: 0;
 
   &.fixed {
-    opacity: 1;
     position: fixed;
     top: 0;
     left: 0;
@@ -18,12 +16,60 @@
       0 225px 90px 0 rgba(28, 33, 63, 0.01),
       0 352px 98px 0 rgba(28, 33, 63, 0);
     padding-top: 0 !important;
+    transition: height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+
+    &:not([style*="opacity: 0"]) {
+      pointer-events: auto;
+    }
+
+    .content {
+      opacity: 1;
+      transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+
+      &:empty {
+        opacity: 0;
+      }
+    }
 
     &.top {
       padding-top: vw-1550(12) !important;
-      .hide {
-        opacity: 0;
-        pointer-events: none;
+    }
+
+    .hide {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      transform: translateY(100%);
+      border-bottom: 1px solid rgba(40, 75, 143, 0.2);
+      background: var(--light-blue);
+      border-left: 1px solid rgba(40, 75, 143, 0.2);
+      border-right: 1px solid rgba(40, 75, 143, 0.2);
+      border-radius: 0 0 vw-1550(12) vw-1550(12);
+      width: vw-1550(83);
+      height: vw-1550(21);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--dark-blue);
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+      svg {
+        width: vw-1550(16);
+        height: vw-1550(16);
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      &.active {
+        svg {
+          transform: rotate(180deg);
+        }
+      }
+
+      &:hover {
+        background: var(--dark-blue);
+        color: var(--white-bg);
       }
     }
   }
@@ -38,44 +84,6 @@
     .inner {
       max-width: vw-1550(1296);
       margin: 0 auto;
-    }
-  }
-
-  .hide {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    transform: translateY(100%);
-    border-bottom: 1px solid rgba(40, 75, 143, 0.2);
-    background: var(--light-blue);
-    border-left: 1px solid rgba(40, 75, 143, 0.2);
-    border-right: 1px solid rgba(40, 75, 143, 0.2);
-    border-radius: 0 0 vw-1550(12) vw-1550(12);
-    width: vw-1550(83);
-    height: vw-1550(21);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--dark-blue);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    opacity: 1;
-
-    svg {
-      width: vw-1550(16);
-      height: vw-1550(16);
-      transition: all 0.3s ease;
-    }
-
-    &.active {
-      svg {
-        transform: rotate(180deg);
-      }
-    }
-
-    &:hover {
-      background: var(--dark-blue);
-      color: var(--white-bg);
     }
   }
 

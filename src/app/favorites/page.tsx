@@ -7,6 +7,8 @@ import { observer } from "mobx-react-lite";
 import InlineButton from "@/components/Buttons/InlineButton/InlineButton";
 import ProductItem from "@/components/ProductItem/ProductItem";
 import { useState, useEffect } from "react";
+import { SvgEmpty } from "@/assets/icons/svgs";
+import MainButton from "@/components/Buttons/MainButton/MainButton";
 
 const Page = observer(() => {
   const { favoritesStore } = globalStore;
@@ -35,16 +37,27 @@ const Page = observer(() => {
               {Object.keys(favorites).length} товаров
             </span>
           </h1>
-          <InlineButton
-            type="link"
-            href="/"
-            onClick={removeAllFavorites}
-            isIcon
-          >
-            Очистить избранное
-          </InlineButton>
+          {Object.keys(favorites).length > 0 && (
+            <InlineButton onClick={removeAllFavorites} isIcon>
+              Очистить избранное
+            </InlineButton>
+          )}
         </div>
         <div className={styles.container}>
+          {Object.values(favorites).length === 0 && (
+            <div className={styles.empty}>
+              <SvgEmpty />
+              <div className={clsx("h2", styles.emptyTitle)}>
+                В избранном ничего нет...
+              </div>
+              <div className={clsx("body-1", styles.description)}>
+                Добавьте товары в избранное, чтобы здесь появились товары.
+              </div>
+              <MainButton type="link" href="/catalog">
+                Перейти в каталог
+              </MainButton>
+            </div>
+          )}
           {Object.values(favorites).map((product) => (
             <ProductItem key={product.id} product={product} />
           ))}

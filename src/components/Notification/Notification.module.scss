@@ -9,7 +9,7 @@
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  padding-top: vw-1550(248);
+  padding-top: vw-1550(200);
   opacity: 0;
   z-index: -1;
   pointer-events: none;
@@ -37,6 +37,11 @@
   &.error {
     max-width: vw-1550(342);
   }
+
+  svg {
+    width: vw-1550(32);
+    height: vw-1550(32);
+  }
 }
 
 .title {
@@ -54,11 +59,6 @@
   background: var(--error);
 }
 
-.title svg {
-  width: vw-1550(32);
-  height: vw-1550(32);
-}
-
 @media (max-width: 768px) {
   .wrapper {
     padding-top: 48px;
@@ -73,15 +73,15 @@
     &.error {
       max-width: 310px;
     }
+
+    svg {
+      width: 32px;
+      height: 32px;
+    }
   }
 
   .title {
     margin-top: 12px;
     margin-bottom: 6px;
-  }
-
-  .title svg {
-    width: 32px;
-    height: 32px;
   }
 }
