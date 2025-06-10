@@ -29,12 +29,16 @@
 
   .slide {
     width: auto;
-    opacity: 0.2;
     cursor: pointer;
     transition: all 0.3s ease;
 
     &.active {
-      opacity: 1;
+      .content {
+        .image {
+          border-color: var(--orange);
+          background-color: var(--white-bg);
+        }
+      }
     }
 
     .content {
@@ -50,6 +54,9 @@
         width: 100%;
         height: vw-1550(60);
         object-fit: cover;
+        border: 1px solid transparent;
+        transition: all 0.3s ease;
+
         border-radius: vw-1550(8);
       }
 

@@ -29,7 +29,7 @@
         width: vw-1550(104);
         color: var(--dark-blue);
         text-align: center;
-        opacity: 0.2;
+
         cursor: pointer;
         transition: opacity 0.3s ease-in-out;
 
@@ -38,6 +38,8 @@
           height: vw-1550(60);
           object-fit: cover;
           border-radius: vw-1550(8);
+          border: 1px solid transparent;
+          transition: all 0.3s ease;
         }
 
         &:hover {
@@ -45,7 +47,10 @@
         }
 
         &.active {
-          opacity: 1;
+          img {
+            border-color: var(--orange);
+            background-color: var(--white-bg);
+          }
         }
       }
     }
