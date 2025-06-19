@@ -33,3 +33,6 @@ export function findCategoryBySlug(categories: CategoryT[], slug: string): Categ
 
   return undefined;
 }
+export function formatPrice(price: number) {
+  return parseFloat(price.toFixed(2)).toString();
+}

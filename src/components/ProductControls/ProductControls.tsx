@@ -6,7 +6,7 @@ import { SvgHeart } from "@/assets/icons/svgs";
 import { ProductT } from "@/types/types";
 import { observer } from "mobx-react-lite";
 import globalStore from "@/stores/global-store";
-
+import { formatPrice } from "@/utils/helper";
 const ProductControls = observer(({ product }: { product: ProductT }) => {
   const { favoritesStore, popupStore, cartStore, notificationStore } =
     globalStore;
@@ -25,7 +25,7 @@ const ProductControls = observer(({ product }: { product: ProductT }) => {
             })}
           >
             {product.in_stock && "от "}
-            {product.price} BYN
+            {formatPrice(Number(product.price))} BYN
           </div>
         ) : (
           <div
@@ -38,10 +38,13 @@ const ProductControls = observer(({ product }: { product: ProductT }) => {
                 [styles.isAvailable]: product.in_stock,
               })}
             >
-              {Number(product.price) * (1 - Number(product.discount) / 100)} BYN
+              {formatPrice(
+                Number(product.price) * (1 - Number(product.discount) / 100)
+              )}
+               BYN
             </div>
             <div className={clsx("h4", styles.discount)}>
-              {product.price} BYN
+              {formatPrice(Number(product.price))} BYN
             </div>
           </div>
         )}

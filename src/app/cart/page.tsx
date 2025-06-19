@@ -12,6 +12,7 @@ import Link from "next/link";
 import ArrowButton from "@/components/Buttons/ArrowButton/ArrowButton";
 import MainButton from "@/components/Buttons/MainButton/MainButton";
 import { SvgEmpty } from "@/assets/icons/svgs";
+import { formatPrice } from "@/utils/helper";
 const Page = observer(() => {
   const { cartStore } = globalStore;
   const {
@@ -76,7 +77,7 @@ const Page = observer(() => {
                   <div className={styles.info}>
                     <div className={styles.title}>
                       <Link
-                        href="/catalog/wheels/product_1"
+                        href={`/catalog/${product.category.slug}/${product.slug}`}
                         className={clsx("h3")}
                       >
                         {product.name}
@@ -85,15 +86,17 @@ const Page = observer(() => {
                         <div className={clsx("h4", styles.price)}>
                           {Number(product.discount) > 0 ? (
                             <>
-                              {Number(product.price) *
-                                (1 - Number(product.discount) / 100)}
+                              {formatPrice(
+                                Number(product.price) *
+                                  (1 - Number(product.discount) / 100)
+                              )}
                                BYN
                               <span className={clsx("body-3", styles.discount)}>
-                                {product.price} BYN
+                                {formatPrice(Number(product.price))} BYN
                               </span>
                             </>
                           ) : (
-                            <>{product.price} BYN</>
+                            <>{formatPrice(Number(product.price))} BYN</>
                           )}
                         </div>
                       </div>
@@ -103,15 +106,17 @@ const Page = observer(() => {
                         <div className={clsx("h4", styles.price)}>
                           {Number(product.discount) > 0 ? (
                             <>
-                              {Number(product.price) *
-                                (1 - Number(product.discount) / 100)}
+                              {formatPrice(
+                                Number(product.price) *
+                                  (1 - Number(product.discount) / 100)
+                              )}
                                BYN
                               <span className={clsx("body-3", styles.discount)}>
-                                {product.price} BYN
+                                {formatPrice(Number(product.price))} BYN
                               </span>
                             </>
                           ) : (
-                            <>{product.price} BYN</>
+                            <>{formatPrice(Number(product.price))} BYN</>
                           )}
                         </div>
                       </div>
@@ -165,8 +170,7 @@ const Page = observer(() => {
               <div className={styles.summary}>
                 <div className={clsx("h4", styles.totalTitle)}>Итого</div>
                 <div className={clsx("h2", styles.totalPrice)}>
-                  {getTotalPrice().discountedPrice}
-                  BYN
+                  {getTotalPrice().discountedPrice} BYN
                 </div>
               </div>
               <MainButton

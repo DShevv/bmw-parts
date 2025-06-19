@@ -25,7 +25,7 @@ const Hero = async ({ banners }: { banners: BannerT[] }) => {
               key={category.id}
             >
               <Image
-                src={`${process.env.NEXT_PUBLIC_STORE_URL}/${category.icon_path}`}
+                src={`${process.env.NEXT_PUBLIC_STORE_URL}/${category?.icon_path}`}
                 alt={`${category.name} иконка`}
                 width={34}
                 height={34}

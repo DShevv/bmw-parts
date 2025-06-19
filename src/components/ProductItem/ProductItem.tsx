@@ -9,6 +9,7 @@ import { observer } from "mobx-react-lite";
 import globalStore from "@/stores/global-store";
 import { SvgHeart } from "@/assets/icons/svgs";
 import { useState, useEffect } from "react";
+import { formatPrice } from "@/utils/helper";
 
 const ProductItem = observer(({ product }: { product: ProductT }) => {
   const { cartStore, favoritesStore, notificationStore, popupStore } =
@@ -59,7 +60,7 @@ const ProductItem = observer(({ product }: { product: ProductT }) => {
       </div>
 
       <Image
-        src={`${process.env.NEXT_PUBLIC_STORE_URL}/${product.main_image.image_path}`}
+        src={`${process.env.NEXT_PUBLIC_STORE_URL}/${product?.main_image?.image_path}`}
         alt={product.name}
         width={200}
         height={200}
@@ -85,10 +86,13 @@ const ProductItem = observer(({ product }: { product: ProductT }) => {
 
         <div className={styles.controls}>
           <div className={clsx(styles.price, "h3")}>
-            {Number(product.price) * (1 - Number(product.discount) / 100)} BYN
+            {formatPrice(
+              Number(product.price) * (1 - Number(product.discount) / 100)
+            )}
+             BYN
             {Number(product.discount) > 0 && (
               <span className={clsx(styles.discount, "body-3")}>
-                {product.price} BYN
+                {formatPrice(Number(product.price))} BYN
               </span>
             )}
           </div>
