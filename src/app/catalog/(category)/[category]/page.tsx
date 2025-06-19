@@ -5,10 +5,10 @@ import clsx from "clsx";
 import FilterButton from "@/components/Buttons/FilterButton/FilterButton";
 import ProductItem from "@/components/ProductItem/ProductItem";
 import Pagination from "@/components/Pagination/Pagination";
-import { getProducts } from "@/services/CatalogService";
-import { ProductT } from "@/types/types";
+import { getCategoriesBySlug, getProducts } from "@/services/CatalogService";
+import { CategoryT, ProductT } from "@/types/types";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { useSearchParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 
 const Page = () => {
   const [products, setProducts] = useState<ProductT[] | null>(null);
@@ -17,13 +17,17 @@ const Page = () => {
     max: 1,
   });
   const [sort, setSort] = useState<string>("name");
+  const [categoryData, setCategoryData] = useState<CategoryT | null>(null);
+  const paramsData = useParams();
   const searchParams = useSearchParams();
   const params = useMemo(
     () => new URLSearchParams(searchParams.toString()),
     [searchParams]
   );
+
   const searchOptions = useMemo(() => {
     return {
+      category: categoryData?.id?.toString() ?? undefined,
       generation: params.get("generation"),
       series: params.get("series"),
       body: params.get("body"),
@@ -32,10 +36,14 @@ const Page = () => {
       transmission: params.get("transmission"),
       sort: sort,
     };
-  }, [params, sort]);
+  }, [params, sort, categoryData]);
 
   useEffect(() => {
     const fetchProducts = async () => {
+      if (paramsData.category !== "all" && !categoryData) {
+        return;
+      }
+
       const products = await getProducts(searchOptions);
 
       setProducts(products?.data ?? []);
@@ -66,6 +74,17 @@ const Page = () => {
     }
 
     setSort(sortValue);
+  }, []);
+
+  useEffect(() => {
+    const fetchCategoryData = async () => {
+      console.log(paramsData.category);
+      const categoryData = await getCategoriesBySlug(
+        paramsData.category as string
+      );
+      setCategoryData(categoryData ?? null);
+    };
+    fetchCategoryData();
   }, []);
 
   return (

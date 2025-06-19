@@ -84,7 +84,10 @@ const Footer = async () => {
             </div>
           </div>
           <div className={styles.policy}>
-            <Link href="/policy" className={clsx(styles.policyItem, "body-4")}>
+            <Link
+              href="/help?type=policy"
+              className={clsx(styles.policyItem, "body-4")}
+            >
               Политика обработки персональных данных
             </Link>
             <div className={styles.dev}>
