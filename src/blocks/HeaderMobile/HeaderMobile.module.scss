@@ -7,9 +7,10 @@
   right: 0;
   z-index: 100;
   width: 100%;
-  max-width: vw-1550(1296);
-  padding-bottom: 12px;
+  max-width: 100%;
   margin: 0 auto;
+  padding: 0 20px;
+  padding-bottom: 12px;
   padding-top: 16px;
   background: var(--white-bg);
 
@@ -123,7 +124,7 @@
 
 @media (max-width: 768px) {
   .header {
-    max-width: calc(100% - 40px);
+    max-width: 100%;
   }
 
   .info {
