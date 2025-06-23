@@ -9,8 +9,8 @@
   width: fit-content;
 
   img {
-    width: vw-1550(66);
-    height: vw-1550(66);
+    width: vw-1550(183);
+    height: vw-1550(74);
   }
 
   .caption {
@@ -37,8 +37,8 @@
     gap: 6px;
 
     img {
-      width: 36px;
-      height: 36px;
+      width: 106px;
+      height: 35px;
     }
 
     .caption {
@@ -49,9 +49,10 @@
 }
 
 .logo.footer {
-  .caption span {
-    @media (max-width: 768px) {
-      display: flex;
-    }
+  width: vw-1550(230);
+  height: vw-1550(93);
+  @media (max-width: 768px) {
+    width: 160px;
+    height: 53px;
   }
 }

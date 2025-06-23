@@ -27,10 +27,6 @@ const Logo = ({
           width={66}
           height={66}
         />
-        <div className={styles.caption}>
-          ООО «Аэронавто»
-          <span className={"body-2"}>Автозапчасти для BMW</span>
-        </div>
       </div>
     );
   }
@@ -46,10 +42,6 @@ const Logo = ({
         width={66}
         height={66}
       />
-      <div className={styles.caption}>
-        ООО «Аэронавто»
-        <span className={"body-2"}>Автозапчасти для BMW</span>
-      </div>
     </Link>
   );
 };

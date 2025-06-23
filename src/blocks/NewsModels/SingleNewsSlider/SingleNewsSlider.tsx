@@ -9,7 +9,7 @@ import NewsItem from "@/components/NewsItem/NewsItem";
 import { NewsT } from "@/types/types";
 
 const SingleNewsSlider = ({ news }: { news: NewsT[] }) => {
-  const swiperRef = useRef<SwiperType>(null);
+  const swiperRef = useRef<SwiperType | null>(null);
 
   const handlePrev = () => {
     swiperRef.current?.slidePrev();
