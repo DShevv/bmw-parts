@@ -19,6 +19,7 @@ import { DeliveryT, PaymentT } from "@/types/types";
 import { getDeliveries, getPayments } from "@/services/CatalogService";
 import { postOrder } from "@/services/FeedbackService";
 import { OrderT } from "@/types/api";
+import validateOrderForm from "@/utils/validateOrderForm";
 
 const Page = observer(() => {
   const { cartStore } = globalStore;
@@ -70,6 +71,9 @@ const Page = observer(() => {
             payment: "",
             isAgree: false,
           }}
+          validate={(values) => validateOrderForm(values, delivery)}
+          validateOnChange={false}
+          validateOnBlur={false}
           onSubmit={async (values) => {
             const orderData: OrderT = {
               customer_name: `${values.name} ${values.lastName}`,
@@ -345,7 +349,17 @@ const Page = observer(() => {
                         Согласие на обработку персональных данных
                       </Checkbox>
                       <MainButton
-                        disabled={!values.isAgree}
+                        disabled={
+                          !values.isAgree ||
+                          !isActiveStepOne(
+                            values.name,
+                            values.lastName,
+                            values.email,
+                            values.phone
+                          ) ||
+                          !(values.payment.length > 0) ||
+                          !(values.delivery.length > 0)
+                        }
                         type="submit"
                         className={styles.checkout}
                       >

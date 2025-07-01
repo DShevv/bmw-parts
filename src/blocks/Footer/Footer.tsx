@@ -7,11 +7,9 @@ import SocialLinks from "@/components/SocialLinks/SocialLinks";
 import { paymentMethods } from "@/data/dumpy-data";
 import Image from "next/image";
 import { getContacts, getSetting } from "@/services/InfoService";
-import { getCategories } from "@/services/CatalogService";
 
 const Footer = async () => {
   const contacts = await getContacts();
-  const categories = await getCategories();
   const settings = await getSetting();
 
   return (
@@ -25,26 +23,20 @@ const Footer = async () => {
             </p>
           </div>
           <div className={styles.categories}>
-            {categories?.map((category) => (
-              <Link
-                key={category.id}
-                href={`/catalog/${category.slug}`}
-                className={clsx(styles.category, "h3")}
-              >
-                {category.name}
-              </Link>
-            ))}
-          </div>
-          <div className={styles.menu}>
-            <Link href="/" className={clsx(styles.menuItem, "body-1")}>
+            <Link href="/" className={clsx(styles.category, "body-1")}>
               Главная
+            </Link>
+            <Link href="/catalog" className={clsx(styles.category, "body-1")}>
+              Каталог
             </Link>
             <Link
               href="/find-parts"
-              className={clsx(styles.menuItem, "body-1")}
+              className={clsx(styles.category, "body-1")}
             >
               Подбор запчастей для BMW
             </Link>
+          </div>
+          <div className={styles.menu}>
             <Link href="/help" className={clsx(styles.menuItem, "body-1")}>
               Помощь покупателю
             </Link>

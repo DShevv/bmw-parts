@@ -10,6 +10,8 @@ import Image from "next/image";
 import { useState } from "react";
 import { motion as m, AnimatePresence } from "motion/react";
 import { GenerationT, BodyT, SeriesT } from "@/types/types";
+import ArrowButton from "@/components/Buttons/ArrowButton/ArrowButton";
+import { Swiper as SwiperType } from "swiper/types";
 
 interface FindModelsProps {
   onChange: (series: SeriesT, body: BodyT, generation: GenerationT) => void;
@@ -26,6 +28,7 @@ const FindModels = ({
 }: FindModelsProps) => {
   const [activeId, setActiveId] = useState<number | null>(null);
   const [activeModel, setActiveModel] = useState<string | null>(null);
+  const [swiper, setSwiper] = useState<SwiperType | null>(null);
 
   return (
     <section className={styles.wrapper}>
@@ -41,6 +44,7 @@ const FindModels = ({
         freeMode={true}
         slidesPerView={"auto"}
         className={styles.swiper}
+        onSwiper={setSwiper}
       >
         {series.map((item) => (
           <SwiperSlide
@@ -64,6 +68,17 @@ const FindModels = ({
           </SwiperSlide>
         ))}
       </Swiper>
+
+      <div className={styles.navigation}>
+        <ArrowButton
+          className={styles.prev}
+          onClick={() => swiper?.slidePrev()}
+        />
+        <ArrowButton
+          className={styles.next}
+          onClick={() => swiper?.slideNext()}
+        />
+      </div>
 
       <AnimatePresence>
         {activeId && (

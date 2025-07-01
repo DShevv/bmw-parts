@@ -18,76 +18,28 @@
     }
   }
 
-  .swiper {
-    margin-left: 0;
-    width: 100%;
-
-    .slide {
-      width: auto;
-      margin-right: vw-1550(20);
-
-      .item {
-        width: vw-1550(104);
-
-        text-align: center;
-
-        cursor: pointer;
-        transition: opacity 0.3s ease-in-out;
-        color: var(--dark-blue);
-
-        img {
-          width: 100%;
-          height: vw-1550(60);
-          object-fit: cover;
-          border-radius: vw-1550(8);
-          border: 1px solid transparent;
-          transition: all 0.3s ease;
-        }
-
-        &:hover {
-          opacity: 1;
-        }
-
-        &.active {
-          img {
-            border-color: var(--orange);
-            background-color: var(--white-bg);
-          }
-        }
-      }
-    }
-
-    @media (max-width: 768px) {
-      .slide {
-        .item {
-          width: 70px;
-
-          img {
-            height: 40px;
-            border-radius: 6px;
-          }
-        }
-      }
-    }
-  }
-
   .models {
     margin-top: vw-1550(32);
     margin-left: 0;
     width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: vw-1550(30);
 
     & > div {
       margin: 0;
     }
 
+    @media (max-width: 768px) {
+      gap: 16px 19px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+    }
+
     .slide {
       width: auto;
-      margin-right: vw-1550(124);
-      margin-bottom: vw-1550(32);
 
       @media (max-width: 768px) {
-        margin-right: 20px;
-        margin-bottom: 16px;
       }
 
       .infoItem {
@@ -97,32 +49,29 @@
         gap: vw-1550(16);
 
         &:hover {
-          .infoTitle {
+          & > div.infoTitle {
             color: var(--orange);
           }
         }
 
         @media (max-width: 768px) {
-          max-width: 141px;
-          width: 141px;
-          gap: 6px;
           flex-direction: column;
-          align-items: flex-start;
-        }
-
-        &.active {
-          .infoTitle {
-            color: var(--orange);
-          }
+          gap: 6px;
+          max-width: 100%;
+          width: 100%;
         }
 
         .infoTitle {
           color: var(--text);
           text-align: left;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          white-space: nowrap;
-          cursor: default;
+
+          cursor: pointer;
+          max-width: 146px;
+
+          &:hover {
+            color: var(--orange);
+            cursor: pointer;
+          }
         }
 
         .infoList {
@@ -137,21 +86,22 @@
 
           @media (max-width: 768px) {
             gap: 6px;
-            max-height: 180px;
-          }
+            max-height: 100%;
 
-          .infoItem {
-            display: block;
-            width: fit-content;
-          }
+            .infoItem {
+              display: block;
+              width: fit-content;
+            }
 
-          .infoTitle {
-            color: var(--text);
-            text-decoration: none;
-            cursor: pointer;
+            .infoTitle {
+              color: var(--text);
+              text-decoration: none;
+              cursor: pointer;
+              white-space: normal;
 
-            &:hover {
-              color: var(--orange);
+              &:hover {
+                color: var(--orange);
+              }
             }
           }
         }

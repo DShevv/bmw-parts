@@ -77,6 +77,8 @@
     display: flex;
     flex-direction: column;
     border-right: 1px solid var(--medium-blue);
+    max-height: vw-1550(570);
+    overflow-y: auto;
 
     .category {
       display: flex;
@@ -98,10 +100,17 @@
         width: vw-1550(36);
         height: vw-1550(36);
         object-fit: contain;
+        flex: 0 0 vw-1550(36);
       }
 
       span {
         flex: 1 1 auto;
+      }
+
+      svg {
+        flex: 0 0 vw-1550(24);
+        height: vw-1550(24);
+        width: vw-1550(24);
       }
 
       &.active {
@@ -117,6 +126,48 @@
           color: var(--orange);
         }
       }
+    }
+
+    &::-webkit-scrollbar {
+      width: vw-1550(20);
+    }
+
+    &::-webkit-scrollbar-track {
+      background: var(--light-blue);
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: var(--medium-blue);
+      border: 1px solid var(--light-blue);
+      border-radius: vw-1550(5);
+      position: relative;
+      z-index: 2;
+    }
+
+    &::-webkit-scrollbar-button:single-button {
+      background: var(--light-blue);
+      display: block;
+      background-size: vw-1550(12);
+      background-repeat: no-repeat;
+    }
+
+    &::-webkit-scrollbar-button:single-button:vertical:decrement {
+      height: vw-1550(15);
+
+      width: vw-1550(20);
+      background-position: center center;
+      border-radius: vw-1550(5) vw-1550(5) 0 0;
+
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polygon points="12,8 6,16 18,16" fill="%23222955"/></svg>');
+    }
+
+    &::-webkit-scrollbar-button:single-button:vertical:increment {
+      border-radius: vw-1550(5) vw-1550(5) 0 0;
+
+      height: vw-1550(15);
+      width: vw-1550(20);
+      background-position: center center;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polygon points="12,16 6,8 18,8" fill="%23222955"/></svg>');
     }
   }
 

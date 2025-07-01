@@ -37,7 +37,7 @@ const HeaderMobile = async () => {
           </li>
           <li>
             <Link href={"/help"} className={clsx("body-2", styles.link)}>
-              Помощь покупателю
+              Оплата и доставка
             </Link>
           </li>
           <li>

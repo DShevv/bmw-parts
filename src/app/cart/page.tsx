@@ -6,7 +6,6 @@ import clsx from "clsx";
 import { observer } from "mobx-react-lite";
 import InlineButton from "@/components/Buttons/InlineButton/InlineButton";
 import { useState, useEffect } from "react";
-import wheelHD from "@/assets/images/wheel-hd.png";
 import Image from "next/image";
 import Link from "next/link";
 import ArrowButton from "@/components/Buttons/ArrowButton/ArrowButton";
@@ -73,7 +72,12 @@ const Page = observer(() => {
             <div className={styles.list}>
               {Object.values(cart).map(({ product, count }) => (
                 <div key={product.id} className={styles.product}>
-                  <Image src={wheelHD} alt="wheel-hd" />
+                  <Image
+                    src={`${process.env.NEXT_PUBLIC_STORE_URL}/${product?.main_image?.image_path}`}
+                    alt={product.sku}
+                    width={200}
+                    height={200}
+                  />
                   <div className={styles.info}>
                     <div className={styles.title}>
                       <Link

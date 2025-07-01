@@ -45,7 +45,7 @@ export type FavoritesStoreT = {
 export type CartStoreT = {
   cart: { [key: number]: { product: ProductT; count: number } };
 
-  addToCart: (product: ProductT) => void;
+  addToCart: (product: ProductT, count?: number) => void;
   removeFromCart: (product: ProductT) => void;
   removeOneFromCart: (product: ProductT) => void;
   removeAllFromCart: () => void;

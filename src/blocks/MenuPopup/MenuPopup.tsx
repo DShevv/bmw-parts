@@ -97,7 +97,7 @@ const MenuPopup = observer(() => {
               href="/help"
               onClick={() => closePopup("menu")}
             >
-              Помощь покупателю
+              Оплата и доставка
             </Link>
           </li>
           <li>

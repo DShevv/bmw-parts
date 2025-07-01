@@ -14,7 +14,11 @@ export function formatDate(date: string) {
 }
 
 export function isActiveStepOne(name: string, lastName: string, email: string, phone: string) {
-  return name.length > 0 && lastName.length > 0 && email.length > 0 && phone.length > 0;
+  if (email.length > 0) {
+    return name.length > 0 && lastName.length > 0 && phone.length > 0 && email.length > 0;
+  }
+
+  return name.length > 0 && lastName.length > 0 && phone.length > 0;
 }
 
 export function findCategoryBySlug(categories: CategoryT[], slug: string): CategoryT | undefined {

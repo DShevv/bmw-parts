@@ -24,11 +24,11 @@ class CartStore implements CartStoreT {
     stopPersisting(this);
   };
 
-  addToCart = (product: ProductT) => {
+  addToCart = (product: ProductT, count?: number) => {
     if (this.isInCart(product)) {
-      this.cart[product.id].count++;
+      this.cart[product.id].count += count ?? 1;
     } else {
-      this.cart[product.id] = { product, count: 1 };
+      this.cart[product.id] = { product, count: count ?? 1 };
     }
   };
 

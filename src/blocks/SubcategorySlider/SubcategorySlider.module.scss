@@ -14,81 +14,106 @@
       width: 100%;
     }
   }
-}
 
-.slider {
-  width: calc(100% + vw-1550(24));
-  position: relative;
-  left: vw-1550(-24);
-  padding: 0 vw-1550(24) vw-1550(48) vw-1550(24);
-  margin-bottom: vw-1550(-24);
-  overflow: hidden;
-
-  .slide {
-    width: vw-1550(282);
-    margin-right: vw-1550(24);
-
-    .item {
-      color: var(--text);
-      text-decoration: none;
-      background: var(--light-blue);
-      width: 100%;
-      height: vw-1550(80);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: vw-1550(12);
-      border: 1px solid transparent;
-      transition: all 0.3s ease-in-out;
-
-      &:hover {
-        box-shadow:
-          0 vw-1550(14) vw-1550(31) 0 rgba(28, 33, 63, 0.06),
-          0 vw-1550(24) vw-1550(90) 0 rgba(28, 33, 63, 0.01),
-          0 vw-1550(352) vw-1550(98) 0 rgba(28, 33, 63, 0);
-      }
-
-      &.active {
-        color: var(--orange);
-        border: 1px solid var(--medium-blue);
-      }
-    }
-  }
-
-  @media (max-width: 768px) {
-    max-width: 100%;
-    width: 100%;
-    padding: 0;
-    margin: 0;
-    left: 0;
+  .slider,
+  .table {
+    width: calc(100% + vw-1550(24));
+    position: relative;
+    left: vw-1550(-24);
+    padding: 0 vw-1550(24) vw-1550(48) vw-1550(24);
+    margin-bottom: vw-1550(-24);
+    overflow: hidden;
+    display: none;
 
     .slide {
-      width: auto;
-      margin-right: 16px;
+      width: vw-1550(196);
+      margin-right: vw-1550(24);
 
       .item {
+        color: var(--text);
+        text-decoration: none;
+        background: var(--light-blue);
+        width: 100%;
+        height: vw-1550(64);
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 0 vw-1550(12);
+        gap: vw-1550(10);
+        border-radius: vw-1550(12);
+        border: 1px solid transparent;
+        transition: all 0.3s ease-in-out;
+
+        &:not(:has(img)) {
+          justify-content: center;
+        }
+
+        &:hover {
+          box-shadow:
+            0 vw-1550(14) vw-1550(31) 0 rgba(28, 33, 63, 0.06),
+            0 vw-1550(24) vw-1550(90) 0 rgba(28, 33, 63, 0.01),
+            0 vw-1550(352) vw-1550(98) 0 rgba(28, 33, 63, 0);
+        }
+
+        &.active {
+          color: var(--orange);
+          border: 1px solid var(--medium-blue);
+        }
+
+        img {
+          width: vw-1550(36);
+          height: vw-1550(36);
+          object-fit: contain;
+          border-radius: vw-1550(8);
+          flex-shrink: 0;
+
+          @media (max-width: 768px) {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+          }
+        }
+      }
+    }
+
+    @media (max-width: 768px) {
+      display: block;
+      max-width: 100%;
+      width: 100%;
+      padding: 0;
+      margin: 0;
+      left: 0;
+
+      .slide {
+        width: auto;
+        margin-right: 16px;
         border-radius: 8px;
-        height: 44px;
-        padding: 12px 20px;
+
+        .item {
+          border-radius: 8px;
+          height: 56px;
+          padding: 10px 12px;
+
+          &:not(:has(img)) {
+            padding: 10px 20px;
+          }
+        }
       }
     }
   }
-}
 
-.navigation {
-  position: absolute;
-  left: vw-1550(-90);
-  top: vw-1550(13);
-  width: calc(100% + vw-1550(180));
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  .table {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-row-gap: vw-1550(20);
+    grid-column-gap: vw-1550(24);
 
-  .prev {
-    transform: rotate(180deg);
-  }
+    .slide {
+      margin: 0;
+    }
 
-  @media (max-width: 768px) {
-    display: none;
+    @media (max-width: 768px) {
+      display: none;
+    }
   }
 }

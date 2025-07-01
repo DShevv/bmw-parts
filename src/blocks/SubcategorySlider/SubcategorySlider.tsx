@@ -4,12 +4,10 @@ import clsx from "clsx";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/grid";
-import ArrowButton from "@/components/Buttons/ArrowButton/ArrowButton";
-import { Swiper as SwiperType } from "swiper";
-import { useRef } from "react";
 import Link from "next/link";
 import { CategoryT } from "@/types/types";
 import { useSearchParams } from "next/navigation";
+import Image from "next/image";
 
 const SubcategorySlider = ({
   slug,
@@ -20,16 +18,7 @@ const SubcategorySlider = ({
   categories: CategoryT[];
   categoryData: CategoryT | null;
 }) => {
-  const swiperRef = useRef<SwiperType>(null);
   const searchParams = useSearchParams();
-
-  const handlePrev = () => {
-    swiperRef.current?.slidePrev();
-  };
-
-  const handleNext = () => {
-    swiperRef.current?.slideNext();
-  };
 
   const getCategoriesToShow = () => {
     if (slug === "all") {
@@ -55,14 +44,8 @@ const SubcategorySlider = ({
 
   return (
     <div className={styles.wrapper}>
-      <Swiper
-        slidesPerView={"auto"}
-        className={styles.slider}
-        onSwiper={(swiper) => {
-          swiperRef.current = swiper;
-        }}
-      >
-        <SwiperSlide className={clsx("h4", styles.slide)}>
+      <Swiper slidesPerView={"auto"} className={styles.slider}>
+        <SwiperSlide className={clsx("body-3", styles.slide)}>
           <Link
             href={`/catalog/all?${searchParams.toString()}`}
             className={clsx(styles.item, {
@@ -74,30 +57,58 @@ const SubcategorySlider = ({
         </SwiperSlide>
 
         {categoriesToShow.map((category) => (
-          <SwiperSlide key={category.id} className={clsx("h4", styles.slide)}>
+          <SwiperSlide
+            key={category.id}
+            className={clsx("body-3", styles.slide)}
+          >
             <Link
               href={`/catalog/${category.slug}?${searchParams.toString()}`}
               className={clsx(styles.item, {
                 [styles.active]: category.slug === slug,
               })}
             >
-              {category.name}
+              <Image
+                src={`${process.env.NEXT_PUBLIC_STORE_URL}/${category.photo_path}`}
+                alt={category.name}
+                width={24}
+                height={24}
+              />
+              <span>{category.name}</span>
             </Link>
           </SwiperSlide>
         ))}
       </Swiper>
 
-      <div className={styles.navigation}>
-        <ArrowButton
-          name="prev-subcategory"
-          className={styles.prev}
-          onClick={handlePrev}
-        />
-        <ArrowButton
-          name="next-subcategory"
-          className={styles.next}
-          onClick={handleNext}
-        />
+      <div className={styles.table}>
+        <div className={clsx("body-3", styles.slide)}>
+          <Link
+            href={`/catalog/all?${searchParams.toString()}`}
+            className={clsx(styles.item, {
+              [styles.active]: slug === "all",
+            })}
+          >
+            Все товары
+          </Link>
+        </div>
+
+        {categoriesToShow.map((category) => (
+          <div key={category.id} className={clsx("body-3", styles.slide)}>
+            <Link
+              href={`/catalog/${category.slug}?${searchParams.toString()}`}
+              className={clsx(styles.item, {
+                [styles.active]: category.slug === slug,
+              })}
+            >
+              <Image
+                src={`${process.env.NEXT_PUBLIC_STORE_URL}/${category.photo_path}`}
+                alt={category.name}
+                width={24}
+                height={24}
+              />
+              <span>{category.name}</span>
+            </Link>
+          </div>
+        ))}
       </div>
     </div>
   );

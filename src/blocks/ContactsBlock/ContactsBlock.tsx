@@ -8,6 +8,7 @@ import { getContacts } from "@/services/InfoService";
 
 const ContactsBlock = async ({ noTitle }: { noTitle?: boolean }) => {
   const contacts = await getContacts();
+  
 
   return (
     <div className={styles.wrapper}>

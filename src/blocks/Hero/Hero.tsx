@@ -11,10 +11,6 @@ const Hero = async ({ banners }: { banners: BannerT[] }) => {
 
   return (
     <section className={styles.hero}>
-      <h1 className={clsx("h1", styles.title)}>
-        Автозапчасти и аксессуары для BMW в Минске
-      </h1>
-
       <div className={styles.container}>
         <HeroBannerSlider banners={banners} />
         <div className={styles.categories}>

@@ -25,7 +25,7 @@
     display: flex;
     flex-direction: column;
     width: 160px;
-    height: 336px;
+    height: 380px;
     border-radius: 8px;
   }
 
@@ -36,6 +36,7 @@
     object-fit: cover;
     margin-bottom: vw-1550(12);
     flex: 0 0 vw-1550(240);
+    object-fit: contain;
 
     @media (max-width: 768px) {
       height: 137px;
@@ -73,6 +74,7 @@
     flex: 0 0 auto;
 
     @media (max-width: 768px) {
+      flex-grow: 1;
       margin-bottom: 8px;
       -webkit-line-clamp: 3;
       line-clamp: 3;
@@ -101,6 +103,32 @@
     }
   }
 
+  .price {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    gap: vw-1550(4);
+    color: var(--dark-blue);
+
+    &:has(.discount) {
+      color: var(--orange);
+    }
+
+    .discount {
+      color: var(--text);
+      text-decoration: line-through;
+      opacity: 0.4;
+      line-height: 1;
+    }
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      align-items: flex-start;
+      margin-bottom: 8px;
+      gap: 2px;
+    }
+  }
+
   .controls {
     margin-top: vw-1550(12);
     display: flex;
@@ -109,27 +137,8 @@
     justify-content: space-between;
     flex: 0 0 auto;
 
-    .price {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: vw-1550(4);
-      color: var(--dark-blue);
-
-      &:has(.discount) {
-        color: var(--orange);
-      }
-
-      .discount {
-        color: var(--text);
-        text-decoration: line-through;
-        opacity: 0.4;
-        line-height: 1;
-      }
-    }
-
     .button {
-      min-width: vw-1550(150);
+      min-width: vw-1550(137);
     }
 
     @media (max-width: 768px) {
@@ -137,12 +146,73 @@
       flex-direction: column;
       gap: 8px;
       align-items: flex-start;
-      flex-grow: 1;
+      justify-content: flex-end;
+
       margin-bottom: 16px;
 
       .button {
         width: 100%;
         padding: 12px 16px;
+      }
+    }
+
+    .countControls {
+      display: flex;
+      gap: vw-1550(2);
+      justify-content: space-between;
+      align-items: center;
+      border: 1px solid var(--medium-blue);
+      border-radius: vw-1550(12);
+      padding: vw-1550(4);
+      flex: 0 0 vw-1550(117);
+      max-width: vw-1550(117);
+
+      .count {
+        min-width: vw-1550(32);
+        text-align: center;
+
+        @media (max-width: 768px) {
+          min-width: 32px;
+        }
+      }
+
+      .arrow {
+        flex: 0 0 vw-1550(36);
+        height: vw-1550(36);
+        width: vw-1550(36);
+
+        @media (max-width: 768px) {
+          flex: 0 0 36px;
+          height: 36px;
+          width: 36px;
+        }
+
+        svg {
+          width: vw-1550(24);
+          height: vw-1550(24);
+
+          @media (max-width: 768px) {
+            width: 24px;
+            height: 24px;
+          }
+        }
+
+        &.arrowLeft {
+          transform: rotate(180deg);
+        }
+      }
+
+      @media (max-width: 768px) {
+        gap: 10px;
+        padding: 4px;
+        border-radius: 6px;
+        max-width: 100%;
+        width: 100%;
+        flex: initial;
+
+        .count {
+          min-width: 32px;
+        }
       }
     }
   }
@@ -156,6 +226,9 @@
     gap: vw-1550(6);
     align-items: center;
     z-index: 1;
+    padding: vw-1550(4) vw-1550(6);
+    border-radius: vw-1550(6);
+    background: var(--white-bg);
 
     &:before {
       content: "";
@@ -169,6 +242,9 @@
       top: 12px;
       left: 12px;
       gap: 3px;
+      padding: 4px 5px;
+      border-radius: 6px;
+      background: var(--white-bg);
 
       &:before {
         width: 4px;
@@ -185,6 +261,12 @@
     cursor: pointer;
     color: var(--dark-blue);
     transition: all 0.3s ease;
+    padding: vw-1550(3);
+    border-radius: vw-1550(6);
+    background: var(--white-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     svg {
       width: vw-1550(26);
@@ -203,6 +285,9 @@
     @media (max-width: 768px) {
       top: 12px;
       right: 12px;
+      padding: 2px;
+      border-radius: 6px;
+      background: var(--white-bg);
 
       svg {
         width: 26px;

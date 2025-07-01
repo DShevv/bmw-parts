@@ -5,13 +5,45 @@
   flex: 0 0 vw-1550(810);
   height: vw-1550(440);
   border-radius: vw-1550(12);
-  overflow: hidden;
   background: var(--light-blue);
+  max-width: vw-1550(810);
 
   @media (max-width: 768px) {
     flex: initial;
     height: fit-content;
     border-radius: 8px;
+    max-width: 100%;
+  }
+
+  .navigation {
+    position: absolute;
+    top: vw-1550(105);
+    display: flex;
+    justify-content: space-between;
+    width: calc(100% + vw-1550(36));
+    left: vw-1550(-18);
+    z-index: 1;
+
+    .prev {
+      transform: rotate(180deg);
+    }
+
+    .prev,
+    .next {
+      width: vw-1550(36);
+      height: vw-1550(36);
+      background-color: var(--white-bg);
+      border: 1px solid var(--light-blue);
+
+      svg {
+        width: vw-1550(24);
+        height: vw-1550(24);
+      }
+    }
+
+    @media (max-width: 768px) {
+      display: none;
+    }
   }
 }
 

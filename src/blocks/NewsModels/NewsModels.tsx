@@ -3,6 +3,7 @@ import HeroPopularModels from "../Hero/HeroPopularModels/HeroPopularModels";
 import styles from "./NewsModels.module.scss";
 import SingleNewsSlider from "./SingleNewsSlider/SingleNewsSlider";
 import { NewsT } from "@/types/types";
+import clsx from "clsx";
 
 interface NewsModelsProps {
   news: NewsT[];
@@ -13,10 +14,15 @@ const NewsModels = async ({ news }: NewsModelsProps) => {
   const generations = await getGenerations();
 
   return (
-    <section className={styles.wrapper}>
-      <SingleNewsSlider news={news} />
-      <HeroPopularModels series={series} generations={generations} />
-    </section>
+    <div>
+      <h1 className={clsx("h1", styles.title)}>
+        Автозапчасти и аксессуары для BMW в Минске
+      </h1>
+      <section className={styles.wrapper}>
+        <SingleNewsSlider news={news} />
+        <HeroPopularModels series={series} generations={generations} />
+      </section>
+    </div>
   );
 };
 

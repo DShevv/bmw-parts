@@ -11,6 +11,7 @@ import clsx from "clsx";
 import Link from "next/link";
 import IconButton from "@/components/Buttons/IconButton/IconButton";
 import { SeriesT, GenerationT } from "@/types/types";
+import ArrowButton from "@/components/Buttons/ArrowButton/ArrowButton";
 
 interface HeroPopularModelsProps {
   series: SeriesT[];
@@ -53,11 +54,11 @@ const HeroPopularModels = ({ series, generations }: HeroPopularModelsProps) => {
           <SwiperSlide
             key={slide.id}
             className={clsx(styles.slide, {
-              [styles.active]: activeIndex === slide.id,
+              [styles.active]: activeIndex === slide.id - 1,
             })}
             onClick={() => {
-              setActiveIndex(slide.id);
-              swiper?.slideTo(slide.id);
+              setActiveIndex(slide.id - 1);
+              swiper?.slideTo(slide.id - 1);
             }}
           >
             <div className={styles.content}>
@@ -75,6 +76,18 @@ const HeroPopularModels = ({ series, generations }: HeroPopularModelsProps) => {
           </SwiperSlide>
         ))}
       </Swiper>
+
+      <div className={styles.navigation}>
+        <ArrowButton
+          className={styles.prev}
+          onClick={() => swiper?.slidePrev()}
+        />
+        <ArrowButton
+          className={styles.next}
+          onClick={() => swiper?.slideNext()}
+        />
+      </div>
+
       <div className={styles.infoContainer}>
         <Swiper
           slidesPerView={2}

@@ -14,7 +14,8 @@ export const generateMetadata = async ({
   params: Promise<{ slug: string }>;
 }) => {
   const { slug } = await params;
-  const news = await getNewsBySlug(slug);
+  const id = slug.split("_")[1];
+  const news = await getNewsBySlug(id);
   return {
     title: news?.title ?? "BMW parts",
     description:
@@ -41,7 +42,8 @@ export async function generateStaticParams() {
 
 const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
   const { slug } = await params;
-  const news = await getNewsBySlug(slug.split("_")[1]);
+  const id = slug.split("_")[1];
+  const news = await getNewsBySlug(id);
   const newsList = await getNews({ page: 1, perPage: 9 });
   await addNewsView(news?.id ?? 0);
 

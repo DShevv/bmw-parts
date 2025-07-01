@@ -22,8 +22,8 @@ export default async function Home() {
 
   return (
     <>
-      <Hero banners={banners ?? []} />
       <NewsModels news={news?.data ?? []} />
+      <Hero banners={banners ?? []} />
       <AboutBlock />
       {products && <PopularSlider products={products.data} />}
       <RecentPromo promo={promo?.data.data ?? []} />

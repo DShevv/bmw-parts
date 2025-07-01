@@ -4,6 +4,7 @@
   border-radius: vw-1550(12);
   padding: vw-1550(24);
   background: var(--light-blue);
+  position: relative;
 
   .title {
     margin-bottom: vw-1550(24);
@@ -15,6 +16,37 @@
 
     .title {
       margin-bottom: 8px;
+    }
+  }
+
+  .navigation {
+    position: absolute;
+    top: vw-1550(105);
+    display: flex;
+    justify-content: space-between;
+    width: calc(100% + vw-1550(36));
+    left: vw-1550(-18);
+    z-index: 1;
+
+    .prev {
+      transform: rotate(180deg);
+    }
+
+    .prev,
+    .next {
+      width: vw-1550(36);
+      height: vw-1550(36);
+      background-color: var(--white-bg);
+      border: 1px solid var(--light-blue);
+
+      svg {
+        width: vw-1550(24);
+        height: vw-1550(24);
+      }
+    }
+
+    @media (max-width: 768px) {
+      display: none;
     }
   }
 

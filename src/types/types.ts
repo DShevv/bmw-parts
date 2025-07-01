@@ -220,3 +220,26 @@ export type DeliveryT = {
   cost: string;
 }
 
+export type OrderFormT = {
+  name: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  delivery: string;
+  address: string;
+  comment: string;
+  payment: string;
+  isAgree: boolean;
+};
+
+export type ValidateOrderFormT = {
+  name?: string;
+  lastName?: string;
+  email?: string;
+  phone?: string;
+  delivery?: string;
+  address?: string;
+  payment?: string;
+  isAgree?: string;
+};
+

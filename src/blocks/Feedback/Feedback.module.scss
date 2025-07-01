@@ -7,8 +7,8 @@
   background: var(--dark-blue);
   overflow: hidden;
   display: flex;
-  justify-content: space-between;
-  gap: vw-1550(110);
+  justify-content: flex-start;
+  gap: 0;
 }
 
 .imageMobile {
@@ -22,6 +22,7 @@
   gap: vw-1550(16);
   width: 100%;
   color: var(--white-bg);
+  max-width: vw-1550(684);
 
   .button {
     width: vw-1550(218);
@@ -48,7 +49,7 @@
 
 .imageContainer {
   position: relative;
-  width: vw-1550(550);
+  width: vw-1550(612);
   flex-shrink: 0;
   overflow: hidden;
   display: flex;

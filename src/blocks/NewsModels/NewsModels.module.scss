@@ -10,3 +10,12 @@
     gap: 24px;
   }
 }
+
+.title {
+  margin-bottom: vw-1550(24);
+  color: var(--text);
+
+  @media (max-width: 768px) {
+    margin-bottom: 16px;
+  }
+}

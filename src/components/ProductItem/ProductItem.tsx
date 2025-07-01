@@ -10,6 +10,7 @@ import globalStore from "@/stores/global-store";
 import { SvgHeart } from "@/assets/icons/svgs";
 import { useState, useEffect } from "react";
 import { formatPrice } from "@/utils/helper";
+import ArrowButton from "../Buttons/ArrowButton/ArrowButton";
 
 const ProductItem = observer(({ product }: { product: ProductT }) => {
   const { cartStore, favoritesStore, notificationStore, popupStore } =
@@ -19,6 +20,7 @@ const ProductItem = observer(({ product }: { product: ProductT }) => {
   const { setNotification } = notificationStore;
   const { openPopup } = popupStore;
   const [isClient, setIsClient] = useState(false);
+  const [count, setCount] = useState(1);
 
   useEffect(() => {
     setIsClient(true);
@@ -83,24 +85,46 @@ const ProductItem = observer(({ product }: { product: ProductT }) => {
             Номер: <span className="body-3">{product.sku}</span>
           </div>
         </div>
+        <div className={clsx(styles.price, "h3")}>
+          {formatPrice(
+            Number(product.price) * (1 - Number(product.discount) / 100)
+          )}
+           BYN
+          {Number(product.discount) > 0 && (
+            <span className={clsx(styles.discount, "body-3")}>
+              {formatPrice(Number(product.price))} BYN
+            </span>
+          )}
+        </div>
 
         <div className={styles.controls}>
-          <div className={clsx(styles.price, "h3")}>
-            {formatPrice(
-              Number(product.price) * (1 - Number(product.discount) / 100)
-            )}
-             BYN
-            {Number(product.discount) > 0 && (
-              <span className={clsx(styles.discount, "body-3")}>
-                {formatPrice(Number(product.price))} BYN
-              </span>
-            )}
+          <div
+            className={styles.countControls}
+            onClick={(e) => {
+              e.preventDefault();
+            }}
+          >
+            <ArrowButton
+              className={clsx(styles.arrow, styles.arrowLeft)}
+              onClick={() => {
+                if (count > 1) {
+                  setCount(count - 1);
+                }
+              }}
+              name="minus-one"
+            />
+            <div className={clsx("h3", styles.count)}>{count}</div>
+            <ArrowButton
+              className={styles.arrow}
+              onClick={() => setCount(count + 1)}
+              name="plus-one"
+            />
           </div>
           <MainButton
             onClick={(e) => {
               e.preventDefault();
               if (product.in_stock) {
-                addToCart(product);
+                addToCart(product, count);
                 setNotification(
                   "Товар добавлен в корзину",
                   undefined,

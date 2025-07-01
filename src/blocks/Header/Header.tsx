@@ -64,7 +64,7 @@ const Header = ({
               </li>
               <li>
                 <Link href={"/help"} className={clsx("body-2", styles.link)}>
-                  Помощь покупателю
+                  Оплата и доставка
                 </Link>
               </li>
               <li>
@@ -98,6 +98,7 @@ const Header = ({
           layout
           className={clsx(styles.header, styles.fixed, {
             [styles.top]: isTop,
+            [styles.visible]: !isHide,
           })}
           initial={{ opacity: 0 }}
           animate={{
