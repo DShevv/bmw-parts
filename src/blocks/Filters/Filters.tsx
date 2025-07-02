@@ -144,6 +144,28 @@ const Filters = observer(
         <h3 className={clsx("h1", styles.title)}>Фильтр</h3>
 
         <div className={styles.filters}>
+          <DropdownFilter
+            title="Год"
+            name="year"
+            data={[
+              "2010",
+              "2011",
+              "2012",
+              "2013",
+              "2014",
+              "2015",
+              "2016",
+              "2017",
+              "2018",
+              "2019",
+              "2020",
+              "2021",
+              "2022",
+              "2023",
+              "2024",
+              "2025",
+            ]}
+          />
           <PriceFilter
             title="Цена"
             name="price"
@@ -188,28 +210,6 @@ const Filters = observer(
             title="КПП"
             name="transmission"
             data={["АКПП", "МКПП", "Вариатор", "Робот"]}
-          />
-          <DropdownFilter
-            title="Год"
-            name="year"
-            data={[
-              "2010",
-              "2011",
-              "2012",
-              "2013",
-              "2014",
-              "2015",
-              "2016",
-              "2017",
-              "2018",
-              "2019",
-              "2020",
-              "2021",
-              "2022",
-              "2023",
-              "2024",
-              "2025",
-            ]}
           />
         </div>
         <MainButton

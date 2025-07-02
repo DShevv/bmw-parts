@@ -2,7 +2,7 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Swiper as SwiperType } from "swiper";
 import { Grid } from "swiper/modules";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import styles from "./HeroPopularModels.module.scss";
 import "swiper/css";
@@ -10,30 +10,26 @@ import "swiper/css/grid";
 import clsx from "clsx";
 import Link from "next/link";
 import IconButton from "@/components/Buttons/IconButton/IconButton";
-import { SeriesT, GenerationT } from "@/types/types";
+import { SeriesT, GenerationT, BodyT } from "@/types/types";
 import ArrowButton from "@/components/Buttons/ArrowButton/ArrowButton";
 
 interface HeroPopularModelsProps {
   series: SeriesT[];
   generations: GenerationT[];
+  bodies: BodyT[];
 }
 
-const HeroPopularModels = ({ series, generations }: HeroPopularModelsProps) => {
-  const [activeIndex, setActiveIndex] = useState(0);
+const HeroPopularModels = ({
+  series,
+  generations,
+  bodies,
+}: HeroPopularModelsProps) => {
+  const [activeSeries, setActiveSeries] = useState<SeriesT | null>(series[0]);
   const [swiper, setSwiper] = useState<SwiperType | null>(null);
-  const [swiper2, setSwiper2] = useState<SwiperType | null>(null);
 
-  const handleSlideChange = () => {
-    if (swiper && swiper2) {
-      setActiveIndex(swiper.realIndex);
-    }
+  const handelSlideChange = (swiper: SwiperType) => {
+    setActiveSeries(series[swiper.realIndex]);
   };
-
-  useEffect(() => {
-    if (swiper && swiper2) {
-      swiper2.slideTo(activeIndex);
-    }
-  }, [swiper, swiper2, activeIndex]);
 
   return (
     <div className={styles.wrapper}>
@@ -47,18 +43,18 @@ const HeroPopularModels = ({ series, generations }: HeroPopularModelsProps) => {
           },
         }}
         onSwiper={setSwiper}
-        onSlideChange={handleSlideChange}
+        onSlideChange={handelSlideChange}
         className={styles.swiper}
       >
-        {series.map((slide) => (
+        {series.map((slide, index) => (
           <SwiperSlide
             key={slide.id}
             className={clsx(styles.slide, {
-              [styles.active]: activeIndex === slide.id - 1,
+              [styles.active]: activeSeries?.id === slide.id,
             })}
             onClick={() => {
-              setActiveIndex(slide.id - 1);
-              swiper?.slideTo(slide.id - 1);
+              setActiveSeries(slide);
+              swiper?.slideTo(index);
             }}
           >
             <div className={styles.content}>
@@ -108,33 +104,29 @@ const HeroPopularModels = ({ series, generations }: HeroPopularModelsProps) => {
               slidesPerGroup: 1,
             },
           }}
-          onSwiper={setSwiper2}
           className={styles.infoSwiper}
         >
-          {series.map((slide) => (
-            <SwiperSlide
-              key={slide.id}
-              className={clsx(styles.infoItem, {
-                [styles.active]: activeIndex === slide.id,
-              })}
-            >
-              <div className={clsx("h4", styles.infoTitle)}>{slide.name}</div>
-              <ul className={styles.infoList}>
-                {generations
-                  .filter((generation) => generation.series_id === slide.id)
-                  .map((generation) => (
-                    <li key={generation.id} className={styles.infoItem}>
-                      <Link
-                        href={`/catalog/all?series=${slide.slug}&generation=${generation.slug}`}
-                        className={clsx("body-2", styles.infoTitle)}
-                      >
-                        {generation.name}
-                      </Link>
-                    </li>
-                  ))}
-              </ul>
-            </SwiperSlide>
-          ))}
+          {generations
+            .filter((generation) => generation.series_id === activeSeries?.id)
+            ?.map((slide) => (
+              <SwiperSlide key={slide.id} className={clsx(styles.infoItem)}>
+                <div className={clsx("h4", styles.infoTitle)}>{slide.name}</div>
+                <ul className={styles.infoList}>
+                  {bodies
+                    .filter((body) => body.generation_id === slide.id)
+                    .map((body) => (
+                      <li key={body.id} className={styles.infoItem}>
+                        <Link
+                          href={`/catalog/all?series=${activeSeries?.slug}&generation=${slide.slug}&body=${body.slug}`}
+                          className={clsx("body-2", styles.infoTitle)}
+                        >
+                          {body.name}
+                        </Link>
+                      </li>
+                    ))}
+                </ul>
+              </SwiperSlide>
+            ))}
         </Swiper>
 
         <IconButton type="link" href="/catalog" className={styles.button}>

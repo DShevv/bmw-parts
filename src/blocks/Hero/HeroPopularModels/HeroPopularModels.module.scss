@@ -23,6 +23,7 @@
     width: calc(100% + vw-1550(36));
     left: vw-1550(-18);
     z-index: 1;
+    pointer-events: none;
 
     .prev {
       transform: rotate(180deg);
@@ -34,6 +35,19 @@
       height: vw-1550(36);
       background-color: var(--white-bg);
       border: 1px solid var(--light-blue);
+      pointer-events: auto;
+
+      &:hover {
+        background-color: var(--medium-blue);
+        border-color: var(--medium-blue);
+        color: var(--dark-blue);
+      }
+
+      &:active {
+        background-color: var(--dark-blue);
+        border-color: var(--dark-blue);
+        color: var(--white-bg);
+      }
 
       svg {
         width: vw-1550(24);

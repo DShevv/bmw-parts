@@ -99,6 +99,7 @@ const Header = ({
           className={clsx(styles.header, styles.fixed, {
             [styles.top]: isTop,
             [styles.visible]: !isHide,
+            [styles.pastViewport]: isPastViewport,
           })}
           initial={{ opacity: 0 }}
           animate={{

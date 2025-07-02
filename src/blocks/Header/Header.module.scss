@@ -29,7 +29,7 @@
       overflow: hidden;
     }
 
-    &:not([style*="opacity: 0"]) {
+    &.pastViewport {
       pointer-events: auto;
     }
 

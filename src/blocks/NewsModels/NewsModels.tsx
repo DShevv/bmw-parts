@@ -1,4 +1,4 @@
-import { getGenerations, getSeries } from "@/services/CarsService";
+import { getBodies, getGenerations, getSeries } from "@/services/CarsService";
 import HeroPopularModels from "../Hero/HeroPopularModels/HeroPopularModels";
 import styles from "./NewsModels.module.scss";
 import SingleNewsSlider from "./SingleNewsSlider/SingleNewsSlider";
@@ -12,6 +12,7 @@ interface NewsModelsProps {
 const NewsModels = async ({ news }: NewsModelsProps) => {
   const series = await getSeries();
   const generations = await getGenerations();
+  const bodies = await getBodies();
 
   return (
     <div>
@@ -20,7 +21,11 @@ const NewsModels = async ({ news }: NewsModelsProps) => {
       </h1>
       <section className={styles.wrapper}>
         <SingleNewsSlider news={news} />
-        <HeroPopularModels series={series} generations={generations} />
+        <HeroPopularModels
+          series={series}
+          generations={generations}
+          bodies={bodies}
+        />
       </section>
     </div>
   );
