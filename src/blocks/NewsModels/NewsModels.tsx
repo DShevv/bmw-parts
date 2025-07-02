@@ -15,7 +15,7 @@ const NewsModels = async ({ news }: NewsModelsProps) => {
   const bodies = await getBodies();
 
   return (
-    <div>
+    <div className={styles.container}>
       <h1 className={clsx("h1", styles.title)}>
         Автозапчасти и аксессуары для BMW в Минске
       </h1>

@@ -1,12 +1,10 @@
 "use client";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Swiper as SwiperType } from "swiper";
-import { Grid } from "swiper/modules";
 import { useState } from "react";
 import Image from "next/image";
 import styles from "./HeroPopularModels.module.scss";
 import "swiper/css";
-import "swiper/css/grid";
 import clsx from "clsx";
 import Link from "next/link";
 import IconButton from "@/components/Buttons/IconButton/IconButton";
@@ -85,32 +83,17 @@ const HeroPopularModels = ({
       </div>
 
       <div className={styles.infoContainer}>
-        <Swiper
-          slidesPerView={2}
-          spaceBetween={12}
-          modules={[Grid]}
-          grid={{
-            rows: 3,
-            fill: "row",
-          }}
-          slidesPerGroup={3}
-          breakpoints={{
-            768: {
-              slidesPerView: "auto",
-              spaceBetween: 52,
-              grid: {
-                rows: 1,
-              },
-              slidesPerGroup: 1,
-            },
-          }}
-          className={styles.infoSwiper}
-        >
+        <div className={styles.infoSwiper}>
           {generations
             .filter((generation) => generation.series_id === activeSeries?.id)
             ?.map((slide) => (
-              <SwiperSlide key={slide.id} className={clsx(styles.infoItem)}>
-                <div className={clsx("h4", styles.infoTitle)}>{slide.name}</div>
+              <div key={slide.id} className={clsx(styles.infoItem)}>
+                <Link
+                  href={`/catalog/all?series=${activeSeries?.slug}&generation=${slide.slug}`}
+                  className={clsx("h4", styles.infoTitle)}
+                >
+                  {slide.name}
+                </Link>
                 <ul className={styles.infoList}>
                   {bodies
                     .filter((body) => body.generation_id === slide.id)
@@ -125,9 +108,9 @@ const HeroPopularModels = ({
                       </li>
                     ))}
                 </ul>
-              </SwiperSlide>
+              </div>
             ))}
-        </Swiper>
+        </div>
 
         <IconButton type="link" href="/catalog" className={styles.button}>
           все модели

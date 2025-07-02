@@ -83,6 +83,7 @@
         .image {
           border-color: var(--orange);
           background-color: var(--white-bg);
+          object-fit: contain;
         }
       }
     }
@@ -151,6 +152,14 @@
 
 .infoSwiper {
   width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: vw-1550(52);
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
 }
 
 .infoItem {
@@ -176,6 +185,11 @@
     color: var(--text);
     text-align: center;
     height: fit-content;
+    text-decoration: none;
+
+    &:hover {
+      color: var(--orange);
+    }
   }
 
   .infoList {
