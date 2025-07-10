@@ -27,6 +27,7 @@ const DropdownFilter = ({
   const params = new URLSearchParams(searchParams.toString());
   const value = params.get(name);
   const [filterValue, setFilterValue] = useState<string>(value || "");
+  const [hasUserInteracted, setHasUserInteracted] = useState(false);
   const debouncedFilterValue = useDebounce(filterValue, 2000);
   const router = useRouter();
   const pathname = usePathname();
@@ -35,12 +36,17 @@ const DropdownFilter = ({
   );
 
   const createQueryString = useCallback(
-    (name: string, value?: string) => {
+    (name: string, value?: string, resetPage = false) => {
       const params = new URLSearchParams(searchParams.toString());
       if (value) {
         params.set(name, value);
       } else {
         params.delete(name);
+      }
+
+      // Сбрасываем page только при изменении фильтра пользователем
+      if (resetPage) {
+        params.delete("page");
       }
 
       return params.toString();
@@ -56,20 +62,45 @@ const DropdownFilter = ({
       setFilterValue("");
       setActive(false);
     }
+    // Сбрасываем hasUserInteracted при изменении URL извне
+    setHasUserInteracted(false);
   }, [value]);
 
   useEffect(() => {
-    if (debouncedFilterValue === "Все") {
-      router.push(pathname + "?" + createQueryString(name), {
-        scroll: false,
-      });
-    } else {
-      router.push(
-        pathname + "?" + createQueryString(name, debouncedFilterValue),
-        { scroll: false }
-      );
+    // Обновляем URL только при пользовательских действиях
+    if (hasUserInteracted && debouncedFilterValue !== undefined) {
+      const currentUrlValue = searchParams.get(name) || "";
+      const targetValue =
+        debouncedFilterValue === "Все" ? "" : debouncedFilterValue;
+
+      // Проверяем, действительно ли изменилось значение
+      if (currentUrlValue !== targetValue) {
+        if (debouncedFilterValue === "Все") {
+          router.push(
+            pathname + "?" + createQueryString(name, undefined, true),
+            {
+              scroll: false,
+            }
+          );
+        } else {
+          router.push(
+            pathname +
+              "?" +
+              createQueryString(name, debouncedFilterValue, true),
+            { scroll: false }
+          );
+        }
+      }
     }
-  }, [debouncedFilterValue]);
+  }, [
+    debouncedFilterValue,
+    hasUserInteracted,
+    pathname,
+    createQueryString,
+    name,
+    router,
+    searchParams,
+  ]);
 
   return (
     <div
@@ -112,8 +143,10 @@ const DropdownFilter = ({
             <Select
               options={["Все", ...data]}
               onChange={(value) => {
+                setHasUserInteracted(true);
                 setFilterValue(value);
               }}
+              key={filterValue} // Принудительно перерендерим Select при изменении filterValue
               defaultValue={filterValue || "Все"}
               className={styles.select}
               direction={direction}

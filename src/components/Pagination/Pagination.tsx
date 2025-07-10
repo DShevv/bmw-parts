@@ -1,7 +1,9 @@
+"use client";
 import Link from "next/link";
 import styles from "./Pagination.module.scss";
 import clsx from "clsx";
 import ArrowButton from "../Buttons/ArrowButton/ArrowButton";
+import { useSearchParams } from "next/navigation";
 
 interface PaginationProps {
   current: number;
@@ -16,13 +18,21 @@ const Pagination = ({
   maxPerView,
   className,
 }: PaginationProps) => {
+  const searchParams = useSearchParams();
+
+  const createUrlWithPage = (page: number) => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("page", page.toString());
+    return `?${params.toString()}`;
+  };
+
   return (
     <div className={clsx(styles.container, className)}>
       {current > 1 && (
         <ArrowButton
           disabled={current === 1}
           type="link"
-          href={`?page=${current - 1}`}
+          href={createUrlWithPage(current - 1)}
           className={styles.prev}
         />
       )}
@@ -42,7 +52,7 @@ const Pagination = ({
                 className={clsx("h2", styles.page, {
                   [styles.active]: elem === current,
                 })}
-                href={`?page=${pageNumber}`}
+                href={createUrlWithPage(pageNumber)}
               >
                 {pageNumber}
               </Link>
@@ -54,7 +64,7 @@ const Pagination = ({
         <ArrowButton
           disabled={current === max}
           type="link"
-          href={`?page=${current + 1}`}
+          href={createUrlWithPage(current + 1)}
           className={styles.next}
         />
       )}

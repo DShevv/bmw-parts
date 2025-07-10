@@ -1,5 +1,5 @@
 import { ProductParamsT, ProductResponseT } from "@/types/api";
-import { CategoryT, DeliveryT, PaymentT, ProductT } from "@/types/types";
+import { CategoryT, DeliveryT, FilterT, PaymentT, ProductT } from "@/types/types";
 
 export const getCategories = async (): Promise<CategoryT[] | null> => {
   try {
@@ -65,20 +65,27 @@ export const getProductBySlug = async (slug: string): Promise<ProductT | null> =
   }
 };
 
-export const getProducts = async ({
-  sort,
-  generation,
-  series,
-  body,
-  year,
-  price,
-  transmission,
-  page,
-  search,
-  category,
-}: ProductParamsT): Promise<ProductResponseT | null> => {
+export const getProducts = async (
+  paramsObj: ProductParamsT
+): Promise<ProductResponseT | null> => {
   try {
     const params = new URLSearchParams();
+
+    // Деструктурируем стандартные параметры
+    const {
+      sort,
+      generation,
+      series,
+      body,
+      year,
+      price,
+      transmission,
+      page,
+      search,
+      category,
+      categoryId,
+      ...dynamicParams
+    } = paramsObj;
 
     if (sort && sort !== null) {
       if (sort[0] === "-") {
@@ -100,6 +107,8 @@ export const getProducts = async ({
 
     if (category) {
       params.set("category_id", category);
+    } else if (categoryId) {
+      params.set("category_id", categoryId.toString());
     }
 
     if (generation) {
@@ -127,10 +136,12 @@ export const getProducts = async ({
       params.set("transmission", transmission);
     }
 
-    if (page) {
-      params.set("page", page.toString());
-    }
-
+    // Обрабатываем динамические параметры спецификаций
+    Object.entries(dynamicParams).forEach(([key, value]) => {
+      if (key.startsWith("specification_") && value !== null && value !== undefined) {
+        params.set(key, value.toString());
+      }
+    });
 
 
 
@@ -145,15 +156,12 @@ export const getProducts = async ({
 
     const data = await res.json();
 
-
-
     return data.data;
   } catch (e) {
     console.log(e);
     return null;
   }
 };
-
 
 export const getPayments = async (): Promise<PaymentT[]> => {
   try {
@@ -186,5 +194,22 @@ export const getDeliveries = async (): Promise<DeliveryT[]> => {
   } catch (e) {
     console.log(e);
     return [];
+  }
+};
+
+export const getFiltersByCategory = async (id: number): Promise<FilterT | null> => {
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/v1/products/filter-options?category_id=${id}`, {
+      next: {
+        revalidate: 60,
+      },
+    });
+
+    const { data } = await res.json();
+
+    return data;
+  } catch (e) {
+    console.log(e);
+    return null;
   }
 };

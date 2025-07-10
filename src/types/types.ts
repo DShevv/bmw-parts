@@ -27,6 +27,21 @@ export type ProductT = {
   }
 };
 
+export type FilterT = {
+  specifications: {
+    id: number;
+    name: string;
+    values: {
+      value: string;
+      count: number;
+    }[];
+  }[];
+  price_range: {
+    min: string;
+    max: string;
+  }
+};
+
 
 
 export type FeedbackT = {

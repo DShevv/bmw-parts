@@ -18,34 +18,36 @@ const PricePicker = ({
   onChange,
 }: PricePickerProps) => {
   const [minValue, setMinValue] = useState<number>(
-    initialValue ? Number(initialValue[0]) : minPrice
+    initialValue ? Number(initialValue[0]) : Number(minPrice)
   );
   const [maxValue, setMaxValue] = useState<number>(
-    initialValue ? Number(initialValue[1]) : maxPrice
+    initialValue ? Number(initialValue[1]) : Number(maxPrice)
   );
   const [debouncedValue, setDebouncedValue] = useState<
     [number, number] | undefined
   >(undefined);
 
   useEffect(() => {
-    setMinValue(initialValue ? Number(initialValue[0]) : minPrice);
-    setMaxValue(initialValue ? Number(initialValue[1]) : maxPrice);
-  }, [initialValue]);
+    setMinValue(initialValue ? Number(initialValue[0]) : Number(minPrice));
+    setMaxValue(initialValue ? Number(initialValue[1]) : Number(maxPrice));
+  }, [initialValue, minPrice, maxPrice]);
 
   useEffect(() => {
     const handler = setTimeout(() => {
-      if (minValue !== minPrice || maxValue !== maxPrice)
-        setDebouncedValue([minValue, maxValue]);
+      const minChanged = Math.abs(minValue - minPrice) > 0.01;
+      const maxChanged = Math.abs(maxValue - Number(maxPrice)) > 0.01;
 
-      if (minValue === minPrice && maxValue === maxPrice) {
-        setDebouncedValue([minPrice, maxPrice]);
+      if (minChanged || maxChanged) {
+        setDebouncedValue([minValue, maxValue]);
+      } else {
+        setDebouncedValue([minPrice, Number(maxPrice)]);
       }
     }, 2000);
 
     return () => {
       clearTimeout(handler);
     };
-  }, [minValue, maxValue]);
+  }, [minValue, maxValue, minPrice, maxPrice]);
 
   useEffect(() => {
     if (debouncedValue) {
@@ -63,7 +65,7 @@ const PricePicker = ({
 
   const handleMaxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = Math.min(
-      maxPrice,
+      Number(maxPrice),
       Math.max(Number(e.target.value), minValue)
     );
     setMaxValue(value);
@@ -73,20 +75,33 @@ const PricePicker = ({
     <div className={styles.container}>
       <div className={styles.inputs}>
         <label className="t-placeholder">
-          от <input type="number" value={minValue} onChange={handleMinChange} />
+          от{" "}
+          <input
+            type="number"
+            step="0.01"
+            value={Math.round(minValue * 100) / 100}
+            onChange={handleMinChange}
+          />
         </label>
         <label className="t-placeholder">
-          до <input type="number" value={maxValue} onChange={handleMaxChange} />
+          до{" "}
+          <input
+            type="number"
+            step="0.01"
+            value={Math.round(maxValue * 100) / 100}
+            onChange={handleMaxChange}
+          />
         </label>
       </div>
       <div className={styles.sliderContainer}>
         <RangeSlider
           min={minPrice}
-          max={maxPrice}
+          max={Number(maxPrice)}
+          step={0.01}
           value={[minValue, maxValue]}
           onInput={(value) => {
-            setMinValue(value[0]);
-            setMaxValue(value[1]);
+            setMinValue(Math.round(value[0] * 100) / 100);
+            setMaxValue(Math.round(value[1] * 100) / 100);
           }}
           className={styles.slider}
           id="pricePicker"

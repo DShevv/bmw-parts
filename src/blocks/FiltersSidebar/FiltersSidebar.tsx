@@ -6,17 +6,24 @@ import globalStore from "@/stores/global-store";
 import clsx from "clsx";
 import { SvgClose } from "@/assets/icons/svgs";
 import { useEffect } from "react";
-import { GenerationT, SeriesT, BodyT } from "@/types/types";
+import { GenerationT, SeriesT, BodyT, FilterT } from "@/types/types";
 
 interface FiltersSidebarProps {
   generations: GenerationT[];
   series: SeriesT[];
   bodies: BodyT[];
   categoryId: number | null;
+  availableFilters: FilterT | null;
 }
 
 const FiltersSidebar = observer(
-  ({ generations, series, bodies, categoryId }: FiltersSidebarProps) => {
+  ({
+    generations,
+    series,
+    bodies,
+    categoryId,
+    availableFilters,
+  }: FiltersSidebarProps) => {
     const { popupStore } = globalStore;
     const { filters } = popupStore;
 
@@ -53,6 +60,7 @@ const FiltersSidebar = observer(
             series={series}
             bodies={bodies}
             categoryId={categoryId}
+            availableFilters={availableFilters}
           />
         </div>
       </div>

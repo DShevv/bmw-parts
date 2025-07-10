@@ -26,6 +26,16 @@ const Page = () => {
   );
 
   const searchOptions = useMemo(() => {
+    // Получаем все параметры спецификаций из URL
+    const specificationParams: { [key: string]: string | null } = {};
+
+    // Проходим по всем параметрам и находим те, что начинаются с "specification_"
+    for (const [key, value] of searchParams.entries()) {
+      if (key.startsWith("specification_")) {
+        specificationParams[key] = value;
+      }
+    }
+
     return {
       category: categoryData?.id?.toString() ?? undefined,
       generation: params.get("generation"),
@@ -34,9 +44,11 @@ const Page = () => {
       year: params.get("year"),
       price: params.get("price"),
       transmission: params.get("transmission"),
+      page: parseInt(params.get("page") || "1", 10),
       sort: sort,
+      ...specificationParams,
     };
-  }, [params, sort, categoryData]);
+  }, [params, sort, categoryData, searchParams]);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -48,33 +60,45 @@ const Page = () => {
 
       setProducts(products?.data ?? []);
       setPage({
-        current: products?.current_page ?? 1,
+        current: parseInt(params.get("page") || "1", 10),
         max: products?.last_page ?? 1,
       });
     };
     fetchProducts();
-  }, [searchOptions]);
+  }, [searchOptions, params]);
 
-  const handleSortChange = useCallback((value: string) => {
-    let sortValue = "name";
+  const handleSortChange = useCallback(
+    (value: string) => {
+      let sortValue = "name";
 
-    switch (value) {
-      case "Сначала дешевые":
-        sortValue = "price";
-        break;
-      case "Сначала дорогие":
-        sortValue = "-price";
-        break;
-      case "По алфавиту А-Я":
-        sortValue = "name";
-        break;
-      case "По алфавиту Я-А":
-        sortValue = "-name";
-        break;
-    }
+      switch (value) {
+        case "Сначала дешевые":
+          sortValue = "price";
+          break;
+        case "Сначала дорогие":
+          sortValue = "-price";
+          break;
+        case "По алфавиту А-Я":
+          sortValue = "name";
+          break;
+        case "По алфавиту Я-А":
+          sortValue = "-name";
+          break;
+      }
 
-    setSort(sortValue);
-  }, []);
+      setSort(sortValue);
+
+      // Сбрасываем page при изменении сортировки
+      const newParams = new URLSearchParams(searchParams.toString());
+      newParams.delete("page");
+      window.history.replaceState(
+        {},
+        "",
+        `${window.location.pathname}?${newParams.toString()}`
+      );
+    },
+    [searchParams]
+  );
 
   useEffect(() => {
     const fetchCategoryData = async () => {

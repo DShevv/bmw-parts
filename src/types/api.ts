@@ -31,6 +31,9 @@ export type ProductParamsT = {
   page?: number | null;
   search?: string | null;
   category?: string | null;
+  categoryId?: number | null;
+  // Индексная сигнатура для динамических фильтров спецификаций
+  [key: string]: string | number | null | undefined;
 }
 
 export type ProductResponseT = {

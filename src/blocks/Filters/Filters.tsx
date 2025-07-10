@@ -9,7 +9,7 @@ import { observer } from "mobx-react-lite";
 import globalStore from "@/stores/global-store";
 import DropdownFilter from "./DropdownFilter/DropdownFilter";
 import { useEffect, useMemo, useState } from "react";
-import { GenerationT, SeriesT, BodyT } from "@/types/types";
+import { GenerationT, SeriesT, BodyT, FilterT } from "@/types/types";
 import { getProducts } from "@/services/CatalogService";
 
 interface FiltersProps {
@@ -17,6 +17,7 @@ interface FiltersProps {
   series: SeriesT[];
   bodies: BodyT[];
   categoryId: number | null;
+  availableFilters: FilterT | null;
 }
 
 const Filters = observer(
@@ -25,30 +26,51 @@ const Filters = observer(
     series,
     bodies,
     categoryId,
+    availableFilters,
   }: FiltersProps): React.ReactElement => {
     const router = useRouter();
     const searchParams = useSearchParams();
-    const params = useMemo(
-      () => new URLSearchParams(searchParams.toString()),
-      [searchParams]
-    );
     const pathname = usePathname();
     const [maxPrice, setMaxPrice] = useState<number | null>(null);
+    const [resetKey, setResetKey] = useState<number>(0);
 
     const searchOptions = useMemo(() => {
+      // Получаем все параметры спецификаций из URL
+      const specificationParams: { [key: string]: string[] } = {};
+
+      // Проходим по всем параметрам и находим те, что начинаются с "specification_"
+      for (const [key, value] of searchParams.entries()) {
+        if (key.startsWith("specification_")) {
+          specificationParams[key] = value.split(",");
+        }
+      }
+
       return {
         categoryId: categoryId,
-        generation: params.get("generation")?.split(",") || [],
-        body: params.get("body")?.split(",") || [],
-        series: params.get("series")?.split(",") || [],
-        year: params.get("year"),
-        price: params.get("price"),
-        transmission: params.get("transmission"),
+        generation: searchParams.get("generation")?.split(",") || [],
+        body: searchParams.get("body")?.split(",") || [],
+        series: searchParams.get("series")?.split(",") || [],
+        year: searchParams.get("year"),
+        price: searchParams.get("price"),
+        transmission: searchParams.get("transmission"),
+        ...specificationParams,
       };
-    }, [params, categoryId]);
+    }, [searchParams, categoryId]);
 
     const { popupStore } = globalStore;
     const { closePopup } = popupStore;
+
+    // Создаем отдельную переменную для спецификаций (без price)
+    const specificationFilters = useMemo(() => {
+      return Object.entries(searchOptions)
+        .filter(([key]) => key.startsWith("specification_"))
+        .reduce((acc, [key, value]) => {
+          if (Array.isArray(value)) {
+            acc[key] = value;
+          }
+          return acc;
+        }, {} as Record<string, string[]>);
+    }, [searchOptions]);
 
     useEffect(() => {
       // Если серия изменилась, проверяем валидность выбранных поколений
@@ -67,15 +89,32 @@ const Filters = observer(
 
       // Если есть невалидные поколения, обновляем URL
       if (validGenerations.length !== searchOptions.generation.length) {
+        const newParams = new URLSearchParams(searchParams.toString());
+
         if (validGenerations.length === 0) {
-          params.delete("generation");
-          params.delete("body");
+          newParams.delete("generation");
+          newParams.delete("body");
         } else {
-          params.set("generation", validGenerations.join(","));
+          newParams.set("generation", validGenerations.join(","));
         }
-        router.push(`${pathname}?${params.toString()}`, { scroll: false });
+
+        // Сохраняем параметр page при автоматическом обновлении URL
+        const currentPage = searchParams.get("page");
+        if (currentPage) {
+          newParams.set("page", currentPage);
+        }
+
+        router.push(`${pathname}?${newParams.toString()}`, { scroll: false });
       }
-    }, [searchOptions.series, series, generations, params, pathname, router]);
+    }, [
+      searchOptions.series,
+      searchOptions.generation,
+      series,
+      generations,
+      searchParams,
+      pathname,
+      router,
+    ]);
 
     const filteredGenerations = useMemo(() => {
       if (searchOptions.series.length === 0) return generations;
@@ -114,30 +153,46 @@ const Filters = observer(
     }, [bodies, generations, searchOptions.generation]);
 
     const resetFilters = () => {
-      params.delete("price");
-      params.delete("model");
-      params.delete("year");
-      params.delete("body");
-      params.delete("series");
-      params.delete("generation");
-      params.delete("transmission");
-      router.push(`${pathname}?${params.toString()}`, { scroll: false });
+      // Переходим на чистый URL без параметров
+      router.replace(pathname, { scroll: false });
+      // Принудительно обновляем компоненты фильтров
+      setResetKey((prev) => prev + 1);
       closePopup("filters");
     };
 
     useEffect(() => {
       const fetchMaxPrice = async () => {
-        const products = await getProducts({
-          ...searchOptions,
+        // Подготавливаем объект с параметрами для API БЕЗ фильтра по цене
+        const apiParams: Record<string, string | number | null> = {
+          categoryId: searchOptions.categoryId,
           generation: searchOptions.generation.join(","),
           series: searchOptions.series.join(","),
           body: searchOptions.body.join(","),
+          year: searchOptions.year,
+          transmission: searchOptions.transmission,
+          // Исключаем price из параметров!
+        };
+
+        // Добавляем параметры спецификаций
+        Object.entries(specificationFilters).forEach(([key, value]) => {
+          apiParams[key] = value.join(",");
         });
+
+        const products = await getProducts(apiParams);
 
         setMaxPrice(products?.max_price ?? null);
       };
       fetchMaxPrice();
-    }, [searchOptions]);
+    }, [
+      searchOptions.categoryId,
+      searchOptions.generation,
+      searchOptions.series,
+      searchOptions.body,
+      searchOptions.year,
+      searchOptions.transmission,
+      specificationFilters,
+      // Исключаем searchOptions.price из зависимостей!
+    ]);
 
     return (
       <div className={styles.wrapper}>
@@ -145,6 +200,7 @@ const Filters = observer(
 
         <div className={styles.filters}>
           <DropdownFilter
+            key={`year-${resetKey}`}
             title="Год"
             name="year"
             data={[
@@ -167,6 +223,7 @@ const Filters = observer(
             ]}
           />
           <PriceFilter
+            key={`price-${resetKey}`}
             title="Цена"
             name="price"
             maxPrice={maxPrice}
@@ -174,6 +231,7 @@ const Filters = observer(
           />
 
           <CheckboxFilter
+            key={`series-${resetKey}`}
             title="Серия автомобиля"
             name="series"
             data={series.map((series) => {
@@ -181,6 +239,7 @@ const Filters = observer(
             })}
           />
           <CheckboxFilter
+            key={`generation-${resetKey}`}
             disabled={
               searchOptions.series.length === 0 ||
               filteredGenerations.length === 0
@@ -193,6 +252,7 @@ const Filters = observer(
           />
 
           <CheckboxFilter
+            key={`body-${resetKey}`}
             disabled={
               searchOptions.series.length === 0 ||
               searchOptions.generation.length === 0 ||
@@ -206,11 +266,23 @@ const Filters = observer(
           />
 
           <DropdownFilter
+            key={`transmission-${resetKey}`}
             direction="top"
             title="КПП"
             name="transmission"
             data={["АКПП", "МКПП", "Вариатор", "Робот"]}
           />
+          {availableFilters?.specifications.map((specification) => (
+            <CheckboxFilter
+              key={`specification_${specification.id}-${resetKey}`}
+              title={specification.name}
+              name={`specification_${specification.id}`}
+              data={specification.values.map((value) => ({
+                title: value.value,
+                value: value.value,
+              }))}
+            />
+          ))}
         </div>
         <MainButton
           style="light"

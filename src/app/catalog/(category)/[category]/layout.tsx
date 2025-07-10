@@ -5,7 +5,11 @@ import clsx from "clsx";
 import SeoBlock from "@/blocks/SeoBlock/SeoBlock";
 import SubcategorySlider from "@/blocks/SubcategorySlider/SubcategorySlider";
 import FiltersSidebar from "@/blocks/FiltersSidebar/FiltersSidebar";
-import { getCategories, getCategoriesBySlug } from "@/services/CatalogService";
+import {
+  getCategories,
+  getCategoriesBySlug,
+  getFiltersByCategory,
+} from "@/services/CatalogService";
 import { getGenerations } from "@/services/CarsService";
 import { getSeries } from "@/services/CarsService";
 import { getBodies } from "@/services/CarsService";
@@ -24,6 +28,7 @@ const Layout = async ({
   const generations = await getGenerations();
   const series = await getSeries();
   const bodies = await getBodies();
+  const filters = await getFiltersByCategory(categoryData?.id ?? 0);
 
   return (
     <>
@@ -61,6 +66,7 @@ const Layout = async ({
             generations={generations ?? []}
             series={series ?? []}
             bodies={bodies ?? []}
+            availableFilters={filters ?? null}
           />
           {children}
         </section>

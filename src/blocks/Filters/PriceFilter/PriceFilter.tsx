@@ -34,12 +34,17 @@ const PriceFilter = ({
   }, [value]);
 
   const createQueryString = useCallback(
-    (name: string, value?: string) => {
+    (name: string, value?: string, resetPage = false) => {
       const params = new URLSearchParams(searchParams.toString());
       if (value) {
         params.set(name, value);
       } else {
         params.delete(name);
+      }
+
+      // Сбрасываем page только при изменении фильтра пользователем
+      if (resetPage) {
+        params.delete("page");
       }
 
       return params.toString();
@@ -80,19 +85,23 @@ const PriceFilter = ({
         transition={{ duration: 0.2, ease: "easeInOut" }}
       >
         <PricePicker
+          key={value || "empty"} // Принудительно перерендерим PricePicker при изменении value
           initialValue={value ? value.split("-").map(Number) : undefined}
           maxPrice={Number(maxPrice)}
           minPrice={Number(minPrice)}
           onChange={(values: [number, number]) => {
             if (values[0] === 0 && values[1] === Number(maxPrice)) {
-              router.push(pathname + "?" + createQueryString(name), {
-                scroll: false,
-              });
+              router.push(
+                pathname + "?" + createQueryString(name, undefined, true),
+                {
+                  scroll: false,
+                }
+              );
             } else {
               router.push(
                 pathname +
                   "?" +
-                  createQueryString(name, `${values[0]}-${values[1]}`),
+                  createQueryString(name, `${values[0]}-${values[1]}`, true),
                 { scroll: false }
               );
             }
