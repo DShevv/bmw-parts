@@ -3,10 +3,13 @@
 .wrapper {
   position: relative;
   flex: 0 0 vw-1550(810);
-  height: vw-1550(440);
+  height: fit-content;
+  min-height: vw-1550(440);
   border-radius: vw-1550(12);
   background: var(--light-blue);
   max-width: vw-1550(810);
+  display: flex;
+  flex-direction: column;
 
   @media (max-width: 768px) {
     flex: initial;
@@ -72,11 +75,23 @@
 .swiper {
   margin-bottom: vw-1550(30);
   padding: 0 vw-1550(24);
+  width: 100%;
+  overflow: hidden;
+
+  :global(.swiper-wrapper) {
+    align-items: center;
+    box-sizing: border-box;
+  }
+
+  :global(.swiper-slide) {
+    box-sizing: border-box;
+  }
 
   .slide {
-    width: auto;
+    width: vw-1550(104);
     cursor: pointer;
     transition: all 0.3s ease;
+    box-sizing: border-box;
 
     &.active {
       .content {
@@ -94,6 +109,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      box-sizing: border-box;
 
       overflow: hidden;
 
@@ -119,6 +135,9 @@
     padding: 0 16px;
 
     .slide {
+      width: 70px;
+      box-sizing: border-box;
+
       .content {
         width: 70px;
         height: 58px;
@@ -138,8 +157,10 @@
   justify-content: space-between;
   align-items: flex-start;
   gap: vw-1550(16);
-  height: vw-1550(214);
+  height: fit-content;
   padding: 0 vw-1550(24);
+  padding-bottom: vw-1550(32);
+  flex: 1 1 100%;
 
   @media (max-width: 768px) {
     height: fit-content;
@@ -152,9 +173,9 @@
 
 .infoSwiper {
   width: 100%;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: vw-1550(52);
+  display: flex;
+  flex-wrap: wrap;
+  gap: vw-1550(16) vw-1550(52);
 
   @media (max-width: 768px) {
     grid-template-columns: 1fr 1fr;
@@ -183,7 +204,7 @@
 
   .infoTitle {
     color: var(--text);
-    text-align: center;
+
     height: fit-content;
     text-decoration: none;
 

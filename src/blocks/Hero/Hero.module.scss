@@ -85,12 +85,14 @@
   .categories {
     grid-template-columns: repeat(2, 1fr);
     gap: 14px 15px;
+    width: 100%;
 
     .category {
       border-radius: 8px;
       height: 74px;
       padding: 16px;
       justify-content: center;
+      word-break: break-all;
 
       svg {
         display: none;

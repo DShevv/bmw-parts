@@ -8,25 +8,23 @@ import "swiper/css";
 import clsx from "clsx";
 import Link from "next/link";
 import IconButton from "@/components/Buttons/IconButton/IconButton";
-import { SeriesT, GenerationT, BodyT } from "@/types/types";
+import { SeriesT, GenerationT } from "@/types/types";
 import ArrowButton from "@/components/Buttons/ArrowButton/ArrowButton";
 
 interface HeroPopularModelsProps {
   series: SeriesT[];
   generations: GenerationT[];
-  bodies: BodyT[];
 }
 
-const HeroPopularModels = ({
-  series,
-  generations,
-  bodies,
-}: HeroPopularModelsProps) => {
+const HeroPopularModels = ({ series, generations }: HeroPopularModelsProps) => {
   const [activeSeries, setActiveSeries] = useState<SeriesT | null>(series[0]);
   const [swiper, setSwiper] = useState<SwiperType | null>(null);
 
   const handelSlideChange = (swiper: SwiperType) => {
-    setActiveSeries(series[swiper.realIndex]);
+    // Добавляем проверку на существование элемента
+    if (series[swiper.realIndex]) {
+      setActiveSeries(series[swiper.realIndex]);
+    }
   };
 
   return (
@@ -35,25 +33,26 @@ const HeroPopularModels = ({
       <Swiper
         slidesPerView={"auto"}
         spaceBetween={12}
+        initialSlide={0}
+        watchSlidesProgress={true}
+        centerInsufficientSlides={false}
+        slideToClickedSlide={true}
         breakpoints={{
           768: {
             spaceBetween: 20,
+            slidesPerView: "auto",
           },
         }}
         onSwiper={setSwiper}
         onSlideChange={handelSlideChange}
         className={styles.swiper}
       >
-        {series.map((slide, index) => (
+        {series.map((slide) => (
           <SwiperSlide
             key={slide.id}
             className={clsx(styles.slide, {
               [styles.active]: activeSeries?.id === slide.id,
             })}
-            onClick={() => {
-              setActiveSeries(slide);
-              swiper?.slideTo(index);
-            }}
           >
             <div className={styles.content}>
               <Image
@@ -94,20 +93,6 @@ const HeroPopularModels = ({
                 >
                   {slide.name}
                 </Link>
-                <ul className={styles.infoList}>
-                  {bodies
-                    .filter((body) => body.generation_id === slide.id)
-                    .map((body) => (
-                      <li key={body.id} className={styles.infoItem}>
-                        <Link
-                          href={`/catalog/all?series=${activeSeries?.slug}&generation=${slide.slug}&body=${body.slug}`}
-                          className={clsx("body-2", styles.infoTitle)}
-                        >
-                          {body.name}
-                        </Link>
-                      </li>
-                    ))}
-                </ul>
               </div>
             ))}
         </div>

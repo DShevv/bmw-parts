@@ -8,9 +8,15 @@ import { NewsT } from "@/types/types";
 import { motion as m } from "motion/react";
 import { formatDate, slugifyWithOpts } from "@/utils/helper";
 
-const NewsItem = ({ promotion }: { promotion: NewsT }) => {
+const NewsItem = ({
+  promotion,
+  className,
+}: {
+  promotion: NewsT;
+  className?: string;
+}) => {
   return (
-    <m.div whileHover="hover" initial="initial">
+    <m.div whileHover="hover" initial="initial" className={className}>
       <Link
         href={`/news/${slugifyWithOpts(promotion.title)}_${promotion.id}`}
         className={clsx(styles.item)}

@@ -37,7 +37,7 @@ const SingleNewsSlider = ({ news }: { news: NewsT[] }) => {
       >
         {news.map((promotion) => (
           <SwiperSlide key={promotion.id} className={styles.slide}>
-            <NewsItem promotion={promotion} />
+            <NewsItem promotion={promotion} className={styles.newsItem} />
           </SwiperSlide>
         ))}
       </Swiper>

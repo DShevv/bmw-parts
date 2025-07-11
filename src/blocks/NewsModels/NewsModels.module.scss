@@ -13,6 +13,7 @@
   width: 100%;
   display: flex;
   gap: vw-1550(70);
+  height: 100%;
 
   @media (max-width: 768px) {
     flex-direction: column-reverse;

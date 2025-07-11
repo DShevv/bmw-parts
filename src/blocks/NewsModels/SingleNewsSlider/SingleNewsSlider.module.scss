@@ -41,6 +41,7 @@
 .slider {
   width: 100%;
   overflow: hidden;
+  height: 100%;
 
   .slide {
     width: auto;
@@ -60,7 +61,7 @@
 .navigation {
   position: absolute;
   left: vw-1550(-46);
-  bottom: vw-1550(193);
+  top: vw-1550(193);
   width: calc(100% + vw-1550(92));
   display: flex;
   justify-content: space-between;
