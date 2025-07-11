@@ -204,22 +204,22 @@ const Filters = observer(
             title="Год"
             name="year"
             data={[
-              "2010",
-              "2011",
-              "2012",
-              "2013",
-              "2014",
-              "2015",
-              "2016",
-              "2017",
-              "2018",
-              "2019",
-              "2020",
-              "2021",
-              "2022",
-              "2023",
-              "2024",
-              "2025",
+              { title: "2010", value: "2010" },
+              { title: "2011", value: "2011" },
+              { title: "2012", value: "2012" },
+              { title: "2013", value: "2013" },
+              { title: "2014", value: "2014" },
+              { title: "2015", value: "2015" },
+              { title: "2016", value: "2016" },
+              { title: "2017", value: "2017" },
+              { title: "2018", value: "2018" },
+              { title: "2019", value: "2019" },
+              { title: "2020", value: "2020" },
+              { title: "2021", value: "2021" },
+              { title: "2022", value: "2022" },
+              { title: "2023", value: "2023" },
+              { title: "2024", value: "2024" },
+              { title: "2025", value: "2025" },
             ]}
           />
           <PriceFilter
@@ -230,15 +230,16 @@ const Filters = observer(
             minPrice={0}
           />
 
-          <CheckboxFilter
+          <DropdownFilter
             key={`series-${resetKey}`}
             title="Серия автомобиля"
             name="series"
-            data={series.map((series) => {
-              return { title: series.name, value: series.slug };
-            })}
+            data={series.map((series) => ({
+              title: series.name,
+              value: series.slug,
+            }))}
           />
-          <CheckboxFilter
+          <DropdownFilter
             key={`generation-${resetKey}`}
             disabled={
               searchOptions.series.length === 0 ||
@@ -246,12 +247,13 @@ const Filters = observer(
             }
             title="Поколение"
             name="generation"
-            data={filteredGenerations.map((generation) => {
-              return { title: generation.name, value: generation.slug };
-            })}
+            data={filteredGenerations.map((generation) => ({
+              title: generation.name,
+              value: generation.slug,
+            }))}
           />
 
-          <CheckboxFilter
+          <DropdownFilter
             key={`body-${resetKey}`}
             disabled={
               searchOptions.series.length === 0 ||
@@ -260,9 +262,10 @@ const Filters = observer(
             }
             title="Кузов"
             name="body"
-            data={filteredBodies.map((body) => {
-              return { title: body.name, value: body.slug };
-            })}
+            data={filteredBodies.map((body) => ({
+              title: body.name,
+              value: body.slug,
+            }))}
           />
 
           <DropdownFilter
@@ -270,7 +273,12 @@ const Filters = observer(
             direction="top"
             title="КПП"
             name="transmission"
-            data={["АКПП", "МКПП", "Вариатор", "Робот"]}
+            data={[
+              { title: "АКПП", value: "АКПП" },
+              { title: "МКПП", value: "МКПП" },
+              { title: "Вариатор", value: "Вариатор" },
+              { title: "Робот", value: "Робот" },
+            ]}
           />
           {availableFilters?.specifications.map((specification) => (
             <CheckboxFilter

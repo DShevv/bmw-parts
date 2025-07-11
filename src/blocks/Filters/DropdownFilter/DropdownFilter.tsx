@@ -12,7 +12,7 @@ interface CheckboxFilterProps {
   name: string;
   title: string;
   disabled?: boolean;
-  data: string[];
+  data: { title: string; value: string }[];
   direction?: "top" | "bottom";
 }
 
@@ -102,6 +102,15 @@ const DropdownFilter = ({
     searchParams,
   ]);
 
+  // Находим текущую выбранную опцию или используем дефолтную
+  const getCurrentOption = () => {
+    if (!filterValue) {
+      return { title: "Все", value: "" };
+    }
+    const found = data.find((item) => item.value === filterValue);
+    return found || { title: "Все", value: "" };
+  };
+
   return (
     <div
       className={clsx(
@@ -141,13 +150,12 @@ const DropdownFilter = ({
             transition={{ duration: 0.2, ease: "easeInOut" }}
           >
             <Select
-              options={["Все", ...data]}
+              options={[{ title: "Все", value: "" }, ...data]}
               onChange={(value) => {
                 setHasUserInteracted(true);
                 setFilterValue(value);
               }}
-              key={filterValue} // Принудительно перерендерим Select при изменении filterValue
-              defaultValue={filterValue || "Все"}
+              defaultValue={getCurrentOption()}
               className={styles.select}
               direction={direction}
             />

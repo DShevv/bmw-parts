@@ -2,12 +2,12 @@
 import clsx from "clsx";
 import styles from "./Select.module.scss";
 import { SvgArrow } from "@/assets/icons/svgs";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import useOutsideClick from "@/utils/useOutsideClick";
 
 interface SelectProps {
-  defaultValue: string;
-  options: string[];
+  defaultValue: { title: string; value: string };
+  options: { title: string; value: string }[];
   onChange?: (value: string) => void;
   className?: string;
   direction?: "top" | "bottom";
@@ -24,6 +24,11 @@ const Select = ({
   const [selectedOption, setSelectedOption] = useState(defaultValue);
   const ref = useRef<HTMLDivElement>(null);
 
+  // Синхронизируем selectedOption с defaultValue при его изменении
+  useEffect(() => {
+    setSelectedOption(defaultValue);
+  }, [defaultValue]);
+
   useOutsideClick(ref, () => setIsOpen(false));
 
   return (
@@ -33,7 +38,7 @@ const Select = ({
       onClick={() => setIsOpen(!isOpen)}
     >
       <div className={clsx("t-placeholder", styles.header)}>
-        <span>{selectedOption}</span>
+        <span>{selectedOption?.title}</span>
 
         <SvgArrow />
       </div>
@@ -45,18 +50,18 @@ const Select = ({
       >
         <div className={styles.inner}>
           {options
-            .filter((option) => option !== selectedOption)
+            .filter((option) => option.value !== selectedOption?.value)
             .map((option) => (
               <div
                 className={clsx("t-placeholder", styles.option)}
-                key={option}
+                key={option.value}
                 onClick={() => {
                   setSelectedOption(option);
                   setIsOpen(false);
-                  onChange?.(option);
+                  onChange?.(option.value);
                 }}
               >
-                {option}
+                {option.title}
               </div>
             ))}
         </div>

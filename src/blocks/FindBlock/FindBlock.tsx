@@ -19,9 +19,9 @@ interface FindBlockProps {
 }
 
 const FindBlock = ({ carModel }: FindBlockProps) => {
-  const [selectedYear, setSelectedYear] = useState<string>("Любой");
+  const [selectedYear, setSelectedYear] = useState<string>("any");
   const [selectedtransmission, setSelectedtransmission] =
-    useState<string>("Любая");
+    useState<string>("any");
   const router = useRouter();
 
   console.log(carModel);
@@ -51,8 +51,12 @@ const FindBlock = ({ carModel }: FindBlockProps) => {
             <div className={clsx("body-1", styles.selectTitle)}>Руль</div>
             <Select
               className={styles.selectItem}
-              defaultValue={selectedRear}
-              options={["Любой", "Левый", "Правый"]}
+              defaultValue={{ title: "Любой", value: "any" }}
+              options={[
+                { title: "Любой", value: "any" },
+                { title: "Левый", value: "left" },
+                { title: "Правый", value: "right" },
+              ]}
               onChange={setSelectedRear}
             />
           </div> */}
@@ -60,32 +64,47 @@ const FindBlock = ({ carModel }: FindBlockProps) => {
             <div className={clsx("body-1", styles.selectTitle)}>Коробка</div>
             <Select
               className={styles.selectItem}
-              defaultValue={selectedtransmission}
-              options={["Любая", "АКПП", "МКПП", "Вариатор", "Робот"]}
+              defaultValue={{
+                title:
+                  selectedtransmission === "any"
+                    ? "Любая"
+                    : selectedtransmission,
+                value: selectedtransmission,
+              }}
+              options={[
+                { title: "Любая", value: "any" },
+                { title: "АКПП", value: "АКПП" },
+                { title: "МКПП", value: "МКПП" },
+                { title: "Вариатор", value: "Вариатор" },
+                { title: "Робот", value: "Робот" },
+              ]}
               onChange={setSelectedtransmission}
             />
           </div>
           <div className={styles.select}>
             <div className={clsx("body-1", styles.selectTitle)}>
-              Год выпуска
+              Год выпуска
             </div>
             <Select
               className={styles.selectItem}
-              defaultValue={selectedYear}
+              defaultValue={{
+                title: selectedYear === "any" ? "Любой" : selectedYear,
+                value: selectedYear,
+              }}
               options={[
-                "Любой",
-                "2025",
-                "2024",
-                "2023",
-                "2022",
-                "2021",
-                "2020",
-                "2019",
-                "2018",
-                "2017",
-                "2016",
-                "2015",
-                "2014",
+                { title: "Любой", value: "any" },
+                { title: "2025", value: "2025" },
+                { title: "2024", value: "2024" },
+                { title: "2023", value: "2023" },
+                { title: "2022", value: "2022" },
+                { title: "2021", value: "2021" },
+                { title: "2020", value: "2020" },
+                { title: "2019", value: "2019" },
+                { title: "2018", value: "2018" },
+                { title: "2017", value: "2017" },
+                { title: "2016", value: "2016" },
+                { title: "2015", value: "2015" },
+                { title: "2014", value: "2014" },
               ]}
               onChange={setSelectedYear}
             />
@@ -96,11 +115,11 @@ const FindBlock = ({ carModel }: FindBlockProps) => {
           onClick={() => {
             const query: Record<string, string> = {};
 
-            if (selectedtransmission !== "Любая") {
+            if (selectedtransmission !== "any") {
               query["transmission"] = selectedtransmission;
             }
 
-            if (selectedYear !== "Любой") {
+            if (selectedYear !== "any") {
               query["year"] = selectedYear;
             }
 

@@ -72,16 +72,16 @@ const Page = () => {
       let sortValue = "name";
 
       switch (value) {
-        case "Сначала дешевые":
+        case "cheap":
           sortValue = "price";
           break;
-        case "Сначала дорогие":
+        case "expensive":
           sortValue = "-price";
           break;
-        case "По алфавиту А-Я":
+        case "a-z":
           sortValue = "name";
           break;
-        case "По алфавиту Я-А":
+        case "z-a":
           sortValue = "-name";
           break;
       }
@@ -124,12 +124,29 @@ const Page = () => {
           <Select
             className={styles.select}
             onChange={handleSortChange}
-            defaultValue="По алфавиту А-Я"
+            defaultValue={{
+              title:
+                sort === "price"
+                  ? "Сначала дешевые"
+                  : sort === "-price"
+                  ? "Сначала дорогие"
+                  : sort === "-name"
+                  ? "По алфавиту Я-А"
+                  : "По алфавиту А-Я",
+              value:
+                sort === "price"
+                  ? "cheap"
+                  : sort === "-price"
+                  ? "expensive"
+                  : sort === "-name"
+                  ? "z-a"
+                  : "a-z",
+            }}
             options={[
-              "Сначала дешевые",
-              "Сначала дорогие",
-              "По алфавиту А-Я",
-              "По алфавиту Я-А",
+              { title: "Сначала дешевые", value: "cheap" },
+              { title: "Сначала дорогие", value: "expensive" },
+              { title: "По алфавиту А-Я", value: "a-z" },
+              { title: "По алфавиту Я-А", value: "z-a" },
             ]}
           />
           <FilterButton />
