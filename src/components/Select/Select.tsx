@@ -37,7 +37,12 @@ const Select = ({
       className={clsx(styles.container, { [styles.active]: isOpen }, className)}
       onClick={() => setIsOpen(!isOpen)}
     >
-      <div className={clsx("t-placeholder", styles.header)}>
+      <div
+        className={clsx("t-placeholder", styles.header, {
+          [styles.selected]:
+            selectedOption?.value !== "" && selectedOption?.value !== "any",
+        })}
+      >
         <span>{selectedOption?.title}</span>
 
         <SvgArrow />

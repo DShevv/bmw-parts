@@ -280,17 +280,55 @@ const Filters = observer(
               { title: "Робот", value: "Робот" },
             ]}
           />
-          {availableFilters?.specifications.map((specification) => (
-            <CheckboxFilter
-              key={`specification_${specification.id}-${resetKey}`}
-              title={specification.name}
-              name={`specification_${specification.id}`}
-              data={specification.values.map((value) => ({
-                title: value.value,
-                value: value.value,
-              }))}
-            />
-          ))}
+          {availableFilters?.specifications.map(
+            (specification, index, array) => {
+              console.log(
+                specification.filter_type,
+                index === array.length - 1 ? "top" : "bottom"
+              );
+
+              if (specification.filter_type === "checkbox") {
+                return (
+                  <CheckboxFilter
+                    key={`specification_${specification.id}-${resetKey}`}
+                    title={specification.name}
+                    name={`specification_${specification.id}`}
+                    data={specification.values.map((value) => ({
+                      title: value.value,
+                      value: value.value,
+                    }))}
+                  />
+                );
+              } else if (specification.filter_type === "dropdown") {
+                return (
+                  <DropdownFilter
+                    direction={index === array.length - 1 ? "top" : "bottom"}
+                    key={`specification_${specification.id}-${resetKey}`}
+                    title={specification.name}
+                    name={`specification_${specification.id}`}
+                    data={specification.values.map((value) => ({
+                      title: value.value,
+                      value: value.value,
+                    }))}
+                  />
+                );
+              } else if (specification.filter_type === "range") {
+                return (
+                  <PriceFilter
+                    key={`specification_${specification.id}-${resetKey}`}
+                    title={specification.name}
+                    name={`specification_${specification.id}`}
+                    maxPrice={specification.values.reduce((max, value) => {
+                      return Math.max(max, Number(value.value));
+                    }, 0)}
+                    minPrice={0}
+                  />
+                );
+              } else {
+                return null;
+              }
+            }
+          )}
         </div>
         <MainButton
           style="light"

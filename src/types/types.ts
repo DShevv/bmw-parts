@@ -31,6 +31,7 @@ export type FilterT = {
   specifications: {
     id: number;
     name: string;
+    filter_type: "checkbox" | "range" | "dropdown";
     values: {
       value: string;
       count: number;

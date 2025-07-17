@@ -23,6 +23,12 @@
       border-radius: 8px;
     }
 
+    &.selected {
+      span {
+        opacity: 1;
+      }
+    }
+
     span {
       opacity: 0.4;
       flex: 1 1 auto;
@@ -68,6 +74,12 @@
       gap: vw-1550(8);
       overflow-y: auto;
       max-height: vw-1550(200);
+    }
+
+    &.top {
+      bottom: initial;
+      top: vw-1550(-8);
+      transform: translateY(-100%);
     }
 
     @media (max-width: 768px) {
