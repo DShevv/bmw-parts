@@ -84,7 +84,7 @@ const Footer = async () => {
             </Link>
             <div className={styles.dev}>
               <p className="body-4">Разработка сайта:</p>
-              <Link href="https://dev-studio.by" className={"body-3"}>
+              <Link href="https://cropas.by" className={"body-3"}>
                 cropas.by
               </Link>
             </div>

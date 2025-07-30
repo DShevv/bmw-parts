@@ -1,7 +1,7 @@
 "use client";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Swiper as SwiperType } from "swiper";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Image from "next/image";
 import styles from "./HeroPopularModels.module.scss";
 import "swiper/css";
@@ -18,14 +18,8 @@ interface HeroPopularModelsProps {
 
 const HeroPopularModels = ({ series, generations }: HeroPopularModelsProps) => {
   const [activeSeries, setActiveSeries] = useState<SeriesT | null>(series[0]);
-  const [swiper, setSwiper] = useState<SwiperType | null>(null);
-
-  const handelSlideChange = (swiper: SwiperType) => {
-    // Добавляем проверку на существование элемента
-    if (series[swiper.realIndex]) {
-      setActiveSeries(series[swiper.realIndex]);
-    }
-  };
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const swiperRef = useRef<SwiperType | null>(null);
 
   return (
     <div className={styles.wrapper}>
@@ -34,18 +28,18 @@ const HeroPopularModels = ({ series, generations }: HeroPopularModelsProps) => {
         slidesPerView={"auto"}
         spaceBetween={12}
         initialSlide={0}
-        watchSlidesProgress={true}
-        centerInsufficientSlides={false}
-        slideToClickedSlide={true}
         breakpoints={{
           768: {
-            spaceBetween: 20,
-            slidesPerView: "auto",
+            spaceBetween: 18,
+            slidesPerView: 6,
           },
         }}
-        onSwiper={setSwiper}
-        onSlideChange={handelSlideChange}
+        onSwiper={(swiper) => (swiperRef.current = swiper)}
+        onSlideChange={(swiper) => setCurrentSlide(swiper.activeIndex)}
         className={styles.swiper}
+        grabCursor={true}
+        centeredSlides={false}
+        loop={false}
       >
         {series.map((slide) => (
           <SwiperSlide
@@ -54,7 +48,10 @@ const HeroPopularModels = ({ series, generations }: HeroPopularModelsProps) => {
               [styles.active]: activeSeries?.id === slide.id,
             })}
           >
-            <div className={styles.content}>
+            <div
+              className={styles.content}
+              onClick={() => setActiveSeries(slide)}
+            >
               <Image
                 src={`${process.env.NEXT_PUBLIC_STORE_URL}/${slide.image_path}`}
                 alt={slide.name}
@@ -73,11 +70,17 @@ const HeroPopularModels = ({ series, generations }: HeroPopularModelsProps) => {
       <div className={styles.navigation}>
         <ArrowButton
           className={styles.prev}
-          onClick={() => swiper?.slidePrev()}
+          onClick={() => {
+            const newIndex = Math.max(currentSlide - 1, 0);
+            swiperRef.current?.slideTo(newIndex);
+          }}
         />
         <ArrowButton
           className={styles.next}
-          onClick={() => swiper?.slideNext()}
+          onClick={() => {
+            const newIndex = Math.min(currentSlide + 1, series.length - 1);
+            swiperRef.current?.slideTo(newIndex);
+          }}
         />
       </div>
 
