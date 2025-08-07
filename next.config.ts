@@ -11,12 +11,12 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
-        hostname: "bmw.webspaceteam.site",
+        hostname: "api.bmw139.by",
         pathname: "/**",
       },
       {
         protocol: "https",
-        hostname: "webspaceteam.site",
+        hostname: "bmw139.by",
         pathname: "/**",
       },
 
@@ -28,6 +28,23 @@ const nextConfig: NextConfig = {
       { source: "/robots.txt", destination: "/api/robots" },
       { source: "/sitemap.xml", destination: "/api/sitemap" },
       { source: "/feed.xml", destination: "/api/feed" },
+    ];
+  },
+
+  async redirects() {
+    return [
+      {
+        source: '/:path*',
+        has: [
+          {
+            type: 'host',
+            value: 'www.(?<domain>.*)',
+          },
+        ],
+        destination: 'https://:domain/:path*',
+        statusCode: 301,
+      },
+
     ];
   },
 };
