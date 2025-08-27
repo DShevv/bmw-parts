@@ -151,7 +151,8 @@
           overflow: hidden;
           text-overflow: ellipsis;
           white-space: nowrap;
-          cursor: default;
+          cursor: pointer;
+          text-decoration: none;
         }
 
         .infoList {

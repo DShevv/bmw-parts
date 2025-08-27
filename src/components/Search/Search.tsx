@@ -12,6 +12,7 @@ import { ProductT } from "@/types/types";
 import { getProducts } from "@/services/CatalogService";
 import { observer } from "mobx-react-lite";
 import globalStore from "@/stores/global-store";
+import { useRouter } from "next/navigation";
 
 const Search = observer(() => {
   const [search, setSearch] = useState("");
@@ -22,11 +23,15 @@ const Search = observer(() => {
   const { addToCart } = cartStore;
   const { setNotification } = notificationStore;
   const { openPopup } = popupStore;
-
-  useOutsideClick(ref, () => {
-    setResults([]);
-    setSearch("");
-  });
+  const router = useRouter();
+  useOutsideClick(
+    ref,
+    () => {
+      setResults([]);
+      setSearch("");
+    },
+    "Search"
+  );
 
   const handleSearch = useCallback(async () => {
     const products = await getProducts({
@@ -38,6 +43,9 @@ const Search = observer(() => {
   useEffect(() => {
     if (debouncedSearch && debouncedSearch.length > 2) {
       handleSearch();
+    }
+    if (debouncedSearch === "") {
+      setResults([]);
     }
   }, [debouncedSearch, handleSearch]);
 
@@ -52,6 +60,12 @@ const Search = observer(() => {
         onChange={(e) => setSearch(e.target.value)}
         onFocus={() => {
           setSearch("");
+        }}
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            router.push(`/search?search=${search}`);
+            setResults([]);
+          }
         }}
       />
 

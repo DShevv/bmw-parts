@@ -12,6 +12,7 @@ import { motion as m, AnimatePresence } from "motion/react";
 import { GenerationT, BodyT, SeriesT } from "@/types/types";
 import ArrowButton from "@/components/Buttons/ArrowButton/ArrowButton";
 import { Swiper as SwiperType } from "swiper/types";
+import Link from "next/link";
 
 interface FindModelsProps {
   onChange: (series: SeriesT, body: BodyT, generation: GenerationT) => void;
@@ -112,12 +113,17 @@ const FindModels = ({
                 .map((generation) => (
                   <SwiperSlide key={generation.id} className={styles.slide}>
                     <div key={generation.id} className={clsx(styles.infoItem)}>
-                      <div
+                      <Link
+                        href={`/catalog/all?generation=${
+                          generation.slug
+                        }&series=${
+                          series.find((item) => item.id === activeId)?.slug
+                        }`}
                         className={clsx("h4", styles.infoTitle)}
                         title={generation.name}
                       >
                         {generation.name}
-                      </div>
+                      </Link>
                       <ul className={styles.infoList}>
                         {bodies
                           .filter(

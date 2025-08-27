@@ -3,47 +3,58 @@ import { SvgClose, SvgSearch } from "@/assets/icons/svgs";
 import styles from "./SearchPopup.module.scss";
 import clsx from "clsx";
 import MainButton from "../Buttons/MainButton/MainButton";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { useDebounce } from "@/utils/useDebounce";
-import { searchData } from "@/data/dumpy-data";
 import Image from "next/image";
 import Link from "next/link";
-import { slugifyWithOpts } from "@/utils/helper";
 import useOutsideClick from "@/utils/useOutsideClick";
 import { motion as m } from "motion/react";
+import { ProductT } from "@/types/types";
+import { getProducts } from "@/services/CatalogService";
+import { observer } from "mobx-react-lite";
+import globalStore from "@/stores/global-store";
+import { useRouter } from "next/navigation";
 
 interface SearchPopupProps {
   isActive: boolean;
   onClose: () => void;
 }
 
-const SearchPopup = ({ isActive, onClose }: SearchPopupProps) => {
+const SearchPopup = observer(({ isActive, onClose }: SearchPopupProps) => {
   const [search, setSearch] = useState("");
   const debouncedSearch = useDebounce(search, 1500);
-  const [results, setResults] = useState<typeof searchData>([]);
+  const [results, setResults] = useState<ProductT[]>([]);
   const ref = useRef<HTMLDivElement>(null);
-
-  useOutsideClick(ref, () => {
-    setResults([]);
-    onClose();
-  });
-
-  useEffect(() => {
-    if (debouncedSearch) {
-      handleSearch();
-    }
+  const { cartStore, notificationStore, popupStore } = globalStore;
+  const { addToCart } = cartStore;
+  const { setNotification } = notificationStore;
+  const { openPopup } = popupStore;
+  const router = useRouter();
+  const handleSearch = useCallback(async () => {
+    const products = await getProducts({
+      search: debouncedSearch,
+    });
+    setResults(products?.data ?? []);
   }, [debouncedSearch]);
 
-  const handleSearch = () => {
-    if (debouncedSearch.length > 1) {
-      console.log("Поисковый запрос:", debouncedSearch);
-      setResults(
-        searchData.filter((item) =>
-          item.name.toLowerCase().includes(debouncedSearch.toLowerCase())
-        )
-      );
+  useOutsideClick(
+    ref,
+    () => {
+      setResults([]);
+      onClose();
+    },
+    "SearchPopup"
+  );
+
+  useEffect(() => {
+    if (debouncedSearch && debouncedSearch.length > 2) {
+      handleSearch();
     }
-  };
+
+    if (debouncedSearch.length === 0) {
+      setResults([]);
+    }
+  }, [debouncedSearch, handleSearch]);
 
   return (
     <m.div
@@ -52,8 +63,9 @@ const SearchPopup = ({ isActive, onClose }: SearchPopupProps) => {
       exit={{ height: 0, opacity: 0 }}
       transition={{ duration: 0.3 }}
       className={clsx(styles.wrapper, { [styles.active]: isActive })}
+      ref={ref}
     >
-      <div className={clsx(styles.container)} ref={ref}>
+      <div className={clsx(styles.container)}>
         <SvgSearch />
         <input
           autoFocus
@@ -62,7 +74,16 @@ const SearchPopup = ({ isActive, onClose }: SearchPopupProps) => {
           className={clsx("t-placeholder", styles.input)}
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          onFocus={handleSearch}
+          onFocus={() => {
+            setSearch("");
+          }}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              router.push(`/search?search=${search}`);
+              setResults([]);
+              onClose();
+            }
+          }}
         />
 
         <SvgClose
@@ -88,11 +109,21 @@ const SearchPopup = ({ isActive, onClose }: SearchPopupProps) => {
             <div className={styles.items}>
               {results.map((item) => (
                 <Link
-                  href={`/catalog/${slugifyWithOpts(item.name)}`}
+                  href={`/catalog/${item.category.slug}/${item.slug}`}
                   key={item.id}
                   className={styles.item}
+                  onClick={() => {
+                    setSearch("");
+                    setResults([]);
+                    onClose();
+                  }}
                 >
-                  <Image src={item.image} alt={item.name} />
+                  <Image
+                    src={`${process.env.NEXT_PUBLIC_STORE_URL}/${item.images[0]}`}
+                    alt={item.name}
+                    width={100}
+                    height={100}
+                  />
                   <div className={styles.info}>
                     <div className={clsx("body-1", styles.title)}>
                       {item.name}
@@ -101,20 +132,42 @@ const SearchPopup = ({ isActive, onClose }: SearchPopupProps) => {
                     <div className={styles.controls}>
                       <div
                         className={clsx("h4", styles.price, {
-                          [styles.sale]: item.discount > 0,
+                          [styles.sale]: Number(item.discount) > 0,
                         })}
                       >
-                        {item.discount > 0
-                          ? `${item.price * (1 - item.discount / 100)} BYN `
-                          : `${item.price} BYN `}
-                        {item.discount > 0 && (
+                        {Number(item.discount) > 0
+                          ? `${
+                              Number(item.price) *
+                              (1 - Number(item.discount) / 100)
+                            } BYN `
+                          : `${Number(item.price)} BYN `}
+                        {Number(item.discount) > 0 && (
                           <span className={clsx("body-4", styles.oldPrice)}>
-                            {item.price} BYN
+                            {Number(item.price)} BYN
                           </span>
                         )}
                       </div>
-                      <MainButton className={styles.resultButton}>
-                        Купить
+                      <MainButton
+                        style={item.in_stock ? "primary" : "secondary"}
+                        className={styles.resultButton}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          if (item.in_stock) {
+                            addToCart(item);
+                            setNotification(
+                              "Товар добавлен в корзину",
+                              undefined,
+                              "success"
+                            );
+                          } else {
+                            openPopup("order", {
+                              product: item,
+                              count: 1,
+                            });
+                          }
+                        }}
+                      >
+                        {item.in_stock ? "Купить" : "Заказать"}
                       </MainButton>
                     </div>
                   </div>
@@ -126,6 +179,6 @@ const SearchPopup = ({ isActive, onClose }: SearchPopupProps) => {
       )}
     </m.div>
   );
-};
+});
 
 export default SearchPopup;

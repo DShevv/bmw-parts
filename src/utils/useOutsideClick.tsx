@@ -2,30 +2,40 @@ import { useEffect } from "react";
 
 function useOutsideClick(
   ref: React.RefObject<HTMLElement | null>,
-  onClick: () => void
+  onClick: () => void,
+  debugName?: string
 ) {
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
-      if (
-        ref.current &&
-        !ref.current.contains(event.target as Node) &&
-        (event.target as HTMLElement).nodeName !== "BUTTON" &&
-        (event.target as HTMLElement).parentNode?.nodeName !== "BUTTON" &&
-        (event.target as HTMLElement).parentNode?.parentNode?.nodeName !==
-          "BUTTON"
-      ) {
+      const target = event.target as HTMLElement;
+
+      if (!ref.current || !target) {
+        return;
+      }
+
+      const isInside = ref.current.contains(target);
+
+      const isButton =
+        target.nodeName === "BUTTON" ||
+        target.parentNode?.nodeName === "BUTTON" ||
+        target.parentNode?.parentNode?.nodeName === "BUTTON";
+
+      const isInput =
+        target.nodeName === "INPUT" ||
+        target.classList.contains("input") ||
+        target.closest("input");
+
+      if (!isInside && !isButton && !isInput) {
         onClick();
       }
     }
-    if (ref) {
-      document.addEventListener("click", handleClickOutside);
-    }
+
+    document.addEventListener("mousedown", handleClickOutside, true);
+
     return () => {
-      if (ref) {
-        document.removeEventListener("click", handleClickOutside);
-      }
+      document.removeEventListener("mousedown", handleClickOutside, true);
     };
-  }, [ref, onClick]);
+  }, [ref, onClick, debugName]);
 }
 
 export default useOutsideClick;
