@@ -8,7 +8,7 @@ import CheckboxFilter from "./CheckboxFilter/CheckboxFilter";
 import { observer } from "mobx-react-lite";
 import globalStore from "@/stores/global-store";
 import DropdownFilter from "./DropdownFilter/DropdownFilter";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useRef } from "react";
 import { GenerationT, SeriesT, BodyT, FilterT } from "@/types/types";
 import { getProducts } from "@/services/CatalogService";
 
@@ -33,6 +33,8 @@ const Filters = observer(
     const pathname = usePathname();
     const [maxPrice, setMaxPrice] = useState<number | null>(null);
     const [resetKey, setResetKey] = useState<number>(0);
+    const isUpdatingRef = useRef<boolean>(false);
+    const prevSearchRef = useRef<string | null>(null);
 
     const searchOptions = useMemo(() => {
       // Получаем все параметры спецификаций из URL
@@ -73,6 +75,31 @@ const Filters = observer(
     }, [searchOptions]);
 
     useEffect(() => {
+      // Предотвращаем циклические обновления
+      if (isUpdatingRef.current) {
+        return;
+      }
+
+      // Получаем текущий поисковый запрос
+      const currentSearch = searchParams.get("search");
+
+      // Если изменился только поисковый запрос (а не фильтры), пропускаем валидацию
+      if (
+        prevSearchRef.current !== null &&
+        prevSearchRef.current !== currentSearch
+      ) {
+        prevSearchRef.current = currentSearch;
+        return;
+      }
+
+      // Обновляем предыдущий поисковый запрос
+      prevSearchRef.current = currentSearch;
+
+      // Пропускаем валидацию если нет серий для проверки
+      if (searchOptions.series.length === 0) {
+        return;
+      }
+
       // Если серия изменилась, проверяем валидность выбранных поколений
       const validGenerations = searchOptions.generation.filter(
         (generationSlug) => {
@@ -89,6 +116,8 @@ const Filters = observer(
 
       // Если есть невалидные поколения, обновляем URL
       if (validGenerations.length !== searchOptions.generation.length) {
+        isUpdatingRef.current = true;
+
         const newParams = new URLSearchParams(searchParams.toString());
 
         if (validGenerations.length === 0) {
@@ -105,6 +134,11 @@ const Filters = observer(
         }
 
         router.push(`${pathname}?${newParams.toString()}`, { scroll: false });
+
+        // Сбрасываем флаг после небольшой задержки
+        setTimeout(() => {
+          isUpdatingRef.current = false;
+        }, 100);
       }
     }, [
       searchOptions.series,

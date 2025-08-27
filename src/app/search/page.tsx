@@ -10,6 +10,8 @@ import { ProductT } from "@/types/types";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 
+export const fetchCache = "force-no-store";
+
 const Page = () => {
   const [products, setProducts] = useState<ProductT[] | null>(null);
   const [page, setPage] = useState<{ current: number; max: number }>({
@@ -28,7 +30,7 @@ const Page = () => {
     const specificationParams: { [key: string]: string | null } = {};
 
     // Проходим по всем параметрам и находим те, что начинаются с "specification_"
-    for (const [key, value] of searchParams.entries()) {
+    for (const [key, value] of params.entries()) {
       if (key.startsWith("specification_")) {
         specificationParams[key] = value;
       }
@@ -47,7 +49,7 @@ const Page = () => {
       sort: sort,
       ...specificationParams,
     };
-  }, [params, sort, searchParams]);
+  }, [params, sort]);
 
   useEffect(() => {
     const fetchProducts = async () => {

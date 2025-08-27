@@ -64,6 +64,7 @@ const Search = observer(() => {
         onKeyDown={(e) => {
           if (e.key === "Enter") {
             router.push(`/search?search=${search}`);
+            setSearch("");
             setResults([]);
           }
         }}

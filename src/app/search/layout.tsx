@@ -9,6 +9,8 @@ import { getGenerations } from "@/services/CarsService";
 import { getSeries } from "@/services/CarsService";
 import { getBodies } from "@/services/CarsService";
 
+export const fetchCache = "force-no-store";
+
 const Layout = async ({ children }: { children: React.ReactNode }) => {
   const categories = await getCategories();
   const generations = await getGenerations();
