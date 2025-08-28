@@ -279,6 +279,13 @@ const Filters = observer(
               searchOptions.series.length === 0 ||
               filteredGenerations.length === 0
             }
+            direction={
+              availableFilters
+                ? availableFilters.specifications.length === 0
+                  ? "top"
+                  : "bottom"
+                : "top"
+            }
             title="Поколение"
             name="generation"
             data={filteredGenerations.map((generation) => ({
@@ -291,7 +298,7 @@ const Filters = observer(
             key={`body-${resetKey}`}
             direction={
               availableFilters
-                ? availableFilters.specifications.length === 0
+                ? availableFilters.specifications.length < 2
                   ? "top"
                   : "bottom"
                 : "top"
