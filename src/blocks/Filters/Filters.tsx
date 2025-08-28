@@ -289,6 +289,13 @@ const Filters = observer(
 
           <DropdownFilter
             key={`body-${resetKey}`}
+            direction={
+              availableFilters
+                ? availableFilters.specifications.length === 0
+                  ? "top"
+                  : "bottom"
+                : "top"
+            }
             disabled={
               searchOptions.series.length === 0 ||
               searchOptions.generation.length === 0 ||
@@ -336,7 +343,11 @@ const Filters = observer(
               } else if (specification.filter_type === "dropdown") {
                 return (
                   <DropdownFilter
-                    direction={index === array.length - 1 ? "top" : "bottom"}
+                    direction={
+                      index === array.length - 1 || index === array.length - 2
+                        ? "top"
+                        : "bottom"
+                    }
                     key={`specification_${specification.id}-${resetKey}`}
                     title={specification.name}
                     name={`specification_${specification.id}`}
