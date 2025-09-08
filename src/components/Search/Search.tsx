@@ -85,7 +85,7 @@ const Search = observer(() => {
                   }}
                 >
                   <Image
-                    src={`${process.env.NEXT_PUBLIC_STORE_URL}/${item.images[0]}`}
+                    src={`${process.env.NEXT_PUBLIC_STORE_URL}/${item.images[0].image_path}`}
                     alt={item.name}
                     width={100}
                     height={100}

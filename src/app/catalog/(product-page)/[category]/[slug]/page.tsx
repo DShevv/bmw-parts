@@ -61,14 +61,6 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
             <div className={styles.specs}>
               <div className={styles.spec}>
                 <div className={clsx("body-2", styles.specKey)}>
-                  Тип/модель АКПП
-                </div>
-                <div className={clsx("h3", styles.specValue)}>
-                  6HP26, 6HP26A, 6HP26A61, 6HP26X
-                </div>
-              </div>
-              <div className={styles.spec}>
-                <div className={clsx("body-2", styles.specKey)}>
                   Производитель
                 </div>
                 <div className={clsx("h3", styles.specValue)}>
