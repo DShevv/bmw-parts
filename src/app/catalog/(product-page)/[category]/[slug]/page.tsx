@@ -88,13 +88,10 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
               Доставка и оплата
             </Link>
           </div>
-          <div className={clsx("body-1", styles.text)}>
-            Описание товара Описание товара Описание товара Описание товара
-            Описание товара Описание товара Описание товара Описание товара
-            Описание товара Описание товара Описание товара Описание товара
-            Описание товара Описание товара Описание товара Описание товара
-            Описание товара Описание товара
-          </div>
+          <div
+            className={clsx("body-1", styles.text)}
+            dangerouslySetInnerHTML={{ __html: product.description }}
+          />
         </div>
       </div>
 

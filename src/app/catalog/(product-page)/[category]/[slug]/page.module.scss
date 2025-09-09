@@ -207,6 +207,15 @@
 
   .text {
     max-width: vw-1550(966);
+
+    ul,
+    ol {
+      margin-left: vw-1550(26);
+
+      @media (max-width: 768px) {
+        margin-left: 24px;
+      }
+    }
   }
 
   @media (max-width: 768px) {
