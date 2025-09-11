@@ -1,5 +1,11 @@
 import { ProductParamsT, ProductResponseT } from "@/types/api";
-import { CategoryT, DeliveryT, FilterT, PaymentT, ProductT } from "@/types/types";
+import {
+  CategoryT,
+  DeliveryT,
+  FilterT,
+  PaymentT,
+  ProductT,
+} from "@/types/types";
 
 export const getCategories = async (): Promise<CategoryT[] | null> => {
   try {
@@ -14,8 +20,6 @@ export const getCategories = async (): Promise<CategoryT[] | null> => {
 
     const { data } = await res.json();
 
-
-
     return data;
   } catch (e) {
     console.log(e);
@@ -23,7 +27,9 @@ export const getCategories = async (): Promise<CategoryT[] | null> => {
   }
 };
 
-export const getCategoriesBySlug = async (slug: string): Promise<CategoryT | null> => {
+export const getCategoriesBySlug = async (
+  slug: string
+): Promise<CategoryT | null> => {
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/v1/categories/slug/${slug}?with_products_count=true`,
@@ -43,7 +49,9 @@ export const getCategoriesBySlug = async (slug: string): Promise<CategoryT | nul
   }
 };
 
-export const getProductBySlug = async (slug: string): Promise<ProductT | null> => {
+export const getProductBySlug = async (
+  slug: string
+): Promise<ProductT | null> => {
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/v1/products/${slug}`,
@@ -55,8 +63,6 @@ export const getProductBySlug = async (slug: string): Promise<ProductT | null> =
     );
 
     const { data } = await res.json();
-
-
 
     return data;
   } catch (e) {
@@ -138,12 +144,14 @@ export const getProducts = async (
 
     // Обрабатываем динамические параметры спецификаций
     Object.entries(dynamicParams).forEach(([key, value]) => {
-      if (key.startsWith("specification_") && value !== null && value !== undefined) {
+      if (
+        key.startsWith("specification_") &&
+        value !== null &&
+        value !== undefined
+      ) {
         params.set(key, value.toString());
       }
     });
-
-
 
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/v1/products?${params.toString()}`,
@@ -165,11 +173,14 @@ export const getProducts = async (
 
 export const getPayments = async (): Promise<PaymentT[]> => {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/v1/payment-methods`, {
-      next: {
-        revalidate: 60,
-      },
-    });
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/v1/payment-methods`,
+      {
+        next: {
+          revalidate: 60,
+        },
+      }
+    );
 
     const { data } = await res.json();
 
@@ -182,11 +193,14 @@ export const getPayments = async (): Promise<PaymentT[]> => {
 
 export const getDeliveries = async (): Promise<DeliveryT[]> => {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/v1/delivery-methods`, {
-      next: {
-        revalidate: 60,
-      },
-    });
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/v1/delivery-methods`,
+      {
+        next: {
+          revalidate: 60,
+        },
+      }
+    );
 
     const { data } = await res.json();
 
@@ -197,13 +211,18 @@ export const getDeliveries = async (): Promise<DeliveryT[]> => {
   }
 };
 
-export const getFiltersByCategory = async (id: number): Promise<FilterT | null> => {
+export const getFiltersByCategory = async (
+  id: number
+): Promise<FilterT | null> => {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/v1/products/filter-options?category_id=${id}`, {
-      next: {
-        revalidate: 60,
-      },
-    });
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/v1/products/filter-options?category_id=${id}`,
+      {
+        next: {
+          revalidate: 60,
+        },
+      }
+    );
 
     const { data } = await res.json();
 

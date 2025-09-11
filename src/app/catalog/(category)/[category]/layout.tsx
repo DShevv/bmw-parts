@@ -22,6 +22,7 @@ const Layout = async ({
   params: Promise<{ category: string }>;
 }) => {
   const { category } = await params;
+
   const categories = await getCategories();
   const categoryData =
     category === "all" ? null : await getCategoriesBySlug(category);

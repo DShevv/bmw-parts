@@ -24,7 +24,7 @@ export type ProductT = {
   brand: BrandT;
   main_image: {
     image_path: string;
-  }
+  };
 };
 
 export type FilterT = {
@@ -40,10 +40,8 @@ export type FilterT = {
   price_range: {
     min: string;
     max: string;
-  }
+  };
 };
-
-
 
 export type FeedbackT = {
   name: string;
@@ -75,7 +73,7 @@ export type PromoListT = {
     from: number;
     last_page: number;
   };
-}
+};
 
 export type PromoT = {
   id: number;
@@ -84,7 +82,7 @@ export type PromoT = {
   content: string;
   photo_path: string;
   published_at: string;
-}
+};
 
 export type NewsT = {
   id: number;
@@ -112,7 +110,7 @@ export type SeoTagT = {
 export type AboutT = {
   text: string;
   image: string;
-}
+};
 
 export type SettingT = {
   logo_path: string;
@@ -125,10 +123,10 @@ export type SettingT = {
   delivery_payment: {
     delivery_text: string;
     payment_text: string;
-  }
+  };
   privacy_policy: {
     text: string;
-  }
+  };
 };
 
 export type BannerT = {
@@ -141,7 +139,7 @@ export type BannerT = {
   photo_path: string;
   subtitle: string | null;
   title: string;
-}
+};
 
 export type ContactsT = {
   address: string;
@@ -155,7 +153,7 @@ export type ContactsT = {
     telegram: string;
     viber: string;
     whatsapp: string;
-  }
+  };
 };
 
 export type CategoryT = {
@@ -167,7 +165,7 @@ export type CategoryT = {
   subcategories: CategoryT[] | undefined;
   products_count: number;
   icon_path: string | null;
-}
+};
 
 export type BrandT = {
   id: number;
@@ -175,7 +173,7 @@ export type BrandT = {
   link: string | null;
   image_path: string | null;
   order: number;
-}
+};
 
 export type SeriesT = {
   id: number;
@@ -186,8 +184,7 @@ export type SeriesT = {
   description: string | null;
   sort_order: number;
   updated_at: string;
-}
-
+};
 
 export type GenerationT = {
   id: number;
@@ -196,11 +193,11 @@ export type GenerationT = {
   description: string | null;
   image_path: string | null;
   created_at: string;
-  production_year_end: number;
-  production_year_start: number;
+  production_year_end: number | null;
+  production_year_start: number | null;
   series_id: number;
   is_active: boolean;
-}
+};
 
 export type BodyT = {
   body_type: string;
@@ -220,21 +217,21 @@ export type BodyT = {
     [key: string]: string;
   };
   transmission: string;
-}
+};
 
 export type PaymentT = {
   id: number;
   name: string;
   description: string | null;
   image: string | null;
-}
+};
 
 export type DeliveryT = {
   id: number;
   name: string;
   description: string;
   cost: string;
-}
+};
 
 export type OrderFormT = {
   name: string;
@@ -258,4 +255,3 @@ export type ValidateOrderFormT = {
   payment?: string;
   isAgree?: string;
 };
-

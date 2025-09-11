@@ -36,6 +36,25 @@ const Filters = observer(
     const isUpdatingRef = useRef<boolean>(false);
     const prevSearchRef = useRef<string | null>(null);
 
+    //находим активный geterations если он есть и вычисляем года по тому что нам приходит.
+    const activeGeneration = generations.find(
+      (elem) => elem.slug === searchParams.get("generation")
+    );
+    const getYears = () => {
+      const currentYear = new Date().getFullYear();
+
+      const start = activeGeneration?.production_year_start || 1980;
+      const end = activeGeneration?.production_year_end || currentYear;
+
+      const yearsArr = [];
+
+      for (let i = start; i <= end; i++) {
+        yearsArr.push({ title: String(i), value: String(i) });
+      }
+
+      return yearsArr;
+    };
+
     const searchOptions = useMemo(() => {
       // Получаем все параметры спецификаций из URL
       const specificationParams: { [key: string]: string[] } = {};
@@ -237,24 +256,7 @@ const Filters = observer(
             key={`year-${resetKey}`}
             title="Год"
             name="year"
-            data={[
-              { title: "2010", value: "2010" },
-              { title: "2011", value: "2011" },
-              { title: "2012", value: "2012" },
-              { title: "2013", value: "2013" },
-              { title: "2014", value: "2014" },
-              { title: "2015", value: "2015" },
-              { title: "2016", value: "2016" },
-              { title: "2017", value: "2017" },
-              { title: "2018", value: "2018" },
-              { title: "2019", value: "2019" },
-              { title: "2020", value: "2020" },
-              { title: "2021", value: "2021" },
-              { title: "2022", value: "2022" },
-              { title: "2023", value: "2023" },
-              { title: "2024", value: "2024" },
-              { title: "2025", value: "2025" },
-            ]}
+            data={getYears()}
           />
           <PriceFilter
             key={`price-${resetKey}`}
