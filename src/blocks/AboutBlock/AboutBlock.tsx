@@ -8,7 +8,11 @@ import { getSetting } from "@/services/InfoService";
 import { useEffect, useState } from "react";
 import { SettingT } from "@/types/types";
 
-const AboutBlock = () => {
+interface AboutBlockProps {
+  title?: string;
+}
+
+const AboutBlock = ({ title }: AboutBlockProps) => {
   const [setting, setSetting] = useState<SettingT | null>(null);
 
   useEffect(() => {
@@ -35,7 +39,7 @@ const AboutBlock = () => {
         <Logo className={styles.logo} image={setting?.logo_path} />
 
         <div className={styles.caption}>
-          <h2 className={clsx("h2", styles.title)}>О нашей компании</h2>
+          {!!title && <h2 className={clsx("h2", styles.title)}>{title}</h2>}
           <p
             className={clsx("body-1", styles.text)}
             dangerouslySetInnerHTML={{ __html: setting?.about.text ?? "" }}

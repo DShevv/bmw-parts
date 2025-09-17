@@ -64,7 +64,7 @@ const Header = ({
               </li>
               <li>
                 <Link href={"/help"} className={clsx("body-2", styles.link)}>
-                  Оплата и доставка
+                  Помощь покупателю
                 </Link>
               </li>
               <li>
@@ -78,6 +78,11 @@ const Header = ({
                   className={clsx("body-2", styles.link)}
                 >
                   Контакты
+                </Link>
+              </li>
+              <li>
+                <Link href={"/about"} className={clsx("body-2", styles.link)}>
+                  О компании
                 </Link>
               </li>
             </ul>

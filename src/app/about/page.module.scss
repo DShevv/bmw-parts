@@ -1,0 +1,19 @@
+@use "../../assets/sass/functions" as *;
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: vw-1550(20);
+
+  .title {
+    margin-bottom: vw-1550(42);
+  }
+
+  @media (max-width: 768px) {
+    gap: 12px;
+
+    .title {
+      margin-bottom: 32px;
+    }
+  }
+}

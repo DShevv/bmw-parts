@@ -123,6 +123,7 @@ export type SettingT = {
   delivery_payment: {
     delivery_text: string;
     payment_text: string;
+    warranty_text: string;
   };
   privacy_policy: {
     text: string;

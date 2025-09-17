@@ -13,18 +13,23 @@ import {
 } from "@/assets/icons/svgs";
 import Link from "next/link";
 import SocialLinks from "@/components/SocialLinks/SocialLinks";
-import { ContactsT } from "@/types/types";
+import { ContactsT, SettingT } from "@/types/types";
 import { getContacts } from "@/services/InfoService";
 
-const MenuPopup = observer(() => {
+interface IMenuPopupProps {
+  contacts: ContactsT | undefined;
+  settings: SettingT | undefined;
+}
+
+const MenuPopup = observer(({}: IMenuPopupProps) => {
   const { popupStore } = globalStore;
   const { menu, closePopup } = popupStore;
   const [contacts, setContacts] = useState<ContactsT | null>(null);
 
   useEffect(() => {
     const fetchContacts = async () => {
-      const contacts = await getContacts();
-      setContacts(contacts);
+      const res = await getContacts();
+      setContacts(res);
     };
     fetchContacts();
   }, []);
@@ -128,26 +133,38 @@ const MenuPopup = observer(() => {
               Контакты
             </Link>
           </li>
+          <li>
+            <Link
+              className={clsx("h4", styles.item)}
+              href={"/about"}
+              onClick={() => closePopup("menu")}
+            >
+              О компании
+            </Link>
+          </li>
         </ul>
 
         <div className={styles.contacts}>
           <div className={clsx("body-3", styles.contactsItem)}>
             <SvgLocation />
-            г. Минск, пр-т Независимости, 1
+            {contacts?.address}
           </div>
+          {contacts?.phones.map((phone, index) => (
+            <Link
+              className={clsx("body-3", styles.contactsItem)}
+              href="tel:+375291234567"
+              key={index}
+            >
+              <SvgPhone />
+              {phone}
+            </Link>
+          ))}
           <Link
             className={clsx("body-3", styles.contactsItem)}
-            href="tel:+375291234567"
-          >
-            <SvgPhone />
-            +375 (29) 123-45-67
-          </Link>
-          <Link
-            className={clsx("body-3", styles.contactsItem)}
-            href="mailto:info@example.com"
+            href={`mailto:${contacts?.email}`}
           >
             <SvgMail />
-            info@example.com
+            {contacts?.email}
           </Link>
           {contacts && <SocialLinks contacts={contacts.social_links} />}
         </div>

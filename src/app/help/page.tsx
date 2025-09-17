@@ -9,9 +9,11 @@ import { getSetting } from "@/services/InfoService";
 import { useEffect, useState } from "react";
 import { SettingT } from "@/types/types";
 
+type NavigationT = "warranty_and_returns" | "delivery" | "policy";
+
 const Page = () => {
   const searchParams = useSearchParams();
-  const type = searchParams.get("type");
+  const type = searchParams.get("type") as NavigationT | null;
   const [data, setData] = useState<SettingT | null>(null);
 
   useEffect(() => {
@@ -21,7 +23,6 @@ const Page = () => {
     };
     fetchData();
   }, []);
-
   return (
     <>
       <div className={styles.content}>
@@ -61,6 +62,15 @@ const Page = () => {
               <SvgDocuments />
               Политика обработки персональных данных
             </Link>
+            <Link
+              href="/help?type=warranty_and_returns"
+              className={clsx("body-1", styles.link, {
+                [styles.active]: type === "warranty_and_returns",
+              })}
+            >
+              <SvgDocuments />
+              Гарантия и возврат
+            </Link>
           </div>
 
           <div className={styles.container}>
@@ -85,6 +95,14 @@ const Page = () => {
                 className={styles.text}
                 dangerouslySetInnerHTML={{
                   __html: data?.privacy_policy.text ?? "",
+                }}
+              />
+            )}
+            {type === "warranty_and_returns" && (
+              <div
+                className={styles.text}
+                dangerouslySetInnerHTML={{
+                  __html: data?.delivery_payment.warranty_text ?? "",
                 }}
               />
             )}

@@ -385,6 +385,12 @@ const Filters = observer(
           )}
         </div>
         <MainButton
+          className={styles.reset}
+          onClick={() => closePopup("filters")}
+        >
+          Применить
+        </MainButton>
+        <MainButton
           style="light"
           className={styles.reset}
           onClick={resetFilters}

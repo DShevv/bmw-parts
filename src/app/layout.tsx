@@ -13,6 +13,7 @@ import { getContacts, getSeoPage } from "@/services/InfoService";
 import { getSetting } from "@/services/InfoService";
 import HeaderMobile from "@/blocks/HeaderMobile/HeaderMobile";
 import { getCategories } from "@/services/CatalogService";
+
 const unbounded = Unbounded({
   variable: "--second-family",
   subsets: ["latin", "cyrillic"],
@@ -69,7 +70,10 @@ export default async function RootLayout({
         </main>
         <Footer />
 
-        <MenuPopup />
+        <MenuPopup
+          contacts={contacts ?? undefined}
+          settings={settings ?? undefined}
+        />
         <FeedbackPopup />
         <PopupButton />
         <Notification />
