@@ -171,6 +171,108 @@ export const getProducts = async (
   }
 };
 
+export const getProductsPreview = async (
+  paramsObj: ProductParamsT
+): Promise<ProductResponseT | null> => {
+  try {
+    const params = new URLSearchParams();
+
+    // Деструктурируем стандартные параметры
+    const {
+      sort,
+      generation,
+      series,
+      body,
+      year,
+      price,
+      transmission,
+      page,
+      search,
+      category,
+      categoryId,
+      ...dynamicParams
+    } = paramsObj;
+
+    if (sort && sort !== null) {
+      if (sort[0] === "-") {
+        params.set("sort_by", sort.slice(1));
+        params.set("sort_direction", "desc");
+      } else {
+        params.set("sort_by", sort);
+        params.set("sort_direction", "asc");
+      }
+    }
+
+    if (page) {
+      params.set("page", page.toString());
+    }
+
+    if (search) {
+      params.set("search", search);
+    }
+
+    if (category) {
+      params.set("category_id", category);
+    } else if (categoryId) {
+      params.set("category_id", categoryId.toString());
+    }
+
+    if (generation) {
+      params.set("generation", generation);
+    }
+
+    if (series) {
+      params.set("series", series);
+    }
+
+    if (body) {
+      params.set("body", body);
+    }
+
+    if (year) {
+      params.set("year", year);
+    }
+
+    if (price) {
+      params.set("price_from", price.split("-")[0]);
+      params.set("price_to", price.split("-")[1]);
+    }
+
+    if (transmission) {
+      params.set("transmission", transmission);
+    }
+
+    // Обрабатываем динамические параметры спецификаций
+    Object.entries(dynamicParams).forEach(([key, value]) => {
+      if (
+        key.startsWith("specification_") &&
+        value !== null &&
+        value !== undefined
+      ) {
+        params.set(key, value.toString());
+      }
+    });
+
+    const res = await fetch(
+      `${
+        process.env.NEXT_PUBLIC_API_URL
+      }/v1/products/previews?${params.toString()}`,
+      {
+        next: {
+          revalidate: 60,
+        },
+      }
+    );
+
+    const data = await res.json();
+
+    return data.data;
+  } catch (e) {
+    console.log(e);
+    return null;
+  }
+};
+
 export const getPayments = async (): Promise<PaymentT[]> => {
   try {
     const res = await fetch(

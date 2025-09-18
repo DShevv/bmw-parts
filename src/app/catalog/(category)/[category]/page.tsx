@@ -5,7 +5,10 @@ import clsx from "clsx";
 import FilterButton from "@/components/Buttons/FilterButton/FilterButton";
 import ProductItem from "@/components/ProductItem/ProductItem";
 import Pagination from "@/components/Pagination/Pagination";
-import { getCategoriesBySlug, getProducts } from "@/services/CatalogService";
+import {
+  getCategoriesBySlug,
+  getProductsPreview,
+} from "@/services/CatalogService";
 import { CategoryT, ProductT } from "@/types/types";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useParams, useSearchParams } from "next/navigation";
@@ -56,8 +59,8 @@ const Page = () => {
         return;
       }
 
-      const products = await getProducts(searchOptions);
-
+      const products = await getProductsPreview(searchOptions);
+      console.log(products);
       setProducts(products?.data ?? []);
       setPage({
         current: parseInt(params.get("page") || "1", 10),
