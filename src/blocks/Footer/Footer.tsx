@@ -37,6 +37,9 @@ const Footer = async () => {
             </Link>
           </div>
           <div className={styles.menu}>
+            <Link href={"/about"} className={clsx("body-1", styles.menuItem)}>
+              О компании
+            </Link>
             <Link href="/help" className={clsx(styles.menuItem, "body-1")}>
               Помощь покупателю
             </Link>
@@ -52,9 +55,6 @@ const Footer = async () => {
             </Link>
             <Link href="/contacts" className={clsx(styles.menuItem, "body-1")}>
               Контакты
-            </Link>
-            <Link href={"/about"} className={clsx("body-1", styles.menuItem)}>
-              О компании
             </Link>
           </div>
           <div className={styles.contacts}>

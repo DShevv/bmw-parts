@@ -77,6 +77,15 @@ const MenuPopup = observer(({}: IMenuPopupProps) => {
               Главная
             </Link>
           </li>
+          <li>
+            <Link
+              className={clsx("h4", styles.item)}
+              href={"/about"}
+              onClick={() => closePopup("menu")}
+            >
+              О компании
+            </Link>
+          </li>
 
           <li>
             <Link
@@ -131,15 +140,6 @@ const MenuPopup = observer(({}: IMenuPopupProps) => {
               onClick={() => closePopup("menu")}
             >
               Контакты
-            </Link>
-          </li>
-          <li>
-            <Link
-              className={clsx("h4", styles.item)}
-              href={"/about"}
-              onClick={() => closePopup("menu")}
-            >
-              О компании
             </Link>
           </li>
         </ul>

@@ -66,6 +66,7 @@
         & > svg {
           width: vw-1550(26);
           height: vw-1550(26);
+          flex-shrink: 0;
         }
 
         @media (max-width: 768px) {

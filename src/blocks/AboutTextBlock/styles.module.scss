@@ -1,0 +1,40 @@
+@use "../../assets/sass/functions" as *;
+
+.container {
+  width: vw-1550(1296);
+  h2 {
+    margin-bottom: vw-1550(16);
+
+    font-family: var(--second-family);
+    font-weight: 500;
+    font-size: vw-1550(26);
+    line-height: 140%;
+
+    @media (max-width: 768px) {
+      font-size: 18px;
+      margin-bottom: 16px;
+    }
+  }
+
+  ul,
+  ol {
+    list-style: inside;
+    margin-bottom: vw-1550(8);
+
+    @media (max-width: 768px) {
+      margin-bottom: 8px;
+    }
+  }
+
+  p {
+    margin-bottom: vw-1550(8);
+
+    @media (max-width: 768px) {
+      margin-bottom: 8px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+}

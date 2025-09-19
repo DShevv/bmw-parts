@@ -2,12 +2,12 @@ import Feedback from "@/blocks/Feedback/Feedback";
 import styles from "./page.module.scss";
 import Breadcrumbs from "@/components/Breadcrumbs/Breadcrumbs";
 import clsx from "clsx";
-import { getSeoPage } from "@/services/InfoService";
+import { getSeoPage, getSetting } from "@/services/InfoService";
 import { getCategories } from "@/services/CatalogService";
 import AboutBlock from "@/blocks/AboutBlock/AboutBlock";
 import ContactsBlock from "@/blocks/ContactsBlock/ContactsBlock";
-import { PrinciplesOfOurWork } from "@/blocks/principles-of-our-work";
 import { ProductCatalog } from "@/blocks/ProductCatalog";
+import { AboutTextBlock } from "@/blocks/AboutTextBlock";
 
 export const generateMetadata = async () => {
   const { seo } = await getSeoPage("about");
@@ -25,6 +25,7 @@ export const generateMetadata = async () => {
 
 const page = async () => {
   const categories = await getCategories();
+  const settings = await getSetting();
 
   return (
     <>
@@ -39,8 +40,22 @@ const page = async () => {
         <AboutBlock />
       </div>
 
-      <PrinciplesOfOurWork />
-      <ProductCatalog />
+      {settings?.about.content_blocks.map((block, index) => {
+        switch (block.type) {
+          case "text":
+            return <AboutTextBlock key={index} text={block.content.text} />;
+          case "image_text":
+            return (
+              <ProductCatalog
+                key={index}
+                text={block.content.text}
+                image={block.content.image_path}
+                imagePosition={block.content.image_position}
+              />
+            );
+        }
+      })}
+
       <ContactsBlock />
       <Feedback categories={categories ?? []} />
     </>

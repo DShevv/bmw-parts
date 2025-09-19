@@ -110,6 +110,24 @@ export type SeoTagT = {
 export type AboutT = {
   text: string;
   image: string;
+  content_blocks: {
+    type: "image_text" | "text";
+    content: ImageTextT | TextT;
+  }[];
+};
+
+export type ImageTextT = {
+  image_position: "left" | "right";
+  text: string;
+  image_path: string;
+  type: "image_text";
+};
+
+export type TextT = {
+  text: string;
+  type: "text";
+  image_path: never;
+  image_position: never;
 };
 
 export type SettingT = {

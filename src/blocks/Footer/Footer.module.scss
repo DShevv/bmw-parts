@@ -23,6 +23,7 @@
   display: flex;
   gap: vw-1550(86);
   position: relative;
+  padding-bottom: vw-1550(36);
 
   @media (max-width: 768px) {
     flex-wrap: wrap;
