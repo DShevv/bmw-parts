@@ -89,12 +89,23 @@ const Page = observer(() => {
               })),
             };
 
+            const paymentMethod = payment.find(
+              (item) => item.id === Number(values.payment)
+            );
+            const isOnlinePayment =
+              paymentMethod?.name.toLowerCase() === "оплата картой онлайн";
             const order = await postOrder(orderData);
 
             if (order.success) {
+              if (isOnlinePayment && order.data.payment_error) {
+                router.push(`/cart/checkout/order`);
+                return;
+              }
               removeAllFromCart();
               router.push(
-                `/cart/checkout/order?orderId=${order.data.order_number}`
+                isOnlinePayment
+                  ? order.data.payment_form_url ?? ""
+                  : `/cart/checkout/order?orderId=${order.data.order_number}`
               );
             } else {
               router.push(`/cart/checkout/order`);

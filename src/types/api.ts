@@ -69,5 +69,7 @@ export type OrderResponseT = {
     order_number: string;
     customer_name: string;
     total_amount: number;
+    payment_form_url: string | null;
+    payment_error: string | null;
   }
 }
