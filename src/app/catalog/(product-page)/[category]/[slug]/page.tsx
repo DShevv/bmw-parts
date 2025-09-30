@@ -59,14 +59,16 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
               {product.in_stock ? "В наличии" : "Под заказ"}
             </div>
             <div className={styles.specs}>
-              <div className={styles.spec}>
-                <div className={clsx("body-2", styles.specKey)}>
-                  Производитель
+              {product.brand && (
+                <div className={styles.spec}>
+                  <div className={clsx("body-2", styles.specKey)}>
+                    Производитель
+                  </div>
+                  <div className={clsx("h3", styles.specValue)}>
+                    {product.brand.name}
+                  </div>
                 </div>
-                <div className={clsx("h3", styles.specValue)}>
-                  {product.brand.name}
-                </div>
-              </div>
+              )}
               <div className={styles.spec}>
                 <div className={clsx("body-2", styles.specKey)}>Номер</div>
                 <div className={clsx("h3", styles.specValue)}>

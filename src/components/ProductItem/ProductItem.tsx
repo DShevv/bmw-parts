@@ -87,10 +87,12 @@ const ProductItem = observer(({ product }: { product: ProductT }) => {
           {/* <div className={clsx(styles.infoItem, "body-4")}>
             Тип/модель АКПП: <span className="body-3">{product.type}</span>
           </div> */}
-          <div className={clsx(styles.infoItem, "body-4")}>
-            Производитель:{" "}
-            <span className={clsx(styles.brand, "body-3")}>{brand.name}</span>
-          </div>
+          {brand && (
+            <div className={clsx(styles.infoItem, "body-4")}>
+              Производитель:{" "}
+              <span className={clsx(styles.brand, "body-3")}>{brand.name}</span>
+            </div>
+          )}
           <div className={clsx(styles.infoItem, "body-4")}>
             Номер: <span className="body-3">{sku}</span>
           </div>

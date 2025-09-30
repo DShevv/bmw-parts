@@ -8,7 +8,7 @@ import "swiper/css/grid";
 import ProductItem from "@/components/ProductItem/ProductItem";
 import ArrowButton from "@/components/Buttons/ArrowButton/ArrowButton";
 import { Swiper as SwiperType } from "swiper";
-import { useRef } from "react";
+import React, { useRef } from "react";
 import { Grid } from "swiper/modules";
 import { ProductT } from "@/types/types";
 

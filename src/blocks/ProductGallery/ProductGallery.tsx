@@ -40,6 +40,10 @@ const ProductGallery = ({ images, className }: ProductGalleryProps) => {
     }
   };
 
+  if (images.length === 0) {
+    return <div className={clsx(styles.container, className)}> </div>;
+  }
+
   return (
     <div className={clsx(styles.container, className)}>
       <Swiper
