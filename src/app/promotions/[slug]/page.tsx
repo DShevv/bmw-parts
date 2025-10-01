@@ -5,6 +5,7 @@ import Image from "next/image";
 import RecentPromo from "@/blocks/RecentPromo/RecentPromo";
 import { formatDate } from "@/utils/helper";
 import { getPromo, getPromoBySlug } from "@/services/PromoService";
+import { getSeoPage } from "@/services/InfoService";
 
 const transformContent = (content: string): string => {
   if (!content) return "";
@@ -53,16 +54,21 @@ export const generateMetadata = async ({
   params: Promise<{ slug: string }>;
 }) => {
   const { slug } = await params;
+  const { seo } = await getSeoPage(`${slug}`);
   const promotion = await getPromoBySlug(slug.split("_")[1]);
   return {
-    title: promotion?.title ?? "BMW parts",
+    title: seo?.title ?? promotion?.title ?? "Акция",
     description:
-      promotion?.content.replace(/<[^>]*>?/g, "").slice(0, 155) ?? "BMW parts",
+      seo?.description ??
+      promotion?.content.replace(/<[^>]*>?/g, "").slice(0, 155) ??
+      "Акция",
+    keywords: seo?.keywords,
     openGraph: {
-      title: promotion?.title ?? "BMW parts",
+      title: seo?.og_title ?? promotion?.title ?? "Акция",
       description:
+        seo?.og_description ??
         promotion?.content.replace(/<[^>]*>?/g, "").slice(0, 155) ??
-        "BMW parts",
+        "Акция",
     },
   };
 };

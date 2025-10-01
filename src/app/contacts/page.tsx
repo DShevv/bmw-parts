@@ -11,12 +11,12 @@ export const generateMetadata = async () => {
   const { seo } = await getSeoPage("contacts");
 
   return {
-    title: seo?.title ?? "BMW parts",
-    description: seo?.description ?? "BMW parts",
+    title: seo?.title ?? "Контакты",
+    description: seo?.description ?? "Контакты",
     keywords: seo?.keywords,
     openGraph: {
-      title: seo?.title ?? "BMW parts",
-      description: seo?.title ?? "BMW parts",
+      title: seo?.title ?? "Контакты",
+      description: seo?.title ?? "Контакты",
     },
   };
 };

@@ -274,3 +274,15 @@ export type ValidateOrderFormT = {
   payment?: string;
   isAgree?: string;
 };
+
+export type SeoPageT = {
+  id: number;
+  name: string;
+  title: string;
+  description: string;
+  keywords: string;
+  og_title: string;
+  og_description: string;
+  created_at: string;
+  updated_at: string;
+};

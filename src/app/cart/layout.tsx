@@ -5,8 +5,8 @@ export const generateMetadata = async () => {
   const { seo } = await getSeoPage("cart");
 
   return {
-    title: seo?.title ?? "BMW parts",
-    description: seo?.description ?? "BMW parts",
+    title: seo?.title ?? "Корзина",
+    description: seo?.description ?? "Корзина",
     keywords: seo?.keywords,
     openGraph: {
       title: seo?.og_title ?? seo?.title,

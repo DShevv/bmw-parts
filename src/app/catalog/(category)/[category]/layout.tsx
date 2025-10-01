@@ -13,6 +13,27 @@ import {
 import { getGenerations } from "@/services/CarsService";
 import { getSeries } from "@/services/CarsService";
 import { getBodies } from "@/services/CarsService";
+import { getSeoPage } from "@/services/InfoService";
+
+export const generateMetadata = async ({
+  params,
+}: {
+  params: Promise<{ category: string }>;
+}) => {
+  const { category } = await params;
+  const categoryData = await getCategoriesBySlug(category);
+  const { seo } = await getSeoPage(`${category}`);
+
+  return {
+    title: seo?.title ?? categoryData?.name ?? "Каталог",
+    description: seo?.description ?? categoryData?.name ?? "Каталог",
+    keywords: seo?.keywords,
+    openGraph: {
+      title: seo?.title ?? categoryData?.name ?? "Каталог",
+      description: seo?.description ?? "Каталог",
+    },
+  };
+};
 
 const Layout = async ({
   children,

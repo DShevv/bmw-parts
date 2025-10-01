@@ -8,8 +8,22 @@ import { getCategories } from "@/services/CatalogService";
 import { getGenerations } from "@/services/CarsService";
 import { getSeries } from "@/services/CarsService";
 import { getBodies } from "@/services/CarsService";
+import { getSeoPage } from "@/services/InfoService";
 
 export const fetchCache = "force-no-store";
+
+export const generateMetadata = async () => {
+  const { seo } = await getSeoPage("search");
+  return {
+    title: seo?.title ?? "Поиск",
+    description: seo?.description ?? "Поиск",
+    keywords: seo?.keywords,
+    openGraph: {
+      title: seo?.title ?? "Поиск",
+      description: seo?.description ?? "Поиск",
+    },
+  };
+};
 
 const Layout = async ({ children }: { children: React.ReactNode }) => {
   const categories = await getCategories();

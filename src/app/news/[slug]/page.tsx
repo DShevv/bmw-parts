@@ -5,6 +5,7 @@ import RecentNews from "@/blocks/RecentNews/RecentNews";
 import Image from "next/image";
 import { getNews, getNewsBySlug, addNewsView } from "@/services/NewsService";
 import { formatDate, slugifyWithOpts } from "@/utils/helper";
+import { getSeoPage } from "@/services/InfoService";
 
 export const dynamicParams = false;
 
@@ -14,16 +15,22 @@ export const generateMetadata = async ({
   params: Promise<{ slug: string }>;
 }) => {
   const { slug } = await params;
+  const { seo } = await getSeoPage(`${slug}`);
   const id = slug.split("_")[1];
   const news = await getNewsBySlug(id);
   return {
-    title: news?.title ?? "BMW parts",
+    title: seo?.title ?? news?.title ?? "Статья",
     description:
-      news?.content.replace(/<[^>]*>?/g, "").slice(0, 155) ?? "BMW parts",
+      seo?.description ??
+      news?.content.replace(/<[^>]*>?/g, "").slice(0, 155) ??
+      "Статья",
+    keywords: seo?.keywords,
     openGraph: {
-      title: news?.title ?? "BMW parts",
+      title: seo?.og_title ?? news?.title ?? "Статья",
       description:
-        news?.content.replace(/<[^>]*>?/g, "").slice(0, 155) ?? "BMW parts",
+        seo?.og_description ??
+        news?.content.replace(/<[^>]*>?/g, "").slice(0, 155) ??
+        "Статья",
     },
   };
 };

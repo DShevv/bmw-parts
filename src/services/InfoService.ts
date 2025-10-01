@@ -1,5 +1,5 @@
 import { SeoTextT } from "@/types/api";
-import { BannerT, ContactsT, SettingT } from "@/types/types";
+import { BannerT, ContactsT, SeoPageT, SettingT } from "@/types/types";
 
 export const getContacts = async (): Promise<ContactsT | null> => {
   try {
@@ -67,7 +67,7 @@ export async function getSeoText(page: string): Promise<SeoTextT | null> {
   }
 }
 
-export async function getSeoPage(page: string) {
+export async function getSeoPage(page: string): Promise<{ seo: SeoPageT | undefined }> {
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/v1/seo/tag?name=${page}`, {
       next: { revalidate: 60 },
