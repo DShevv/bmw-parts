@@ -3,14 +3,12 @@ import tools from "@/assets/images/tools.png";
 import oil from "@/assets/images/oil.png";
 import wheelHd from "@/assets/images/wheel-hd.png";
 import { SvgCar, SvgEngine, SvgOil, SvgWheel } from "@/assets/icons/svgs";
-import visaSecure from "@/assets/images/payments/visa-secure.png";
-import visa from "@/assets/images/payments/visa.png";
-import mastercard from "@/assets/images/payments/marstercard.png";
-import alfa from "@/assets/images/payments/alfa.png";
-import belcard from "@/assets/images/payments/belcard.png";
-import belcardInternet from "@/assets/images/payments/belcard-internet.png";
-import samsung from "@/assets/images/payments/samsung-pay.png";
-import apple from "@/assets/images/payments/apple.png";
+import visa from "@/assets/images/payments/BGPB_Visa.png";
+import visaSecure from "@/assets/images/payments/BGPB_Visa Secure.png";
+import mastercardBlack from "@/assets/images/payments/BGPB_Mastercard_Black.png";
+import mastercardIdBlack from "@/assets/images/payments/BGPB_Mastercard ID_Black.png";
+import belcardBlack from "@/assets/images/payments/BGPB_Belcart_Black.png";
+import belcardIpBlack from "@/assets/images/payments/BGPB_Belcart IP_Black.png";
 import slide1 from "@/assets/images/slide.png";
 import carModel from "@/assets/images/car-model.png";
 
@@ -406,39 +404,32 @@ export const paymentMethods = [
   },
   {
     id: 2,
-    name: "Mastercard",
-    image: mastercard,
-  },
-  {
-    id: 3,
-    name: "Альфа-банк",
-    image: alfa,
-  },
-  {
-    id: 4,
-    name: "Белкард",
-    image: belcard,
-  },
-  {
-    id: 5,
-    name: "Белкард интернет",
-    image: belcardInternet,
-  },
-  {
-    id: 6,
-    name: "Samsung Pay",
-    image: samsung,
-  },
-  {
-    id: 7,
-    name: "Apple Pay",
-    image: apple,
-  },
-  {
-    id: 8,
     name: "Visa Secure",
     image: visaSecure,
   },
+  {
+    id: 3,
+    name: "Mastercard",
+    image: mastercardBlack,
+  },
+  {
+    id: 5,
+    name: "Mastercard ID",
+    image: mastercardIdBlack,
+  },
+
+  {
+    id: 7,
+    name: "Белкард",
+    image: belcardBlack,
+  },
+
+  {
+    id: 9,
+    name: "Белкард интернет",
+    image: belcardIpBlack,
+  },
+
 ]
 
 
